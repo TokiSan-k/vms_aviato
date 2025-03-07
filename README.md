@@ -4,16 +4,10 @@
 
 ## **Table of Contents**
 - [Project Overview](#project-overview)
+- [Installation & Setup](#installation--setup)
 - [Project Objectives](#project-objectives)
 - [Features & Functionalities](#features--functionalities)
 - [Technical Stack](#technical-stack)
-- [Installation & Setup](#installation--setup)
-- [Database Setup](#database-setup)
-- [Usage Guide](#usage-guide)
-- [Deliverables](#deliverables)
-- [Contributors](#contributors)
-- [License](#license)
-
 ---
 
 ## **📌 Project Overview**

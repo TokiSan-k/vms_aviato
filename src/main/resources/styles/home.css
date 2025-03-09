@@ -1,0 +1,15 @@
+/* styles.css */
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #333;
+}
+
+.vbox {
+    -fx-padding: 20;
+    -fx-spacing: 10;
+}

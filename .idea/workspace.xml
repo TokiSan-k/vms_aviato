@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/home.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,9 +46,10 @@
     "Application.Main.executor": "Run",
     "Application.vms_aviato.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Problems",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.3034483",
     "settings.build.tools.auto.reload": "ALL",

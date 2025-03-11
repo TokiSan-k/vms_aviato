@@ -13,3 +13,11 @@
     -fx-padding: 20;
     -fx-spacing: 10;
 }
+
+.table-view {
+    -fx-pref-width: 100%;
+}
+
+.date-picker {
+    -fx-pref-width: 100%;
+}

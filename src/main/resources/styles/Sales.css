@@ -1,0 +1,26 @@
+/* Sidebar styling */
+.sidebar {
+    -fx-background-color: #030069;
+}
+
+/* Sidebar buttons */
+.sidebar-button {
+    -fx-background-color: #2D3C80;
+    -fx-text-fill: white;
+}
+
+/* Action buttons in Quick Actions section */
+.action-button {
+    -fx-background-color: #2D3C80;
+    -fx-text-fill: white;
+}
+
+/* Section titles */
+.section-title {
+    -fx-fill: #030069;
+}
+
+/* Bottom sections */
+.bottom-section {
+    -fx-background-color: #f0f0f0;
+}

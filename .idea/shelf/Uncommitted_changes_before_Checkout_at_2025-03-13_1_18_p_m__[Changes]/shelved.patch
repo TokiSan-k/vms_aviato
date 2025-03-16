@@ -1,0 +1,106 @@
+Index: src/main/resources/pages/Home.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.DatePicker?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.control.TableColumn?>\r\n<?import javafx.scene.control.TableView?>\r\n<?import javafx.scene.layout.HBox?>\r\n<?import javafx.scene.layout.VBox?>\r\n\r\n<VBox stylesheets=\"@../styles/home.css\" xmlns=\"http://javafx.com/javafx/23.0.1\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"com.aviato.Controllers.Home_ctlr\">\r\n    <!-- Split the layout into two parts: Left and Right -->\r\n    <HBox spacing=\"10\" style=\"-fx-padding: 20;\">\r\n        <!-- Left part with 3 buttons and a label -->\r\n        <VBox prefWidth=\"200\" spacing=\"10\">\r\n            <Label style=\"-fx-font-size: 16px; -fx-font-weight: bold;\" text=\"Dashboard\" />\r\n        </VBox>\r\n\r\n        <!-- Right part with a calendar and table -->\r\n        <VBox prefWidth=\"600\" spacing=\"10\">\r\n            <!-- Upper part with a calendar -->\r\n            <Label style=\"-fx-font-size: 18px; -fx-font-weight: bold;\" text=\"Upcoming Services\" />\r\n            <DatePicker style=\"-fx-pref-width: 100%;\" />\r\n\r\n            <!-- Lower part with today's appointments table -->\r\n            <Label style=\"-fx-font-size: 18px; -fx-font-weight: bold;\" text=\"Today's Appointments\" />\r\n            <TableView style=\"-fx-pref-width: 100%;\">\r\n                <TableColumn prefWidth=\"100\" text=\"Time\" />\r\n                <TableColumn prefWidth=\"200\" text=\"Service\" />\r\n                <TableColumn prefWidth=\"200\" text=\"Client\" />\r\n            </TableView>\r\n        </VBox>\r\n    </HBox>\r\n</VBox>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/pages/Home.fxml b/src/main/resources/pages/Home.fxml
+--- a/src/main/resources/pages/Home.fxml	(revision 2e51a93c61657cd07c3461e75a5a9c72aa5062f5)
++++ b/src/main/resources/pages/Home.fxml	(date 1741886245650)
+@@ -7,27 +7,29 @@
+ <?import javafx.scene.layout.HBox?>
+ <?import javafx.scene.layout.VBox?>
+ 
+-<VBox stylesheets="@../styles/home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Home_ctlr">
++<VBox stylesheets="@../styles/home.css" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23pie.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Home_ctlr">
+     <!-- Split the layout into two parts: Left and Right -->
+-    <HBox spacing="10" style="-fx-padding: 20;">
+-        <!-- Left part with 3 buttons and a label -->
+-        <VBox prefWidth="200" spacing="10">
++    <HBox fx:id="mainHBox" spacing="10" style="-fx-padding: 20;" HBox.hgrow="ALWAYS">
++        <!-- Left part with a label (Dashboard) -->
++        <VBox fx:id="leftPane" maxWidth="300" minWidth="150" prefWidth="200" spacing="10" HBox.hgrow="NEVER">
+             <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Dashboard" />
+         </VBox>
+ 
+         <!-- Right part with a calendar and table -->
+-        <VBox prefWidth="600" spacing="10">
++        <VBox fx:id="rightPane" minWidth="400" prefWidth="600" spacing="10" HBox.hgrow="ALWAYS">
+             <!-- Upper part with a calendar -->
+             <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Upcoming Services" />
+-            <DatePicker style="-fx-pref-width: 100%;" />
++            <DatePicker fx:id="datePicker" style="-fx-pref-width: 100%;" VBox.vgrow="NEVER" />
+ 
+             <!-- Lower part with today's appointments table -->
+             <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Today's Appointments" />
+-            <TableView style="-fx-pref-width: 100%;">
+-                <TableColumn prefWidth="100" text="Time" />
+-                <TableColumn prefWidth="200" text="Service" />
+-                <TableColumn prefWidth="200" text="Client" />
++            <TableView fx:id="appointmentsTable" style="-fx-pref-width: 100%;" VBox.vgrow="NEVER">
++                <columns>
++                    <TableColumn fx:id="timeColumn" maxWidth="150" minWidth="80" prefWidth="100" text="Time" />
++                    <TableColumn fx:id="serviceColumn" minWidth="150" prefWidth="275.9999771118164" text="Service" />
++                    <TableColumn fx:id="clientColumn" minWidth="150" prefWidth="223.99996948242188" text="Client" />
++                </columns>
+             </TableView>
+         </VBox>
+     </HBox>
+-</VBox>
+\ No newline at end of file
++</VBox>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"ALL\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"e7a298b9-4e51-40be-a829-a5c7b39f1372\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/pom.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/pom.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;customColor&quot;: &quot;&quot;,\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2u63qG8vzgAnGWE67jJsnL9JgEJ\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.Main.executor\": \"Run\",\r\n    \"Application.vms_aviato.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"git-widget-placeholder\": \"master\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.3034483\",\r\n    \"settings.build.tools.auto.reload\": \"ALL\",\r\n    \"settings.editor.selected.configurable\": \"configurable.group.language\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\Work\\Humber_ClassWork\\sem2\\AdvJava\\GiT\\vms_Aviato\\src\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"vms_aviato\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"ALTERNATIVE_JRE_PATH\" value=\"22\" />\r\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"true\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.aviato.Main\" />\r\n      <module name=\"vms_Aviato\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"e7a298b9-4e51-40be-a829-a5c7b39f1372\" name=\"Changes\" comment=\"\" />\r\n      <created>1741555392943</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1741555392943</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 2e51a93c61657cd07c3461e75a5a9c72aa5062f5)
++++ b/.idea/workspace.xml	(date 1741886269637)
+@@ -5,8 +5,7 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Home.fxml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -40,20 +39,20 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "Application.Main.executor": "Run",
+-    "Application.vms_aviato.executor": "Run",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "git-widget-placeholder": "master",
+-    "kotlin-language-version-configured": "true",
+-    "project.structure.last.edited": "Modules",
+-    "project.structure.proportion": "0.15",
+-    "project.structure.side.proportion": "0.3034483",
+-    "settings.build.tools.auto.reload": "ALL",
+-    "settings.editor.selected.configurable": "configurable.group.language"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
++    &quot;Application.vms_aviato.executor&quot;: &quot;Run&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.3034483&quot;,
++    &quot;settings.build.tools.auto.reload&quot;: &quot;ALL&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.language&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="D:\Work\Humber_ClassWork\sem2\AdvJava\GiT\vms_Aviato\src" />

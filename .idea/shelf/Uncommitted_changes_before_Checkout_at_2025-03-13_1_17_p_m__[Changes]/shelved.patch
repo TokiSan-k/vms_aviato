@@ -1,0 +1,24 @@
+Index: src/main/resources/pages/Home.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.DatePicker?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.control.TableColumn?>\r\n<?import javafx.scene.control.TableView?>\r\n<?import javafx.scene.layout.HBox?>\r\n<?import javafx.scene.layout.VBox?>\r\n\r\n<VBox stylesheets=\"@../styles/home.css\" HBox.hgrow=\"ALWAYS\" VBox.vgrow=\"ALWAYS\" xmlns=\"http://javafx.com/javafx/23pie.0.1\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"com.aviato.Controllers.Home_ctlr\">\r\n    <!-- Split the layout into two parts: Left and Right -->\r\n    <HBox fx:id=\"mainHBox\" spacing=\"10\" style=\"-fx-padding: 20;\" HBox.hgrow=\"ALWAYS\">\r\n        <!-- Left part with a label (Dashboard) -->\r\n        <VBox fx:id=\"leftPane\" maxWidth=\"300\" minWidth=\"150\" prefWidth=\"200\" spacing=\"10\" HBox.hgrow=\"NEVER\">\r\n            <Label style=\"-fx-font-size: 16px; -fx-font-weight: bold;\" text=\"Dashboard\" />\r\n        </VBox>\r\n\r\n        <!-- Right part with a calendar and table -->\r\n        <VBox fx:id=\"rightPane\" minWidth=\"400\" prefWidth=\"600\" spacing=\"10\" HBox.hgrow=\"ALWAYS\">\r\n            <!-- Upper part with a calendar -->\r\n            <Label style=\"-fx-font-size: 18px; -fx-font-weight: bold;\" text=\"Upcoming Services\" />\r\n            <DatePicker fx:id=\"datePicker\" style=\"-fx-pref-width: 100%;\" VBox.vgrow=\"NEVER\" />\r\n\r\n            <!-- Lower part with today's appointments table -->\r\n            <Label style=\"-fx-font-size: 18px; -fx-font-weight: bold;\" text=\"Today's Appointments\" />\r\n            <TableView fx:id=\"appointmentsTable\" style=\"-fx-pref-width: 100%;\" VBox.vgrow=\"NEVER\">\r\n                <columns>\r\n                    <TableColumn fx:id=\"timeColumn\" maxWidth=\"150\" minWidth=\"80\" prefWidth=\"100\" text=\"Time\" />\r\n                    <TableColumn fx:id=\"serviceColumn\" minWidth=\"150\" prefWidth=\"275.9999771118164\" text=\"Service\" />\r\n                    <TableColumn fx:id=\"clientColumn\" minWidth=\"150\" prefWidth=\"223.99996948242188\" text=\"Client\" />\r\n                </columns>\r\n            </TableView>\r\n        </VBox>\r\n    </HBox>\r\n</VBox>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/pages/Home.fxml b/src/main/resources/pages/Home.fxml
+--- a/src/main/resources/pages/Home.fxml	(revision 913b1de03584eaa5bedf283d64dcedef64b92fc3)
++++ b/src/main/resources/pages/Home.fxml	(date 1741885928052)
+@@ -19,11 +19,11 @@
+         <VBox fx:id="rightPane" minWidth="400" prefWidth="600" spacing="10" HBox.hgrow="ALWAYS">
+             <!-- Upper part with a calendar -->
+             <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Upcoming Services" />
+-            <DatePicker fx:id="datePicker" style="-fx-pref-width: 100%;" VBox.vgrow="NEVER" />
++            <DatePicker fx:id="datePicker" prefHeight="26.0" prefWidth="354.0" style="-fx-pref-width: 100%;" VBox.vgrow="NEVER" />
+ 
+             <!-- Lower part with today's appointments table -->
+             <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Today's Appointments" />
+-            <TableView fx:id="appointmentsTable" style="-fx-pref-width: 100%;" VBox.vgrow="NEVER">
++            <TableView fx:id="appointmentsTable" style="-fx-pref-width: 100%; -fx-border-color: 1px solid black;" VBox.vgrow="ALWAYS">
+                 <columns>
+                     <TableColumn fx:id="timeColumn" maxWidth="150" minWidth="80" prefWidth="100" text="Time" />
+                     <TableColumn fx:id="serviceColumn" minWidth="150" prefWidth="275.9999771118164" text="Service" />

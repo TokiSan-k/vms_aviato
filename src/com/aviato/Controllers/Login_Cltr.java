@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class Login_Controller {
+public class Login_Cltr {
 
     // Inject the TextFields and Button from the FXML
     @FXML

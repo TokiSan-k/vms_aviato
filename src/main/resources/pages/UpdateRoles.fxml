@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/addRoles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.AddRoles_Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/UpdateRoles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.UpdateRoles_Ctlr">
    <children>
       <HBox VBox.vgrow="ALWAYS">
          <children>
@@ -255,7 +255,7 @@
                               </HBox>
                               <HBox>
                                  <children>
-                                    <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAdd" prefHeight="30.0" prefWidth="110.0" styleClass="main-button" text="Add">
+                                    <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAdd" prefHeight="30.0" prefWidth="110.0" styleClass="main-button" text="Update">
                                        <HBox.margin>
                                           <Insets bottom="20.0" left="150.0" right="50.0" top="40.0" />
                                        </HBox.margin>

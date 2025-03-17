@@ -4,19 +4,35 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="Created Admin and Sales page with Controllers">
-      <change afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/AddRoles_Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/RemoveRoles_Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/updateRoles_Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pages/addRoles.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pages/removeRoles.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pages/updateRoles.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/addRoles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/removeRoles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/updateRoles.css" afterDir="false" />
+    <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="Created Add, Remove and update employee pages">
+      <change afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/AddInventory_Cltr.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/RemoveInventory_Cltr.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/UpdateInventory_Cltr.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pages/AddInventory.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pages/RemoveInventory.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pages/UpdateInventory.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/RemoveRoles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/UpdateInventory.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/UpdateRoles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/AddRoles_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/AddRoles_Cltr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Admin_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Admin_Cltr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Home_ctlr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Home_Ctlr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Login_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Login_Cltr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/RemoveRoles_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/RemoveRoles_Cltr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Sales_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Sales_Cltr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/updateRoles_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/UpdateRoles_Ctlr.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Admin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Sales.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Sales.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/addRoles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/AddRoles.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/removeRoles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/RemoveRoles.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/updateRoles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/UpdateRoles.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/addRoles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/AddInventory.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/removeRoles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/AddRoles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/updateRoles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/RemoveInventory.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +54,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -49,7 +64,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/TokiSan-k/vms_aviato&quot;,
-    &quot;accountId&quot;: &quot;d44b7f54-7f70-4e47-a19e-c04238e6fb39&quot;
+    &quot;accountId&quot;: &quot;9e4c2063-902c-4789-b526-06b80fcd3517&quot;
   }
 }</component>
   <component name="MavenImportPreferences">
@@ -141,13 +156,22 @@
       <option name="project" value="LOCAL" />
       <updated>1741886220766</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Created Add, Remove and update employee pages">
+      <option name="closed" value="true" />
+      <created>1742101185112</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742101185112</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update POM" />
     <MESSAGE value="Created Dev Branch" />
     <MESSAGE value="Created Admin and Sales page with Controllers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created Admin and Sales page with Controllers" />
+    <MESSAGE value="Created Add, Remove and update employee pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created Add, Remove and update employee pages" />
   </component>
 </project>

@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class AddRoles_Controller {
+public class RemoveRoles_Cltr {
 
     @FXML
     private Button customersButton;
@@ -47,12 +47,6 @@ public class AddRoles_Controller {
 
     @FXML
     private TextField passwordField;
-
-    @FXML
-    private TextField emailField;
-
-    @FXML
-    private TextField roleNameField;
 
     @FXML
     private Button addButton;
@@ -113,39 +107,31 @@ public class AddRoles_Controller {
     @FXML
     public void handleAddEmployee() {
         System.out.println("Add Employee button clicked");
-        // Add logic to handle adding an employee
     }
 
     @FXML
     public void handleRemoveEmployee() {
         System.out.println("Remove Employee button clicked");
-        // Add logic to handle removing an employee
     }
 
     @FXML
     public void handleUpdateEmployee() {
         System.out.println("Update Employee button clicked");
-        // Add logic to handle updating an employee
     }
 
     @FXML
     public void handleViewEmployee() {
         System.out.println("View Employee button clicked");
-        // Add logic to handle viewing an employee
     }
 
     @FXML
-    public void handleAdd() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        String email = emailField.getText();
-        String roleName = roleNameField.getText();
+    public void handleRemove() {
+        String employeeId = usernameField.getText();
+        String employeeName = passwordField.getText();
 
-        System.out.println("Add button clicked with details:");
-        System.out.println("Username: " + username);
-        System.out.println("Password: " + password);
-        System.out.println("Email: " + email);
-        System.out.println("Role Name: " + roleName);
+        System.out.println("Remove button clicked with details:");
+        System.out.println("Employee ID: " + employeeId);
+        System.out.println("Employee Name: " + employeeName);
     }
 
     @FXML

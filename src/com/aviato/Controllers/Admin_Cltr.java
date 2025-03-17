@@ -1,15 +1,12 @@
 package com.aviato.Controllers;
 import com.aviato.Types.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
-public class Sales_Controller {
+public class Admin_Cltr {
 
     // Sidebar menu buttons
     @FXML

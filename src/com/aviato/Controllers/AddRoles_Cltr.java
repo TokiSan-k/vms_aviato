@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class updateRoles_Controller {
+public class AddRoles_Cltr {
 
     @FXML
     private Button customersButton;
@@ -55,7 +55,7 @@ public class updateRoles_Controller {
     private TextField roleNameField;
 
     @FXML
-    private Button updateButton;
+    private Button addButton;
 
     @FXML
     private Button cancelButton;
@@ -141,7 +141,7 @@ public class updateRoles_Controller {
         String email = emailField.getText();
         String roleName = roleNameField.getText();
 
-        System.out.println("Update button clicked with details:");
+        System.out.println("Add button clicked with details:");
         System.out.println("Username: " + username);
         System.out.println("Password: " + password);
         System.out.println("Email: " + email);

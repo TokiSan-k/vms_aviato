@@ -1,0 +1,20 @@
+/* Sidebar styling */
+.sidebar {
+    -fx-background-color: #030069;
+}
+
+/* Sidebar buttons */
+.sidebar-button {
+    -fx-background-color: #2D3C80;
+    -fx-text-fill: white;
+}
+
+.top-button{
+    -fx-background-color: #EDE9E9;
+    -fx-text-fill: black;
+}
+
+.main-button{
+    -fx-background-color: #0600A8;
+    -fx-text-fill: white;
+}

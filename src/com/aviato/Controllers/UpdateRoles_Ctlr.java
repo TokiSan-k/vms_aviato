@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class RemoveRoles_Controller {
+public class UpdateRoles_Ctlr {
 
     @FXML
     private Button customersButton;
@@ -49,7 +49,13 @@ public class RemoveRoles_Controller {
     private TextField passwordField;
 
     @FXML
-    private Button addButton;
+    private TextField emailField;
+
+    @FXML
+    private TextField roleNameField;
+
+    @FXML
+    private Button updateButton;
 
     @FXML
     private Button cancelButton;
@@ -107,31 +113,39 @@ public class RemoveRoles_Controller {
     @FXML
     public void handleAddEmployee() {
         System.out.println("Add Employee button clicked");
+        // Add logic to handle adding an employee
     }
 
     @FXML
     public void handleRemoveEmployee() {
         System.out.println("Remove Employee button clicked");
+        // Add logic to handle removing an employee
     }
 
     @FXML
     public void handleUpdateEmployee() {
         System.out.println("Update Employee button clicked");
+        // Add logic to handle updating an employee
     }
 
     @FXML
     public void handleViewEmployee() {
         System.out.println("View Employee button clicked");
+        // Add logic to handle viewing an employee
     }
 
     @FXML
-    public void handleRemove() {
-        String employeeId = usernameField.getText();
-        String employeeName = passwordField.getText();
+    public void handleAdd() {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String email = emailField.getText();
+        String roleName = roleNameField.getText();
 
-        System.out.println("Remove button clicked with details:");
-        System.out.println("Employee ID: " + employeeId);
-        System.out.println("Employee Name: " + employeeName);
+        System.out.println("Update button clicked with details:");
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
+        System.out.println("Email: " + email);
+        System.out.println("Role Name: " + roleName);
     }
 
     @FXML

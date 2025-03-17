@@ -13,7 +13,7 @@
 <VBox stylesheets="@../styles/Sales.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
       xmlns="http://javafx.com/javafx/23.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.aviato.Controllers.Admin_Controller">
+      fx:controller="com.aviato.Controllers.Admin_Cltr">
     <children>
         <HBox VBox.vgrow="ALWAYS">
             <children>

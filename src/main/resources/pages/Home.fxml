@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@../styles/home.css" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23pie.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Home_ctlr">
+<VBox stylesheets="@../styles/Home.css" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23pie.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Home_Ctlr">
     <!-- Split the layout into two parts: Left and Right -->
     <HBox fx:id="mainHBox" spacing="10" style="-fx-padding: 20;" HBox.hgrow="ALWAYS">
         <!-- Left part with a label (Dashboard) -->

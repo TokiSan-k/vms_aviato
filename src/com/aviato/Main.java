@@ -22,6 +22,7 @@ public class Main extends Application {
         primaryStage.setMinHeight(400.0);
         primaryStage.setResizable(true);
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {

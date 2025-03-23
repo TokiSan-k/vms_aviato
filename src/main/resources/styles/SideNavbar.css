@@ -1,0 +1,34 @@
+/* Sidebar Button Styling */
+.sidebar-button {
+    -fx-pref-height: 45px;
+    -fx-pref-width: 168px;
+    -fx-background-color: #f8fafd;
+    -fx-text-fill: #5f6368;
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 40px;
+    -fx-background-radius: 0;
+    -fx-border-width: 0;
+}
+
+/* Icon Styling within Buttons */
+.sidebar-button .graphic {
+    -fx-padding: 0 10px 0 0;
+}
+
+/* Hover State */
+.sidebar-button:hover {
+    -fx-background-color: #e8f0fe;
+    -fx-cursor: hand;
+}
+
+/* Active/Selected State (e.g., "Users and permissions") */
+.sidebar-button:selected {
+    -fx-background-color: #e8f0fe;
+    -fx-text-fill: #1a73e8;
+}
+
+/* Ensure the text stays aligned with the icon */
+.sidebar-button .text {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}

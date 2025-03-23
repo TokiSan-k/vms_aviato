@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         // Load the FXML file
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/pages/Login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/pages/Customer.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         // Set up the stage
@@ -20,7 +20,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setMinWidth(600.0);
         primaryStage.setMinHeight(400.0);
-        primaryStage.setResizable(true);
+        primaryStage.setMaximized(true);
         primaryStage.show();
 
     }

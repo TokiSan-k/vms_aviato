@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="Created Admin and Sales page with Controllers">
-      <change afterPath="$PROJECT_DIR$/.idea/cssdialects.xml" afterDir="false" />
+    <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="Created Add, Remove and update Inventory pages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/aviato/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Customer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Customer.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/RemoveCustomer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/RemoveCustomer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/SideNavbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/SideNavbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +30,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -44,7 +40,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/TokiSan-k/vms_aviato&quot;,
-    &quot;accountId&quot;: &quot;d44b7f54-7f70-4e47-a19e-c04238e6fb39&quot;
+    &quot;accountId&quot;: &quot;9e4c2063-902c-4789-b526-06b80fcd3517&quot;
   }
 }</component>
   <component name="MavenImportPreferences">
@@ -64,29 +60,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.vms_aviato.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Development",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Humber/Advanced Java Programming ITE5215/Industry Project/Project/src/main/resources/styles",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.3034483",
-    "settings.build.tools.auto.reload": "ALL",
-    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.vms_aviato.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Development&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Humber/Advanced Java Programming ITE5215/Industry Project/Project/src/main/resources/styles&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.3034483&quot;,
+    &quot;settings.build.tools.auto.reload&quot;: &quot;ALL&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Humber\Advanced Java Programming ITE5215\Industry Project\Project\src\main\resources\styles" />
@@ -110,14 +105,6 @@
       </method>
     </configuration>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -126,8 +113,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1741555392943</updated>
-      <workItem from="1742820445080" duration="21000" />
-      <workItem from="1743007056765" duration="11770000" />
+      <workItem from="1742218033783" duration="577000" />
+      <workItem from="1742219137710" duration="1839000" />
+      <workItem from="1742228713943" duration="1257000" />
+      <workItem from="1742330214808" duration="1353000" />
+      <workItem from="1742656352458" duration="5692000" />
     </task>
     <task id="LOCAL-00001" summary="Created Dev Branch">
       <option name="closed" value="true" />
@@ -153,7 +143,23 @@
       <option name="project" value="LOCAL" />
       <updated>1741886220766</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Created Add, Remove and update employee pages">
+      <option name="closed" value="true" />
+      <created>1742101185112</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742101185112</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Created Add, Remove and update Inventory pages">
+      <option name="closed" value="true" />
+      <created>1742214317736</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742214317736</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,6 +169,8 @@
     <MESSAGE value="update POM" />
     <MESSAGE value="Created Dev Branch" />
     <MESSAGE value="Created Admin and Sales page with Controllers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created Admin and Sales page with Controllers" />
+    <MESSAGE value="Created Add, Remove and update employee pages" />
+    <MESSAGE value="Created Add, Remove and update Inventory pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created Add, Remove and update Inventory pages" />
   </component>
 </project>

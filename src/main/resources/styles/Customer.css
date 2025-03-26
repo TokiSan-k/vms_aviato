@@ -1,0 +1,33 @@
+.customer-search-field {
+    -fx-pref-width: 25%;
+}
+
+#customer-search-field {
+    -fx-pref-width: 25%;
+}
+
+.mainContainer{
+    -fx-background-color: white;
+}
+
+.customerNavBar{
+    -fx-padding: 20 0 5 0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #CCCCCC;
+    -fx-border-style: solid;
+}
+
+.custButtons{
+    -fx-min-height: 40;
+    -fx-font-size: 17;
+    -fx-font-family: "Maven Pro Medium";
+}
+
+.custMainContainer{
+    -fx-background-color: #F8F8FF;
+
+}
+
+.custMainCard{
+    -fx-background-color: #F8F8FF;
+}

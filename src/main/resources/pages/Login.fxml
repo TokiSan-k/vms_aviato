@@ -13,15 +13,12 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="683.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Login_Cltr">
     <children>
-        <HBox prefHeight="683.0" prefWidth="887.0">
+        <HBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
             <children>
                 <!-- Left Section: Illustration -->
-                <VBox prefHeight="683.0" prefWidth="540.0" style="-fx-background-color: #F5F7FA;">
+                <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" style="-fx-background-color: #F5F7FA;">
                     <children>
-                        <HBox alignment="CENTER" prefHeight="550.0" prefWidth="537.0">
-                            <VBox.margin>
-                                <Insets top="65.0" />
-                            </VBox.margin>
+                        <HBox alignment="CENTER">
                             <children>
                                 <ImageView fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -34,23 +31,13 @@
                 </VBox>
 
                 <!-- Right Section: Login Form -->
-                <VBox alignment="CENTER" prefHeight="683.0" prefWidth="354.0" spacing="20.0" style="-fx-background-color: #FFFFFF;">
+                <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" spacing="20.0" style="-fx-background-color: #FFFFFF;">
                     <children>
-                        <VBox alignment="CENTER" style="-fx-background-color: #F3F4F6; -fx-background-radius: 10; -fx-padding: 10;">
-                            <children>
-                                <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1E3A8A;" text="Logo">
-                                    <font>
-                                        <Font name="System Bold" size="24.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                            <effect>
-                                <DropShadow color="#00000033" offsetX="5.0" offsetY="5.0" radius="10.0" spread="0.2" />
-                            </effect>
-                     <VBox.margin>
-                        <Insets left="50.0" right="50.0" />
-                     </VBox.margin>
-                        </VBox>
+                        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1E3A8A;" text="Logo">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
 
                         <!-- Welcome Message -->
                         <Label style="-fx-font-size: 20px; -fx-text-fill: #000000;" text="Welcome!">
@@ -61,15 +48,11 @@
 
                         <!-- Username Field -->
                         <TextField fx:id="usernameField" prefWidth="250.0" promptText="Username" style="-fx-background-color: #F5F5F5; -fx-border-color: #D1D5DB; -fx-border-radius: 5; -fx-padding: 10;">
-                     <VBox.margin>
-                        <Insets left="50.0" right="50.0" />
-                     </VBox.margin></TextField>
+                        </TextField>
 
                         <!-- Password Field -->
                         <TextField fx:id="passwordField" prefWidth="250.0" promptText="Password" style="-fx-background-color: #F5F5F5; -fx-border-color: #D1D5DB; -fx-border-radius: 5; -fx-padding: 10;">
-                     <VBox.margin>
-                        <Insets left="50.0" right="50.0" />
-                     </VBox.margin></TextField>
+                        </TextField>
 
                         <!-- Login Button -->
                         <Button fx:id="loginButton" onAction="#handleLogin" prefWidth="100.0" style="-fx-background-color: #1E3A8A; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-border-radius: 5; -fx-padding: 10;" text="Login">
@@ -78,9 +61,6 @@
                             </font>
                         </Button>
                     </children>
-                    <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                    </VBox.margin>
                 </VBox>
             </children>
         </HBox>

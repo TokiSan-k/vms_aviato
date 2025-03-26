@@ -1,34 +1,26 @@
-/* Sidebar Button Styling */
 .sidebar-button {
-    -fx-pref-height: 45px;
-    -fx-pref-width: 168px;
-    -fx-background-color: #f8fafd;
-    -fx-text-fill: #5f6368;
+    -fx-background-color: #F8F8FF;
+    -fx-text-fill: #5E5E5E;
+    -fx-min-width: 300;
+    -fx-min-height: 50;
+    -fx-font-size: 17;
     -fx-alignment: center-left;
-    -fx-padding: 0 0 0 40px;
-    -fx-background-radius: 0;
-    -fx-border-width: 0;
+    -fx-content-display: left;
+    -fx-padding: 10px 30px;
+    -fx-font-family: "Maven Pro Medium";
 }
 
-/* Icon Styling within Buttons */
-.sidebar-button .graphic {
-    -fx-padding: 0 10px 0 0;
+.sidebar-button:hover{
+    -fx-background-color: #D3D3D3;
 }
 
-/* Hover State */
-.sidebar-button:hover {
-    -fx-background-color: #e8f0fe;
-    -fx-cursor: hand;
+.sidebar-button:focused{
+    -fx-background-color: #C4DAFE;
+    -fx-text-fill: #0B57D0;
 }
 
-/* Active/Selected State (e.g., "Users and permissions") */
-.sidebar-button:selected {
-    -fx-background-color: #e8f0fe;
-    -fx-text-fill: #1a73e8;
-}
-
-/* Ensure the text stays aligned with the icon */
-.sidebar-button .text {
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
+.sidebar{
+    -fx-padding: 10 20 0 0;
+    -fx-min-width: 300;
+    -fx-background-color: #F8F8FF;
 }

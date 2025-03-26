@@ -1,119 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Region?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/RemoveCustomer.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Admin_Cltr">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Customer.css" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Admin_Cltr">
     <children>
         <HBox VBox.vgrow="ALWAYS">
             <children>
                 <!-- Sidebar Menu -->
-                <VBox maxWidth="252.0" minWidth="252.0" spacing="20.0">
+                <VBox styleClass="sidebar">
                     <padding>
                         <Insets top="20.0" />
                     </padding>
                     <children>
-                        <Button fx:id="customersButton" mnemonicParsing="false" onAction="#handleCustomers" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Customers">
+                        <Button fx:id="sidebarCustomersButton" mnemonicParsing="false" onAction="#handleCustomers" styleClass="sidebar-button" text="Customers">
                             <VBox.margin>
-                                <Insets left="40.0" top="35.0" />
+                                <Insets top="35.0" />
                             </VBox.margin>
                             <graphic>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../images/Icons/team-line.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="appointmentsButton" mnemonicParsing="false" onAction="#handleAppointments" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Appointments">
+                        <Button fx:id="sidebarAppointmentsButton" mnemonicParsing="false" onAction="#handleAppointments" styleClass="sidebar-button" text="Appointments">
                             <VBox.margin>
-                                <Insets left="40.0" />
+                                <Insets />
                             </VBox.margin>
                             <graphic>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../images/Icons/calendar-line.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="vehiclesButton" mnemonicParsing="false" onAction="#handleVehicles" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Vehicles">
+                        <Button fx:id="sidebarVehiclesButton" mnemonicParsing="false" onAction="#handleVehicles" styleClass="sidebar-button" text="Vehicles">
                             <VBox.margin>
-                                <Insets left="40.0" />
+                                <Insets />
                             </VBox.margin>
                             <graphic>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../images/Icons/car-line.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="paymentsButton" mnemonicParsing="false" onAction="#handlePayments" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Payments">
+                        <Button fx:id="sidebarPaymentsButton" mnemonicParsing="false" onAction="#handlePayments" styleClass="sidebar-button" text="Payments">
                             <VBox.margin>
-                                <Insets left="40.0" />
+                                <Insets />
                             </VBox.margin>
                             <graphic>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../images/Icons/money-dollar-circle-line.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="manageRolesButton" mnemonicParsing="false" onAction="#handleManageRoles" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Manage Roles">
+                        <Button fx:id="sidebarManageRolesButton" mnemonicParsing="false" onAction="#handleManageRoles" styleClass="sidebar-button" text="Manage Roles">
                             <VBox.margin>
-                                <Insets left="40.0" />
+                                <Insets />
                             </VBox.margin>
                             <graphic>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../images/Icons/shield-user-line.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="manageInventoryButton" mnemonicParsing="false" onAction="#handleManageInventory" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Manage Inventory">
+                        <Button fx:id="sidebarManageInventoryButton" mnemonicParsing="false" onAction="#handleManageInventory" styleClass="sidebar-button" text="Manage Inventory">
                             <VBox.margin>
-                                <Insets left="40.0" />
+                                <Insets />
                             </VBox.margin>
                             <graphic>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../images/Icons/shopping-cart-2-line.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="serviceManagementButton" mnemonicParsing="false" onAction="#handleServiceManagement" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Service Management">
+                        <Button fx:id="sidebarServiceManagementButton" mnemonicParsing="false" onAction="#handleServiceManagement" styleClass="sidebar-button" text="Service Management">
                             <VBox.margin>
-                                <Insets left="40.0" />
+                                <Insets />
                             </VBox.margin>
                             <graphic>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../images/Icons/tools-line.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="monthlyReportsButton" mnemonicParsing="false" onAction="#handleMonthlyReports" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Monthly Reports">
+                        <Button fx:id="sidebarMonthlyReportsButton" mnemonicParsing="false" onAction="#handleMonthlyReports" styleClass="sidebar-button" text="Monthly Reports">
                             <VBox.margin>
-                                <Insets left="40.0" />
+                                <Insets />
                             </VBox.margin>
                             <graphic>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../images/Icons/reports.png" />
                                     </image>
@@ -123,97 +120,223 @@
                     </children>
                 </VBox>
                 <!-- Main Container -->
-                <VBox fx:id="mainContainer" styleClass="mainContainer" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+                <VBox styleClass="custMainCard" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                     <children>
-                        <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="mainContainer" styleClass="custMainContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
                             <children>
-                                <!-- Navigation Bar -->
-                                <HBox HBox.hgrow="ALWAYS">
+                                <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                     <children>
-                                        <Button text="Add Customer" />
-                                        <Button text="Remove Customer" />
-                                        <Button text="Modify Customer" />
-                                        <Button text="View Customer" />
-                                    </children>
-                                </HBox>
-
-                                <!-- Container for Adding a Customer -->
-                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" visible="false" managed="false">
-                                    <children>
-                                        <Text text="Add New Customer" />
-                                        <VBox spacing="10.0">
+                                        <!-- Navigation Bar -->
+                                        <HBox styleClass="customerNavBar" HBox.hgrow="ALWAYS">
                                             <children>
-                                                <HBox spacing="10.0">
-                                                    <Text text="First Name:" />
-                                                    <TextField fx:id="ac_firstNameField" prefWidth="200.0" />
-                                                </HBox>
-                                                <HBox spacing="10.0">
-                                                    <Text text="Last Name:" />
-                                                    <TextField fx:id="ac_lastNameField" prefWidth="200.0" />
-                                                </HBox>
-                                                <HBox spacing="10.0">
-                                                    <Text text="Email:" />
-                                                    <TextField fx:id="ac_emailField" prefWidth="200.0" />
-                                                </HBox>
-                                                <HBox spacing="10.0">
-                                                    <Text text="Phone Number:" />
-                                                    <TextField fx:id="ac_phoneField" prefWidth="200.0" />
-                                                </HBox>
-                                                <HBox spacing="10.0">
-                                                    <Text text="Address:" />
-                                                    <TextField fx:id="ac_addressField" prefWidth="200.0" />
-                                                </HBox>
-                                                <Button text="Submit" prefWidth="100.0" />
+                                                <Button styleClass="custButtons" text="Add Customer" />
+                                                <Button styleClass="custButtons" text="Remove Customer" />
+                                                <Button styleClass="custButtons" text="Modify Customer" />
+                                                <Button styleClass="custButtons" text="View Customer" />
                                             </children>
-                                        </VBox>
-                                    </children>
-                                </VBox>
+                                        </HBox>
 
-                                <!-- Container for Removing a Customer -->
-                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" >
-                                    <children>
+                                        <!-- Container for Removing a Customer -->
                                         <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
-                                                <Text text="Remove A Customer" />
-                                                <VBox spacing="10.0">
+                                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                     <children>
-                                                        <HBox spacing="10.0">
-                                                            <Text text="Email:" />
-                                                            <TextField fx:id="rc_emailField" prefWidth="200.0" />
-                                                            <Button fx:id="rc_swapFieldButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="rc_swapField-button" text="C">
-                                                                <HBox.margin>
-                                                                    <Insets left="5.0" />
-                                                                </HBox.margin>
-                                                            </Button>
-                                                        </HBox>
-                                                        <Button text="Submit" prefWidth="100.0" />
+                                                        <Text text="Remove A Customer" />
+                                                        <VBox spacing="10.0">
+                                                            <children>
+                                                                <HBox spacing="10.0">
+                                                                    <Text text="Email:" />
+                                                                    <TextField fx:id="rc_emailField" />
+                                                                    <Button fx:id="rc_swapFieldButton" mnemonicParsing="false" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <Button text="Submit" />
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+
+                                                <!-- Container for Searching a Customer -->
+                                                <VBox fx:id="rc_customerSearchContainer" spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text fx:id="rc_customerSearchTitle" text="Check Customer Info" />
+                                                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Text fx:id="rc_searchLabel" text="Search by Name:" />
+                                                                        <TextField fx:id="rc_customerSearchField" promptText="Enter customer name" HBox.hgrow="ALWAYS" />
+                                                                        <Button fx:id="rc_searchButton" mnemonicParsing="false" text="Search">
+                                                                            <HBox.margin>
+                                                                                <Insets left="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Button>
+                                                                    </children>
+                                                                </HBox>
+                                                                <TableView fx:id="rc_customerTable" VBox.vgrow="ALWAYS">
+                                                                    <columns>
+                                                                        <TableColumn fx:id="customerNameColumn" text="Name" />
+                                                                        <TableColumn fx:id="customerEmailColumn" text="Email" />
+                                                                        <TableColumn fx:id="customerPhoneColumn" text="Phone" />
+                                                                    </columns>
+                                                                </TableView>
+                                                            </children>
+                                                        </VBox>
                                                     </children>
                                                 </VBox>
                                             </children>
                                         </VBox>
 
-                                        <!-- Container for Searching a Customer -->
-                                        <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" fx:id="rc_customerSearchContainer" styleClass="customer-search-container">
+                                        <!-- Container for Adding a Customer -->
+                                        <VBox managed="false" spacing="20.0" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
-                                                <Text text="Check Customer Info" fx:id="rc_customerSearchTitle" styleClass="section-title"/>
+                                                <Text text="Add New Customer" />
+                                                <VBox spacing="10.0">
+                                                    <children>
+                                                        <HBox spacing="10.0">
+                                                            <Text text="First Name:" />
+                                                            <TextField fx:id="ac_firstNameField" />
+                                                        </HBox>
+                                                        <HBox spacing="10.0">
+                                                            <Text text="Last Name:" />
+                                                            <TextField fx:id="ac_lastNameField" />
+                                                        </HBox>
+                                                        <HBox spacing="10.0">
+                                                            <Text text="Email:" />
+                                                            <TextField fx:id="ac_emailField" />
+                                                        </HBox>
+                                                        <HBox spacing="10.0">
+                                                            <Text text="Phone Number:" />
+                                                            <TextField fx:id="ac_phoneField" />
+                                                        </HBox>
+                                                        <HBox spacing="10.0">
+                                                            <Text text="Address:" />
+                                                            <TextField fx:id="ac_addressField" />
+                                                        </HBox>
+                                                        <Button text="Submit" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Container for Modifying a Customer -->
+                                        <VBox managed="false" spacing="20.0" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <VBox fx:id="rc_checkCustomerIdContainer" spacing="20.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Text fx:id="rc_checkCustomerIdTitle" text="Check Customer ID" />
+                                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                            <children>
+                                                                <Text fx:id="rc_customerIdLabel" text="Enter ID:" />
+                                                                <TextField fx:id="rc_customerIdField" promptText="Enter customer ID" />
+                                                            </children>
+                                                        </HBox>
+                                                        <Button fx:id="rc_verifyButton" mnemonicParsing="false" text="Verify">
+                                                            <HBox.margin>
+                                                                <Insets left="5.0" />
+                                                            </HBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                </VBox>
+
+                                                <!-- Container for Modifying a Customer -->
+                                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text text="Add New Customer" />
+                                                        <VBox spacing="10.0">
+                                                            <children>
+                                                                <HBox spacing="10.0">
+                                                                    <Text text="First Name:" />
+                                                                    <TextField fx:id="mc_firstNameField" />
+                                                                    <Button fx:id="mc_editFirstNameButton" mnemonicParsing="false" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox spacing="10.0">
+                                                                    <Text text="Last Name:" />
+                                                                    <TextField fx:id="mc_lastNameField" />
+                                                                    <Button fx:id="mc_editLastNameButton" mnemonicParsing="false" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox spacing="10.0">
+                                                                    <Text text="Email:" />
+                                                                    <TextField fx:id="mc_emailField" />
+                                                                    <Button fx:id="mc_editEmailButton" mnemonicParsing="false" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox spacing="10.0">
+                                                                    <Text text="Phone Number:" />
+                                                                    <TextField fx:id="mc_phoneField" />
+                                                                    <Button fx:id="mc_editPhoneNoButton" mnemonicParsing="false" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox spacing="10.0">
+                                                                    <Text text="Address:" />
+                                                                    <TextField fx:id="mc_addressField" />
+                                                                    <Button fx:id="mc_editAddressButton" mnemonicParsing="false" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <Button text="Submit" />
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Container for View Customers -->
+                                        <VBox fx:id="addCustomerContainer" managed="false" spacing="20.0" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Text fx:id="viewCustomerTitle" text="View All Customers" />
                                                 <VBox spacing="10.0" HBox.hgrow="ALWAYS">
                                                     <children>
-                                                        <HBox spacing="10.0" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                        <!-- Search and Control Section -->
+                                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Text text="Search by Name:" fx:id="rc_searchLabel" styleClass="search-label"/>
-                                                                <TextField fx:id="rc_customerSearchField" HBox.hgrow="ALWAYS" styleClass="customer-search-field" promptText="Enter customer name"/>
-                                                                <Button fx:id="rc_searchButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" styleClass="search-button" text="Search">
+                                                                <Button fx:id="vc_clearButton" mnemonicParsing="false" text="C">
+                                                                    <HBox.margin>
+                                                                        <Insets right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                                <Text fx:id="vc_nameLabel" text="Enter Name:" />
+                                                                <TextField fx:id="vc_nameSearchField" promptText="Enter customer name" />
+                                                                <Button fx:id="vc_searchButton" mnemonicParsing="false" text="S">
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                                <Button fx:id="vc_allCustomersButton" mnemonicParsing="false" text="All Customers">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
                                                             </children>
                                                         </HBox>
-                                                        <TableView fx:id="rc_customerTable" VBox.vgrow="ALWAYS" styleClass="customer-table">
+                                                        <!-- Customer Table -->
+                                                        <TableView fx:id="vc_customerTable" VBox.vgrow="ALWAYS">
                                                             <columns>
-                                                                <TableColumn fx:id="customerNameColumn" prefWidth="200.0" text="Name" styleClass="column-name"/>
-                                                                <TableColumn fx:id="customerEmailColumn" prefWidth="250.0" text="Email" styleClass="column-email"/>
-                                                                <TableColumn fx:id="customerPhoneColumn" prefWidth="150.0" text="Phone" styleClass="column-phone"/>
+                                                                <TableColumn fx:id="vc_firstNameColumn" text="First Name" />
+                                                                <TableColumn fx:id="vc_lastNameColumn" text="Last Name" />
+                                                                <TableColumn fx:id="vc_emailColumn" text="Email" />
+                                                                <TableColumn fx:id="vc_phoneColumn" text="Phone" />
+                                                                <TableColumn fx:id="vc_addressColumn" text="Address" />
                                                             </columns>
                                                         </TableView>
                                                     </children>
@@ -222,130 +345,10 @@
                                         </VBox>
                                     </children>
                                 </VBox>
-
-                                <!-- Container for Modifying a Customer -->
-                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" visible="false" managed="false">
-                                    <children>
-                                        <VBox spacing="20.0" HBox.hgrow="ALWAYS" fx:id="rc_checkCustomerIdContainer" styleClass="check-customer-id-container">
-                                            <children>
-                                                <Text text="Check Customer ID" fx:id="rc_checkCustomerIdTitle" styleClass="section-title"/>
-                                                <HBox spacing="10.0" alignment="CENTER_LEFT">
-                                                    <children>
-                                                        <Text text="Enter ID:" fx:id="rc_customerIdLabel" styleClass="id-label"/>
-                                                        <TextField fx:id="rc_customerIdField" prefWidth="200.0" styleClass="id-field" promptText="Enter customer ID"/>
-                                                    </children>
-                                                </HBox>
-                                                <Button fx:id="rc_verifyButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" styleClass="verify-button" text="Verify">
-                                                    <HBox.margin>
-                                                        <Insets left="5.0" />
-                                                    </HBox.margin>
-                                                </Button>
-                                            </children>
-                                        </VBox>
-
-                                        <!-- Container for Modifying a Customer -->
-                                        <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-                                            <children>
-                                                <Text text="Add New Customer" />
-                                                <VBox spacing="10.0">
-                                                    <children>
-                                                        <HBox spacing="10.0">
-                                                            <Text text="First Name:" />
-                                                            <TextField fx:id="mc_firstNameField" prefWidth="200.0" />
-                                                            <Button fx:id="mc_editFirstNameButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="editFirstName-button" text="C">
-                                                                <HBox.margin>
-                                                                    <Insets left="5.0" />
-                                                                </HBox.margin>
-                                                            </Button>
-                                                        </HBox>
-                                                        <HBox spacing="10.0">
-                                                            <Text text="Last Name:" />
-                                                            <TextField fx:id="mc_lastNameField" prefWidth="200.0" />
-                                                            <Button fx:id="mc_editLastNameButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="editLastName-button" text="C">
-                                                                <HBox.margin>
-                                                                    <Insets left="5.0" />
-                                                                </HBox.margin>
-                                                            </Button>
-                                                        </HBox>
-                                                        <HBox spacing="10.0">
-                                                            <Text text="Email:" />
-                                                            <TextField fx:id="mc_emailField" prefWidth="200.0" />
-                                                            <Button fx:id="mc_editEmailButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="editEmail-button" text="C">
-                                                                <HBox.margin>
-                                                                    <Insets left="5.0" />
-                                                                </HBox.margin>
-                                                            </Button>
-                                                        </HBox>
-                                                        <HBox spacing="10.0">
-                                                            <Text text="Phone Number:" />
-                                                            <TextField fx:id="mc_phoneField" prefWidth="200.0" />
-                                                            <Button fx:id="mc_editPhoneNoButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="editPhoneNo-button" text="C">
-                                                                <HBox.margin>
-                                                                    <Insets left="5.0" />
-                                                                </HBox.margin>
-                                                            </Button>
-                                                        </HBox>
-                                                        <HBox spacing="10.0">
-                                                            <Text text="Address:" />
-                                                            <TextField fx:id="mc_addressField" prefWidth="200.0" />
-                                                            <Button fx:id="mc_editAddressButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="editAddress-button" text="C">
-                                                                <HBox.margin>
-                                                                    <Insets left="5.0" />
-                                                                </HBox.margin>
-                                                            </Button>
-                                                        </HBox>
-                                                        <Button text="Submit" prefWidth="100.0" />
-                                                    </children>
-                                                </VBox>
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                </VBox>
-
-                                <!-- Container for View Customers -->
-                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" visible="false" managed="false" fx:id="addCustomerContainer" styleClass="add-customer-container">
-                                    <children>
-                                        <Text text="View All Customers" fx:id="viewCustomerTitle" styleClass="section-title"/>
-                                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
-                                            <children>
-                                                <!-- Search and Control Section -->
-                                                <HBox spacing="10.0" alignment="CENTER_LEFT">
-                                                    <children>
-                                                        <Button fx:id="vc_clearButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="square-button" text="C">
-                                                            <HBox.margin>
-                                                                <Insets right="5.0" />
-                                                            </HBox.margin>
-                                                        </Button>
-                                                        <Text text="Enter Name:" fx:id="vc_nameLabel" styleClass="name-label"/>
-                                                        <TextField fx:id="vc_nameSearchField" prefWidth="200.0" styleClass="search-field" promptText="Enter customer name"/>
-                                                        <Button fx:id="vc_searchButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="square-search-button" text="S">
-                                                            <HBox.margin>
-                                                                <Insets left="5.0" right="5.0" />
-                                                            </HBox.margin>
-                                                        </Button>
-                                                        <Button fx:id="vc_allCustomersButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" styleClass="all-customers-button" text="All Customers">
-                                                            <HBox.margin>
-                                                                <Insets left="5.0" />
-                                                            </HBox.margin>
-                                                        </Button>
-                                                    </children>
-                                                </HBox>
-                                                <!-- Customer Table -->
-                                                <TableView fx:id="vc_customerTable" VBox.vgrow="ALWAYS" styleClass="customer-table">
-                                                    <columns>
-                                                        <TableColumn fx:id="vc_firstNameColumn" prefWidth="150.0" text="First Name" styleClass="column-first-name"/>
-                                                        <TableColumn fx:id="vc_lastNameColumn" prefWidth="150.0" text="Last Name" styleClass="column-last-name"/>
-                                                        <TableColumn fx:id="vc_emailColumn" prefWidth="200.0" text="Email" styleClass="column-email"/>
-                                                        <TableColumn fx:id="vc_phoneColumn" prefWidth="150.0" text="Phone" styleClass="column-phone"/>
-                                                        <TableColumn fx:id="vc_addressColumn" prefWidth="200.0" text="Address" styleClass="column-address"/>
-                                                    </columns>
-                                                </TableView>
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                </VBox>
-
                             </children>
+                     <VBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </VBox.margin>
                         </VBox>
                     </children>
                 </VBox>

@@ -1,5 +1,8 @@
 package com.aviato;
 
+import com.aviato.db.dao.*;
+import com.aviato.Types.*;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,6 +26,16 @@ public class Main extends Application {
         primaryStage.setMaximized(true);
         primaryStage.show();
 
+
+        try
+        {
+            Customer cust = Customer_dao.GetCustomer(1l);
+            System.out.println(cust.getName());
+            System.out.println(cust.getEmailId());
+        }catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public static void main(String[] args) {

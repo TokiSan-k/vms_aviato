@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="Created Add, Remove and update Inventory pages">
+    <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="Added initial styling to Customer.fxml page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Customer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Customer.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Customer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Customer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/SideNavbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/SideNavbar.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +37,12 @@
     &quot;assignee&quot;: &quot;dev1654&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/TokiSan-k/vms_aviato&quot;,
-    &quot;accountId&quot;: &quot;9e4c2063-902c-4789-b526-06b80fcd3517&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/TokiSan-k/vms_aviato",
+    "accountId": "9aa7ad5b-588a-4b2a-80a7-1d36cccb2b1d"
   }
-}</component>
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -105,6 +105,14 @@
       </method>
     </configuration>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -118,6 +126,7 @@
       <workItem from="1742228713943" duration="1257000" />
       <workItem from="1742330214808" duration="1353000" />
       <workItem from="1742656352458" duration="5692000" />
+      <workItem from="1743092039396" duration="9811000" />
     </task>
     <task id="LOCAL-00001" summary="Created Dev Branch">
       <option name="closed" value="true" />

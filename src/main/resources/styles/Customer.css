@@ -10,6 +10,11 @@
     -fx-background-color: white;
 }
 
+.heading{
+    -fx-padding: 25px 0px 0px 0px;
+    -fx-font-size: 20;
+}
+
 .customerNavBar{
     -fx-padding: 20 0 5 0;
     -fx-border-width: 0 0 1 0;
@@ -21,13 +26,162 @@
     -fx-min-height: 40;
     -fx-font-size: 17;
     -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.custButtons:hover{
+    /*-fx-background-color: #C4DAFE;*/
+    -fx-text-fill: #1967D2;
+}
+
+.custButtons:focused{
+    -fx-border-width: 0 0 4 0;
+    -fx-border-color: #0B57D0;
+    -fx-text-fill: #1967D2;
 }
 
 .custMainContainer{
-    -fx-background-color: #F8F8FF;
-
+    -fx-background-color: #F9F9F9;
+    -fx-background-radius: 30 0 0 30;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-padding: 25 25 25 25;
+    -fx-font-family: "Maven Pro Medium";
 }
 
 .custMainCard{
     -fx-background-color: #F8F8FF;
+}
+
+.custBackButton{
+    -fx-min-height: 40;
+    -fx-font-size: 17;
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.custBackButton:hover{
+    -fx-text-fill: #1967D2;
+}
+
+.footer{
+    -fx-font-family: "Maven Pro Medium";
+}
+
+.removeFieldButton{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.removeFieldButton:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.custSearchTextField{
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: #CCCCCC;
+    -fx-border-style: solid;
+    -fx-padding: 10px 0 0 0;
+}
+
+.CustInfo{
+    -fx-font-size: 15;
+}
+
+.remove-customer-section {
+    -fx-padding: 0 0 10px 0; /* Bottom padding only */
+}
+
+.Search {
+    -fx-pref-height: -1;
+    -fx-min-height: -1;
+    -fx-padding: 10px 0;
+}
+
+.searchCustButton{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.searchCustButton:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.table-view {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 1);
+}
+
+/* Column header styling with borders */
+.table-view .column-header-background {
+    -fx-background-color: #F5F5F5;
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+    -fx-font-family: "Maven Pro Medium";
+    -fx-font-size: 14px;
+    -fx-text-fill: #5E5E5E;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 1px 0 0;
+    -fx-border-style: solid;
+}
+
+.table-view .column-header:last-child,
+.table-view .column-header-background .filler:last-child {
+    -fx-border-width: 0;
+}
+
+/* Table cells with borders */
+.table-view .table-cell {
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 1px 1px 0;
+    -fx-padding: 10px;
+    -fx-font-family: "Maven Pro";
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+}
+
+.table-view .table-row-cell .table-cell:last-child {
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-view .table-row-cell:last-child .table-cell {
+    -fx-border-width: 0 1px 0 0;
+}
+
+.table-view .table-row-cell:last-child .table-cell:last-child {
+    -fx-border-width: 0;
+}
+
+/* Row styling */
+.table-row-cell {
+    -fx-background-color: #FFFFFF;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #FAFAFA;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #E3F2FD;
+    -fx-text-fill: #0B57D0;
+}
+
+/* Hover effects */
+.table-row-cell:hover {
+    -fx-background-color: #F5F5F5;
 }

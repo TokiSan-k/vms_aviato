@@ -8,6 +8,7 @@
     -fx-content-display: left;
     -fx-padding: 10px 30px;
     -fx-font-family: "Maven Pro Medium";
+    -fx-background-radius: 0 30px 30px 0;
 }
 
 .sidebar-button:hover{
@@ -23,4 +24,19 @@
     -fx-padding: 10 20 0 0;
     -fx-min-width: 300;
     -fx-background-color: #F8F8FF;
+}
+
+.logout-button{
+    -fx-background-color: #F8F8FF;
+    -fx-text-fill: #5E5E5E;
+    -fx-min-width: 300;
+    -fx-min-height: 50;
+    -fx-font-size: 17;
+    -fx-alignment: center-left;
+    -fx-content-display: left;
+    -fx-padding: 10px 30px;
+    -fx-font-family: "Maven Pro Medium";
+    -fx-border-width: 2 2 2 2;
+    -fx-border-color: #CCCCCC;
+    -fx-border-radius: 15px;
 }

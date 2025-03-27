@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="Added initial styling to Customer.fxml page">
+    <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="RemoveCustomer Css Completed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Customer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Customer.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Customer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Customer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/SideNavbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/SideNavbar.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +35,12 @@
     &quot;assignee&quot;: &quot;dev1654&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/TokiSan-k/vms_aviato",
-    "accountId": "9aa7ad5b-588a-4b2a-80a7-1d36cccb2b1d"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/TokiSan-k/vms_aviato&quot;,
+    &quot;accountId&quot;: &quot;9aa7ad5b-588a-4b2a-80a7-1d36cccb2b1d&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -126,7 +124,8 @@
       <workItem from="1742228713943" duration="1257000" />
       <workItem from="1742330214808" duration="1353000" />
       <workItem from="1742656352458" duration="5692000" />
-      <workItem from="1743092039396" duration="9811000" />
+      <workItem from="1743092039396" duration="9968000" />
+      <workItem from="1743105753951" duration="170000" />
     </task>
     <task id="LOCAL-00001" summary="Created Dev Branch">
       <option name="closed" value="true" />
@@ -168,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742214317736</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="RemoveCustomer Css Completed">
+      <option name="closed" value="true" />
+      <created>1743105494095</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1743105494095</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +187,7 @@
     <MESSAGE value="Created Admin and Sales page with Controllers" />
     <MESSAGE value="Created Add, Remove and update employee pages" />
     <MESSAGE value="Created Add, Remove and update Inventory pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created Add, Remove and update Inventory pages" />
+    <MESSAGE value="RemoveCustomer Css Completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="RemoveCustomer Css Completed" />
   </component>
 </project>

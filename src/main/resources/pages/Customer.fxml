@@ -118,7 +118,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <HBox>
+                        <HBox HBox.hgrow="ALWAYS">
                             <children>
                                 <Button fx:id="logOutButton" mnemonicParsing="false" styleClass="logout-button" text="Log Out">
                                     <HBox.margin>
@@ -376,7 +376,7 @@
                 </VBox>
             </children>
         </HBox>
-        <HBox alignment="CENTER" style="-fx-background-color: #F8F8FF;" styleClass="footer">
+        <HBox alignment="CENTER" style="-fx-background-color: #F8F8FF;" styleClass="footer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
             <children>
                 <Label>
                     2025 © VMS|Aviato™

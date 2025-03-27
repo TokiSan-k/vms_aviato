@@ -1,5 +1,8 @@
 package com.aviato;
 
+import com.aviato.Types.Customer;
+import com.aviato.Types.Pages;
+import com.aviato.db.dao.Customer_dao;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,6 +12,8 @@ import javafx.scene.text.Font;
 import java.io.IOException;
 
 public class Main extends Application {
+
+    public static Stage currentStage = null;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -26,17 +31,25 @@ public class Main extends Application {
             System.err.println("Failed to load Maven Pro font: " + e.getMessage());
         }
 
-        // Load the FXML file
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/pages/Customer.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        // Load All FXML file
+        try{
+            Pages.LoadAllPages();
 
-        // Set up the stage
-        primaryStage.setTitle("Admin Panel Dashboard");
-        primaryStage.setScene(scene);
-        primaryStage.setMinWidth(600.0);
-        primaryStage.setMinHeight(400.0);
-        primaryStage.setMaximized(true);
-        primaryStage.show();
+            // Set up the stage
+            currentStage = primaryStage;
+            primaryStage.setTitle("Admin Panel Dashboard");
+            primaryStage.setScene(Pages.GetCustomerScene());
+            primaryStage.setMinWidth(600.0);
+            primaryStage.setMinHeight(400.0);
+            primaryStage.setMaximized(true);
+            primaryStage.show();
+
+            Customer cust = Customer_dao.GetCustomer(41l);
+            System.out.println(cust.getName());
+        }
+        catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
     public static void main(String[] args) {

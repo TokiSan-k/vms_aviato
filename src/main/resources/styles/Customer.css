@@ -185,3 +185,128 @@
 .table-row-cell:hover {
     -fx-background-color: #F5F5F5;
 }
+
+.addCustInputField{
+    -fx-min-width: 400;
+    -fx-min-height: 25;
+}
+
+.addCustContainer{
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+    -fx-text-fill: #5E5E5E;
+}
+
+.addFirstNameField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 6;
+}
+.addLastNameField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 8;
+}
+.addEmailField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 44;
+}
+.addPhoneNoField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 0;
+}
+.addAddressField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 26;
+}
+
+.addFieldButton{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.addFieldButton:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.modCustContainer{
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+    -fx-text-fill: #5E5E5E;
+}
+
+.checkCustID{
+    -fx-spacing: 5;
+}
+
+.modCustVerifyButton{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.modCustVerifyButton:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.modCustButtons{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.modCustButtons:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.modCustSubmitButton{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.modCustSubmitButton:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.modCustFirstName{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 5;
+}
+
+.modCustLastName{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 6;
+}
+
+.modCustEmail{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 43;
+}
+
+.modCustPhoneNum{
+    -fx-spacing: 10;
+}
+
+.modCustAddress{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 26;
+}
+
+.viewCustContainer{
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+}
+
+.viewCustButtons{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.viewCustButtons:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}

@@ -155,9 +155,9 @@
                                         </HBox>
 
                                         <!-- Container for Removing a Customer -->
-                                        <VBox styleClass="remove-customer-section" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox managed="false" styleClass="remove-customer-section" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
-                                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="Search">
+                                                <VBox spacing="20.0" styleClass="Search" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                     <children>
                                                         <Text styleClass="heading" text="Remove A Customer" />
                                                         <VBox spacing="10.0">
@@ -167,30 +167,30 @@
                                                       <HBox.margin>
                                                          <Insets top="5.0" />
                                                       </HBox.margin></Text>
-                                                                    <TextField fx:id="rc_emailField" promptText="Enter ID"/>
-                                                                    <Button fx:id="rc_swapFieldButton" mnemonicParsing="false" text="C" styleClass="removeFieldButton">
+                                                                    <TextField fx:id="rc_emailField" promptText="Enter ID" />
+                                                                    <Button fx:id="rc_swapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button text="Submit" styleClass="removeFieldButton"/>
+                                                                <Button styleClass="removeFieldButton" text="Submit" />
                                                             </children>
                                                         </VBox>
                                                     </children>
                                                 </VBox>
 
                                                 <!-- Container for Searching a Customer -->
-                                                <VBox fx:id="rc_customerSearchContainer" styleClass="custSearchTextField" spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                <VBox fx:id="rc_customerSearchContainer" spacing="20.0" styleClass="custSearchTextField" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                     <children>
-                                                        <Text fx:id="rc_customerSearchTitle" text="Check Customer Info" styleClass="CustInfo"/>
+                                                        <Text fx:id="rc_customerSearchTitle" styleClass="CustInfo" text="Check Customer Info" />
                                                         <VBox spacing="10.0" HBox.hgrow="ALWAYS">
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                                                                     <children>
                                                                         <Text fx:id="rc_searchLabel" text="Search by Name:" />
-                                                                        <TextField fx:id="rc_customerSearchField" promptText="Enter customer name" HBox.hgrow="ALWAYS"/>
-                                                                        <Button fx:id="rc_searchButton" mnemonicParsing="false" text="Search" styleClass="searchCustButton">
+                                                                        <TextField fx:id="rc_customerSearchField" promptText="Enter customer name" HBox.hgrow="ALWAYS" />
+                                                                        <Button fx:id="rc_searchButton" mnemonicParsing="false" styleClass="searchCustButton" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
@@ -212,41 +212,47 @@
                                         </VBox>
 
                                         <!-- Container for Adding a Customer -->
-                                        <VBox managed="false" spacing="20.0" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox managed="false" styleClass="addCustContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text text="Add New Customer" />
                                                 <VBox spacing="10.0">
                                                     <children>
-                                                        <HBox spacing="10.0">
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addFirstNameField">
                                                             <Text text="First Name:" />
-                                                            <TextField fx:id="ac_firstNameField" />
+                                                            <TextField fx:id="ac_firstNameField" styleClass="addCustInputField" />
                                                         </HBox>
-                                                        <HBox spacing="10.0">
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addLastNameField">
                                                             <Text text="Last Name:" />
-                                                            <TextField fx:id="ac_lastNameField" />
+                                                            <TextField fx:id="ac_LastNameField" styleClass="addCustInputField" />
                                                         </HBox>
-                                                        <HBox spacing="10.0">
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addEmailField">
                                                             <Text text="Email:" />
-                                                            <TextField fx:id="ac_emailField" />
+                                                            <TextField fx:id="ac_emailField" styleClass="addCustInputField" />
                                                         </HBox>
-                                                        <HBox spacing="10.0">
-                                                            <Text text="Phone Number:" />
-                                                            <TextField fx:id="ac_phoneField" />
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addPhoneNoField">
+                                                            <Text text="Phone Num:" />
+                                                            <TextField fx:id="ac_phoneField" styleClass="addCustInputField" />
                                                         </HBox>
-                                                        <HBox spacing="10.0">
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addAddressField">
                                                             <Text text="Address:" />
-                                                            <TextField fx:id="ac_addressField" />
+                                                            <TextField fx:id="ac_addressField" styleClass="addCustInputField" />
                                                         </HBox>
-                                                        <Button text="Submit" styleClass="removeFieldButton"/>
+                                                        <Button styleClass="addFieldButton" text="Submit">
+                                             <VBox.margin>
+                                                <Insets left="428.0" />
+                                             </VBox.margin></Button>
                                                     </children>
                                                 </VBox>
                                             </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
                                         </VBox>
 
                                         <!-- Container for Modifying a Customer -->
-                                        <VBox managed="false" spacing="20.0" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox managed="false" styleClass="modCustContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
-                                                <VBox fx:id="rc_checkCustomerIdContainer" spacing="20.0" HBox.hgrow="ALWAYS">
+                                                <VBox fx:id="rc_checkCustomerIdContainer" styleClass="checkCustID" HBox.hgrow="ALWAYS">
                                                     <children>
                                                         <Text fx:id="rc_checkCustomerIdTitle" text="Check Customer ID" />
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
@@ -255,12 +261,15 @@
                                                                 <TextField fx:id="rc_customerIdField" promptText="Enter customer ID" />
                                                             </children>
                                                         </HBox>
-                                                        <Button fx:id="rc_verifyButton" mnemonicParsing="false" text="Verify">
+                                                        <Button fx:id="rc_verifyButton" mnemonicParsing="false" styleClass="modCustVerifyButton" text="Verify">
                                                             <HBox.margin>
                                                                 <Insets left="5.0" />
                                                             </HBox.margin>
                                                         </Button>
                                                     </children>
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
                                                 </VBox>
 
                                                 <!-- Container for Modifying a Customer -->
@@ -269,52 +278,55 @@
                                                         <Text text="Add New Customer" />
                                                         <VBox spacing="10.0">
                                                             <children>
-                                                                <HBox spacing="10.0">
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modCustFirstName">
                                                                     <Text text="First Name:" />
                                                                     <TextField fx:id="mc_firstNameField" />
-                                                                    <Button fx:id="mc_editFirstNameButton" mnemonicParsing="false" text="C">
+                                                                    <Button fx:id="mc_editFirstNameButton" mnemonicParsing="false" styleClass="modCustButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <HBox spacing="10.0">
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modCustLastName">
                                                                     <Text text="Last Name:" />
                                                                     <TextField fx:id="mc_lastNameField" />
-                                                                    <Button fx:id="mc_editLastNameButton" mnemonicParsing="false" text="C">
+                                                                    <Button fx:id="mc_editLastNameButton" mnemonicParsing="false" styleClass="modCustButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <HBox spacing="10.0">
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modCustEmail">
                                                                     <Text text="Email:" />
                                                                     <TextField fx:id="mc_emailField" />
-                                                                    <Button fx:id="mc_editEmailButton" mnemonicParsing="false" text="C">
+                                                                    <Button fx:id="mc_editEmailButton" mnemonicParsing="false" styleClass="modCustButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <HBox spacing="10.0">
-                                                                    <Text text="Phone Number:" />
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modCustPhoneNum">
+                                                                    <Text text="Phone Num:" />
                                                                     <TextField fx:id="mc_phoneField" />
-                                                                    <Button fx:id="mc_editPhoneNoButton" mnemonicParsing="false" text="C">
+                                                                    <Button fx:id="mc_editPhoneNoButton" mnemonicParsing="false" styleClass="modCustButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <HBox spacing="10.0">
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modCustAddress">
                                                                     <Text text="Address:" />
                                                                     <TextField fx:id="mc_addressField" />
-                                                                    <Button fx:id="mc_editAddressButton" mnemonicParsing="false" text="C">
+                                                                    <Button fx:id="mc_editAddressButton" mnemonicParsing="false" styleClass="modCustButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button text="Submit" />
+                                                                <Button styleClass="modCustSubmitButton" text="Submit">
+                                                   <VBox.margin>
+                                                      <Insets left="270.0" />
+                                                   </VBox.margin></Button>
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -323,7 +335,7 @@
                                         </VBox>
 
                                         <!-- Container for View Customers -->
-                                        <VBox fx:id="addCustomerContainer" managed="false" spacing="20.0" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="addCustomerContainer" styleClass="viewCustContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="viewCustomerTitle" text="View All Customers" />
                                                 <VBox spacing="10.0" HBox.hgrow="ALWAYS">
@@ -331,19 +343,19 @@
                                                         <!-- Search and Control Section -->
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Button fx:id="vc_clearButton" mnemonicParsing="false" text="C">
+                                                                <Button fx:id="vc_clearButton" mnemonicParsing="false" styleClass="viewCustButtons" text="C">
                                                                     <HBox.margin>
                                                                         <Insets right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
                                                                 <Text fx:id="vc_nameLabel" text="Enter Name:" />
                                                                 <TextField fx:id="vc_nameSearchField" promptText="Enter customer name" />
-                                                                <Button fx:id="vc_searchButton" mnemonicParsing="false" text="S">
+                                                                <Button fx:id="vc_searchButton" mnemonicParsing="false" styleClass="viewCustButtons" text="S">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Button fx:id="vc_allCustomersButton" mnemonicParsing="false" text="All Customers">
+                                                                <Button fx:id="vc_allCustomersButton" mnemonicParsing="false" styleClass="viewCustButtons" text="All Customers">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" />
                                                                     </HBox.margin>
@@ -363,6 +375,9 @@
                                                     </children>
                                                 </VBox>
                                             </children>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
                                         </VBox>
                                     </children>
                                 </VBox>

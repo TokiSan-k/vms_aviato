@@ -19,9 +19,29 @@ import java.util.List;
 
 public class Customer_Cltr
 {
-    // Main Container
+    //Containers
     @FXML
     private VBox mainContainer;
+
+    private VBox[] customerContainers = new VBox[4];
+    private class CustContainerEnum
+    {
+        public static String CustomerContainerTag = "#customerContainer_";
+        public static final byte AddCustomerContainer = 0;
+        public static final byte RemoveCustomerContainer = 1;
+        public static final byte ModifyCustomerContainer = 2;
+        public static final byte ViewCustomerContainer = 3;
+    }
+
+    //Customer Navbar
+    @FXML
+    private Button addCustBtn;
+    @FXML
+    private Button removeCustBtn;
+    @FXML
+    private Button modifyCustBtn;
+    @FXML
+    private Button viewCustBtn;
 
     // Add Customer Fields
     @FXML
@@ -104,6 +124,15 @@ public class Customer_Cltr
     // Initialize method to set up table columns
     @FXML
     public void initialize() {
+
+        for(byte i =0; i<customerContainers.length; i++)
+        {
+            String container = CustContainerEnum.CustomerContainerTag + i;
+            customerContainers[i] = (VBox)mainContainer.lookup(container);
+        }
+        customerContainers[CustContainerEnum.AddCustomerContainer].setVisible(true);
+        customerContainers[CustContainerEnum.AddCustomerContainer].setManaged(true);
+
         // Set up Remove Customer table columns
         customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
         customerEmailColumn.setCellValueFactory(new PropertyValueFactory<>("EmailId"));
@@ -115,6 +144,44 @@ public class Customer_Cltr
         vc_emailColumn.setCellValueFactory(new PropertyValueFactory<>("EmailId"));
         vc_phoneColumn.setCellValueFactory(new PropertyValueFactory<>("Phone"));
         vc_addressColumn.setCellValueFactory(new PropertyValueFactory<>("Address"));
+    }
+
+    //Customer NavBar
+    private void TurnOffVisibleAndManageCustContainer()
+    {
+        for(byte i =0; i<customerContainers.length; i++)
+        {
+            customerContainers[i].setVisible(false);
+            customerContainers[i].setManaged(false);
+        }
+    }
+
+    @FXML
+    private void handleCustomerNavAddCust(ActionEvent event) {
+        TurnOffVisibleAndManageCustContainer();
+        customerContainers[CustContainerEnum.AddCustomerContainer].setManaged(true);
+        customerContainers[CustContainerEnum.AddCustomerContainer].setVisible(true);
+    }
+
+    @FXML
+    private void handleCustomerNavRemoveCust(ActionEvent event) {
+        TurnOffVisibleAndManageCustContainer();
+        customerContainers[CustContainerEnum.RemoveCustomerContainer].setManaged(true);
+        customerContainers[CustContainerEnum.RemoveCustomerContainer].setVisible(true);
+    }
+
+    @FXML
+    private void handleCustomerNavModifyCust(ActionEvent event) {
+        TurnOffVisibleAndManageCustContainer();
+        customerContainers[CustContainerEnum.ModifyCustomerContainer].setManaged(true);
+        customerContainers[CustContainerEnum.ModifyCustomerContainer].setVisible(true);
+    }
+
+    @FXML
+    private void handleCustomerNavViewCust(ActionEvent event) {
+        TurnOffVisibleAndManageCustContainer();
+        customerContainers[CustContainerEnum.ViewCustomerContainer].setManaged(true);
+        customerContainers[CustContainerEnum.ViewCustomerContainer].setVisible(true);
     }
 
     // Add Customer Submit Handler

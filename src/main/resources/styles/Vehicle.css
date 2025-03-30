@@ -1,0 +1,293 @@
+.vehicleMainCard{
+    -fx-background-color: #F8F8FF;
+}
+
+.vehicleMainContainer{
+    -fx-background-color: #F9F9F9;
+    -fx-background-radius: 30 0 0 30;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-padding: 25 25 25 25;
+    -fx-font-family: "Maven Pro Medium";
+}
+
+.vehicleBackButton{
+    -fx-min-height: 40;
+    -fx-font-size: 17;
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.vehicleBackButton:hover{
+    -fx-text-fill: #1967D2;
+}
+
+.vehicleNavBar{
+    -fx-padding: 20 0 5 0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #CCCCCC;
+    -fx-border-style: solid;
+}
+
+.vehicleButtons{
+    -fx-min-height: 40;
+    -fx-font-size: 17;
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.vehicleButtons:hover{
+    /*-fx-background-color: #C4DAFE;*/
+    -fx-text-fill: #1967D2;
+}
+.vehicleButtons:focused{
+    -fx-border-width: 0 0 4 0;
+    -fx-border-color: #0B57D0;
+    -fx-text-fill: #1967D2;
+}
+
+.addVehicleContainer{
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+    -fx-text-fill: #5E5E5E;
+}
+
+.addCustIDField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 6;
+}
+.addCustIdInputField{
+    -fx-min-width: 400;
+    -fx-min-height: 25;
+}
+
+.addLicencePlateField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 8;
+}
+
+.addLicencePlateInputField{
+    -fx-min-width: 400;
+    -fx-min-height: 25;
+}
+
+.addMakeField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 44;
+}
+
+.addModelField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 44;
+}
+
+.addYearInputField {
+    -fx-min-width: 400;
+    -fx-min-height: 25;
+}
+
+.addFieldButton{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.addFieldButton:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.remove-vehicle-section {
+    -fx-padding: 0 0 10 0;
+}
+
+.Search {
+    -fx-pref-height: -1;
+    -fx-min-height: -1;
+    -fx-padding: 10px 0;
+}
+
+.heading{
+    -fx-padding: 25px 0px 0px 0px;
+    -fx-font-size: 20;
+}
+
+.removeFieldButton{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.removeFieldButton:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.VehicleInfo{
+    -fx-font-size: 15;
+}
+
+.searchVehicleButton{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.searchVehicleButton:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+
+.table-view {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 1);
+}
+
+/* Column header styling with borders */
+.table-view .column-header-background {
+    -fx-background-color: #F5F5F5;
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+    -fx-font-family: "Maven Pro Medium";
+    -fx-font-size: 14px;
+    -fx-text-fill: #5E5E5E;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 1px 0 0;
+    -fx-border-style: solid;
+}
+
+.table-view .column-header:last-child,
+.table-view .column-header-background .filler:last-child {
+    -fx-border-width: 0;
+}
+
+/* Table cells with borders */
+.table-view .table-cell {
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 1px 1px 0;
+    -fx-padding: 10px;
+    -fx-font-family: "Maven Pro";
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+}
+
+.table-view .table-row-cell .table-cell:last-child {
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-view .table-row-cell:last-child .table-cell {
+    -fx-border-width: 0 1px 0 0;
+}
+
+.table-view .table-row-cell:last-child .table-cell:last-child {
+    -fx-border-width: 0;
+}
+
+/* Row styling */
+.table-row-cell {
+    -fx-background-color: #FFFFFF;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #FAFAFA;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #E3F2FD;
+    -fx-text-fill: #0B57D0;
+}
+
+/* Hover effects */
+.table-row-cell:hover {
+    -fx-background-color: #F5F5F5;
+}
+
+.modVehicleContainer{
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+    -fx-text-fill: #5E5E5E;
+}
+
+.checkVehicleID{
+    -fx-spacing: 5;
+}
+
+.modVehicleVerifyButton{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.modVehicleVerifyButton:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.modVehicleLicencePlate{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 5;
+}
+
+.modVehicleButtons{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.modVehicleButtons:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.modVehicleMake{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 6;
+}
+
+.modVehicleModel{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 43;
+}
+
+.modVehicleYear {
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 43;
+}
+
+.modVehicleSubmitButton{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.modVehicleSubmitButton:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.viewVehicleContainer{
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+}
+
+.viewVehicleButtons{
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.viewVehicleButtons:hover{
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.footer{
+    -fx-font-family: "Maven Pro Medium";
+}

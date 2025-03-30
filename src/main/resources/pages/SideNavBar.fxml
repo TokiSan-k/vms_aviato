@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox styleClass="sidebar" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.SideNavBar_Cltr">
+    <padding>
+        <Insets top="20.0" />
+    </padding>
+    <children>
+        <Button fx:id="sidebarCustomersButton" onAction="#handleCustomers" mnemonicParsing="false" styleClass="sidebar-button" text="Customers">
+            <VBox.margin>
+                <Insets top="35.0" />
+            </VBox.margin>
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Icons/team-line.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="sidebarVehiclesButton" onAction="#handleVehicles" mnemonicParsing="false" styleClass="sidebar-button" text="Vehicles">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Icons/car-line.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="sidebarEmployeeButton" onAction="#handleEmployee" mnemonicParsing="false" styleClass="sidebar-button" text="Employee">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Icons/team-line.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="sidebarServiceManagementButton" onAction="#handleServiceManagement" mnemonicParsing="false"  styleClass="sidebar-button" text="Service Management">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Icons/tools-line.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="sidebarAppointmentsButton" onAction="#handleAppointments" mnemonicParsing="false" styleClass="sidebar-button" text="Appointments">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Icons/calendar-line.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="sidebarManageInventoryButton" onAction="#handleManageInventory" mnemonicParsing="false"  styleClass="sidebar-button" text="Manage Inventory">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Icons/shopping-cart-2-line.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="sidebarPaymentsButton" onAction="#handlePayments" mnemonicParsing="false"  styleClass="sidebar-button" text="Payments">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Icons/money-dollar-circle-line.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="sidebarManageRolesButton" onAction="#handleManageRoles" mnemonicParsing="false"  styleClass="sidebar-button" text="Manage Roles">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Icons/shield-user-line.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="sidebarMonthlyReportsButton" onAction="#handleMonthlyReports" mnemonicParsing="false"  styleClass="sidebar-button" text="Monthly Reports">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Icons/reports.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <HBox HBox.hgrow="ALWAYS">
+            <children>
+                <Button fx:id="logOutButton" mnemonicParsing="false" styleClass="logout-button" text="Log Out">
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                </Button>
+            </children>
+            <VBox.margin>
+                <Insets top="275.0" />
+            </VBox.margin>
+        </HBox>
+    </children>
+</VBox>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Appointment.css" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Appointment_Cltr">
+    <children>
+        <HBox VBox.vgrow="ALWAYS">
+            <children>
+                <!-- Sidebar Menu -->
+                <fx:include source="../pages/SideNavBar.fxml"/>
+
+                <!-- Main Container -->
+                <VBox styleClass="appMainCard" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                    <children>
+                        <VBox fx:id="mainContainer" styleClass="appMainContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                            <children>
+                                <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <HBox>
+                                            <children>
+                                                <Button styleClass="appBackButton" text="Main Menu" />
+                                            </children>
+                                        </HBox>
+                                        <!-- Navigation Bar -->
+                                        <HBox styleClass="appointmentNavBar" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Button fx:id="addAppBtn" onAction="#handleAppointmentNavAddApp" styleClass="appButtons" text="Schedule Appointment" />
+                                                <Button fx:id="removeAppBtn" onAction="#handleAppointmentNavRemoveApp" styleClass="appButtons" text="Remove Appointment" />
+                                                <Button fx:id="modifyAppBtn" onAction="#handleAppointmentNavModifyApp" styleClass="appButtons" text="Modify Appointment" />
+                                                <Button fx:id="viewAppBtn" onAction="#handleAppointmentNavViewApp" styleClass="appButtons" text="View Appointment" />
+                                            </children>
+                                        </HBox>
+
+                                        <!-- Container for Scheduling an Appointment -->
+                                        <VBox fx:id="appointmentContainer_0" managed="false" visible="false" styleClass="addAppContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Text text="Schedule New Appointment" />
+                                                <VBox spacing="10.0">
+                                                    <children>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addCustIdField">
+                                                            <Text text="Customer ID:" />
+                                                            <TextField fx:id="aa_custIdField" styleClass="addAppInputField" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addVehicleIdField">
+                                                            <Text text="Vehicle ID:" />
+                                                            <TextField fx:id="aa_vehicleIdField" styleClass="addAppInputField" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addAppDateField">
+                                                            <Text text="Date:" />
+                                                            <TextField fx:id="aa_appDateField" styleClass="addAppInputField" promptText="YYYY-MM-DD" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addAppTimeField">
+                                                            <Text text="Time:" />
+                                                            <TextField fx:id="aa_appTimeField" styleClass="addAppInputField" promptText="HH24:MI:SS" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addStatusField">
+                                                            <Text text="Status:" />
+                                                            <TextField fx:id="aa_statusField" styleClass="addAppInputField" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addServiceIdField">
+                                                            <Text text="Service ID:" />
+                                                            <TextField fx:id="aa_serviceIdField" styleClass="addAppInputField" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addEmpIdField">
+                                                            <Text text="Employee ID:" />
+                                                            <TextField fx:id="aa_empIdField" styleClass="addAppInputField" />
+                                                        </HBox>
+                                                        <Button fx:id="aa_submitButton" styleClass="addFieldButton" text="Submit">
+                                                            <VBox.margin>
+                                                                <Insets left="428.0" />
+                                                            </VBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </VBox>
+
+                                        <!-- Container for Removing an Appointment -->
+                                        <VBox fx:id="appointmentContainer_1" managed="false" visible="false" styleClass="remove-appointment-section" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <VBox spacing="20.0" styleClass="Search" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text styleClass="heading" text="Remove An Appointment" />
+                                                        <VBox spacing="10.0">
+                                                            <children>
+                                                                <HBox spacing="10.0">
+                                                                    <Text text="Appointment ID:">
+                                                                        <HBox.margin>
+                                                                            <Insets top="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Text>
+                                                                    <TextField fx:id="ra_appIdField" promptText="Enter ID" />
+                                                                    <Button fx:id="ra_swapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <Button fx:id="ra_submitButton" styleClass="removeFieldButton" text="Submit" />
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+
+                                                <!-- Container for Searching an Appointment -->
+                                                <VBox fx:id="ra_appointmentSearchContainer" spacing="20.0" styleClass="appSearchTextField" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text fx:id="ra_appointmentSearchTitle" styleClass="AppInfo" text="Check Appointment Info" />
+                                                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Text fx:id="ra_searchLabel" text="Search by Date:" />
+                                                                        <TextField fx:id="ra_appointmentSearchField" promptText="YYYY-MM-DD" HBox.hgrow="ALWAYS" />
+                                                                        <Button fx:id="ra_searchButton" mnemonicParsing="false" styleClass="searchAppButton" text="Search">
+                                                                            <HBox.margin>
+                                                                                <Insets left="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Button>
+                                                                    </children>
+                                                                </HBox>
+                                                                <TableView fx:id="ra_appointmentTable" styleClass="table-view" VBox.vgrow="ALWAYS">
+                                                                    <columns>
+                                                                        <TableColumn fx:id="appointmentIdColumn" text="ID" />
+                                                                        <TableColumn fx:id="appointmentDateColumn" text="Date" />
+                                                                        <TableColumn fx:id="appointmentStatusColumn" text="Status" />
+                                                                    </columns>
+                                                                </TableView>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Container for Modifying an Appointment -->
+                                        <VBox fx:id="appointmentContainer_2" managed="false" visible="false" styleClass="modAppContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <VBox fx:id="ma_checkAppointmentIdContainer" styleClass="checkAppID" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Text fx:id="ma_checkAppointmentIdTitle" text="Check Appointment ID" />
+                                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                            <children>
+                                                                <Text fx:id="ma_appointmentIdLabel" text="Enter ID:" />
+                                                                <TextField fx:id="ma_appIdField" promptText="Enter appointment ID" />
+                                                            </children>
+                                                        </HBox>
+                                                        <Button fx:id="ma_verifyButton" mnemonicParsing="false" styleClass="modAppVerifyButton" text="Verify">
+                                                            <HBox.margin>
+                                                                <Insets left="5.0" />
+                                                            </HBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                    <VBox.margin>
+                                                        <Insets top="5.0" />
+                                                    </VBox.margin>
+                                                </VBox>
+
+                                                <!-- Container for Modifying an Appointment -->
+                                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text text="Modify An Appointment" />
+                                                        <VBox spacing="10.0">
+                                                            <children>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modCustId">
+                                                                    <Text text="Customer ID:" />
+                                                                    <TextField fx:id="ma_custIdField" />
+                                                                    <Button fx:id="ma_editCustIdButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modVehicleId">
+                                                                    <Text text="Vehicle ID:" />
+                                                                    <TextField fx:id="ma_vehicleIdField" />
+                                                                    <Button fx:id="ma_editVehicleIdButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modAppDate">
+                                                                    <Text text="Date:" />
+                                                                    <TextField fx:id="ma_appDateField" />
+                                                                    <Button fx:id="ma_editAppDateButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modAppTime">
+                                                                    <Text text="Time:" />
+                                                                    <TextField fx:id="ma_appTimeField" />
+                                                                    <Button fx:id="ma_editAppTimeButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modStatus">
+                                                                    <Text text="Status:" />
+                                                                    <TextField fx:id="ma_statusField" />
+                                                                    <Button fx:id="ma_editStatusButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modServiceId">
+                                                                    <Text text="Service ID:" />
+                                                                    <TextField fx:id="ma_serviceIdField" />
+                                                                    <Button fx:id="ma_editServiceIdButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modEmpId">
+                                                                    <Text text="Employee ID:" />
+                                                                    <TextField fx:id="ma_empIdField" />
+                                                                    <Button fx:id="ma_editEmpIdButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <Button fx:id="ma_submitButton" styleClass="modAppSubmitButton" text="Submit">
+                                                                    <VBox.margin>
+                                                                        <Insets left="270.0" />
+                                                                    </VBox.margin>
+                                                                </Button>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Container for Viewing Appointments -->
+                                        <VBox fx:id="appointmentContainer_3" managed="false" visible="false" styleClass="viewAppContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Text fx:id="viewAppointmentTitle" text="View All Appointments" />
+                                                <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <!-- Search and Control Section -->
+                                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                            <children>
+                                                                <Button fx:id="va_clearButton" mnemonicParsing="false" styleClass="viewAppButtons" text="C">
+                                                                    <HBox.margin>
+                                                                        <Insets right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                                <Text fx:id="va_dateLabel" text="Enter Date:" />
+                                                                <TextField fx:id="va_appointmentSearchField" promptText="YYYY-MM-DD" />
+                                                                <Button fx:id="va_searchButton" mnemonicParsing="false" styleClass="viewAppButtons" text="S">
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                                <Button fx:id="va_allAppointmentsButton" mnemonicParsing="false" styleClass="viewAppButtons" text="All Appointments">
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                            </children>
+                                                        </HBox>
+                                                        <!-- Appointment Table -->
+                                                        <TableView fx:id="va_appointmentTable" VBox.vgrow="ALWAYS">
+                                                            <columns>
+                                                                <TableColumn fx:id="va_appIdColumn" text="ID" />
+                                                                <TableColumn fx:id="va_custIdColumn" text="Customer ID" />
+                                                                <TableColumn fx:id="va_vehicleIdColumn" text="Vehicle ID" />
+                                                                <TableColumn fx:id="va_appDateColumn" text="Date" />
+                                                                <TableColumn fx:id="va_appTimeColumn" text="Time" />
+                                                                <TableColumn fx:id="va_statusColumn" text="Status" />
+                                                                <TableColumn fx:id="va_serviceIdColumn" text="Service ID" />
+                                                                <TableColumn fx:id="va_empIdColumn" text="Employee ID" />
+                                                            </columns>
+                                                        </TableView>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="5.0" />
+                                            </VBox.margin>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="15.0" left="15.0" top="15.0" />
+                            </VBox.margin>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" style="-fx-background-color: #F8F8FF;" styleClass="footer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <children>
+                <Label>
+                    2025 © VMS|Aviato™
+                </Label>
+            </children>
+        </HBox>
+    </children>
+</VBox>

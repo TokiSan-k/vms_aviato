@@ -22,25 +22,16 @@ public class Main extends Application {
             Font regularFont = Font.loadFont(getClass().getResourceAsStream("/fonts/MavenPro-Regular.ttf"), 14);
             Font mediumFont = Font.loadFont(getClass().getResourceAsStream("/fonts/MavenPro-Medium.ttf"), 14);
             Font boldFont = Font.loadFont(getClass().getResourceAsStream("/fonts/MavenPro-Bold.ttf"), 14);
-            System.out.println("Maven Pro font loaded successfully.");
-            // Print the font family names
-            System.out.println("Regular Font Family: " + regularFont.getFamily());
-            System.out.println("Medium Font Family: " + mediumFont.getFamily());
-            System.out.println("Bold Font Family: " + boldFont.getFamily());
         } catch (Exception e) {
             System.err.println("Failed to load Maven Pro font: " + e.getMessage());
         }
 
-        // Load All FXML file
         try{
             Pages.LoadAllPages();
 
-            // Set up the stage
             currentStage = primaryStage;
             primaryStage.setTitle("Admin Panel Dashboard");
-            primaryStage.setScene(Pages.GetCustomerScene());
-            primaryStage.setMinWidth(600.0);
-            primaryStage.setMinHeight(400.0);
+            primaryStage.setScene(Pages.GetAppointmentScene());
             primaryStage.setMaximized(true);
             primaryStage.show();
 
@@ -48,7 +39,7 @@ public class Main extends Application {
             System.out.println(cust.getName());
         }
         catch (Exception ex){
-            System.out.println(ex.getMessage());
+            System.out.println("MainErr: "+ex.getMessage());
         }
     }
 

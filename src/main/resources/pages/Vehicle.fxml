@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Vehicle.css" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Vehicle_Cltr">
+    <children>
+        <HBox VBox.vgrow="ALWAYS">
+            <children>
+                <!-- Sidebar Menu -->
+                <fx:include source="../pages/SideNavBar.fxml" HBox.hgrow="NEVER"/>
+
+                <!-- Main Container -->
+                <VBox styleClass="vehicleMainCard" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                    <children>
+                        <VBox fx:id="mainContainer" styleClass="vehicleMainContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+                            <children>
+                                <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <HBox>
+                                            <children>
+                                                <Button styleClass="vehicleBackButton" text="Main Menu" />
+                                            </children>
+                                        </HBox>
+                                        <!-- Navigation Bar -->
+                                        <HBox styleClass="vehicleNavBar" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Button fx:id="addVehicleBtn" onAction="#handleCustomerNavAddCust" styleClass="vehicleButtons" text="Add Vehicle" />
+                                                <Button fx:id="removeVehicleBtn" onAction="#handleCustomerNavRemoveCust" styleClass="vehicleButtons" text="Remove Vehicle" />
+                                                <Button fx:id="modifyVehicleBtn" onAction="#handleCustomerNavModifyCust" styleClass="vehicleButtons" text="Modify Vehicle" />
+                                                <Button fx:id="viewVehicleBtn" onAction="#handleCustomerNavViewCust" styleClass="vehicleButtons" text="View Vehicle" />
+                                            </children>
+                                        </HBox>
+
+                                        <!-- Container for Adding a vehicle -->
+                                        <VBox fx:id="vehicleContainer_0" managed="false" visible="false" styleClass="addVehicleContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Text text="Add New Vehicle" />
+                                                <VBox spacing="10.0">
+                                                    <children>
+                                                        <HBox>
+                                                            <Text text="verify customer id" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addCustIDField">
+                                                            <Text text="Customer ID:" />
+                                                            <TextField fx:id="av_CustIdField" editable="false" styleClass="addCustIdInputField" />
+                                                            <Button fx:id="av_verifyCustIdButton" mnemonicParsing="false" styleClass="addFieldButton" text="Verify">
+                                                                <HBox.margin>
+                                                                    <Insets left="5.0" />
+                                                                </HBox.margin>
+                                                            </Button>
+                                                            <Text visible="false" managed="false" text="Customer ID does not exists!" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addLicencePlateField">
+                                                            <Text text="Licence Plate:" />
+                                                            <TextField fx:id="ac_LicencePlateField" styleClass="addLicencePlateInputField" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addMakeField">
+                                                            <Text text="Make:" />
+                                                            <TextField fx:id="ac_MakeField" styleClass="addMakeInputField" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addModelField">
+                                                            <Text text="Model:" />
+                                                            <TextField fx:id="ac_ModelField" styleClass="addModelInputField" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addYearField">
+                                                            <Text text="Year:" />
+                                                            <TextField fx:id="ac_YearField" styleClass="addYearInputField" />
+                                                        </HBox>
+                                                        <Button styleClass="addFieldButton" text="Submit">
+                                                            <VBox.margin>
+                                                                <Insets left="428.0" />
+                                                            </VBox.margin></Button>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </VBox>
+
+                                        <!-- Container for Removing a Vehicle -->
+                                        <VBox fx:id="vehicleContainer_1" managed="false" visible="false" styleClass="remove-vehicle-section" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <VBox spacing="20.0" styleClass="Search" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text styleClass="heading" text="Remove A Vehicle" />
+                                                        <VBox spacing="10.0">
+                                                            <children>
+                                                                <HBox spacing="10.0">
+                                                                    <Text text="Vehicle ID:">
+                                                                        <HBox.margin>
+                                                                            <Insets top="5.0" />
+                                                                        </HBox.margin></Text>
+                                                                    <TextField fx:id="rv_inputField" promptText="Enter ID" />
+                                                                    <Button fx:id="rv_swapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <Button styleClass="removeFieldButton" text="Submit" />
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+
+                                                <!-- Container for Searching a Vehicle -->
+                                                <VBox fx:id="rv_VechicleSearchContainer" spacing="20.0" styleClass="vehicleSearchTextField" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text fx:id="rv_vehicleSearchTitle" styleClass="VehicleInfo" text="Check Vehicle Info" />
+                                                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Text fx:id="rv_searchLabel" text="Search by Vehicle ID:" />
+                                                                        <TextField fx:id="rv_vehicleSearchField" promptText="Enter Vehicle Id" HBox.hgrow="ALWAYS" />
+                                                                        <Button fx:id="rv_searchButton" mnemonicParsing="false" styleClass="searchVehicleButton" text="Search">
+                                                                            <HBox.margin>
+                                                                                <Insets left="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Button>
+                                                                    </children>
+                                                                </HBox>
+                                                                <TableView fx:id="rv_vehicleTable" styleClass="table-view" VBox.vgrow="ALWAYS">
+                                                                    <columns>
+                                                                        <TableColumn fx:id="vehicleIdColumn" text="ID" />
+                                                                        <TableColumn fx:id="vehicleLicencePlateColumn" text="Licence Plate" />
+                                                                        <TableColumn fx:id="vehicleMakeColumn" text="Make" />
+                                                                        <TableColumn fx:id="vehicleModelColumn" text="Model" />
+                                                                        <TableColumn fx:id="vehicleYearColumn" text="Year" />
+                                                                    </columns>
+                                                                </TableView>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Container for Modifying a Vehicle -->
+                                        <VBox fx:id="vehicleContainer_2" managed="false" visible="false" styleClass="modVehicleContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <VBox fx:id="mv_checkVehicleIdContainer" styleClass="checkVehicleID" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Text fx:id="mv_checkVehicleIdTitle" text="Check Vehicle ID" />
+                                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                            <children>
+                                                                <Text fx:id="mv_vehicleIdLabel" text="Enter ID:" />
+                                                                <TextField fx:id="mv_vehicleIdField" promptText="Enter Vehicle ID" />
+                                                            </children>
+                                                        </HBox>
+                                                        <Button fx:id="mv_verifyButton" mnemonicParsing="false" styleClass="modVehicleVerifyButton" text="Verify">
+                                                            <HBox.margin>
+                                                                <Insets left="5.0" />
+                                                            </HBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                    <VBox.margin>
+                                                        <Insets top="5.0" />
+                                                    </VBox.margin>
+                                                </VBox>
+
+                                                <!-- Container for Modifying a Vehicle -->
+                                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text text="Modify A Vehicle" />
+                                                        <VBox spacing="10.0">
+                                                            <children>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modVehicleLicencePlate">
+                                                                    <Text text="Licence Plate:" />
+                                                                    <TextField fx:id="mv_LicencePlateField" />
+                                                                    <Button fx:id="mv_editLicencePlateButton" mnemonicParsing="false" styleClass="modVehicleButtons" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modVehicleMake">
+                                                                    <Text text="Make:" />
+                                                                    <TextField fx:id="mv_MakeField" />
+                                                                    <Button fx:id="mc_editMakeButton" mnemonicParsing="false" styleClass="modVehicleButtons" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modVehicleModel">
+                                                                    <Text text="Model:" />
+                                                                    <TextField fx:id="mv_ModelField" />
+                                                                    <Button fx:id="mv_ModelButton" mnemonicParsing="false" styleClass="modVehicleButtons" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="modVehicleYear">
+                                                                    <Text text="Year:" />
+                                                                    <TextField fx:id="mv_YearField" />
+                                                                    <Button fx:id="mv_VehicleYearEditButton" mnemonicParsing="false" styleClass="modVehicleButtons" text="C">
+                                                                        <HBox.margin>
+                                                                            <Insets left="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Button>
+                                                                </HBox>
+                                                                <Button styleClass="modVehicleSubmitButton" text="Submit">
+                                                                    <VBox.margin>
+                                                                        <Insets left="270.0" />
+                                                                    </VBox.margin></Button>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Container for View Vehicle -->
+                                        <VBox fx:id="vehicleContainer_3" managed="false" visible="false"  styleClass="viewVehicleContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Text fx:id="viewVehicleTitle" text="View All Vehicle Info" />
+                                                <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <!-- Search and Control Section -->
+                                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                            <children>
+                                                                <Button fx:id="vv_clearButton" mnemonicParsing="false" styleClass="viewVehicleButtons" text="C">
+                                                                    <HBox.margin>
+                                                                        <Insets right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                                <Text fx:id="vv_VehicleIdLabel" text="Enter ID:" />
+                                                                <TextField fx:id="vv_VehicleIdField" promptText="Enter Vehicle ID:" />
+                                                                <Button fx:id="vv_searchButton" mnemonicParsing="false" styleClass="viewVehicleButtons" text="S">
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                                <Button fx:id="vv_allVehicleButton" mnemonicParsing="false" styleClass="viewVehicleButtons" text="All Vehicles">
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                            </children>
+                                                        </HBox>
+                                                        <!-- Customer Table -->
+                                                        <TableView fx:id="vv_VehicleTable" VBox.vgrow="ALWAYS">
+                                                            <columns>
+                                                                <TableColumn fx:id="vv_VehicleIdColumn" text="Vehicle ID" />
+                                                                <TableColumn fx:id="vv_CustomerIdColumn" text="Customer ID" />
+                                                                <TableColumn fx:id="vv_LicencePlateColumn" text="Licence Plate" />
+                                                                <TableColumn fx:id="vv_MakeColumn" text="Make" />
+                                                                <TableColumn fx:id="vv_ModelColumn" text="Model" />
+                                                                <TableColumn fx:id="vv_YearColumn" text="Year" />
+                                                            </columns>
+                                                        </TableView>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="5.0" />
+                                            </VBox.margin>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="15.0" left="15.0" top="15.0" />
+                            </VBox.margin>
+                        </VBox>
+
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" style="-fx-background-color: #F8F8FF;" styleClass="footer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <children>
+                <Label>
+                    2025 © VMS|Aviato™
+                </Label>
+            </children>
+        </HBox>
+    </children>
+</VBox>

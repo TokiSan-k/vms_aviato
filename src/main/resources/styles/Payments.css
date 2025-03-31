@@ -1,0 +1,226 @@
+/* Main container styles */
+.payMainContainer {
+    -fx-background-color: #F9F9F9;
+    -fx-background-radius: 30 0 0 30;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-padding: 25 25 25 25;
+    -fx-font-family: "Maven Pro Medium";
+}
+
+.payMainCard {
+    -fx-background-color: #F8F8FF;
+}
+
+/* Navigation bar */
+.paymentNavBar {
+    -fx-padding: 20 0 5 0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #CCCCCC;
+    -fx-border-style: solid;
+}
+
+.payButtons {
+    -fx-min-height: 40;
+    -fx-font-size: 17;
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.payButtons:hover {
+    -fx-text-fill: #1967D2;
+}
+
+.payButtons:focused {
+    -fx-border-width: 0 0 4 0;
+    -fx-border-color: #0B57D0;
+    -fx-text-fill: #1967D2;
+}
+
+/* Back button */
+.payBackButton {
+    -fx-min-height: 40;
+    -fx-font-size: 17;
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.payBackButton:hover {
+    -fx-text-fill: #1967D2;
+}
+
+/* Footer */
+.footer {
+    -fx-font-family: "Maven Pro Medium";
+}
+
+/* Add Payment Container */
+.addPaymentContainer {
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+    -fx-text-fill: #5E5E5E;
+}
+
+.addPaymentInputField {
+    -fx-min-width: 400;
+    -fx-min-height: 25;
+}
+
+.addInvoiceIdField {
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 20;
+}
+
+.addAmountPaidField {
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 5;
+}
+
+.addPaymentMethodField {
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 0;
+}
+
+.addStatusField {
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 40;
+}
+
+.addPaymentButton {
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.addPaymentButton:hover {
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+/* View Payments Container */
+.viewPaymentsContainer {
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+}
+
+.viewPaymentsButtons {
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.viewPaymentsButtons:hover {
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.table-view {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 1);
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #F5F5F5;
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+    -fx-font-family: "Maven Pro Medium";
+    -fx-font-size: 14px;
+    -fx-text-fill: #5E5E5E;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 1px 0 0;
+    -fx-border-style: solid;
+}
+
+.table-view .column-header:last-child,
+.table-view .column-header-background .filler:last-child {
+    -fx-border-width: 0;
+}
+
+.table-view .table-cell {
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 1px 1px 0;
+    -fx-padding: 10px;
+    -fx-font-family: "Maven Pro";
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+}
+
+.table-view .table-row-cell .table-cell:last-child {
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-view .table-row-cell:last-child .table-cell {
+    -fx-border-width: 0 1px 0 0;
+}
+
+.table-view .table-row-cell:last-child .table-cell:last-child {
+    -fx-border-width: 0;
+}
+
+.table-row-cell {
+    -fx-background-color: #FFFFFF;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #FAFAFA;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #E3F2FD;
+    -fx-text-fill: #0B57D0;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #F5F5F5;
+}
+
+/* Update Status Container */
+.updateStatusContainer {
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+    -fx-text-fill: #5E5E5E;
+}
+
+.checkPaymentID {
+    -fx-spacing: 5;
+}
+
+.updateStatusVerifyButton {
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.updateStatusVerifyButton:hover {
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.updateStatusField {
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 20;
+}
+
+.updateStatusSubmitButton {
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.updateStatusSubmitButton:hover {
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}

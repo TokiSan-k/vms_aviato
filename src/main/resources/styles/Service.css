@@ -307,3 +307,24 @@
     -fx-text-fill: #1967D2;
     -fx-background-color: #C4DAFE;
 }
+
+.itemsUsedContainer {
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+    -fx-text-fill: #5E5E5E;
+}
+
+.itemsUsedServiceIdField {
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 20;
+}
+
+.itemsUsedItemIdField {
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 28;
+}
+
+.itemsUsedQuantityField {
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 2;
+}

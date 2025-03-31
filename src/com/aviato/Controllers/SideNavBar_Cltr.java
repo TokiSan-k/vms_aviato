@@ -78,6 +78,9 @@ public class SideNavBar_Cltr {
         if(Main.currentStage.getScene() != Pages.GetVehicleScene()){
             Main.currentStage.setScene(Pages.GetVehicleScene());
             Main.currentStage.setTitle(vehiclePageHeading);
+
+            System.out.println("Width on Vehicle page: "+Main.currentStage.getWidth());
+            System.out.println("Height on Vehicle page: "+Main.currentStage.getHeight());
         }
     }
 

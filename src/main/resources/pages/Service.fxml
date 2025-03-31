@@ -38,6 +38,7 @@
                                                 <Button fx:id="removeSvcBtn" onAction="#handleServiceNavRemoveSvc" styleClass="svcButtons" text="Remove Service" />
                                                 <Button fx:id="modifySvcBtn" onAction="#handleServiceNavModifySvc" styleClass="svcButtons" text="Modify Service" />
                                                 <Button fx:id="viewSvcBtn" onAction="#handleServiceNavViewSvc" styleClass="svcButtons" text="View Service" />
+                                                <Button fx:id="addItemUsedBtn" onAction="#handleServiceNavItemsUsed" styleClass="svcButtons" text="Add Item Used" />
                                             </children>
                                         </HBox>
 
@@ -249,6 +250,57 @@
                                                                 <TableColumn fx:id="vs_costColumn" text="Cost" />
                                                             </columns>
                                                         </TableView>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="5.0" />
+                                            </VBox.margin>
+                                        </VBox>
+
+                                        <VBox fx:id="serviceContainer_4" managed="false" visible="false" styleClass="itemsUsedContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Text fx:id="itemsUsedTitle" text="Manage Items Used in Services" />
+                                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <!-- Add Item Used Section -->
+                                                        <VBox spacing="10.0">
+                                                            <children>
+                                                                <Text text="Add Item Used" />
+                                                                <HBox alignment="CENTER_LEFT" styleClass="itemsUsedServiceIdField">
+                                                                    <Text text="Service ID:" />
+                                                                    <TextField fx:id="iu_serviceIdField" styleClass="addSvcInputField" promptText="Enter Service ID" />
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="itemsUsedItemIdField">
+                                                                    <Text text="Item ID:" />
+                                                                    <TextField fx:id="iu_itemIdField" styleClass="addSvcInputField" promptText="Enter Item ID" />
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="itemsUsedQuantityField">
+                                                                    <Text text="Quantity Used:" />
+                                                                    <TextField fx:id="iu_quantityField" styleClass="addSvcInputField" promptText="Enter Quantity" />
+                                                                </HBox>
+                                                                <Button fx:id="iu_submitButton" styleClass="addFieldButton" text="Submit" onAction="#handleAddItemUsed">
+                                                                    <VBox.margin>
+                                                                        <Insets left="428.0" />
+                                                                    </VBox.margin>
+                                                                </Button>
+                                                            </children>
+                                                        </VBox>
+                                                        <!-- Table for Items Used -->
+                                                        <VBox spacing="10.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                            <children>
+                                                                <Text text="Items Used in Services" />
+                                                                <TableView fx:id="iu_itemsTable" VBox.vgrow="ALWAYS">
+                                                                    <columns>
+                                                                        <TableColumn fx:id="iu_serviceIdColumn" text="Service ID" />
+                                                                        <TableColumn fx:id="iu_itemIdColumn" text="Item ID" />
+                                                                        <TableColumn fx:id="iu_quantityUsedColumn" text="Quantity Used" />
+                                                                        <TableColumn fx:id="iu_itemNameColumn" text="Item Name" />
+                                                                        <TableColumn fx:id="iu_pricePerUnitColumn" text="Price Per Unit" />
+                                                                    </columns>
+                                                                </TableView>
+                                                            </children>
+                                                        </VBox>
                                                     </children>
                                                 </VBox>
                                             </children>

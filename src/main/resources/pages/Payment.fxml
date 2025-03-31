@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Payments.css" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Payments_Cltr">
+    <children>
+        <HBox VBox.vgrow="ALWAYS">
+            <children>
+                <!-- Sidebar Menu -->
+                <fx:include source="../pages/SideNavBar.fxml"/>
+
+                <!-- Main Container -->
+                <VBox styleClass="payMainCard" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                    <children>
+                        <VBox fx:id="mainContainer" styleClass="payMainContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                            <children>
+                                <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <HBox>
+                                            <children>
+                                                <Button styleClass="payBackButton" text="Main Menu" />
+                                            </children>
+                                        </HBox>
+                                        <!-- Navigation Bar -->
+                                        <HBox styleClass="paymentNavBar" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Button fx:id="addPaymentBtn" onAction="#handlePaymentNavAddPayment" styleClass="payButtons" text="Add Payment" />
+                                                <Button fx:id="viewPaymentsBtn" onAction="#handlePaymentNavViewPayments" styleClass="payButtons" text="View Payments" />
+                                                <Button fx:id="updateStatusBtn" onAction="#handlePaymentNavUpdateStatus" styleClass="payButtons" text="Update Status" />
+                                            </children>
+                                        </HBox>
+
+                                        <!-- Container for Adding a Payment -->
+                                        <VBox fx:id="paymentContainer_0" managed="false" visible="false" styleClass="addPaymentContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Text text="Add New Payment" />
+                                                <VBox spacing="10.0">
+                                                    <children>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addInvoiceIdField">
+                                                            <Text text="Invoice ID:" />
+                                                            <TextField fx:id="ap_invoiceIdField" styleClass="addPaymentInputField" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addAmountPaidField">
+                                                            <Text text="Amount Paid:" />
+                                                            <TextField fx:id="ap_amountPaidField" styleClass="addPaymentInputField" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addPaymentMethodField">
+                                                            <Text text="Payment Method:" />
+                                                            <TextField fx:id="ap_paymentMethodField" styleClass="addPaymentInputField" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addStatusField">
+                                                            <Text text="Status:" />
+                                                            <TextField fx:id="ap_statusField" styleClass="addPaymentInputField" />
+                                                        </HBox>
+                                                        <Button styleClass="addPaymentButton" text="Submit">
+                                                            <VBox.margin>
+                                                                <Insets left="428.0" />
+                                                            </VBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </VBox>
+
+                                        <!-- Container for Viewing Payments -->
+                                        <VBox fx:id="paymentContainer_1" managed="false" visible="false" styleClass="viewPaymentsContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Text fx:id="viewPaymentsTitle" text="View All Payments" />
+                                                <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <!-- Search and Control Section -->
+                                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                            <children>
+                                                                <Button fx:id="vp_clearButton" mnemonicParsing="false" styleClass="viewPaymentsButtons" text="C">
+                                                                    <HBox.margin>
+                                                                        <Insets right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                                <Text fx:id="vp_paymentIdLabel" text="Enter Payment ID:" />
+                                                                <TextField fx:id="vp_paymentIdSearchField" promptText="Enter payment ID" />
+                                                                <Button fx:id="vp_searchButton" mnemonicParsing="false" styleClass="viewPaymentsButtons" text="S">
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                                <Button fx:id="vp_allPaymentsButton" mnemonicParsing="false" styleClass="viewPaymentsButtons" text="All Payments">
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                            </children>
+                                                        </HBox>
+                                                        <!-- Payments Table -->
+                                                        <TableView fx:id="vp_paymentsTable" VBox.vgrow="ALWAYS">
+                                                            <columns>
+                                                                <TableColumn fx:id="vp_paymentIdColumn" text="Payment ID" />
+                                                                <TableColumn fx:id="vp_invoiceIdColumn" text="Invoice ID" />
+                                                                <TableColumn fx:id="vp_paymentDateColumn" text="Payment Date" />
+                                                                <TableColumn fx:id="vp_amountPaidColumn" text="Amount Paid" />
+                                                                <TableColumn fx:id="vp_paymentMethodColumn" text="Payment Method" />
+                                                                <TableColumn fx:id="vp_statusColumn" text="Status" />
+                                                            </columns>
+                                                        </TableView>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="5.0" />
+                                            </VBox.margin>
+                                        </VBox>
+
+                                        <!-- Container for Updating Payment Status -->
+                                        <VBox fx:id="paymentContainer_2" managed="false" visible="false" styleClass="updateStatusContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <VBox fx:id="us_checkPaymentIdContainer" styleClass="checkPaymentID" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Text fx:id="us_checkPaymentIdTitle" text="Check Payment ID" />
+                                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                            <children>
+                                                                <Text fx:id="us_paymentIdLabel" text="Enter ID:" />
+                                                                <TextField fx:id="us_paymentIdField" promptText="Enter payment ID" />
+                                                            </children>
+                                                        </HBox>
+                                                        <Button fx:id="us_verifyButton" mnemonicParsing="false" styleClass="updateStatusVerifyButton" text="Verify">
+                                                            <HBox.margin>
+                                                                <Insets left="5.0" />
+                                                            </HBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                    <VBox.margin>
+                                                        <Insets top="5.0" />
+                                                    </VBox.margin>
+                                                </VBox>
+
+                                                <!-- Container for Updating Status -->
+                                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text text="Update Payment Status" />
+                                                        <VBox spacing="10.0">
+                                                            <children>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="updateStatusField">
+                                                                    <Text text="New Status:" />
+                                                                    <TextField fx:id="us_newStatusField" />
+                                                                </HBox>
+                                                                <Button styleClass="updateStatusSubmitButton" text="Submit">
+                                                                    <VBox.margin>
+                                                                        <Insets left="270.0" />
+                                                                    </VBox.margin>
+                                                                </Button>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="15.0" left="15.0" top="15.0" />
+                            </VBox.margin>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="ALWAYS">
+            <children>
+                <Label>
+                    2025 © VMS|Aviato™
+                </Label>
+            </children>
+        </HBox>
+    </children>
+</VBox>

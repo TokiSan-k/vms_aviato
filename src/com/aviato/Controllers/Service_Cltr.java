@@ -23,13 +23,14 @@ public class Service_Cltr {
     @FXML
     private VBox mainContainer;
 
-    private VBox[] serviceContainers = new VBox[4];
+    private VBox[] serviceContainers = new VBox[5];
     private class SvcContainerEnum {
         public static String ServiceContainerTag = "#serviceContainer_";
         public static final byte AddServiceContainer = 0;
         public static final byte RemoveServiceContainer = 1;
         public static final byte ModifyServiceContainer = 2;
         public static final byte ViewServiceContainer = 3;
+        public static final byte AddItemUsedContainer = 4;
     }
 
     // Service Navbar
@@ -120,6 +121,12 @@ public class Service_Cltr {
     @FXML
     private TableColumn<Service, Double> vs_costColumn;
 
+    @FXML private TextField iu_serviceIdField;
+    @FXML private TextField iu_itemIdField;
+    @FXML private TextField iu_quantityField;
+    @FXML private Button iu_submitButton;
+    @FXML private TableView<?> iu_itemsTable;
+
     // Initialize method to set up table columns
     @FXML
     public void initialize() {
@@ -179,6 +186,13 @@ public class Service_Cltr {
         serviceContainers[SvcContainerEnum.ViewServiceContainer].setVisible(true);
     }
 
+    @FXML
+    private void handleServiceNavItemsUsed(ActionEvent event) {
+        turnOffVisibleAndManageSvcContainer();
+        serviceContainers[SvcContainerEnum.AddItemUsedContainer].setManaged(true);
+        serviceContainers[SvcContainerEnum.AddItemUsedContainer].setVisible(true);
+    }
+
     // Add Service Submit Handler
     @FXML
     private void submitAddService(ActionEvent event) {
@@ -188,6 +202,18 @@ public class Service_Cltr {
         as_serviceDateField.clear();
         as_statusField.clear();
         as_costField.clear();
+    }
+
+    @FXML
+    private void handleAddItemUsed(ActionEvent event) {
+        Long serviceId = Long.parseLong(iu_serviceIdField.getText());
+        Long itemId = Long.parseLong(iu_itemIdField.getText());
+        Integer quantity = Integer.parseInt(iu_quantityField.getText());
+
+
+        iu_serviceIdField.clear();
+        iu_itemIdField.clear();
+        iu_quantityField.clear();
     }
 
     // Remove Service Event Handlers

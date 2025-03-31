@@ -54,6 +54,32 @@ import java.sql.Date;
                         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_service_id_out", type = Long.class)
                 }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "UseInventory",
+                procedureName = "use_inventory",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_item_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_quantity_used", type = Integer.class)
+                }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "GetServiceInventory",
+                procedureName = "get_service_inventory",
+                resultClasses = ServiceItem.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
+                }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "DeleteServiceInventory",
+                procedureName = "delete_service_inventory",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_item_id", type = Long.class)
+                }
         )
 })
 public class Service {

@@ -136,7 +136,7 @@ public class Service_dao {
         }
     }
 
-    public static void GetServiceInventory(Long serviceId, ObservableList<ServiceItem> items) throws Exception {
+    public static void GetServiceInventory(Long serviceId, List<ServiceItem> items) throws Exception {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             items.clear();
 

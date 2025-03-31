@@ -18,5 +18,11 @@
 
         <!-- Mappings -->
         <mapping class="com.aviato.Types.Customer"/>
+        <mapping class="com.aviato.Types.Employee"/>
+        <mapping class="com.aviato.Types.Service"/>
+        <mapping class="com.aviato.Types.Vehicle"/>
+        <mapping class="com.aviato.Types.Item"/>
+        <mapping class="com.aviato.Types.Appointment"/>
+        <mapping class="com.aviato.Types.Payment"/>
     </session-factory>
 </hibernate-configuration>

@@ -49,6 +49,7 @@ public class Employee_dao {
             }
             return results.get(0);
         } catch (Exception ex) {
+            ex.printStackTrace();
             throw ex;
         }
     }

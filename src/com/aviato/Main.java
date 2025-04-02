@@ -44,7 +44,7 @@ public class Main extends Application {
 
             currentStage = primaryStage;
             primaryStage.setTitle("Admin Panel Dashboard");
-            primaryStage.setScene(Pages.GetPaymentsScene());
+            primaryStage.setScene(Pages.GetAdminScene());
 
             primaryStage.setX(visualBounds.getMinX());
             primaryStage.setY(visualBounds.getMinY());

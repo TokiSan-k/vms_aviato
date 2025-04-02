@@ -30,6 +30,9 @@ public class Pages {
     private static Scene paymentScene;
     private static Parent paymentRoot;
 
+    private static Scene adminScene;
+    private static Parent adminRoot;
+
     private static double width;
     private static double height;
     public static void SetWidthHeightOfScreen(double Width, double Height)
@@ -62,6 +65,9 @@ public class Pages {
             paymentRoot = new FXMLLoader(Main.class.getResource("/pages/Payment.fxml")).load();
             paymentScene = new Scene(paymentRoot, width, height);
 
+            adminRoot = new FXMLLoader(Main.class.getResource("/pages/Admin.fxml")).load();
+            adminScene = new Scene(adminRoot, width, height);
+
             // Debug output to verify sizes
             System.out.println("Visual Bounds - Width: " + width + ", Height: " + height);
         } catch (Exception ex) {
@@ -80,5 +86,6 @@ public class Pages {
     public static Scene GetMonthlyReportsScene() {return inventoryScene;}
     public static Scene GetLogOutScene() {return inventoryScene;}
     public static Scene GetEmployeeScene() {return employeeScene;}
+    public static Scene GetAdminScene() {return adminScene;}
 
 }

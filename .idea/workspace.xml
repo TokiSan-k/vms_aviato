@@ -5,12 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="Minor Changes">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2025-03-23_2_51_p_m__[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2025-03-23_2_51_p_m___Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/dao/Employee_dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/dao/Employee_dao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/dao/Service_dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/dao/Service_dao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/AddInventory_Cltr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/AddRoles_Cltr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/RemoveInventory_Cltr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/RemoveRoles_Cltr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/UpdateInventory_Cltr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/UpdateRoles_Ctlr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/ViewInventory_Cltr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/ViewRoles_Cltr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/InventoryItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/RoleItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/AddInventory.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/AddRoles.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/RemoveInventory.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/RemoveRoles.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/UpdateInventory.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/UpdateRoles.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/ViewInventory.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/ViewRoles.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/AddInventory.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/AddRoles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/RemoveCustomer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/RemoveInventory.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/RemoveRoles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/UpdateInventory.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/UpdateRoles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/ViewInventory.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/ViewRoles.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

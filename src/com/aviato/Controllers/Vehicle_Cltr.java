@@ -1,10 +1,15 @@
 package com.aviato.Controllers;
 
+import com.aviato.Main;
+import com.aviato.Types.Pages;
 import com.aviato.Types.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -148,6 +153,22 @@ public class Vehicle_Cltr {
         vv_ModelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         vv_YearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
     }
+
+    @FXML
+    private void tempCustPage()
+    {
+        try
+        {
+            Parent custParent = new FXMLLoader(Main.class.getResource("/pages/Customer.fxml")).load();
+            Main.currentStage.setScene(new Scene(custParent));
+            //Main.currentStage.setMaximized(true);
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
 
     // Vehicle NavBar
     private void turnOffVisibleAndManageVehicleContainer() {

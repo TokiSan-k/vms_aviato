@@ -45,28 +45,28 @@ public class Pages {
         try {
 
             customerRoot = new FXMLLoader(Main.class.getResource("/pages/Customer.fxml")).load();
-            customerScene = new Scene(customerRoot, width, height);
+            customerScene = new Scene(customerRoot);
 
             inventoryRoot = new FXMLLoader(Main.class.getResource("/pages/Inventory.fxml")).load();
-            inventoryScene = new Scene(inventoryRoot, width, height);
+            inventoryScene = new Scene(inventoryRoot);
 
             vehicleRoot = new FXMLLoader(Main.class.getResource("/pages/Vehicle.fxml")).load();
-            vehicleScene = new Scene(vehicleRoot, width, height);
+            vehicleScene = new Scene(vehicleRoot);
 
             employeeRoot = new FXMLLoader(Main.class.getResource("/pages/Employee.fxml")).load();
-            employeeScene = new Scene(employeeRoot, width, height);
+            employeeScene = new Scene(employeeRoot);
 
             serviceRoot = new FXMLLoader(Main.class.getResource("/pages/Service.fxml")).load();
-            serviceScene = new Scene(serviceRoot, width, height);
+            serviceScene = new Scene(serviceRoot);
 
             appointmentRoot = new FXMLLoader(Main.class.getResource("/pages/Appointment.fxml")).load();
-            appointmentScene = new Scene(appointmentRoot, width, height);
+            appointmentScene = new Scene(appointmentRoot);
 
             paymentRoot = new FXMLLoader(Main.class.getResource("/pages/Payment.fxml")).load();
-            paymentScene = new Scene(paymentRoot, width, height);
+            paymentScene = new Scene(paymentRoot);
 
             adminRoot = new FXMLLoader(Main.class.getResource("/pages/Admin.fxml")).load();
-            adminScene = new Scene(adminRoot, width, height);
+            adminScene = new Scene(adminRoot);
 
             // Debug output to verify sizes
             System.out.println("Visual Bounds - Width: " + width + ", Height: " + height);
@@ -87,5 +87,10 @@ public class Pages {
     public static Scene GetLogOutScene() {return inventoryScene;}
     public static Scene GetEmployeeScene() {return employeeScene;}
     public static Scene GetAdminScene() {return adminScene;}
+    public static Scene GetMainMenuScene()
+    {
+        //Change based on login
+        return adminScene;
+    }
 
 }

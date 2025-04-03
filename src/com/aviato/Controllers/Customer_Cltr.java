@@ -1,16 +1,22 @@
 package com.aviato.Controllers;
 
+import com.aviato.Main;
 import com.aviato.Types.Customer;
+import com.aviato.Types.Pages;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -32,6 +38,29 @@ public class Customer_Cltr
         public static final byte ModifyCustomerContainer = 2;
         public static final byte ViewCustomerContainer = 3;
     }
+
+    private class Field
+    {
+        public int Id;
+        public String Text;
+        public String Prompt;
+
+        public Field(int id, String text, String prompt)
+        {
+            Id = id;
+            Text = text;
+            Prompt = prompt;
+        }
+    }
+
+    private final Field[] rcSwapFields = { new Field(0,"ID:","Enter Customer ID"),
+            new Field(1,"Email:", "Enter Email ID")};
+
+    private final Field[] vcSwapFields = { new Field(0,"ID:","Enter Customer ID"),
+            new Field(1,"Name:","Enter Customer Name"),
+            new Field(2,"Email:", "Enter Email ID")};
+
+    private final int TotalModifyFields = 5;
 
     //Customer Navbar
     @FXML
@@ -58,6 +87,10 @@ public class Customer_Cltr
     // Remove Customer Fields
     @FXML
     private TextField rc_emailField;
+    @FXML
+    private TextField rc_swapInputField;
+    @FXML
+    private Text rc_swapTextLabel;
     @FXML
     private Button rc_swapFieldButton;
     @FXML
@@ -101,7 +134,9 @@ public class Customer_Cltr
 
     // View Customer Fields
     @FXML
-    private TextField vc_nameSearchField;
+    private TextField vc_swapField;
+    @FXML
+    private Text vc_swapLabel;
     @FXML
     private Button vc_clearButton;
     @FXML
@@ -120,6 +155,9 @@ public class Customer_Cltr
     private TableColumn<Customer, String> vc_phoneColumn;
     @FXML
     private TableColumn<Customer, String> vc_addressColumn;
+
+
+    //ToDo: For internal Nav check if clicked on same button results in no Change.
 
     // Initialize method to set up table columns
     @FXML
@@ -154,6 +192,8 @@ public class Customer_Cltr
             customerContainers[i].setVisible(false);
             customerContainers[i].setManaged(false);
         }
+
+        SetEditableMCFields(false);
     }
 
     @FXML
@@ -184,6 +224,24 @@ public class Customer_Cltr
         customerContainers[CustContainerEnum.ViewCustomerContainer].setVisible(true);
     }
 
+    @FXML
+    private void handleMainMenuButton(ActionEvent event)
+    {
+        Main.currentStage.setScene(Pages.GetMainMenuScene());
+    }
+
+    private int currentRCFieldIdx = 0;
+    @FXML
+    private void handleRCSwapField(ActionEvent event)
+    {
+        currentRCFieldIdx +=1;
+        if(currentRCFieldIdx == rcSwapFields.length)
+            currentRCFieldIdx = 0;
+
+        rc_swapTextLabel.setText(rcSwapFields[currentRCFieldIdx].Text);
+        rc_swapInputField.setPromptText(rcSwapFields[currentRCFieldIdx].Prompt);
+    }
+
     // Add Customer Submit Handler
     @FXML
     private void submitAddCustomer(ActionEvent event) {
@@ -209,57 +267,73 @@ public class Customer_Cltr
     }
 
     @FXML
-    private void swapRemoveField(ActionEvent event) {
-        // Placeholder for swapping field (e.g., toggle between email and ID input)
-        System.out.println("Swap field button clicked in Remove Customer");
-    }
-
-    @FXML
-    private void searchRemoveCustomer(ActionEvent event) {
+    private void searchNameRCTable(ActionEvent event) {
         String searchTerm = rc_customerSearchField.getText();
     }
 
     // Modify Customer Event Handlers
     @FXML
-    private void verifyCustomerId(ActionEvent event) {
+    private void MCverifyCustomerId(ActionEvent event) {
+        OnCustomerVerified();
+    }
+
+    private void OnCustomerVerified()
+    {
 
     }
+
+    private void SetEditableMCFields(boolean status)
+    {
+        mc_firstNameField.setEditable(status);
+        mc_firstNameField.setDisable(!status);
+
+        mc_lastNameField.setEditable(status);
+        mc_lastNameField.setDisable(!status);
+
+        mc_emailField.setEditable(status);
+        mc_emailField.setDisable(!status);
+
+        mc_phoneField.setEditable(status);
+        mc_phoneField.setDisable(!status);
+
+        mc_addressField.setEditable(status);
+        mc_addressField.setDisable(!status);
+    }
+
 
     @FXML
     private void editFirstName(ActionEvent event) {
         mc_firstNameField.setEditable(true);
+        mc_firstNameField.setDisable(false);
     }
 
     @FXML
     private void editLastName(ActionEvent event) {
         mc_lastNameField.setEditable(true);
+        mc_lastNameField.setDisable(false);
     }
 
     @FXML
     private void editEmail(ActionEvent event) {
         mc_emailField.setEditable(true);
+        mc_emailField.setDisable(false);
     }
 
     @FXML
     private void editPhone(ActionEvent event) {
         mc_phoneField.setEditable(true);
+        mc_phoneField.setDisable(false);
     }
 
     @FXML
     private void editAddress(ActionEvent event) {
         mc_addressField.setEditable(true);
+        mc_addressField.setDisable(false);
     }
 
     @FXML
     private void submitModifyCustomer(ActionEvent event) {
 
-    }
-
-    // View Customer Event Handlers
-    @FXML
-    private void clearViewSearch(ActionEvent event) {
-        vc_nameSearchField.clear();
-        vc_customerTable.getItems().clear();
     }
 
     @FXML
@@ -273,5 +347,17 @@ public class Customer_Cltr
     private void showAllCustomers(ActionEvent event) {
         // Note: GetAllCustomer seems identical to GetCustomer; assuming it fetches all if p_cust_id is null
 
+    }
+
+    private int currentVCFieldIdx = 0;
+    @FXML
+    private void handleVCSwapField(ActionEvent event)
+    {
+        currentVCFieldIdx +=1;
+        if(currentVCFieldIdx == vcSwapFields.length)
+            currentVCFieldIdx = 0;
+
+        vc_swapLabel.setText(vcSwapFields[currentVCFieldIdx].Text);
+        vc_swapField.setPromptText(vcSwapFields[currentVCFieldIdx].Prompt);
     }
 }

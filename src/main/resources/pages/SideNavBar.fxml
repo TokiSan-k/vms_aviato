@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.layout.Region?>
 <VBox styleClass="sidebar" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.SideNavBar_Cltr">
     <padding>
         <Insets top="20.0" />
@@ -133,7 +134,8 @@
                 </ImageView>
             </graphic>
         </Button>
-        <HBox HBox.hgrow="ALWAYS">
+        <Region VBox.vgrow="ALWAYS"/>
+        <HBox>
             <children>
                 <Button fx:id="logOutButton" mnemonicParsing="false" styleClass="logout-button" text="Log Out">
                     <HBox.margin>
@@ -142,7 +144,7 @@
                 </Button>
             </children>
             <VBox.margin>
-                <Insets top="275.0" />
+                <Insets bottom="15.0" />
             </VBox.margin>
         </HBox>
     </children>

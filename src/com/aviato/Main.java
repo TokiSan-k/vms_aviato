@@ -44,35 +44,26 @@ public class Main extends Application {
 
             currentStage = primaryStage;
             primaryStage.setTitle("Admin Panel Dashboard");
-            primaryStage.setScene(Pages.GetAdminScene());
-
-            primaryStage.setX(visualBounds.getMinX());
-            primaryStage.setY(visualBounds.getMinY());
+            primaryStage.setScene(Pages.GetCustomerScene());
             primaryStage.setWidth(width);
             primaryStage.setHeight(height);
+            primaryStage.setResizable(true);
             primaryStage.setMaximized(true);
+
+            primaryStage.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+                if (newWidth.doubleValue() != width) {
+                    System.out.println("Width changed to " + newWidth );
+                }
+            });
+
+            primaryStage.heightProperty().addListener((obs, oldHeight, newHeight) -> {
+                if (newHeight.doubleValue() != height) {
+                    System.out.println("Height changed to " + newHeight);
+                }
+            });
+
             primaryStage.show();
 
-
-            System.out.println("Stage - Width: " + primaryStage.getWidth()+", "+ width + ", Height: " + primaryStage.getHeight()+", "+height);
-            System.out.println("Stage - X: " + primaryStage.getX() +", "+ visualBounds.getMinX() + ", Y: " + primaryStage.getY() + ", "+visualBounds.getMinY());
-
-            Customer cust = Customer_dao.GetCustomer(41l);
-            System.out.println(cust.getName());
-
-            Employee emp = Employee_dao.GetEmployee(5l);
-            System.out.println("Emp Name: "+emp.getEmpName());
-            System.out.println("Emp Email: "+emp.getEmail());
-
-            Item item = Inventory_dao.GetItem(61l);
-            System.out.println("Item ID:" +item.getItemId());
-            System.out.println("Item Name:" +item.getItemName());
-            System.out.println("Item Price:" +item.getPricePerUnit());
-
-            Service srv = Service_dao.GetService(2l);
-            System.out.println("Service ID: " +srv.getServiceId());
-            System.out.println("Service Type: " +srv.getServiceType());
-            System.out.println("Service Cost: " +srv.getCost());
         }
         catch (Exception ex){
             System.out.println("MainErr: "+ex.getMessage());

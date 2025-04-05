@@ -89,16 +89,16 @@
                                                         <VBox spacing="10.0">
                                                             <children>
                                                                 <HBox spacing="10.0">
-                                                                    <Text fx:id="rc_SwapLabel" text="Email:">
+                                                                    <Text fx:id="rc_SwapLabel" text="ID:">
                                                                         <HBox.margin>
                                                                             <Insets top="5.0" />
                                                                         </HBox.margin></Text>
                                                                     <TextField fx:id="rc_SwapField" promptText="Enter ID" />
-                                                                    <Button fx:id="rc_swapFieldButton" onAction="#handleRCSwapField" mnemonicParsing="false" styleClass="removeFieldButton" text="C">
-                                                                        <HBox.margin>
-                                                                            <Insets left="5.0" />
-                                                                        </HBox.margin>
-                                                                    </Button>
+<!--                                                                    <Button fx:id="rc_swapFieldButton" onAction="#handleRCSwapField" mnemonicParsing="false" styleClass="removeFieldButton" text="C">-->
+<!--                                                                        <HBox.margin>-->
+<!--                                                                            <Insets left="5.0" />-->
+<!--                                                                        </HBox.margin>-->
+<!--                                                                    </Button>-->
                                                                 </HBox>
                                                                 <Button onAction="#submitRemoveCustomer" styleClass="removeFieldButton" text="Submit" />
                                                             </children>
@@ -145,8 +145,8 @@
                                                         <Text fx:id="mc_checkCustomerIdTitle" text="Check Customer ID" />
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Text fx:id="rc_customerIdLabel" text="Enter ID:" />
-                                                                <TextField fx:id="rc_customerIdField" promptText="Enter customer ID" />
+                                                                <Text fx:id="mc_customerIdLabel" text="Enter ID:" />
+                                                                <TextField fx:id="mc_customerIdField" promptText="Enter customer ID" />
                                                             </children>
                                                         </HBox>
                                                         <Button fx:id="mc_verifyButton" mnemonicParsing="false" styleClass="modCustVerifyButton" onAction="#MCverifyCustomerId" text="Verify">
@@ -163,7 +163,7 @@
                                                 <!-- Container for Modifying a Customer -->
                                                 <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                     <children>
-                                                        <Text text="Add New Customer" />
+                                                        <Text text="Modify A Customer" />
                                                         <VBox spacing="10.0">
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modCustFirstName">
@@ -253,8 +253,8 @@
                                                         <!-- Customer Table -->
                                                         <TableView fx:id="vc_customerTable" VBox.vgrow="ALWAYS">
                                                             <columns>
-                                                                <TableColumn fx:id="vc_firstNameColumn" text="First Name" />
-                                                                <TableColumn fx:id="vc_lastNameColumn" text="Last Name" />
+                                                                <TableColumn fx:id="vc_IdColumn" text="ID" />
+                                                                <TableColumn fx:id="vc_firstNameColumn" text="Name" />
                                                                 <TableColumn fx:id="vc_emailColumn" text="Email" />
                                                                 <TableColumn fx:id="vc_phoneColumn" text="Phone" />
                                                                 <TableColumn fx:id="vc_addressColumn" text="Address" />

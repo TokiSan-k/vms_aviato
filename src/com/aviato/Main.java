@@ -2,6 +2,7 @@ package com.aviato;
 
 import com.aviato.Types.*;
 import com.aviato.Types.Pages;
+import com.aviato.db.HibernateUtil;
 import com.aviato.db.dao.Customer_dao;
 import com.aviato.db.dao.Employee_dao;
 import com.aviato.db.dao.Inventory_dao;
@@ -41,6 +42,7 @@ public class Main extends Application {
             double height = visualBounds.getHeight();
             Pages.SetWidthHeightOfScreen(width, height);
             Pages.LoadAllPages();
+            HibernateUtil.Init();
 
             currentStage = primaryStage;
             primaryStage.setTitle("Admin Panel Dashboard");

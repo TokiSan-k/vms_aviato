@@ -19,14 +19,14 @@ public class Appointment_Cltr {
     @FXML
     private VBox mainContainer;
 
-    private VBox[] appointmentContainers = new VBox[5];
+    private VBox[] appointmentContainers = new VBox[4];
     private class AppContainerEnum {
         public static String AppointmentContainerTag = "#appointmentContainer_";
         public static final byte AddAppointmentContainer = 0;
         public static final byte RemoveAppointmentContainer = 1;
         public static final byte ModifyAppointmentContainer = 2;
         public static final byte ViewAppointmentContainer = 3;
-        public static final byte ManageInvoiceContainer = 4;
+        //public static final byte ManageInvoiceContainer = 4;
     }
 
     @FXML
@@ -197,8 +197,8 @@ public class Appointment_Cltr {
     @FXML
     private void handleAppointmentNavInvoice(ActionEvent event) {
         turnOffVisibleAndManageAppContainer();
-        appointmentContainers[AppContainerEnum.ManageInvoiceContainer].setManaged(true);
-        appointmentContainers[AppContainerEnum.ManageInvoiceContainer].setVisible(true);
+        //appointmentContainers[AppContainerEnum.ManageInvoiceContainer].setManaged(true);
+        //appointmentContainers[AppContainerEnum.ManageInvoiceContainer].setVisible(true);
     }
 
     @FXML

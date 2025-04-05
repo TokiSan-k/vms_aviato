@@ -89,6 +89,14 @@ public class Customer
     public String getAddress() { return Address;}
     public void setAddress(String address) { Address = address;}
 
+    public void SetAllFields(String fName, String lName, String phone, String emailId, String address)
+    {
+        Name = fName+" "+lName;
+        Phone = phone;
+        EmailId = emailId;
+        Address = address;
+    }
+
     public Customer(){}
 
     public Customer(String name, String phone, String emailId, String address) {

@@ -1,19 +1,22 @@
 package com.aviato.Controllers;
 
 import com.aviato.Main;
+import com.aviato.Utils.AlertBox;
+
 import com.aviato.Types.Customer;
 import com.aviato.Types.Pages;
+import com.aviato.Utils.concurrency.Worker;
+import com.aviato.db.dao.Customer_dao;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -21,6 +24,7 @@ import javafx.scene.text.Text;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.StoredProcedureQuery;
+import java.util.Arrays;
 import java.util.List;
 
 public class Customer_Cltr
@@ -28,6 +32,8 @@ public class Customer_Cltr
     //Containers
     @FXML
     private VBox mainContainer;
+
+    private final ObservableList<Customer> vc_customerList = FXCollections.observableArrayList();
 
     private VBox[] customerContainers = new VBox[4];
     private class CustContainerEnum
@@ -76,7 +82,7 @@ public class Customer_Cltr
     @FXML
     private TextField ac_firstNameField;
     @FXML
-    private TextField ac_lastNameField;
+    private TextField ac_LastNameField;
     @FXML
     private TextField ac_emailField;
     @FXML
@@ -86,11 +92,9 @@ public class Customer_Cltr
 
     // Remove Customer Fields
     @FXML
-    private TextField rc_emailField;
+    private TextField rc_SwapField;
     @FXML
-    private TextField rc_swapInputField;
-    @FXML
-    private Text rc_swapTextLabel;
+    private Text rc_SwapLabel;
     @FXML
     private Button rc_swapFieldButton;
     @FXML
@@ -108,9 +112,9 @@ public class Customer_Cltr
 
     // Modify Customer Fields
     @FXML
-    private TextField rc_customerIdField;
+    private TextField mc_customerIdField;
     @FXML
-    private Button rc_verifyButton;
+    private Button mc_verifyButton;
     @FXML
     private TextField mc_firstNameField;
     @FXML
@@ -148,13 +152,15 @@ public class Customer_Cltr
     @FXML
     private TableColumn<Customer, String> vc_firstNameColumn;
     @FXML
-    private TableColumn<Customer, String> vc_lastNameColumn;
+    private TableColumn<Customer, String> vc_IdColumn;
     @FXML
     private TableColumn<Customer, String> vc_emailColumn;
     @FXML
     private TableColumn<Customer, String> vc_phoneColumn;
     @FXML
     private TableColumn<Customer, String> vc_addressColumn;
+
+    private Customer customer = new Customer();
 
 
     //ToDo: For internal Nav check if clicked on same button results in no Change.
@@ -177,11 +183,14 @@ public class Customer_Cltr
         customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("Phone"));
 
         // Set up View Customer table columns
+        vc_IdColumn.setCellValueFactory(new PropertyValueFactory<>("custId"));
         vc_firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        vc_lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
         vc_emailColumn.setCellValueFactory(new PropertyValueFactory<>("EmailId"));
         vc_phoneColumn.setCellValueFactory(new PropertyValueFactory<>("Phone"));
         vc_addressColumn.setCellValueFactory(new PropertyValueFactory<>("Address"));
+
+
+        vc_customerTable.setItems(vc_customerList);
     }
 
     //Customer NavBar
@@ -194,6 +203,7 @@ public class Customer_Cltr
         }
 
         SetEditableMCFields(false);
+        vc_customerList.clear();
     }
 
     @FXML
@@ -238,48 +248,138 @@ public class Customer_Cltr
         if(currentRCFieldIdx == rcSwapFields.length)
             currentRCFieldIdx = 0;
 
-        rc_swapTextLabel.setText(rcSwapFields[currentRCFieldIdx].Text);
-        rc_swapInputField.setPromptText(rcSwapFields[currentRCFieldIdx].Prompt);
+        rc_SwapLabel.setText(rcSwapFields[currentRCFieldIdx].Text);
+        rc_SwapField.setPromptText(rcSwapFields[currentRCFieldIdx].Prompt);
+    }
+
+    private void ClearAddCustFields()
+    {
+        ac_firstNameField.clear();
+        ac_LastNameField.clear();
+        ac_emailField.clear();
+        ac_phoneField.clear();
+        ac_addressField.clear();
     }
 
     // Add Customer Submit Handler
     @FXML
     private void submitAddCustomer(ActionEvent event) {
         String firstName = ac_firstNameField.getText();
-        String lastName = ac_lastNameField.getText();
-        String fullName = firstName + " " + lastName; // Combine for cust_name
+        String lastName = ac_LastNameField.getText();
+        String fullName = firstName + " " + lastName;
         String email = ac_emailField.getText();
         String phone = ac_phoneField.getText();
         String address = ac_addressField.getText();
 
-        // Clear fields
-        ac_firstNameField.clear();
-        ac_lastNameField.clear();
-        ac_emailField.clear();
-        ac_phoneField.clear();
-        ac_addressField.clear();
+        //ReUsing - No Garbage Collection
+        customer.SetAllFields(fullName, lastName, phone, email, address);
+        Task<Void> insertTask = Customer_dao.insertCustomerTask(customer);
+
+        insertTask.setOnSucceeded(e -> {
+            Platform.runLater(() -> {
+                ClearAddCustFields();
+                AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer added successfully");
+            });
+        });
+
+        insertTask.setOnFailed(e -> {
+            Platform.runLater(() ->{
+                    ClearAddCustFields();
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to add customer: " +
+                            insertTask.getException().getMessage());
+            });
+        });
+
+        Worker.submitTask(insertTask);
     }
 
     // Remove Customer Event Handlers
     @FXML
     private void submitRemoveCustomer(ActionEvent event) {
+        try {
+            String inputID = rc_SwapField.getText();
+            if (inputID.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please Enter a Customer ID to remove");
+                return;
+            }
+            Long custId = Long.parseLong(inputID);
 
+            Task<Void> deleteTask = Customer_dao.deleteCustomerTask(custId);
+            deleteTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    rc_SwapField.clear();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Information", "Customer removed successful");
+                });
+            });
+
+            deleteTask.setOnFailed(e -> {
+                Platform.runLater(() ->
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove customer: " +
+                                deleteTask.getException().getMessage()));
+            });
+
+            //deleteTask.setOnFinished(e -> showLoading(false));
+            Worker.submitTask(deleteTask);
+        }
+        catch (Exception ex)
+        {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     @FXML
     private void searchNameRCTable(ActionEvent event) {
         String searchTerm = rc_customerSearchField.getText();
+
     }
 
     // Modify Customer Event Handlers
     @FXML
     private void MCverifyCustomerId(ActionEvent event) {
-        OnCustomerVerified();
+        try {
+            String inputID = mc_customerIdField.getText();
+            if (inputID.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please Enter a Customer ID to remove");
+                return;
+            }
+            Long custId = Long.parseLong(inputID);
+
+            Task<Customer> getCustTask = Customer_dao.getCustomerTask(custId);
+            getCustTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    //Verify UI update
+                    OnCustomerVerified(getCustTask.getValue());
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer removed successfully");
+                });
+            });
+
+            getCustTask.setOnFailed(e -> {
+                Platform.runLater(() ->
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove customer: " +
+                                getCustTask.getException().getMessage()));
+            });
+
+            //getCustTask.setOnFinished(e -> showLoading(false));
+            Worker.submitTask(getCustTask);
+        }
+        catch (Exception ex)
+        {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
-    private void OnCustomerVerified()
+    private void OnCustomerVerified(Customer customer)
     {
+        String[] nameParts = customer.getName().split(" ");
+        String FName = nameParts[0];
+        String LName = String.join(" ", Arrays.copyOfRange(nameParts, 1, nameParts.length));
+        mc_firstNameField.setText(FName);
+        mc_lastNameField.setText(LName);
+        mc_emailField.setText(customer.getEmailId());
+        mc_phoneField.setText(customer.getPhone());
+        mc_addressField.setText(customer.getAddress());
 
+        //UI
     }
 
     private void SetEditableMCFields(boolean status)
@@ -331,22 +431,113 @@ public class Customer_Cltr
         mc_addressField.setDisable(false);
     }
 
+    private void ClearAllMCFields()
+    {
+        mc_customerIdField.clear();
+        mc_firstNameField.clear();
+        mc_lastNameField.clear();
+        mc_emailField.clear();
+        mc_phoneField.clear();
+        mc_addressField.clear();
+    }
+
+
     @FXML
     private void submitModifyCustomer(ActionEvent event) {
+        try {
+            customer.SetAllFields(mc_firstNameField.getText(),
+                    mc_lastNameField.getText(),
+                    mc_phoneField.getText(),
+                    mc_emailField.getText(),
+                    mc_addressField.getText());
 
+            Task<Void> updateCustTask = Customer_dao.updateCustomerTask(customer);
+            updateCustTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    ClearAllMCFields();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer Modified successfully");
+                });
+            });
+
+            updateCustTask.setOnFailed(e -> {
+                Platform.runLater(() ->{
+                    ClearAllMCFields();
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove customer: " +
+                            updateCustTask.getException().getMessage());
+                });
+            });
+
+            //getCustTask.setOnFinished(e -> showLoading(false));
+            Worker.submitTask(updateCustTask);
+        }
+        catch (Exception ex)
+        {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     @FXML
     private void searchViewCustomer(ActionEvent event) {
-        // Note: Stored procedure GetCustomer requires cust_id, not name search
-        // For name-based search, you'd need a different approach or stored proc
+        try {
+            String vcId = vc_swapField.getText();
+            if(vcId.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.ERROR,"Error", "Search ID cannot be empty!");
+            }
+            Long custId = Long.parseLong(vcId);
 
+            Task<Customer> getCustTask = Customer_dao.getCustomerTask(custId);
+            getCustTask.setOnSucceeded(e ->
+            {
+                Platform.runLater(() -> {
+                    vc_customerList.clear();
+                    vc_customerList.addAll(getCustTask.getValue());
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer Modified successfully");
+                });
+            });
+
+            getCustTask.setOnFailed(e ->
+            {
+                Platform.runLater(() ->{
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Customer: " +
+                            getCustTask.getException().getMessage());
+                });
+            });
+            Worker.submitTask(getCustTask);
+        }
+        catch (Exception ex)
+        {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", ex.getMessage());
+        }
     }
 
     @FXML
     private void showAllCustomers(ActionEvent event) {
-        // Note: GetAllCustomer seems identical to GetCustomer; assuming it fetches all if p_cust_id is null
+        try{
+            System.out.println("VALL");
+            Task<List<Customer>> getAllCustTask = Customer_dao.getAllCustomersTask();
+            getAllCustTask.setOnSucceeded(e ->
+            {
+                Platform.runLater(() -> {
+                    vc_customerList.clear();
+                    vc_customerList.addAll(getAllCustTask.getValue());
+                    List<Customer> custs = getAllCustTask.getValue();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer Modified successfully");
+                });
+            });
 
+            getAllCustTask.setOnFailed(e ->
+            {
+                Platform.runLater(() ->{
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Customer: " +
+                            getAllCustTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(getAllCustTask);
+
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR,"Error", e.getMessage());
+        }
     }
 
     private int currentVCFieldIdx = 0;

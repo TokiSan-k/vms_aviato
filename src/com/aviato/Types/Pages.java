@@ -90,7 +90,7 @@ public class Pages {
     public static Scene GetMainMenuScene()
     {
         //Change based on login
-        return adminScene;
+        return customerScene;
     }
 
 }

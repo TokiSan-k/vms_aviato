@@ -10,6 +10,6 @@ module com.aviato {
 
     opens com.aviato to javafx.fxml, org.hibernate.orm.core;
     opens com.aviato.Controllers to javafx.fxml, javafx.base, org.hibernate.orm.core;
-    opens com.aviato.Types to org.hibernate.orm.core;
+    opens com.aviato.Types to org.hibernate.orm.core, javafx.base;
     exports com.aviato;
 }

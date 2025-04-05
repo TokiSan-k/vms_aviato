@@ -8,17 +8,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Appointment_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Appointment_Cltr.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Customer_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Customer_Cltr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Vehicle_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Vehicle_Cltr.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/aviato/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Customer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Pages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Pages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Appointment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Appointment.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/HibernateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/dao/Customer_dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/dao/Customer_dao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Customer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Customer.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Employee.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Employee.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Inventory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Inventory.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Payment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Payment.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Service.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Service.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/SideNavBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/SideNavBar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Vehicle.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Vehicle.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

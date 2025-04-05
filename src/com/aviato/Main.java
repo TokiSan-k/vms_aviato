@@ -2,6 +2,7 @@ package com.aviato;
 
 import com.aviato.Types.*;
 import com.aviato.Types.Pages;
+import com.aviato.Utils.concurrency.Worker;
 import com.aviato.db.HibernateUtil;
 import com.aviato.db.dao.Customer_dao;
 import com.aviato.db.dao.Employee_dao;
@@ -70,6 +71,11 @@ public class Main extends Application {
         catch (Exception ex){
             System.out.println("MainErr: "+ex.getMessage());
         }
+    }
+
+    @Override
+    public void stop() {
+        Worker.shutdown();
     }
 
     public static void main(String[] args) {

@@ -6,6 +6,7 @@ import com.aviato.Utils.AlertBox;
 import com.aviato.Types.Customer;
 import com.aviato.Types.Pages;
 import com.aviato.Utils.concurrency.Worker;
+import com.aviato.Utils.Field;
 import com.aviato.db.dao.Customer_dao;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -45,26 +46,11 @@ public class Customer_Cltr
         public static final byte ViewCustomerContainer = 3;
     }
 
-    private class Field
-    {
-        public int Id;
-        public String Text;
-        public String Prompt;
-
-        public Field(int id, String text, String prompt)
-        {
-            Id = id;
-            Text = text;
-            Prompt = prompt;
-        }
-    }
-
     private final Field[] rcSwapFields = { new Field(0,"ID:","Enter Customer ID"),
             new Field(1,"Email:", "Enter Email ID")};
 
     private final Field[] vcSwapFields = { new Field(0,"ID:","Enter Customer ID"),
-            new Field(1,"Name:","Enter Customer Name"),
-            new Field(2,"Email:", "Enter Email ID")};
+            new Field(1,"Name:","Enter Customer Name")};
 
     private final int TotalModifyFields = 5;
 
@@ -445,6 +431,7 @@ public class Customer_Cltr
     @FXML
     private void submitModifyCustomer(ActionEvent event) {
         try {
+            customer.setCustId(Long.parseLong(mc_customerIdField.getText()));
             customer.SetAllFields(mc_firstNameField.getText(),
                     mc_lastNameField.getText(),
                     mc_phoneField.getText(),

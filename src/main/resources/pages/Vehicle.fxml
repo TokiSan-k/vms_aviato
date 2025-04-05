@@ -52,31 +52,31 @@
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addCustIDField">
                                                             <Text text="Customer ID:" />
-                                                            <TextField fx:id="av_CustIdField" editable="false" styleClass="addCustIdInputField" />
-                                                            <Button fx:id="av_verifyCustIdButton" mnemonicParsing="false" styleClass="addFieldButton" text="Verify">
+                                                            <TextField fx:id="av_CustIdField" styleClass="addCustIdInputField" />
+                                                            <Button fx:id="av_verifyCustIdButton" mnemonicParsing="false" styleClass="addFieldButton" onAction="#verifyCustomerId" text="Verify">
                                                                 <HBox.margin>
                                                                     <Insets left="5.0" />
                                                                 </HBox.margin>
                                                             </Button>
-                                                            <Text visible="false" managed="false" text="Customer ID does not exists!" />
+                                                            <Text fx:id="verifyStatus" visible="false" managed="false" text="Customer ID does not exists!" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addLicencePlateField">
                                                             <Text text="Licence Plate:" />
-                                                            <TextField fx:id="ac_LicencePlateField" styleClass="addLicencePlateInputField" />
+                                                            <TextField fx:id="av_LicencePlateField" editable="false" disable="true" styleClass="addLicencePlateInputField" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addMakeField">
                                                             <Text text="Make:" />
-                                                            <TextField fx:id="ac_MakeField" styleClass="addMakeInputField" />
+                                                            <TextField fx:id="av_MakeField" editable="false" disable="true" styleClass="addMakeInputField" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addModelField">
                                                             <Text text="Model:" />
-                                                            <TextField fx:id="ac_ModelField" styleClass="addModelInputField" />
+                                                            <TextField fx:id="av_ModelField" editable="false" disable="true" styleClass="addModelInputField" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addYearField">
                                                             <Text text="Year:" />
-                                                            <TextField fx:id="ac_YearField" styleClass="addYearInputField" />
+                                                            <TextField fx:id="av_YearField" editable="false" disable="true" styleClass="addYearInputField" />
                                                         </HBox>
-                                                        <Button styleClass="addFieldButton" text="Submit">
+                                                        <Button onAction="#submitAddVehicle" styleClass="addFieldButton" text="Submit">
                                                             <VBox.margin>
                                                                 <Insets left="428.0" />
                                                             </VBox.margin></Button>
@@ -97,18 +97,18 @@
                                                         <VBox spacing="10.0">
                                                             <children>
                                                                 <HBox spacing="10.0">
-                                                                    <Text text="Vehicle ID:">
+                                                                    <Text fx:id="rv_swapLabel" text="Vehicle ID:">
                                                                         <HBox.margin>
                                                                             <Insets top="5.0" />
                                                                         </HBox.margin></Text>
-                                                                    <TextField fx:id="rv_inputField" promptText="Enter ID" />
-                                                                    <Button fx:id="rv_swapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C">
-                                                                        <HBox.margin>
-                                                                            <Insets left="5.0" />
-                                                                        </HBox.margin>
-                                                                    </Button>
+                                                                    <TextField fx:id="rv_swapField" promptText="Enter ID" />
+<!--                                                                    <Button fx:id="rv_swapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C">-->
+<!--                                                                        <HBox.margin>-->
+<!--                                                                            <Insets left="5.0" />-->
+<!--                                                                        </HBox.margin>-->
+<!--                                                                    </Button>-->
                                                                 </HBox>
-                                                                <Button styleClass="removeFieldButton" text="Submit" />
+                                                                <Button styleClass="removeFieldButton" onAction="#submitRemoveVehicle" text="Submit" />
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -122,11 +122,21 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                                                                     <children>
+                                                                        <Button fx:id="rv_tableSwapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C">
+                                                                            <HBox.margin>
+                                                                                <Insets right="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Button>
                                                                         <Text fx:id="rv_searchLabel" text="Search by Vehicle ID:" />
-                                                                        <TextField fx:id="rv_vehicleSearchField" promptText="Enter Vehicle Id" HBox.hgrow="ALWAYS" />
-                                                                        <Button fx:id="rv_searchButton" mnemonicParsing="false" styleClass="searchVehicleButton" text="Search">
+                                                                        <TextField fx:id="rv_searchField" promptText="Enter Vehicle Id" HBox.hgrow="ALWAYS" />
+                                                                        <Button fx:id="rv_searchButton" mnemonicParsing="false" onAction="#TableSearchRV" styleClass="searchVehicleButton" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Button>
+                                                                        <Button fx:id="rv_AllVehicleButton" mnemonicParsing="false" onAction="#SearchAllVehicle" styleClass="searchVehicleButton" text="Search">
+                                                                            <HBox.margin>
+                                                                                <Insets left="10.0" />
                                                                             </HBox.margin>
                                                                         </Button>
                                                                     </children>
@@ -159,7 +169,7 @@
                                                                 <TextField fx:id="mv_vehicleIdField" promptText="Enter Vehicle ID" />
                                                             </children>
                                                         </HBox>
-                                                        <Button fx:id="mv_verifyButton" mnemonicParsing="false" styleClass="modVehicleVerifyButton" text="Verify">
+                                                        <Button fx:id="mv_verifyButton" mnemonicParsing="false" styleClass="modVehicleVerifyButton" onAction="#verifyVehicleId" text="Verify">
                                                             <HBox.margin>
                                                                 <Insets left="5.0" />
                                                             </HBox.margin>
@@ -178,8 +188,8 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modVehicleLicencePlate">
                                                                     <Text text="Licence Plate:" />
-                                                                    <TextField fx:id="mv_LicencePlateField" />
-                                                                    <Button fx:id="mv_editLicencePlateButton" mnemonicParsing="false" styleClass="modVehicleButtons" text="C">
+                                                                    <TextField fx:id="mv_LicencePlateField" editable="false" disable="true" />
+                                                                    <Button fx:id="mv_editLicencePlateButton" mnemonicParsing="false" styleClass="modVehicleButtons" onAction="#editLicencePlate" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -187,8 +197,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modVehicleMake">
                                                                     <Text text="Make:" />
-                                                                    <TextField fx:id="mv_MakeField" />
-                                                                    <Button fx:id="mc_editMakeButton" mnemonicParsing="false" styleClass="modVehicleButtons" text="C">
+                                                                    <TextField fx:id="mv_MakeField" editable="false" disable="true" />
+                                                                    <Button fx:id="mc_editMakeButton" mnemonicParsing="false" styleClass="modVehicleButtons" onAction="#editMake" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -196,8 +206,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modVehicleModel">
                                                                     <Text text="Model:" />
-                                                                    <TextField fx:id="mv_ModelField" />
-                                                                    <Button fx:id="mv_ModelButton" mnemonicParsing="false" styleClass="modVehicleButtons" text="C">
+                                                                    <TextField fx:id="mv_ModelField" editable="false" disable="true" />
+                                                                    <Button fx:id="mv_ModelButton" mnemonicParsing="false" styleClass="modVehicleButtons" onAction="#editModel" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -205,17 +215,18 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modVehicleYear">
                                                                     <Text text="Year:" />
-                                                                    <TextField fx:id="mv_YearField" />
-                                                                    <Button fx:id="mv_VehicleYearEditButton" mnemonicParsing="false" styleClass="modVehicleButtons" text="C">
+                                                                    <TextField fx:id="mv_YearField" editable="false" disable="true"/>
+                                                                    <Button fx:id="mv_VehicleYearEditButton" mnemonicParsing="false" styleClass="modVehicleButtons" onAction="#editYear" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button styleClass="modVehicleSubmitButton" text="Submit">
+                                                                <Button styleClass="modVehicleSubmitButton" onAction="#submitModifyVehicle" text="Submit">
                                                                     <VBox.margin>
                                                                         <Insets left="270.0" />
-                                                                    </VBox.margin></Button>
+                                                                    </VBox.margin>
+                                                                </Button>
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -232,19 +243,19 @@
                                                         <!-- Search and Control Section -->
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Button fx:id="vv_clearButton" mnemonicParsing="false" styleClass="viewVehicleButtons" text="C">
+                                                                <Button fx:id="vv_swapButton" mnemonicParsing="false" styleClass="viewVehicleButtons" onAction="#handleVCSwapField" text="C">
                                                                     <HBox.margin>
                                                                         <Insets right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Text fx:id="vv_VehicleIdLabel" text="Enter ID:" />
-                                                                <TextField fx:id="vv_VehicleIdField" promptText="Enter Vehicle ID:" />
+                                                                <Text fx:id="vv_SwapLabel" text="ID:" />
+                                                                <TextField fx:id="vv_SwapField" promptText="Enter Vehicle ID:" />
                                                                 <Button fx:id="vv_searchButton" mnemonicParsing="false" styleClass="viewVehicleButtons" text="S">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Button fx:id="vv_allVehicleButton" mnemonicParsing="false" styleClass="viewVehicleButtons" text="All Vehicles">
+                                                                <Button fx:id="vv_allVehicleButton" mnemonicParsing="false" styleClass="viewVehicleButtons" onAction="#showAllVehicles" text="All Vehicles">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" />
                                                                     </HBox.margin>

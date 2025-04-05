@@ -94,10 +94,18 @@ public class Vehicle {
     public int getYear() { return year; }
     public void setYear(int year) { this.year = year;}
 
+    public void SetAllFields(Long customerId, String licencePlate, String make, String model, int year)
+    {
+        this.customerId = customerId;
+        this.licencePlate = licencePlate;
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
 
     public Vehicle() {}
 
-    public Vehicle(Long customerId, String licencePlate, String make, String model, Integer year) {
+    public Vehicle(Long customerId, String licencePlate, String make, String model, int year) {
         this.customerId = customerId;
         this.licencePlate = licencePlate;
         this.make = make;

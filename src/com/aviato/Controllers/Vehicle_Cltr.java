@@ -1,25 +1,32 @@
 package com.aviato.Controllers;
 
 import com.aviato.Main;
+import com.aviato.Types.Customer;
 import com.aviato.Types.Pages;
 import com.aviato.Types.Vehicle;
+import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.Field;
+import com.aviato.Utils.concurrency.Worker;
+import com.aviato.db.dao.Customer_dao;
+import com.aviato.db.dao.Vehicle_dao;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.StoredProcedureQuery;
+import java.util.Arrays;
 import java.util.List;
 
 public class Vehicle_Cltr {
@@ -35,6 +42,13 @@ public class Vehicle_Cltr {
         public static final byte ModifyVehicleContainer = 2;
         public static final byte ViewVehicleContainer = 3;
     }
+
+    private final ObservableList<Vehicle> rv_vehicleList = FXCollections.observableArrayList();
+    private final ObservableList<Vehicle> vv_vehicleList = FXCollections.observableArrayList();
+
+    private final Field[] vvSwapFields = { new Field(0,"ID:","Enter Vehicle ID"),
+            new Field(1,"Customer ID:","Enter Customer ID")};
+
 
     // Vehicle Navbar
     @FXML
@@ -52,21 +66,25 @@ public class Vehicle_Cltr {
     @FXML
     private Button av_verifyCustIdButton;
     @FXML
-    private TextField ac_LicencePlateField;
+    private TextField av_LicencePlateField;
     @FXML
-    private TextField ac_MakeField;
+    private TextField av_MakeField;
     @FXML
-    private TextField ac_ModelField;
+    private TextField av_ModelField;
     @FXML
-    private TextField ac_YearField;
+    private TextField av_YearField;
 
     // Remove Vehicle Fields
     @FXML
-    private TextField rv_inputField;
+    private Text rv_swapLabel;
     @FXML
-    private Button rv_swapFieldButton;
+    private TextField rv_swapField;
     @FXML
-    private TextField rv_vehicleSearchField;
+    private Button rv_tableSwapFieldButton;
+    @FXML
+    private Text rv_searchLabel;
+    @FXML
+    private TextField rv_searchField;
     @FXML
     private Button rv_searchButton;
     @FXML
@@ -106,7 +124,9 @@ public class Vehicle_Cltr {
 
     // View Vehicle Fields
     @FXML
-    private TextField vv_VehicleIdField;
+    private Text vv_SwapLabel;
+    @FXML
+    private TextField vv_SwapField;
     @FXML
     private Button vv_clearButton;
     @FXML
@@ -127,6 +147,8 @@ public class Vehicle_Cltr {
     private TableColumn<Vehicle, String> vv_ModelColumn;
     @FXML
     private TableColumn<Vehicle, String> vv_YearColumn;
+
+    private Vehicle vehicle = new Vehicle();
 
     // Initialize method to set up table columns
     @FXML
@@ -152,23 +174,9 @@ public class Vehicle_Cltr {
         vv_MakeColumn.setCellValueFactory(new PropertyValueFactory<>("make"));
         vv_ModelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         vv_YearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
+
+        vv_VehicleTable.setItems(vv_vehicleList);
     }
-
-    @FXML
-    private void tempCustPage()
-    {
-        try
-        {
-            Parent custParent = new FXMLLoader(Main.class.getResource("/pages/Customer.fxml")).load();
-            Main.currentStage.setScene(new Scene(custParent));
-            //Main.currentStage.setMaximized(true);
-        }
-        catch (Exception ex)
-        {
-
-        }
-    }
-
 
     // Vehicle NavBar
     private void turnOffVisibleAndManageVehicleContainer() {
@@ -176,6 +184,9 @@ public class Vehicle_Cltr {
             vehicleContainers[i].setVisible(false);
             vehicleContainers[i].setManaged(false);
         }
+
+        SetEditableAVFields(false);
+        SetEditableMVFields(false);
     }
 
     @FXML
@@ -206,93 +217,340 @@ public class Vehicle_Cltr {
         vehicleContainers[VehicleContainerEnum.ViewVehicleContainer].setVisible(true);
     }
 
+    private void clearAddVehicleFields() {
+        av_CustIdField.clear();
+        av_LicencePlateField.clear();
+        av_MakeField.clear();
+        av_ModelField.clear();
+        av_YearField.clear();
+    }
+
     // Add Vehicle Submit Handler
     @FXML
     private void submitAddVehicle(ActionEvent event) {
-        String customerId = av_CustIdField.getText();
-        String licencePlate = ac_LicencePlateField.getText();
-        String make = ac_MakeField.getText();
-        String model = ac_ModelField.getText();
-        String year = ac_YearField.getText();
+        try {
+            Long custId = Long.parseLong(av_CustIdField.getText());
+            String licencePlate = av_LicencePlateField.getText();
+            String make = av_MakeField.getText();
+            String model = av_ModelField.getText();
+            int year = Integer.parseInt(av_YearField.getText());
 
-        // Clear fields
-        av_CustIdField.clear();
-        ac_LicencePlateField.clear();
-        ac_MakeField.clear();
-        ac_ModelField.clear();
-        ac_YearField.clear();
+            vehicle.SetAllFields(custId, licencePlate, make, model, year);
+            Task<Void> insertTask = Vehicle_dao.insertVehicleTask(vehicle);
+
+            insertTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    clearAddVehicleFields();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Vehicle added successfully");
+                });
+            });
+
+            insertTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    clearAddVehicleFields();
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to add vehicle: " +
+                            insertTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(insertTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
+        }
+    }
+
+    private void SetEditableAVFields(boolean status)
+    {
+        av_LicencePlateField.setEditable(status);
+        av_LicencePlateField.setDisable(!status);
+
+        av_MakeField.setEditable(status);
+        av_MakeField.setDisable(!status);
+
+        av_ModelField.setEditable(status);
+        av_ModelField.setDisable(!status);
+
+        av_YearField.setEditable(status);
+        av_YearField.setDisable(!status);
     }
 
     @FXML
     private void verifyCustomerId(ActionEvent event) {
-        // Logic to verify customer ID would go here
-        System.out.println("Verifying Customer ID: " + av_CustIdField.getText());
+        try {
+            String inputID = av_CustIdField.getText();
+            if (inputID.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please Enter a Customer ID to remove");
+                return;
+            }
+            Long custId = Long.parseLong(inputID);
+
+            Task<Customer> getCustTask = Customer_dao.getCustomerTask(custId);
+            getCustTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    //Verify UI update
+                    SetEditableAVFields(true);
+                    //======
+                    //For Now
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer Verified!");
+                });
+            });
+
+            getCustTask.setOnFailed(e -> {
+                Platform.runLater(() ->
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove customer: " +
+                                getCustTask.getException().getMessage()));
+            });
+
+            //getCustTask.setOnFinished(e -> showLoading(false));
+            Worker.submitTask(getCustTask);
+        }
+        catch (Exception ex)
+        {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     // Remove Vehicle Event Handlers
     @FXML
     private void submitRemoveVehicle(ActionEvent event) {
-        // Logic to remove vehicle would go here
+        try {
+            String inputID = rv_swapField.getText();
+            if (inputID.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please enter a Vehicle ID to remove");
+                return;
+            }
+            Long vehicleId = Long.parseLong(inputID);
+
+            Task<Void> deleteTask = Vehicle_dao.deleteVehicleTask(vehicleId);
+            deleteTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    rv_swapField.clear();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Vehicle removed successfully");
+                });
+            });
+
+            deleteTask.setOnFailed(e -> {
+                Platform.runLater(() ->
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove vehicle: " +
+                                deleteTask.getException().getMessage()));
+            });
+
+            Worker.submitTask(deleteTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     @FXML
-    private void swapRemoveField(ActionEvent event) {
-        System.out.println("Swap field button clicked in Remove Vehicle");
+    private void TableSearchRV(ActionEvent event) {
+        String searchTerm = rv_searchField.getText();
+        //Cust Id
+        //Vehicle Id
+
+        //Show OutPut in Table
     }
 
     @FXML
-    private void searchRemoveVehicle(ActionEvent event) {
-        String searchTerm = rv_vehicleSearchField.getText();
-        // Search logic would go here
+    private void SearchAllVehicle(ActionEvent event) {
+        try{
+            Task<List<Vehicle>> getAllVehicleTask = Vehicle_dao.getAllVehiclesTask();
+            getAllVehicleTask.setOnSucceeded(e ->
+            {
+                Platform.runLater(() -> {
+                    rv_vehicleList.clear();
+                    rv_vehicleList.addAll(getAllVehicleTask.getValue());
+                });
+            });
+
+            getAllVehicleTask.setOnFailed(e ->
+            {
+                Platform.runLater(() ->{
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Customer: " +
+                            getAllVehicleTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(getAllVehicleTask);
+
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR,"Error", e.getMessage());
+        }
     }
 
     // Modify Vehicle Event Handlers
+    private void SetEditableMVFields(boolean status)
+    {
+        mv_LicencePlateField.setEditable(status);
+        mv_LicencePlateField.setDisable(!status);
+
+        mv_MakeField.setEditable(status);
+        mv_MakeField.setDisable(!status);
+
+        mv_ModelField.setEditable(status);
+        mv_ModelField.setDisable(!status);
+
+        mv_YearField.setEditable(status);
+        mv_YearField.setDisable(!status);
+    }
+
     @FXML
     private void verifyVehicleId(ActionEvent event) {
-        // Logic to verify vehicle ID would go here
-        System.out.println("Verifying Vehicle ID: " + mv_vehicleIdField.getText());
+        try {
+            String inputID = mv_vehicleIdField.getText();
+            if (inputID.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please Enter a Customer ID to remove");
+                return;
+            }
+            Long vehicleId = Long.parseLong(inputID);
+
+            Task<Vehicle> getVehicleTask = Vehicle_dao.getVehicleTask(vehicleId);
+            getVehicleTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    //Verify UI update
+                    OnVehicleVerified(getVehicleTask.getValue());
+
+                    //For Now
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Vehicle ID Verified!");
+                });
+            });
+
+            getVehicleTask.setOnFailed(e -> {
+                Platform.runLater(() ->
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", getVehicleTask.getException().getMessage()));
+            });
+
+            //getCustTask.setOnFinished(e -> showLoading(false));
+            Worker.submitTask(getVehicleTask);
+        }
+        catch (Exception ex)
+        {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
+    }
+
+    private void OnVehicleVerified(Vehicle vehicle)
+    {
+        mv_LicencePlateField.setText(vehicle.getLicencePlate());
+        mv_MakeField.setText(vehicle.getMake());
+        mv_ModelField.setText(vehicle.getModel());
+        mv_YearField.setText(String.valueOf(vehicle.getYear()));
+
+        //UI
     }
 
     @FXML
     private void editLicencePlate(ActionEvent event) {
         mv_LicencePlateField.setEditable(true);
+        mv_LicencePlateField.setDisable(false);
     }
 
     @FXML
     private void editMake(ActionEvent event) {
         mv_MakeField.setEditable(true);
+        mv_MakeField.setDisable(false);
     }
 
     @FXML
     private void editModel(ActionEvent event) {
         mv_ModelField.setEditable(true);
+        mv_ModelField.setDisable(false);
     }
 
     @FXML
     private void editYear(ActionEvent event) {
         mv_YearField.setEditable(true);
+        mv_YearField.setDisable(false);
+    }
+
+    private void ClearAllMVFields()
+    {
+        mv_vehicleIdField.clear();
+        mv_LicencePlateField.clear();
+        mv_MakeField.clear();
+        mv_ModelField.clear();
+        mv_YearField.clear();
     }
 
     @FXML
     private void submitModifyVehicle(ActionEvent event) {
-        // Logic to submit modified vehicle would go here
-    }
+        try {
+            vehicle.setVehicleId(Long.parseLong(mv_vehicleIdField.getText()));
+            vehicle.SetAllFields(vehicle.getCustomerId(),
+                    mv_LicencePlateField.getText(),
+                    mv_MakeField.getText(),
+                    mv_ModelField.getText(),
+                    Integer.parseInt(mv_YearField.getText()));
 
-    // View Vehicle Event Handlers
-    @FXML
-    private void clearViewSearch(ActionEvent event) {
-        vv_VehicleIdField.clear();
-        vv_VehicleTable.getItems().clear();
+            Task<Void> updateVehicleTask = Vehicle_dao.updateVehicleTask(vehicle);
+            updateVehicleTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    ClearAllMVFields();
+                    SetEditableMVFields(false);
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Vehicle Modified successfully");
+                });
+            });
+
+            updateVehicleTask.setOnFailed(e -> {
+                Platform.runLater(() ->{
+                    ClearAllMVFields();
+                    SetEditableMVFields(false);
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Modify Vehicle: " +
+                            updateVehicleTask.getException().getMessage());
+                });
+            });
+
+            //getVehicleTask.setOnFinished(e -> showLoading(false));
+            Worker.submitTask(updateVehicleTask);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     @FXML
     private void searchViewVehicle(ActionEvent event) {
-        String vehicleId = vv_VehicleIdField.getText();
+        String field = vv_SwapField.getText();
         // Search logic would go here
     }
 
     @FXML
     private void showAllVehicles(ActionEvent event) {
-        // Logic to show all vehicles would go here
+        try{
+            Task<List<Vehicle>> getAllVehicleTask = Vehicle_dao.getAllVehiclesTask();
+            getAllVehicleTask.setOnSucceeded(e ->
+            {
+                Platform.runLater(() -> {
+                    vv_vehicleList.clear();
+                    vv_vehicleList.addAll(getAllVehicleTask.getValue());
+                });
+            });
+
+            getAllVehicleTask.setOnFailed(e ->
+            {
+                Platform.runLater(() ->{
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Vehicles: " +
+                            getAllVehicleTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(getAllVehicleTask);
+
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR,"Error", e.getMessage());
+        }
+    }
+
+    private int currentVVFieldIdx = 0;
+    @FXML
+    private void handleVCSwapField(ActionEvent event)
+    {
+        currentVVFieldIdx +=1;
+        if(currentVVFieldIdx == vvSwapFields.length)
+            currentVVFieldIdx = 0;
+
+        vv_SwapLabel.setText(vvSwapFields[currentVVFieldIdx].Text);
+        vv_SwapField.setPromptText(vvSwapFields[currentVVFieldIdx].Prompt);
     }
 }

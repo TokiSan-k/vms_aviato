@@ -33,8 +33,15 @@ public class Pages {
     private static Scene adminScene;
     private static Parent adminRoot;
 
+    private static Scene rolesScene;
+    private static Parent rolesRoot;
+
+    private static Scene loginScene;
+    private static Parent loginRoot;
+
     private static double width;
     private static double height;
+
     public static void SetWidthHeightOfScreen(double Width, double Height)
     {
         width = Width;
@@ -43,6 +50,9 @@ public class Pages {
 
     public static void LoadAllPages() throws Exception {
         try {
+
+            loginRoot = new FXMLLoader(Main.class.getResource("/pages/Customer.fxml")).load();
+            loginScene = new Scene(loginRoot);
 
             customerRoot = new FXMLLoader(Main.class.getResource("/pages/Customer.fxml")).load();
             customerScene = new Scene(customerRoot);
@@ -68,6 +78,9 @@ public class Pages {
             adminRoot = new FXMLLoader(Main.class.getResource("/pages/Admin.fxml")).load();
             adminScene = new Scene(adminRoot);
 
+            rolesRoot = new FXMLLoader(Main.class.getResource("/pages/Roles.fxml")).load();
+            rolesScene = new Scene(rolesRoot, width, height);
+
             // Debug output to verify sizes
             System.out.println("Visual Bounds - Width: " + width + ", Height: " + height);
         } catch (Exception ex) {
@@ -81,7 +94,7 @@ public class Pages {
     public static Scene GetAppointmentScene() { return appointmentScene; }
     public static Scene GetVehicleScene() { return vehicleScene; }
     public static Scene GetPaymentsScene() { return paymentScene; }
-    public static Scene GetManageRoleScene() { return inventoryScene; }
+    public static Scene GetManageRoleScene() { return rolesScene; }
     public static Scene GetServiceManagementScene() {return serviceScene;}
     public static Scene GetMonthlyReportsScene() {return inventoryScene;}
     public static Scene GetLogOutScene() {return inventoryScene;}
@@ -90,7 +103,7 @@ public class Pages {
     public static Scene GetMainMenuScene()
     {
         //Change based on login
-        return customerScene;
+        return loginScene;
     }
 
 }

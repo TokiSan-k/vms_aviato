@@ -1,260 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/Admin.css" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Admin_Cltr">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Admin.css" minWidth="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Admin_Cltr">
    <children>
       <HBox VBox.vgrow="ALWAYS">
          <children>
             <!-- Sidebar Menu -->
-            <VBox maxWidth="252.0" minWidth="252.0" spacing="20.0" styleClass="sidebar">
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
+            <fx:include source="../pages/SideNavBar.fxml" />
+
+            <VBox styleClass="adminMainCard" HBox.hgrow="ALWAYS">
                <children>
-                  <Button fx:id="customersButton" mnemonicParsing="false" onAction="#handleCustomers" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Customers">
-                     <VBox.margin>
-                        <Insets left="40.0" top="35.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/Icons/team-line.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="appointmentsButton" mnemonicParsing="false" onAction="#handleAppointments" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Appointments">
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/Icons/calendar-line.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="vehiclesButton" mnemonicParsing="false" onAction="#handleVehicles" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Vehicles">
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/Icons/car-line.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="paymentsButton" mnemonicParsing="false" onAction="#handlePayments" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Payments">
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/Icons/money-dollar-circle-line.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="manageRolesButton" mnemonicParsing="false" onAction="#handleManageRoles" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Manage Roles">
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/Icons/shield-user-line.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="manageInventoryButton" mnemonicParsing="false" onAction="#handleManageInventory" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Manage Inventory">
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/Icons/shopping-cart-2-line.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="serviceManagementButton" mnemonicParsing="false" onAction="#handleServiceManagement" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Service Management">
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/Icons/tools-line.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="monthlyReportsButton" mnemonicParsing="false" onAction="#handleMonthlyReports" prefHeight="45.0" prefWidth="168.0" styleClass="sidebar-button" text="Monthly Reports">
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/Icons/reports.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </VBox>
-            <!-- Main Container -->
-            <VBox fx:id="mainContainer" HBox.hgrow="ALWAYS">
-               <children>
-                  <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                  <VBox fx:id="mainContainer" styleClass="adminMainContainer">
                      <children>
-                        <!-- Middle Section -->
-                        <VBox minWidth="341.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                        <!-- Main Container -->
+                        <VBox>
                            <children>
-                              <!-- Pending Services Pie Chart -->
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pending Services" />
-                              <PieChart fx:id="pendingServicesChart" minHeight="100.0" VBox.vgrow="ALWAYS" />
-                              <!-- Today's Appointments Table -->
-                              <VBox minHeight="207.0" VBox.vgrow="ALWAYS">
+                              <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Today's Appointment" />
-                                    <TableView fx:id="appointmentsTable" VBox.vgrow="ALWAYS">
-                                       <columns>
-                                          <TableColumn fx:id="detailsColumn" prefWidth="232.0" text="Details" />
-                                          <TableColumn fx:id="timeColumn" prefWidth="105.6" text="Time" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </VBox>
-                              <!-- Quick Actions Section -->
-                              <VBox minHeight="221.0" spacing="10.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Text styleClass="section-title" text="Quick Actions" wrappingWidth="103.908935546875">
-                                       <VBox.margin>
-                                          <Insets left="120.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font name="System Bold Italic" size="15.0" />
-                                       </font>
-                                    </Text>
-                                    <!-- First Row of Buttons -->
-                                    <HBox alignment="CENTER" spacing="20.0">
+                                    <!-- Middle Section -->
+                                    <VBox minWidth="341.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="newAppointmentButton" mnemonicParsing="false" onAction="#handleNewAppointment" prefHeight="38.0" prefWidth="118.0" styleClass="action-button" text="New Appointment">
+                                          <!-- Pending Services Pie Chart -->
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pending Services" textAlignment="CENTER">
                                              <font>
-                                                <Font name="System Bold" size="11.0" />
-                                             </font>
-                                          </Button>
-                                          <Button fx:id="customerSearchButton" mnemonicParsing="false" onAction="#handleCustomerSearch" prefHeight="38.0" prefWidth="118.0" styleClass="action-button" text="Customer Search">
-                                             <font>
-                                                <Font name="System Bold" size="11.0" />
-                                             </font>
-                                          </Button>
+                                                <Font size="18.0" />
+                                             </font></Text>
+                                          <PieChart fx:id="pendingServicesChart" minHeight="100.0" VBox.vgrow="ALWAYS" />
+                                          <!-- Today's Appointments Table -->
+                                          <VBox minHeight="207.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Today's Appointment" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin></Text>
+                                                <TableView fx:id="appointmentsTable" VBox.vgrow="ALWAYS">
+                                                   <columns>
+                                                      <TableColumn fx:id="detailsColumn" prefWidth="304.79998779296875" text="Details" />
+                                                      <TableColumn fx:id="timeColumn" prefWidth="195.20001220703125" text="Time" />
+                                                   </columns>
+                                                </TableView>
+                                             </children>
+                                          </VBox>
+                                          <!-- Quick Actions Section -->
+                                          <VBox minHeight="221.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Text styleClass="section-title" text="Quick Actions" textAlignment="CENTER" wrappingWidth="189.5089111328125">
+                                                   <VBox.margin>
+                                                      <Insets left="160.0" top="25.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="18.0" />
+                                                   </font>
+                                                </Text>
+                                                <!-- First Row of Buttons -->
+                                                <HBox alignment="CENTER" spacing="20.0">
+                                                   <children>
+                                                      <Button fx:id="newAppointmentButton" mnemonicParsing="false" onAction="#handleNewAppointment" prefHeight="38.0" prefWidth="118.0" styleClass="action-button" text="New Appointment">
+                                                         <font>
+                                                            <Font name="System Bold" size="11.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <Button fx:id="customerSearchButton" mnemonicParsing="false" onAction="#handleCustomerSearch" prefHeight="38.0" prefWidth="118.0" styleClass="action-button" text="Customer Search">
+                                                         <font>
+                                                            <Font name="System Bold" size="11.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </HBox.margin>
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <!-- Second Row of Buttons -->
+                                                <HBox alignment="CENTER" spacing="20.0">
+                                                   <children>
+                                                      <Button fx:id="registerVehicleButton" mnemonicParsing="false" onAction="#handleRegisterVehicle" prefHeight="38.0" prefWidth="118.0" styleClass="action-button" text="Register Vehicle">
+                                                         <font>
+                                                            <Font name="System Bold" size="11.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <Button fx:id="processPaymentButton" mnemonicParsing="false" onAction="#handleProcessPayment" prefHeight="38.0" prefWidth="118.0" styleClass="action-button" text="Process Payment">
+                                                         <font>
+                                                            <Font name="System Bold" size="11.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </HBox.margin>
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <!-- New Bottom VBox -->
+                                          <VBox fx:id="middleBottomVBox" minHeight="0.0" prefHeight="0.0" prefWidth="502.0" styleClass="bottom-section" />
                                        </children>
-                                       <HBox.margin>
-                                          <Insets top="20.0" />
-                                       </HBox.margin>
-                                       <VBox.margin>
-                                          <Insets top="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <!-- Second Row of Buttons -->
-                                    <HBox alignment="CENTER" spacing="20.0">
+                                    </VBox>
+                                    <!-- Right Section -->
+                                    <VBox minWidth="279.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="registerVehicleButton" mnemonicParsing="false" onAction="#handleRegisterVehicle" prefHeight="38.0" prefWidth="118.0" styleClass="action-button" text="Register Vehicle">
-                                             <font>
-                                                <Font name="System Bold" size="11.0" />
-                                             </font>
-                                          </Button>
-                                          <Button fx:id="processPaymentButton" mnemonicParsing="false" onAction="#handleProcessPayment" prefHeight="38.0" prefWidth="118.0" styleClass="action-button" text="Process Payment">
-                                             <font>
-                                                <Font name="System Bold" size="11.0" />
-                                             </font>
-                                          </Button>
+                                          <!-- Placeholder -->
+                                          <VBox minHeight="100.0" prefHeight="181.0" prefWidth="279.0" VBox.vgrow="ALWAYS" />
+                                          <!-- Inventory Alerts Table -->
+                                          <VBox minHeight="329.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Text styleClass="section-title" text="Inventory Alerts" wrappingWidth="136.5367488861084">
+                                                   <VBox.margin>
+                                                      <Insets left="90.0" top="10.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Text>
+                                                <TableView fx:id="inventoryTable" VBox.vgrow="ALWAYS">
+                                                   <columns>
+                                                      <TableColumn fx:id="c1Column" prefWidth="191.2" text="Item" />
+                                                      <TableColumn fx:id="c2Column" prefWidth="84.0" text="Status" />
+                                                   </columns>
+                                                </TableView>
+                                             </children>
+                                          </VBox>
                                        </children>
-                                       <HBox.margin>
-                                          <Insets top="10.0" />
-                                       </HBox.margin>
-                                       <VBox.margin>
-                                          <Insets top="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
+                                    </VBox>
                                  </children>
-                              </VBox>
-                              <!-- New Bottom VBox -->
-                              <VBox fx:id="middleBottomVBox" minHeight="20.0" styleClass="bottom-section" />
-                           </children>
-                        </VBox>
-                        <!-- Right Section -->
-                        <VBox minWidth="279.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-                           <children>
-                              <!-- Placeholder -->
-                              <VBox minHeight="100.0" prefHeight="181.0" prefWidth="279.0" VBox.vgrow="ALWAYS" />
-                              <!-- Inventory Alerts Table -->
-                              <VBox minHeight="329.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Text styleClass="section-title" text="Inventory Alerts" wrappingWidth="86.93676567077637">
-                                       <VBox.margin>
-                                          <Insets left="90.0" top="10.0" />
-                                       </VBox.margin>
-                                    </Text>
-                                    <TableView fx:id="inventoryTable" VBox.vgrow="ALWAYS">
-                                       <columns>
-                                          <TableColumn fx:id="c1Column" prefWidth="191.2" text="Item" />
-                                          <TableColumn fx:id="c2Column" prefWidth="84.0" text="Status" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </VBox>
-                              <!-- New Bottom VBox -->
-                              <VBox fx:id="rightBottomVBox" minHeight="20.0" styleClass="bottom-section" />
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
-                  </HBox>
+                     <VBox.margin>
+                        <Insets bottom="15.0" left="15.0" top="15.0" />
+                     </VBox.margin>
+                  </VBox>
                </children>
             </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" minHeight="40" prefHeight="40" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="NEVER">
+         <children>
+            <Label>
+               2025 © VMS|Aviato™
+            </Label>
          </children>
       </HBox>
    </children>

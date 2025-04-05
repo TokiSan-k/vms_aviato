@@ -2,64 +2,60 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="683.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Login_Cltr">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="496.0" prefWidth="696.0" stylesheets="@../styles/Login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Login_Cltr">
     <children>
-        <HBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+        <HBox VBox.vgrow="ALWAYS">
             <children>
-                <!-- Left Section: Illustration -->
-                <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" style="-fx-background-color: #F5F7FA;">
+                <ImageView fitHeight="499.0" fitWidth="406.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="img">
+                    <image>
+                        <Image url="@../images/Login.jpg" />
+                    </image>
+                </ImageView>
+
+                <!-- Login Section -->
+                <VBox prefHeight="499.0" prefWidth="331.0" styleClass="login-section" HBox.hgrow="ALWAYS">
                     <children>
-                        <HBox alignment="CENTER">
-                            <children>
-                                <ImageView fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../images/vector.jpg" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-
-                <!-- Right Section: Login Form -->
-                <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" spacing="20.0" style="-fx-background-color: #FFFFFF;">
-                    <children>
-                        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1E3A8A;" text="Logo">
-                            <font>
-                                <Font name="System Bold" size="24.0" />
-                            </font>
-                        </Label>
-
-                        <!-- Welcome Message -->
-                        <Label style="-fx-font-size: 20px; -fx-text-fill: #000000;" text="Welcome!">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
-
-                        <!-- Username Field -->
-                        <TextField fx:id="usernameField" prefWidth="250.0" promptText="Username" style="-fx-background-color: #F5F5F5; -fx-border-color: #D1D5DB; -fx-border-radius: 5; -fx-padding: 10;">
-                        </TextField>
-
-                        <!-- Password Field -->
-                        <TextField fx:id="passwordField" prefWidth="250.0" promptText="Password" style="-fx-background-color: #F5F5F5; -fx-border-color: #D1D5DB; -fx-border-radius: 5; -fx-padding: 10;">
-                        </TextField>
-
-                        <!-- Login Button -->
-                        <Button fx:id="loginButton" onAction="#handleLogin" prefWidth="100.0" style="-fx-background-color: #1E3A8A; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-border-radius: 5; -fx-padding: 10;" text="Login">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                            <image>
+                                <Image url="@../images/Logo.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets left="68.0" top="60.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        <Text styleClass="welcome-text" text="Welcome!" VBox.vgrow="ALWAYS">
+                            <VBox.margin>
+                                <Insets left="100.0" top="20.0" />
+                            </VBox.margin></Text>
+                        <TextField fx:id="usernameField" maxHeight="30.0" maxWidth="250.0" promptText="Username" styleClass="input-field" VBox.vgrow="ALWAYS">
                             <font>
                                 <Font size="14.0" />
                             </font>
-                        </Button>
+                     <VBox.margin>
+                        <Insets left="40.0" />
+                     </VBox.margin></TextField>
+                        <TextField fx:id="passwordField" maxHeight="30.0" maxWidth="250.0" promptText="Password" styleClass="input-field" VBox.vgrow="ALWAYS">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                     <VBox.margin>
+                        <Insets left="40.0" />
+                     </VBox.margin></TextField>
+                        <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" onAction="#handleLogin" prefHeight="42.0" prefWidth="114.0" styleClass="login-button" text="Login" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                            <VBox.margin>
+                                <Insets left="120.0" />
+                            </VBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
                     </children>
                 </VBox>
             </children>

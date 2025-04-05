@@ -1,0 +1,196 @@
+.addRoleContainer {
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+    -fx-text-fill: #5E5E5E;
+}
+
+.heading {
+    -fx-padding: 25px 0px 0px 0px;
+    -fx-font-size: 20;
+}
+
+.addRoleNameField, .addRolePasswordField, .addRoleEmailField {
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 6;
+}
+
+.addRoleInputField {
+    -fx-min-width: 400;
+    -fx-min-height: 25;
+}
+
+.roleMainCard {
+    -fx-background-color: #F8F8FF;
+}
+
+.roleMainContainer {
+    -fx-background-color: #F9F9F9;
+    -fx-background-radius: 30 0 0 30;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-padding: 25 25 25 25;
+    -fx-font-family: "Maven Pro Medium";
+}
+
+.roleBackButton {
+    -fx-min-height: 40;
+    -fx-font-size: 17;
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.roleBackButton:hover {
+    -fx-text-fill: #1967D2;
+}
+
+.roleNavBar {
+    -fx-padding: 20 0 5 0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #CCCCCC;
+    -fx-border-style: solid;
+}
+
+.roleNavButtons {
+    -fx-min-height: 40;
+    -fx-font-size: 17;
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+
+.roleNavButtons:hover {
+    -fx-text-fill: #1967D2;
+}
+
+.roleNavButtons:focused {
+    -fx-border-width: 0 0 4 0;
+    -fx-border-color: #0B57D0;
+    -fx-text-fill: #1967D2;
+}
+
+.submitButton {
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.submitButton:hover {
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.remove-role-section {
+    -fx-padding: 0 0 10px 0;
+}
+
+.Search {
+    -fx-pref-height: -1;
+    -fx-min-height: -1;
+    -fx-padding: 10px 0;
+}
+
+.removeFieldButton {
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.removeFieldButton:hover {
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+.updateRoleContainer {
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+    -fx-text-fill: #5E5E5E;
+}
+
+.updateRoleField {
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 6;
+}
+
+.updateRoleInputField {
+    -fx-min-width: 400;
+    -fx-min-height: 25;
+}
+
+.viewRoleContainer {
+    -fx-spacing: 20;
+    -fx-font-size: 15;
+}
+
+.viewRoleButtons {
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+}
+.viewRoleButtons:hover {
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}
+
+/* Table styling */
+.table-view .column-header-background {
+    -fx-background-color: #F5F5F5;
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+    -fx-font-family: "Maven Pro Medium";
+    -fx-font-size: 14px;
+    -fx-text-fill: #5E5E5E;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 1px 0 0;
+    -fx-border-style: solid;
+}
+
+.table-view .column-header:last-child,
+.table-view .column-header-background .filler:last-child {
+    -fx-border-width: 0;
+}
+
+.table-view .table-cell {
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 1px 1px 0;
+    -fx-padding: 10px;
+    -fx-font-family: "Maven Pro";
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+}
+
+.table-view .table-row-cell .table-cell:last-child {
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-view .table-row-cell:last-child .table-cell {
+    -fx-border-width: 0 1px 0 0;
+}
+
+.table-view .table-row-cell:last-child .table-cell:last-child {
+    -fx-border-width: 0;
+}
+
+.table-row-cell {
+    -fx-background-color: #FFFFFF;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #FAFAFA;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #E3F2FD;
+    -fx-text-fill: #0B57D0;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #F5F5F5;
+}
+
+.footer {
+    -fx-font-family: "Maven Pro Medium";
+}

@@ -1,0 +1,45 @@
+.logo-section {
+    -fx-padding: 20;
+    -fx-background-color: #F8F8FF;
+    -fx-border-radius: 10;
+    -fx-spacing: 10;
+}
+
+.login-section {
+    -fx-padding: 20;
+    -fx-background-color: #F5FEFD;
+    -fx-border-radius: 10;
+    -fx-spacing: 15;
+}
+
+.welcome-text {
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.input-field {
+    -fx-min-width: 200;
+    -fx-min-height: 20;
+    -fx-padding: 5;
+    -fx-spacing: 10;
+    -fx-background-radius: 5;
+    -fx-border-color: #CCCCCC;
+}
+
+.login-button {
+    -fx-font-family: "Maven Pro Medium";
+    -fx-background-color: #F9F9F9;
+    -fx-text-fill: #5E5E5E;
+    -fx-min-width: 100;
+    -fx-min-height: 20;
+    -fx-padding: 10;
+    -fx-border-radius: 5;
+    -fx-border-color: black;
+    -fx-font-size: 14px;
+}
+
+.login-button:hover {
+    -fx-text-fill: #1967D2;
+    -fx-background-color: #C4DAFE;
+}

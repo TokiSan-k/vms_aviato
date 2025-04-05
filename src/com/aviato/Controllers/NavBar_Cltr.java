@@ -66,9 +66,9 @@ public class NavBar_Cltr {
 
     @FXML
     private void handleManageRoles(ActionEvent event) {
-        // Add logic to switch to Manage Roles view
-        System.out.println("Navigating to Manage Roles view");
-        // Example: loadManageRolesView();
+        if (Main.currentStage.getScene() != Pages.GetManageRoleScene()) {
+            Main.currentStage.setScene(Pages.GetManageRoleScene());
+        }
     }
 
     @FXML

@@ -75,9 +75,9 @@
                                                             <Text text="Hours Worked:" />
                                                             <TextField fx:id="ae_hoursWorkedField" styleClass="addEmpInputField" />
                                                         </HBox>
-                                                        <Button fx:id="ae_submitButton" styleClass="addFieldButton" text="Submit">
+                                                        <Button fx:id="ae_submitButton" styleClass="addFieldButton" onAction="#submitAddEmployee" text="Submit">
                                                             <VBox.margin>
-                                                                <Insets left="428.0" />
+                                                                <Insets left="15.0" />
                                                             </VBox.margin>
                                                         </Button>
                                                     </children>
@@ -103,13 +103,13 @@
                                                                         </HBox.margin>
                                                                     </Text>
                                                                     <TextField fx:id="re_empIdField" promptText="Enter ID" />
-                                                                    <Button fx:id="re_swapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C">
-                                                                        <HBox.margin>
-                                                                            <Insets left="5.0" />
-                                                                        </HBox.margin>
-                                                                    </Button>
+<!--                                                                    <Button fx:id="re_swapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C">-->
+<!--                                                                        <HBox.margin>-->
+<!--                                                                            <Insets left="5.0" />-->
+<!--                                                                        </HBox.margin>-->
+<!--                                                                    </Button>-->
                                                                 </HBox>
-                                                                <Button fx:id="re_submitButton" styleClass="removeFieldButton" text="Submit" />
+                                                                <Button fx:id="re_submitButton" styleClass="removeFieldButton" onAction="#submitRemoveEmployee" text="Submit" />
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -128,6 +128,11 @@
                                                                         <Button fx:id="re_searchButton" mnemonicParsing="false" styleClass="searchEmpButton" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Button>
+                                                                        <Button fx:id="re_searchAllButton" mnemonicParsing="false" styleClass="searchEmpButton" onAction="#searchAllRemoveEmployee" text="All Employees">
+                                                                            <HBox.margin>
+                                                                                <Insets left="10.0" />
                                                                             </HBox.margin>
                                                                         </Button>
                                                                     </children>
@@ -158,7 +163,7 @@
                                                                 <TextField fx:id="me_employeeIdField" promptText="Enter employee ID" />
                                                             </children>
                                                         </HBox>
-                                                        <Button fx:id="me_verifyButton" mnemonicParsing="false" styleClass="modEmpVerifyButton" text="Verify">
+                                                        <Button fx:id="me_verifyButton" mnemonicParsing="false" styleClass="modEmpVerifyButton" onAction="#verifyEmployeeId" text="Verify">
                                                             <HBox.margin>
                                                                 <Insets left="5.0" />
                                                             </HBox.margin>
@@ -177,8 +182,8 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpName">
                                                                     <Text text="Name:" />
-                                                                    <TextField fx:id="me_empNameField" />
-                                                                    <Button fx:id="me_editNameButton" mnemonicParsing="false" styleClass="modEmpButtons" text="C">
+                                                                    <TextField fx:id="me_empNameField" editable="false" disable="true" />
+                                                                    <Button fx:id="me_editNameButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editName" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -186,8 +191,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpPosition">
                                                                     <Text text="Position:" />
-                                                                    <TextField fx:id="me_positionField" />
-                                                                    <Button fx:id="me_editPositionButton" mnemonicParsing="false" styleClass="modEmpButtons" text="C">
+                                                                    <TextField fx:id="me_positionField" editable="false" disable="true" />
+                                                                    <Button fx:id="me_editPositionButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editPosition" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -195,8 +200,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpPhone">
                                                                     <Text text="Phone:" />
-                                                                    <TextField fx:id="me_phoneField" />
-                                                                    <Button fx:id="me_editPhoneButton" mnemonicParsing="false" styleClass="modEmpButtons" text="C">
+                                                                    <TextField fx:id="me_phoneField" editable="false" disable="true" />
+                                                                    <Button fx:id="me_editPhoneButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editPhone" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -204,8 +209,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpEmail">
                                                                     <Text text="Email:" />
-                                                                    <TextField fx:id="me_emailField" />
-                                                                    <Button fx:id="me_editEmailButton" mnemonicParsing="false" styleClass="modEmpButtons" text="C">
+                                                                    <TextField fx:id="me_emailField" editable="false" disable="true" />
+                                                                    <Button fx:id="me_editEmailButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editEmail" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -213,8 +218,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpSalary">
                                                                     <Text text="Salary:" />
-                                                                    <TextField fx:id="me_salaryField" />
-                                                                    <Button fx:id="me_editSalaryButton" mnemonicParsing="false" styleClass="modEmpButtons" text="C">
+                                                                    <TextField fx:id="me_salaryField" editable="false" disable="true" />
+                                                                    <Button fx:id="me_editSalaryButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editSalary" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -222,8 +227,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpHireDate">
                                                                     <Text text="Hire Date:" />
-                                                                    <TextField fx:id="me_hireDateField" />
-                                                                    <Button fx:id="me_editHireDateButton" mnemonicParsing="false" styleClass="modEmpButtons" text="C">
+                                                                    <TextField fx:id="me_hireDateField" editable="false" disable="true" />
+                                                                    <Button fx:id="me_editHireDateButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editHireDate" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -231,14 +236,14 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpHoursWorked">
                                                                     <Text text="Hours Worked:" />
-                                                                    <TextField fx:id="me_hoursWorkedField" />
-                                                                    <Button fx:id="me_editHoursWorkedButton" mnemonicParsing="false" styleClass="modEmpButtons" text="C">
+                                                                    <TextField fx:id="me_hoursWorkedField" editable="false" disable="true" />
+                                                                    <Button fx:id="me_editHoursWorkedButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editHoursWorked" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button fx:id="me_submitButton" styleClass="modEmpSubmitButton" text="Submit">
+                                                                <Button fx:id="me_submitButton" styleClass="modEmpSubmitButton" onAction="#submitModifyEmployee" text="Submit">
                                                                     <VBox.margin>
                                                                         <Insets left="270.0" />
                                                                     </VBox.margin>
@@ -271,7 +276,7 @@
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Button fx:id="ve_allEmployeesButton" mnemonicParsing="false" styleClass="viewEmpButtons" text="All Employees">
+                                                                <Button fx:id="ve_allEmployeesButton" mnemonicParsing="false" styleClass="viewEmpButtons" onAction="#showAllEmployees" text="All Employees">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" />
                                                                     </HBox.margin>

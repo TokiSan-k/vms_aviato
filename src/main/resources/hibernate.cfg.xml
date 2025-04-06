@@ -24,5 +24,7 @@
         <mapping class="com.aviato.Types.Item"/>
         <mapping class="com.aviato.Types.Appointment"/>
         <mapping class="com.aviato.Types.Payment"/>
+        <mapping class="com.aviato.Types.Role"/>
+        <mapping class="com.aviato.Types.User"/>
     </session-factory>
 </hibernate-configuration>

@@ -428,12 +428,13 @@ public class Vehicle_Cltr {
         }
     }
 
-    private void OnVehicleVerified(Vehicle vehicle)
+    private void OnVehicleVerified(Vehicle vehi)
     {
-        mv_LicencePlateField.setText(vehicle.getLicencePlate());
-        mv_MakeField.setText(vehicle.getMake());
-        mv_ModelField.setText(vehicle.getModel());
-        mv_YearField.setText(String.valueOf(vehicle.getYear()));
+        this.vehicle.setCustomerId(vehi.getCustomerId());
+        mv_LicencePlateField.setText(vehi.getLicencePlate());
+        mv_MakeField.setText(vehi.getMake());
+        mv_ModelField.setText(vehi.getModel());
+        mv_YearField.setText(String.valueOf(vehi.getYear()));
 
         //UI
     }

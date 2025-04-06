@@ -1,21 +1,26 @@
 package com.aviato.Controllers;
 
 import com.aviato.Types.Appointment;
+import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.concurrency.Worker;
+import com.aviato.db.dao.Appointment_dao;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Appointment_Cltr {
+    // Containers
     @FXML
     private VBox mainContainer;
 
@@ -26,115 +31,74 @@ public class Appointment_Cltr {
         public static final byte RemoveAppointmentContainer = 1;
         public static final byte ModifyAppointmentContainer = 2;
         public static final byte ViewAppointmentContainer = 3;
-        //public static final byte ManageInvoiceContainer = 4;
     }
 
-    @FXML
-    private Button addAppBtn;
-    @FXML
-    private Button removeAppBtn;
-    @FXML
-    private Button modifyAppBtn;
-    @FXML
-    private Button viewAppBtn;
+    private final ObservableList<Appointment> ra_AppList = FXCollections.observableArrayList();
+    private final ObservableList<Appointment> va_AppList = FXCollections.observableArrayList();
 
-    @FXML
-    private TextField aa_custIdField;
-    @FXML
-    private TextField aa_vehicleIdField;
-    @FXML
-    private TextField aa_appDateField;
-    @FXML
-    private TextField aa_appTimeField;
-    @FXML
-    private TextField aa_statusField;
-    @FXML
-    private TextField aa_serviceIdField;
-    @FXML
-    private TextField aa_empIdField;
-    @FXML
-    private Button aa_submitButton;
+    // Appointment Navbar
+    @FXML private Button addAppBtn;
+    @FXML private Button removeAppBtn;
+    @FXML private Button modifyAppBtn;
+    @FXML private Button viewAppBtn;
 
-    @FXML
-    private TextField ra_appIdField;
-    @FXML
-    private Button ra_swapFieldButton;
-    @FXML
-    private Button ra_submitButton;
-    @FXML
-    private TextField ra_appointmentSearchField;
-    @FXML
-    private Button ra_searchButton;
-    @FXML
-    private TableView<Appointment> ra_appointmentTable;
-    @FXML
-    private TableColumn<Appointment, Long> appointmentIdColumn;
-    @FXML
-    private TableColumn<Appointment, Date> appointmentDateColumn;
-    @FXML
-    private TableColumn<Appointment, String> appointmentStatusColumn;
+    // Add Appointment Fields
+    @FXML private TextField aa_custIdField;
+    @FXML private TextField aa_vehicleIdField;
+    @FXML private TextField aa_appDateField;
+    @FXML private TextField aa_appTimeField;
+    @FXML private TextField aa_statusField;
+    @FXML private TextField aa_serviceIdField;
+    @FXML private TextField aa_empIdField;
+    @FXML private Button aa_submitButton;
 
-    @FXML
-    private TextField ma_appIdField;
-    @FXML
-    private Button ma_verifyButton;
-    @FXML
-    private TextField ma_custIdField;
-    @FXML
-    private TextField ma_vehicleIdField;
-    @FXML
-    private TextField ma_appDateField;
-    @FXML
-    private TextField ma_appTimeField;
-    @FXML
-    private TextField ma_statusField;
-    @FXML
-    private TextField ma_serviceIdField;
-    @FXML
-    private TextField ma_empIdField;
-    @FXML
-    private Button ma_editCustIdButton;
-    @FXML
-    private Button ma_editVehicleIdButton;
-    @FXML
-    private Button ma_editAppDateButton;
-    @FXML
-    private Button ma_editAppTimeButton;
-    @FXML
-    private Button ma_editStatusButton;
-    @FXML
-    private Button ma_editServiceIdButton;
-    @FXML
-    private Button ma_editEmpIdButton;
-    @FXML
-    private Button ma_submitButton;
+    // Remove Appointment Fields
+    @FXML private TextField ra_appIdField;
+    @FXML private Button ra_swapFieldButton;
+    @FXML private Button ra_submitButton;
+    @FXML private TextField ra_appointmentSearchField;
+    @FXML private Button ra_searchButton;
+    @FXML private TableView<Appointment> ra_appointmentTable;
+    @FXML private TableColumn<Appointment, Long> appointmentIdColumn;
+    @FXML private TableColumn<Appointment, Date> appointmentDateColumn;
+    @FXML private TableColumn<Appointment, String> appointmentStatusColumn;
 
-    @FXML
-    private TextField va_appointmentSearchField;
-    @FXML
-    private Button va_clearButton;
-    @FXML
-    private Button va_searchButton;
-    @FXML
-    private Button va_allAppointmentsButton;
-    @FXML
-    private TableView<Appointment> va_appointmentTable;
-    @FXML
-    private TableColumn<Appointment, Long> va_appIdColumn;
-    @FXML
-    private TableColumn<Appointment, Long> va_custIdColumn;
-    @FXML
-    private TableColumn<Appointment, Long> va_vehicleIdColumn;
-    @FXML
-    private TableColumn<Appointment, Date> va_appDateColumn;
-    @FXML
-    private TableColumn<Appointment, Timestamp> va_appTimeColumn;
-    @FXML
-    private TableColumn<Appointment, String> va_statusColumn;
-    @FXML
-    private TableColumn<Appointment, Long> va_serviceIdColumn;
-    @FXML
-    private TableColumn<Appointment, Long> va_empIdColumn;
+    // Modify Appointment Fields
+    @FXML private TextField ma_appIdField;
+    @FXML private Button ma_verifyButton;
+    @FXML private TextField ma_custIdField;
+    @FXML private TextField ma_vehicleIdField;
+    @FXML private TextField ma_appDateField;
+    @FXML private TextField ma_appTimeField;
+    @FXML private TextField ma_statusField;
+    @FXML private TextField ma_serviceIdField;
+    @FXML private TextField ma_empIdField;
+    @FXML private Button ma_editCustIdButton;
+    @FXML private Button ma_editVehicleIdButton;
+    @FXML private Button ma_editAppDateButton;
+    @FXML private Button ma_editAppTimeButton;
+    @FXML private Button ma_editStatusButton;
+    @FXML private Button ma_editServiceIdButton;
+    @FXML private Button ma_editEmpIdButton;
+    @FXML private Button ma_submitButton;
+
+    // View Appointment Fields
+    @FXML private TextField va_appointmentSearchField;
+    @FXML private Button va_clearButton;
+    @FXML private Button va_searchButton;
+    @FXML private Button va_allAppointmentsButton;
+    @FXML private TableView<Appointment> va_appointmentTable;
+    @FXML private TableColumn<Appointment, Long> va_appIdColumn;
+    @FXML private TableColumn<Appointment, Long> va_custIdColumn;
+    @FXML private TableColumn<Appointment, Long> va_vehicleIdColumn;
+    @FXML private TableColumn<Appointment, Date> va_appDateColumn;
+    @FXML private TableColumn<Appointment, Timestamp> va_appTimeColumn;
+    @FXML private TableColumn<Appointment, String> va_statusColumn;
+    @FXML private TableColumn<Appointment, Long> va_serviceIdColumn;
+    @FXML private TableColumn<Appointment, Long> va_empIdColumn;
+
+    private Appointment appointment = new Appointment();
+    private boolean isMAVerified = false;
 
     @FXML
     public void initialize() {
@@ -145,10 +109,13 @@ public class Appointment_Cltr {
         appointmentContainers[AppContainerEnum.AddAppointmentContainer].setVisible(true);
         appointmentContainers[AppContainerEnum.AddAppointmentContainer].setManaged(true);
 
+        // Set up Remove Appointment table columns
         appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appId"));
         appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("appDate"));
         appointmentStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        ra_appointmentTable.setItems(ra_AppList);
 
+        // Set up View Appointment table columns
         va_appIdColumn.setCellValueFactory(new PropertyValueFactory<>("appId"));
         va_custIdColumn.setCellValueFactory(new PropertyValueFactory<>("custId"));
         va_vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleId"));
@@ -157,6 +124,13 @@ public class Appointment_Cltr {
         va_statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         va_serviceIdColumn.setCellValueFactory(new PropertyValueFactory<>("serviceId"));
         va_empIdColumn.setCellValueFactory(new PropertyValueFactory<>("empId"));
+        va_appointmentTable.setItems(va_AppList);
+    }
+
+    // Appointment NavBar
+    private void resetUiComps() {
+        turnOffVisibleAndManageAppContainer();
+        isMAVerified = false;
     }
 
     private void turnOffVisibleAndManageAppContainer() {
@@ -166,43 +140,31 @@ public class Appointment_Cltr {
         }
     }
 
-    @FXML
-    private void handleAppointmentNavAddApp(ActionEvent event) {
-        turnOffVisibleAndManageAppContainer();
+    @FXML private void handleAppointmentNavAddApp(ActionEvent event) {
+        resetUiComps();
         appointmentContainers[AppContainerEnum.AddAppointmentContainer].setManaged(true);
         appointmentContainers[AppContainerEnum.AddAppointmentContainer].setVisible(true);
     }
 
-    @FXML
-    private void handleAppointmentNavRemoveApp(ActionEvent event) {
-        turnOffVisibleAndManageAppContainer();
+    @FXML private void handleAppointmentNavRemoveApp(ActionEvent event) {
+        resetUiComps();
         appointmentContainers[AppContainerEnum.RemoveAppointmentContainer].setManaged(true);
         appointmentContainers[AppContainerEnum.RemoveAppointmentContainer].setVisible(true);
     }
 
-    @FXML
-    private void handleAppointmentNavModifyApp(ActionEvent event) {
-        turnOffVisibleAndManageAppContainer();
+    @FXML private void handleAppointmentNavModifyApp(ActionEvent event) {
+        resetUiComps();
         appointmentContainers[AppContainerEnum.ModifyAppointmentContainer].setManaged(true);
         appointmentContainers[AppContainerEnum.ModifyAppointmentContainer].setVisible(true);
     }
 
-    @FXML
-    private void handleAppointmentNavViewApp(ActionEvent event) {
-        turnOffVisibleAndManageAppContainer();
+    @FXML private void handleAppointmentNavViewApp(ActionEvent event) {
+        resetUiComps();
         appointmentContainers[AppContainerEnum.ViewAppointmentContainer].setManaged(true);
         appointmentContainers[AppContainerEnum.ViewAppointmentContainer].setVisible(true);
     }
 
-    @FXML
-    private void handleAppointmentNavInvoice(ActionEvent event) {
-        turnOffVisibleAndManageAppContainer();
-        //appointmentContainers[AppContainerEnum.ManageInvoiceContainer].setManaged(true);
-        //appointmentContainers[AppContainerEnum.ManageInvoiceContainer].setVisible(true);
-    }
-
-    @FXML
-    private void submitAddAppointment(ActionEvent event) {
+    private void clearAddAppFields() {
         aa_custIdField.clear();
         aa_vehicleIdField.clear();
         aa_appDateField.clear();
@@ -213,65 +175,280 @@ public class Appointment_Cltr {
     }
 
     @FXML
+    private void submitAddAppointment(ActionEvent event) {
+        try {
+            Long custId = Long.parseLong(aa_custIdField.getText());
+            Long vehicleId = Long.parseLong(aa_vehicleIdField.getText());
+            Date appDate = Date.valueOf(aa_appDateField.getText());
+            Timestamp appTime = Timestamp.valueOf(aa_appTimeField.getText());
+            String status = aa_statusField.getText();
+            Long serviceId = Long.parseLong(aa_serviceIdField.getText());
+            Long empId = Long.parseLong(aa_empIdField.getText());
+
+            appointment = new Appointment(custId, vehicleId, appDate, appTime, status, serviceId, empId);
+            Task<Void> scheduleTask = Appointment_dao.scheduleAppointmentTask(appointment);
+
+            scheduleTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    clearAddAppFields();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Appointment scheduled successfully");
+                });
+            });
+
+            scheduleTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    clearAddAppFields();
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to schedule appointment: " +
+                            scheduleTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(scheduleTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
+        }
+    }
+
+    @FXML
     private void submitRemoveAppointment(ActionEvent event) {
-        ra_appIdField.clear();
+        try {
+            String appIdText = ra_appIdField.getText();
+            if (appIdText.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please enter an Appointment ID to remove");
+                return;
+            }
+            Long appId = Long.parseLong(appIdText);
+
+            Task<Void> deleteTask = Appointment_dao.deleteAppointmentTask(appId);
+            deleteTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    ra_appIdField.clear();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Appointment removed successfully");
+                });
+            });
+
+            deleteTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ra_appIdField.clear();
+                    Throwable exception = deleteTask.getException();
+                    String err = "";
+
+                    if (exception != null) {
+                        Throwable cause = exception;
+                        SQLException sqlEx = null;
+                        while (cause != null) {
+                            if (cause instanceof SQLException) {
+                                sqlEx = (SQLException) cause;
+                                break;
+                            }
+                            cause = cause.getCause();
+                        }
+
+                        if (sqlEx != null) {
+                            err = sqlEx.getMessage().split("\n")[0];
+                        } else {
+                            cause = exception;
+                            while (cause.getCause() != null) {
+                                cause = cause.getCause();
+                            }
+                            err = cause.getMessage();
+                        }
+
+                        AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Information", err);
+                    } else {
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Unknown error occurred.");
+                    }
+                });
+            });
+
+            Worker.submitTask(deleteTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     @FXML
     private void swapRemoveField(ActionEvent event) {
+        // Placeholder for swapping field (e.g., toggle between ID and another field)
         System.out.println("Swap field button clicked in Remove Appointment");
     }
 
     @FXML
     private void searchRemoveAppointment(ActionEvent event) {
         String searchTerm = ra_appointmentSearchField.getText();
-        System.out.println("Searching for appointment date: " + searchTerm);
+        // Add search logic here if needed
+    }
+
+    @FXML
+    private void searchAllRemoveAppointment(ActionEvent event) {
+        try {
+            Task<List<Appointment>> getAllTask = Appointment_dao.getAllAppointmentsTask();
+            getAllTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    ra_AppList.clear();
+                    ra_AppList.addAll(getAllTask.getValue());
+                });
+            });
+
+            getAllTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to get all appointments: " +
+                            getAllTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(getAllTask);
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+        }
+    }
+
+    private void onMAAppointmentVerified(Appointment app) {
+        appointment.setAppId(app.getAppId());
+        ma_custIdField.setText(String.valueOf(app.getCustId()));
+        ma_vehicleIdField.setText(String.valueOf(app.getVehicleId()));
+        ma_appDateField.setText(app.getAppDate().toString());
+        ma_appTimeField.setText(app.getAppTime().toString());
+        ma_statusField.setText(app.getStatus());
+        ma_serviceIdField.setText(String.valueOf(app.getServiceId()));
+        ma_empIdField.setText(String.valueOf(app.getEmpId()));
     }
 
     @FXML
     private void verifyAppointmentId(ActionEvent event) {
-        String appId = ma_appIdField.getText();
-        System.out.println("Verifying appointment ID: " + appId);
+        try {
+            String appIdText = ma_appIdField.getText();
+            if (appIdText.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please enter an Appointment ID to verify");
+                return;
+            }
+            Long appId = Long.parseLong(appIdText);
+
+            Task<Appointment> getAppTask = Appointment_dao.getAppointmentTask(appId);
+            getAppTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    onMAAppointmentVerified(getAppTask.getValue());
+                    isMAVerified = true;
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Appointment ID Verified!");
+                });
+            });
+
+            getAppTask.setOnFailed(e -> {
+                Platform.runLater(() ->
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", getAppTask.getException().getMessage()));
+            });
+
+            Worker.submitTask(getAppTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
-    @FXML
-    private void editCustId(ActionEvent event) {
-        ma_custIdField.setEditable(true);
+    @FXML private void editCustId(ActionEvent event) {
+        if (isMAVerified) {
+            ma_custIdField.setEditable(true);
+            ma_custIdField.setDisable(false);
+        }
     }
 
-    @FXML
-    private void editVehicleId(ActionEvent event) {
-        ma_vehicleIdField.setEditable(true);
+    @FXML private void editVehicleId(ActionEvent event) {
+        if (isMAVerified) {
+            ma_vehicleIdField.setEditable(true);
+            ma_vehicleIdField.setDisable(false);
+        }
     }
 
-    @FXML
-    private void editAppDate(ActionEvent event) {
-        ma_appDateField.setEditable(true);
+    @FXML private void editAppDate(ActionEvent event) {
+        if (isMAVerified) {
+            ma_appDateField.setEditable(true);
+            ma_appDateField.setDisable(false);
+        }
     }
 
-    @FXML
-    private void editAppTime(ActionEvent event) {
-        ma_appTimeField.setEditable(true);
+    @FXML private void editAppTime(ActionEvent event) {
+        if (isMAVerified) {
+            ma_appTimeField.setEditable(true);
+            ma_appTimeField.setDisable(false);
+        }
     }
 
-    @FXML
-    private void editStatus(ActionEvent event) {
-        ma_statusField.setEditable(true);
+    @FXML private void editStatus(ActionEvent event) {
+        if (isMAVerified) {
+            ma_statusField.setEditable(true);
+            ma_statusField.setDisable(false);
+        }
     }
 
-    @FXML
-    private void editServiceId(ActionEvent event) {
-        ma_serviceIdField.setEditable(true);
+    @FXML private void editServiceId(ActionEvent event) {
+        if (isMAVerified) {
+            ma_serviceIdField.setEditable(true);
+            ma_serviceIdField.setDisable(false);
+        }
     }
 
-    @FXML
-    private void editEmpId(ActionEvent event) {
-        ma_empIdField.setEditable(true);
+    @FXML private void editEmpId(ActionEvent event) {
+        if (isMAVerified) {
+            ma_empIdField.setEditable(true);
+            ma_empIdField.setDisable(false);
+        }
+    }
+
+    private void clearAllMAFields() {
+        ma_custIdField.clear();
+        ma_vehicleIdField.clear();
+        ma_appDateField.clear();
+        ma_appTimeField.clear();
+        ma_statusField.clear();
+        ma_serviceIdField.clear();
+        ma_empIdField.clear();
+    }
+
+    private void setEditableMAFields(boolean status) {
+        ma_custIdField.setEditable(status);
+        ma_custIdField.setDisable(!status);
+        ma_vehicleIdField.setEditable(status);
+        ma_vehicleIdField.setDisable(!status);
+        ma_appDateField.setEditable(status);
+        ma_appDateField.setDisable(!status);
+        ma_appTimeField.setEditable(status);
+        ma_appTimeField.setDisable(!status);
+        ma_statusField.setEditable(status);
+        ma_statusField.setDisable(!status);
+        ma_serviceIdField.setEditable(status);
+        ma_serviceIdField.setDisable(!status);
+        ma_empIdField.setEditable(status);
+        ma_empIdField.setDisable(!status);
     }
 
     @FXML
     private void submitModifyAppointment(ActionEvent event) {
-        System.out.println("Submitting modified appointment");
+        try {
+            Long appId = Long.parseLong(ma_appIdField.getText());
+            String status = ma_statusField.getText();
+
+            Task<Void> updateTask = Appointment_dao.updateAppointmentStatusTask(appId, status);
+            updateTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    clearAllMAFields();
+                    setEditableMAFields(false);
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Appointment status updated successfully");
+                });
+            });
+
+            updateTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    clearAllMAFields();
+                    setEditableMAFields(false);
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to update appointment status: " +
+                            updateTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(updateTask);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     @FXML
@@ -283,11 +460,30 @@ public class Appointment_Cltr {
     @FXML
     private void searchViewAppointment(ActionEvent event) {
         String searchTerm = va_appointmentSearchField.getText();
-        System.out.println("Searching for appointment date: " + searchTerm);
+        // Add search logic here if needed
     }
 
     @FXML
     private void showAllAppointments(ActionEvent event) {
-        System.out.println("Showing all appointments");
+        try {
+            Task<List<Appointment>> getAllTask = Appointment_dao.getAllAppointmentsTask();
+            getAllTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    va_AppList.clear();
+                    va_AppList.addAll(getAllTask.getValue());
+                });
+            });
+
+            getAllTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to get all appointments: " +
+                            getAllTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(getAllTask);
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+        }
     }
 }

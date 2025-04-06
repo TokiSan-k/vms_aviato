@@ -1,20 +1,26 @@
 package com.aviato.Controllers;
 
 import com.aviato.Types.Employee; // Assuming an Employee entity class exists
+import com.aviato.Types.Vehicle;
+import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.concurrency.Worker;
+import com.aviato.db.dao.Employee_dao;
+import com.aviato.db.dao.Vehicle_dao;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.StoredProcedureQuery;
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Employee_Cltr {
@@ -30,6 +36,9 @@ public class Employee_Cltr {
         public static final byte ModifyEmployeeContainer = 2;
         public static final byte ViewEmployeeContainer = 3;
     }
+
+    private final ObservableList<Employee> re_EmpList = FXCollections.observableArrayList();
+    private final ObservableList<Employee> ve_EmpList = FXCollections.observableArrayList();
 
     // Employee Navbar
     @FXML
@@ -143,6 +152,8 @@ public class Employee_Cltr {
     @FXML
     private TableColumn<Employee, Double> ve_hoursWorkedColumn;
 
+    private Employee employee = new Employee();
+
     // Initialize method to set up table columns
     @FXML
     public void initialize() {
@@ -168,6 +179,7 @@ public class Employee_Cltr {
         ve_salaryColumn.setCellValueFactory(new PropertyValueFactory<>("salary"));
         ve_hireDateColumn.setCellValueFactory(new PropertyValueFactory<>("hireDate"));
         ve_hoursWorkedColumn.setCellValueFactory(new PropertyValueFactory<>("hoursWorked"));
+        ve_employeeTable.setItems(ve_EmpList);
     }
 
     // Employee NavBar
@@ -206,18 +218,8 @@ public class Employee_Cltr {
         employeeContainers[EmpContainerEnum.ViewEmployeeContainer].setVisible(true);
     }
 
-    // Add Employee Submit Handler
-    @FXML
-    private void submitAddEmployee(ActionEvent event) {
-        String empName = ae_empNameField.getText();
-        String position = ae_positionField.getText();
-        String phone = ae_phoneField.getText();
-        String email = ae_emailField.getText();
-        String salary = ae_salaryField.getText();
-        String hireDate = ae_hireDateField.getText();
-        String hoursWorked = ae_hoursWorkedField.getText();
-
-        // Clear fields
+    private void clearAddEmpFields()
+    {
         ae_empNameField.clear();
         ae_positionField.clear();
         ae_phoneField.clear();
@@ -227,11 +229,100 @@ public class Employee_Cltr {
         ae_hoursWorkedField.clear();
     }
 
+
+    // Add Employee Submit Handler
+    @FXML
+    private void submitAddEmployee(ActionEvent event) {
+        try {
+            String empName = ae_empNameField.getText();
+            String position = ae_positionField.getText();
+            String phone = ae_phoneField.getText();
+            String email = ae_emailField.getText();
+            Double salary = Double.parseDouble(ae_salaryField.getText());
+            Date hireDate = Date.valueOf(ae_hireDateField.getText());
+            Double hoursWorked = Double.parseDouble(ae_hoursWorkedField.getText());
+
+            employee.SetAllFields(empName, position, phone, email, salary, hireDate, hoursWorked);
+            Task<Void> insertEmpTask = Employee_dao.insertEmployeeTask(employee);
+
+            insertEmpTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    clearAddEmpFields();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Vehicle added successfully");
+                });
+            });
+
+            insertEmpTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    clearAddEmpFields();
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to add vehicle: " +
+                            insertEmpTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(insertEmpTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
+        }
+    }
+
     // Remove Employee Event Handlers
     @FXML
     private void submitRemoveEmployee(ActionEvent event) {
-        String empId = re_empIdField.getText();
-        // Add database removal logic here
+        try {
+            String empId = re_empIdField.getText();
+            if (empId.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please enter a Employee ID to remove");
+                return;
+            }
+            Long employeeId = Long.parseLong(empId);
+
+            Task<Void> deleteTask = Employee_dao.deleteEmployeeTask(employeeId);
+            deleteTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    re_empIdField.clear();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Employee removed successfully");
+                });
+            });
+
+            deleteTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    re_empIdField.clear();
+                    Throwable exception = deleteTask.getException();
+                    String err ="";
+
+                    if (exception != null) {
+                        Throwable cause = exception;
+                        SQLException sqlEx = null;
+                        while (cause != null) {
+                            if (cause instanceof SQLException) {
+                                sqlEx = (SQLException) cause;
+                                break;
+                            }
+                            cause = cause.getCause();
+                        }
+
+                        if (sqlEx != null) {
+                            err = sqlEx.getMessage().split("\n")[0];
+                        } else {
+                            cause = exception;
+                            while (cause.getCause() != null) {
+                                cause = cause.getCause();
+                            }
+                            err = cause.getMessage();
+                        }
+
+                        AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Information", err);
+                    } else {
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Unknown error occurred.");
+                    }
+                });
+            });
+
+            Worker.submitTask(deleteTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     @FXML
@@ -246,51 +337,208 @@ public class Employee_Cltr {
         // Add search logic here
     }
 
-    // Modify Employee Event Handlers
     @FXML
-    private void verifyEmployeeId(ActionEvent event) {
-        String empId = me_employeeIdField.getText();
-        // Add verification logic here (e.g., fetch employee details and populate fields)
+    private void searchAllRemoveEmployee(ActionEvent event) {
+        try{
+            Task<List<Employee>> getAllEmpTask = Employee_dao.getAllEmployeesTask();
+            getAllEmpTask.setOnSucceeded(e ->
+            {
+                Platform.runLater(() -> {
+                    re_EmpList.clear();
+                    re_EmpList.addAll(getAllEmpTask.getValue());
+                });
+            });
+
+            getAllEmpTask.setOnFailed(e ->
+            {
+                Platform.runLater(() ->{
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Employee: " +
+                            getAllEmpTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(getAllEmpTask);
+
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR,"Error", e.getMessage());
+        }
+    }
+
+    // Modify Employee Event Handlers
+    private void OnMEEmployeeVerified(Employee emp)
+    {
+        employee.setEmpId(emp.getEmpId());
+        me_empNameField.setText(emp.getEmpName());
+        me_positionField.setText(emp.getPosition());
+        me_phoneField.setText(emp.getPhone());
+        me_emailField.setText(emp.getEmail());
+        me_salaryField.setText(String.valueOf(emp.getSalary()));
+        me_hireDateField.setText(emp.getHireDate().toString());
+        me_hoursWorkedField.setText(String.valueOf(emp.getHoursWorked()));
     }
 
     @FXML
+    private void verifyEmployeeId(ActionEvent event) {
+        try {
+            String empId = me_employeeIdField.getText();
+            if (empId.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please Enter a Customer ID to remove");
+                return;
+            }
+            Long employeeId = Long.parseLong(empId);
+
+            Task<Employee> getEmpTask = Employee_dao.getEmployeeTask(employeeId);
+            getEmpTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    //Verify UI update
+                    OnMEEmployeeVerified(getEmpTask.getValue());
+                    isMEVerified = true;
+                    //For Now
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Employee ID Verified!");
+                });
+            });
+
+            getEmpTask.setOnFailed(e -> {
+                Platform.runLater(() ->
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", getEmpTask.getException().getMessage()));
+            });
+
+            //getEmpTask.setOnFinished(e -> showLoading(false));
+            Worker.submitTask(getEmpTask);
+        }
+        catch (Exception ex)
+        {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
+    }
+
+    private boolean isMEVerified = false;
+    @FXML
     private void editName(ActionEvent event) {
-        me_empNameField.setEditable(true);
+        if(isMEVerified) {
+            me_empNameField.setEditable(true);
+            me_empNameField.setDisable(false);
+        }
     }
 
     @FXML
     private void editPosition(ActionEvent event) {
-        me_positionField.setEditable(true);
+        if(isMEVerified) {
+            me_positionField.setEditable(true);
+            me_positionField.setDisable(false);
+        }
     }
 
     @FXML
     private void editPhone(ActionEvent event) {
-        me_phoneField.setEditable(true);
+        if(isMEVerified) {
+            me_phoneField.setEditable(true);
+            me_phoneField.setDisable(false);
+        }
     }
 
     @FXML
     private void editEmail(ActionEvent event) {
-        me_emailField.setEditable(true);
+        if(isMEVerified) {
+            me_emailField.setEditable(true);
+            me_emailField.setDisable(false);
+        }
     }
 
     @FXML
     private void editSalary(ActionEvent event) {
-        me_salaryField.setEditable(true);
+        if(isMEVerified) {
+            me_salaryField.setEditable(true);
+            me_salaryField.setDisable(false);
+        }
     }
 
     @FXML
     private void editHireDate(ActionEvent event) {
-        me_hireDateField.setEditable(true);
+        if(isMEVerified) {
+            me_hireDateField.setEditable(true);
+            me_hireDateField.setDisable(false);
+        }
     }
 
     @FXML
     private void editHoursWorked(ActionEvent event) {
-        me_hoursWorkedField.setEditable(true);
+        if(isMEVerified) {
+            me_hoursWorkedField.setEditable(true);
+            me_hoursWorkedField.setDisable(false);
+        }
+    }
+
+    private void ClearAllMEFields()
+    {
+        me_empNameField.clear();
+        me_positionField.clear();
+        me_phoneField.clear();
+        me_emailField.clear();
+        me_salaryField.clear();
+        me_hireDateField.clear();
+        me_hoursWorkedField.clear();
+    }
+
+    private void SetEditableMEFields(boolean status)
+    {
+        me_empNameField.setEditable(status);
+        me_empNameField.setDisable(!status);
+
+        me_positionField.setEditable(status);
+        me_positionField.setDisable(!status);
+
+        me_phoneField.setEditable(status);
+        me_phoneField.setDisable(!status);
+
+        me_salaryField.setEditable(status);
+        me_salaryField.setDisable(!status);
+
+        me_hireDateField.setEditable(status);
+        me_hireDateField.setDisable(!status);
+
+        me_hoursWorkedField.setEditable(status);
+        me_hoursWorkedField.setDisable(!status);
     }
 
     @FXML
     private void submitModifyEmployee(ActionEvent event) {
-        // Add database update logic here
+        try {
+            employee.setEmpId(Long.parseLong(me_employeeIdField.getText()));
+            employee.SetAllFields(me_empNameField.getText(),
+                    me_positionField.getText(),
+                    me_phoneField.getText(),
+                    me_emailField.getText(),
+                    Double.parseDouble(me_salaryField.getText()),
+                    Date.valueOf(me_hireDateField.getText()),
+                    Double.parseDouble(me_hoursWorkedField.getText()));
+
+            Task<Void> updateEmpTask = Employee_dao.updateEmployeeTask(employee);
+            updateEmpTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    ClearAllMEFields();
+                    SetEditableMEFields(false);
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Employee Modified successfully");
+                });
+            });
+
+            updateEmpTask.setOnFailed(e -> {
+                Platform.runLater(() ->{
+                    ClearAllMEFields();
+                    SetEditableMEFields(false);
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Modify Employee: " +
+                            updateEmpTask.getException().getMessage());
+                });
+            });
+
+            //getVehicleTask.setOnFinished(e -> showLoading(false));
+            Worker.submitTask(updateEmpTask);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     // View Employee Event Handlers
@@ -308,6 +556,28 @@ public class Employee_Cltr {
 
     @FXML
     private void showAllEmployees(ActionEvent event) {
-        // Add logic to fetch and display all employees
+        try{
+            Task<List<Employee>> getAllEmpTask = Employee_dao.getAllEmployeesTask();
+            getAllEmpTask.setOnSucceeded(e ->
+            {
+                Platform.runLater(() -> {
+                    ve_EmpList.clear();
+                    ve_EmpList.addAll(getAllEmpTask.getValue());
+                });
+            });
+
+            getAllEmpTask.setOnFailed(e ->
+            {
+                Platform.runLater(() ->{
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Employee: " +
+                            getAllEmpTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(getAllEmpTask);
+
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR,"Error", e.getMessage());
+        }
     }
 }

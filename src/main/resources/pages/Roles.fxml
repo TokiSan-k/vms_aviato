@@ -33,30 +33,30 @@
                                         <!-- Navigation Bar -->
                                         <HBox styleClass="roleNavBar" HBox.hgrow="ALWAYS">
                                             <children>
-                                                <Button fx:id="addRoleBtn" onAction="#handleRoleNavAddRole" styleClass="roleNavButtons" text="Add Employee" />
-                                                <Button fx:id="removeRoleBtn" onAction="#handleRoleNavRemoveRole" styleClass="roleNavButtons" text="Remove Employee" />
-                                                <Button fx:id="updateRoleBtn" onAction="#handleRoleNavUpdateRole" styleClass="roleNavButtons" text="Update Employee" />
-                                                <Button fx:id="viewRoleBtn" onAction="#handleRoleNavViewRole" styleClass="roleNavButtons" text="View Employees" />
+                                                <Button fx:id="addRoleBtn" onAction="#handleRoleNavAddRole" styleClass="roleNavButtons" text="Add User" />
+                                                <Button fx:id="removeRoleBtn" onAction="#handleRoleNavRemoveRole" styleClass="roleNavButtons" text="Remove User" />
+                                                <Button fx:id="updateRoleBtn" onAction="#handleRoleNavUpdateRole" styleClass="roleNavButtons" text="Update User" />
+                                                <Button fx:id="viewRoleBtn" onAction="#handleRoleNavViewRole" styleClass="roleNavButtons" text="View Users" />
                                             </children>
                                         </HBox>
 
                                         <!-- Container for Adding a Role -->
                                         <VBox fx:id="roleContainer_0" managed="false" visible="false" styleClass="addRoleContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
-                                                <Text fx:id="selectedRoleNavLabel" styleClass="heading" text="Add New Employee" />
+                                                <Text fx:id="selectedRoleNavLabel" styleClass="heading" text="Add New User" />
                                                 <VBox spacing="10.0">
                                                     <children>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addRoleNameField">
                                                             <Text text="Username:" />
                                                             <TextField fx:id="ar_usernameField" styleClass="addRoleInputField" />
                                                         </HBox>
-                                                        <HBox alignment="CENTER_LEFT" styleClass="addRolePasswordField">
-                                                            <Text text="Password:" />
-                                                            <TextField fx:id="ar_passwordField" styleClass="addRoleInputField" />
-                                                        </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addRoleEmailField">
                                                             <Text text="Email ID:" />
                                                             <TextField fx:id="ar_emailField" styleClass="addRoleInputField" />
+                                                        </HBox>
+                                                        <HBox alignment="CENTER_LEFT" styleClass="addRolePasswordField">
+                                                            <Text text="Password:" />
+                                                            <TextField fx:id="ar_passwordField" styleClass="addRoleInputField" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addRoleNameField">
                                                             <Text text="Role Name:" />
@@ -64,12 +64,7 @@
                                                         </HBox>
                                                         <Button fx:id="ar_submitButton" styleClass="submitButton" text="Add" onAction="#submitAddRole">
                                                             <VBox.margin>
-                                                                <Insets left="428.0" />
-                                                            </VBox.margin>
-                                                        </Button>
-                                                        <Button fx:id="ar_cancelButton" styleClass="submitButton" text="Cancel" onAction="#cancelAddRole">
-                                                            <VBox.margin>
-                                                                <Insets left="428.0" />
+                                                                <Insets left="15.0" />
                                                             </VBox.margin>
                                                         </Button>
                                                     </children>
@@ -85,24 +80,18 @@
                                             <children>
                                                 <VBox spacing="20.0" styleClass="Search" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                     <children>
-                                                        <Text styleClass="heading" text="Remove An Employee" />
+                                                        <Text styleClass="heading" text="Remove A User" />
                                                         <VBox spacing="10.0">
                                                             <children>
                                                                 <HBox spacing="10.0">
-                                                                    <Text fx:id="rr_swapLabel" text="Employee ID:">
+                                                                    <Text fx:id="rr_swapLabel" text="User EmailID:">
                                                                         <HBox.margin>
                                                                             <Insets top="5.0" />
                                                                         </HBox.margin>
                                                                     </Text>
-                                                                    <TextField fx:id="rr_employeeIdField" promptText="Enter ID" />
-                                                                    <Button fx:id="rr_swapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C" onAction="#swapRemoveField">
-                                                                        <HBox.margin>
-                                                                            <Insets left="5.0" />
-                                                                        </HBox.margin>
-                                                                    </Button>
+                                                                    <TextField fx:id="rr_userEmailIdField" promptText="Enter Email" />
                                                                 </HBox>
                                                                 <Button fx:id="rr_submitButton" styleClass="removeFieldButton" text="Delete" onAction="#submitRemoveRole" />
-                                                                <Button fx:id="rr_cancelButton" styleClass="removeFieldButton" text="Cancel" onAction="#cancelRemoveRole" />
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -113,7 +102,7 @@
                                         <!-- Container for Updating a Role -->
                                         <VBox fx:id="roleContainer_2" managed="false" visible="false" styleClass="updateRoleContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
-                                                <Text fx:id="ur_updateRoleTitle" text="Update An Employee" />
+                                                <Text fx:id="ur_updateRoleTitle" text="Update A User" />
                                                 <VBox spacing="10.0">
                                                     <children>
                                                         <HBox alignment="CENTER_LEFT" styleClass="updateRoleField">
@@ -129,15 +118,10 @@
                                                             <TextField fx:id="ur_emailField" styleClass="updateRoleInputField" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="updateRoleField">
-                                                            <Text text="Role Name:" />
+                                                            <Text text="Role:" />
                                                             <ComboBox fx:id="ur_roleNameComboBox" styleClass="updateRoleInputField" />
                                                         </HBox>
                                                         <Button fx:id="ur_submitButton" styleClass="submitButton" text="Update" onAction="#submitUpdateRole">
-                                                            <VBox.margin>
-                                                                <Insets left="428.0" />
-                                                            </VBox.margin>
-                                                        </Button>
-                                                        <Button fx:id="ur_cancelButton" styleClass="submitButton" text="Cancel" onAction="#cancelUpdateRole">
                                                             <VBox.margin>
                                                                 <Insets left="428.0" />
                                                             </VBox.margin>
@@ -153,7 +137,7 @@
                                         <!-- Container for Viewing Roles -->
                                         <VBox fx:id="roleContainer_3" managed="false" visible="false" styleClass="viewRoleContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
-                                                <Text fx:id="viewRoleTitle" text="View All Employees" />
+                                                <Text fx:id="viewRoleTitle" text="View All Users" />
                                                 <VBox spacing="10.0" HBox.hgrow="ALWAYS">
                                                     <children>
                                                         <!-- Search and Control Section -->
@@ -166,12 +150,17 @@
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
+                                                                <Button fx:id="vr_searchAllButton" mnemonicParsing="false" styleClass="viewRoleButtons" text="All Users" onAction="#showAllRoles">
+                                                                    <HBox.margin>
+                                                                        <Insets left="15.0" right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
                                                             </children>
                                                         </HBox>
                                                         <!-- Role Table -->
                                                         <TableView fx:id="vr_RoleTable" VBox.vgrow="ALWAYS">
                                                             <columns>
-                                                                <TableColumn fx:id="vr_EmployeeId" text="Employee ID" />
+                                                                <TableColumn fx:id="vr_UserID" text="Employee ID" />
                                                                 <TableColumn fx:id="vr_Username" text="Username" />
                                                                 <TableColumn fx:id="vr_Email" text="Email" />
                                                                 <TableColumn fx:id="vr_RoleName" text="Role Name" />

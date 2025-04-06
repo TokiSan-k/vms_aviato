@@ -1,26 +1,23 @@
 package com.aviato.Controllers;
 
-import com.aviato.Types.RoleItem;
+import com.aviato.Types.User;
+import com.aviato.Types.Policy;
+import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.concurrency.Worker;
+import com.aviato.db.dao.User_dao;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.persistence.StoredProcedureQuery;
 import java.util.List;
 
 public class Roles_Cltr {
-
     // Containers
     @FXML
     private VBox mainContainer;
@@ -34,71 +31,44 @@ public class Roles_Cltr {
         public static final byte ViewRoleContainer = 3;
     }
 
+    private final ObservableList<User> vr_UserList = FXCollections.observableArrayList();
+
     // Role Navbar
-    @FXML
-    private Button addRoleBtn;
-    @FXML
-    private Button removeRoleBtn;
-    @FXML
-    private Button updateRoleBtn;
-    @FXML
-    private Button viewRoleBtn;
+    @FXML private Button addRoleBtn;
+    @FXML private Button removeRoleBtn;
+    @FXML private Button updateRoleBtn;
+    @FXML private Button viewRoleBtn;
 
     // Add Role Fields
-    @FXML
-    private TextField ar_usernameField;
-    @FXML
-    private TextField ar_passwordField;
-    @FXML
-    private TextField ar_emailField;
-    @FXML
-    private ComboBox<String> ar_roleNameComboBox;
-    @FXML
-    private Button ar_submitButton;
-    @FXML
-    private Button ar_cancelButton;
+    @FXML private TextField ar_usernameField;
+    @FXML private TextField ar_passwordField;
+    @FXML private TextField ar_emailField;
+    @FXML private ComboBox<String> ar_roleNameComboBox;  // Using as roleId
+    @FXML private Button ar_submitButton;
 
     // Remove Role Fields
-    @FXML
-    private TextField rr_employeeIdField;
-    @FXML
-    private Button rr_swapFieldButton;
-    @FXML
-    private Button rr_submitButton;
-    @FXML
-    private Button rr_cancelButton;
+    @FXML private TextField rr_userEmailIdField;  // Using email instead of employeeId
+    @FXML private Button rr_submitButton;
 
     // Update Role Fields
-    @FXML
-    private TextField ur_usernameField;
-    @FXML
-    private TextField ur_passwordField;
-    @FXML
-    private TextField ur_emailField;
-    @FXML
-    private ComboBox<String> ur_roleNameComboBox;
-    @FXML
-    private Button ur_submitButton;
-    @FXML
-    private Button ur_cancelButton;
+    @FXML private TextField ur_usernameField;
+    @FXML private TextField ur_passwordField;
+    @FXML private TextField ur_emailField;
+    @FXML private ComboBox<String> ur_roleNameComboBox;
+    @FXML private Button ur_submitButton;
 
     // View Role Fields
-    @FXML
-    private TextField vr_employeeIdSearchField;
-    @FXML
-    private Button vr_searchButton;
-    @FXML
-    private TableView<RoleItem> vr_RoleTable;
-    @FXML
-    private TableColumn<RoleItem, Integer> vr_EmployeeId;
-    @FXML
-    private TableColumn<RoleItem, String> vr_Username;
-    @FXML
-    private TableColumn<RoleItem, String> vr_Email;
-    @FXML
-    private TableColumn<RoleItem, String> vr_RoleName;
+    @FXML private TextField vr_employeeIdSearchField;  // Using as userId search
+    @FXML private Button vr_searchButton;
+    @FXML private TableView<User> vr_RoleTable;
+    @FXML private TableColumn<User, Long> vr_UserID;  // Changed from EmployeeId
+    @FXML private TableColumn<User, String> vr_Username;
+    @FXML private TableColumn<User, String> vr_Email;
+    @FXML private TableColumn<User, Long> vr_RoleName;  // Changed to roleId
 
-    // Initialize method to set up table columns and containers
+    private User user = new User();
+    private Long currentUserId = null;  // For update functionality
+
     @FXML
     public void initialize() {
         for (byte i = 0; i < roleContainers.length; i++) {
@@ -108,153 +78,259 @@ public class Roles_Cltr {
         roleContainers[RoleContainerEnum.AddRoleContainer].setVisible(true);
         roleContainers[RoleContainerEnum.AddRoleContainer].setManaged(true);
 
-        // Populate role name combo boxes (example roles)
-        ObservableList<String> roleNames = FXCollections.observableArrayList("Admin", "Manager", "Employee");
-        ar_roleNameComboBox.setItems(roleNames);
-        ur_roleNameComboBox.setItems(roleNames);
+        ar_roleNameComboBox.setItems(Policy.roleNames);
+        ur_roleNameComboBox.setItems(Policy.roleNames);
 
         // Set up View Role table columns
-        vr_EmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
+        vr_UserID.setCellValueFactory(new PropertyValueFactory<>("userId"));
         vr_Username.setCellValueFactory(new PropertyValueFactory<>("username"));
         vr_Email.setCellValueFactory(new PropertyValueFactory<>("email"));
-        vr_RoleName.setCellValueFactory(new PropertyValueFactory<>("roleName"));
+        vr_RoleName.setCellValueFactory(new PropertyValueFactory<>("roleId"));
+        vr_RoleTable.setItems(vr_UserList);
     }
 
     // Role NavBar
-    private void TurnOffVisibleAndManageRoleContainer() {
+    private void resetUiComps() {
+        turnOffVisibleAndManageRoleContainer();
+        currentUserId = null;
+    }
+
+    private void turnOffVisibleAndManageRoleContainer() {
         for (byte i = 0; i < roleContainers.length; i++) {
             roleContainers[i].setVisible(false);
             roleContainers[i].setManaged(false);
         }
     }
 
-    @FXML
-    private void handleRoleNavAddRole(ActionEvent event) {
-        TurnOffVisibleAndManageRoleContainer();
+    @FXML private void handleRoleNavAddRole(ActionEvent event) {
+        resetUiComps();
         roleContainers[RoleContainerEnum.AddRoleContainer].setManaged(true);
         roleContainers[RoleContainerEnum.AddRoleContainer].setVisible(true);
     }
 
-    @FXML
-    private void handleRoleNavRemoveRole(ActionEvent event) {
-        TurnOffVisibleAndManageRoleContainer();
+    @FXML private void handleRoleNavRemoveRole(ActionEvent event) {
+        resetUiComps();
         roleContainers[RoleContainerEnum.RemoveRoleContainer].setManaged(true);
         roleContainers[RoleContainerEnum.RemoveRoleContainer].setVisible(true);
     }
 
-    @FXML
-    private void handleRoleNavUpdateRole(ActionEvent event) {
-        TurnOffVisibleAndManageRoleContainer();
+    @FXML private void handleRoleNavUpdateRole(ActionEvent event) {
+        resetUiComps();
         roleContainers[RoleContainerEnum.UpdateRoleContainer].setManaged(true);
         roleContainers[RoleContainerEnum.UpdateRoleContainer].setVisible(true);
     }
 
-    @FXML
-    private void handleRoleNavViewRole(ActionEvent event) {
-        TurnOffVisibleAndManageRoleContainer();
+    @FXML private void handleRoleNavViewRole(ActionEvent event) {
+        resetUiComps();
         roleContainers[RoleContainerEnum.ViewRoleContainer].setManaged(true);
         roleContainers[RoleContainerEnum.ViewRoleContainer].setVisible(true);
     }
 
-    // Add Role Submit Handler
+    private void clearAddRoleFields() {
+        ar_usernameField.clear();
+        ar_passwordField.clear();
+        ar_emailField.clear();
+        ar_roleNameComboBox.setValue(null);
+    }
+
     @FXML
     private void submitAddRole(ActionEvent event) {
-        String username = ar_usernameField.getText();
-        String password = ar_passwordField.getText();
-        String email = ar_emailField.getText();
-        String roleName = ar_roleNameComboBox.getValue();
+        try {
+            String username = ar_usernameField.getText();
+            String password = ar_passwordField.getText();
+            String email = ar_emailField.getText();
+            String roleIdStr = ar_roleNameComboBox.getValue();
+            if (username.isEmpty() || password.isEmpty() || email.isEmpty() || roleIdStr == null) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "All fields are required");
+                return;
+            }
+            Long roleId = Policy.GetRoleId(roleIdStr);
 
-        // EntityManager em = Persistence.createEntityManagerFactory("persistence-unit").createEntityManager();
-        // em.getTransaction().begin();
-        // Role role = new Role(username, password, email, roleName);
-        // em.persist(role);
-        // em.getTransaction().commit();
+            user.SetAllFields(roleId, username, email, password);
+            Task<Void> insertUserTask = User_dao.insertUserTask(user);
 
-        // Clear fields
-        ar_usernameField.clear();
-        ar_passwordField.clear();
-        ar_emailField.clear();
-        ar_roleNameComboBox.setValue(null);
+            insertUserTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    clearAddRoleFields();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "User added successfully with ID: " + user.getUserId());
+                });
+            });
+
+            insertUserTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    clearAddRoleFields();
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to add user: " +
+                            insertUserTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(insertUserTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
+        }
     }
 
-    @FXML
-    private void cancelAddRole(ActionEvent event) {
-        ar_usernameField.clear();
-        ar_passwordField.clear();
-        ar_emailField.clear();
-        ar_roleNameComboBox.setValue(null);
-    }
-
-    // Remove Role Event Handlers
     @FXML
     private void submitRemoveRole(ActionEvent event) {
-        String employeeId = rr_employeeIdField.getText();
-        // Add logic to remove the role by employeeId
-        // Example: Use JPA to remove the role
-        // EntityManager em = Persistence.createEntityManagerFactory("persistence-unit").createEntityManager();
-        // em.getTransaction().begin();
-        // Role role = em.find(Role.class, Integer.parseInt(employeeId));
-        // if (role != null) em.remove(role);
-        // em.getTransaction().commit();
+        try {
+            String email = rr_userEmailIdField.getText();
+            if (email.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please enter an email to remove");
+                return;
+            }
 
-        rr_employeeIdField.clear();
+            // We need user ID for deletion, so we'll fetch the user first
+            Task<List<User>> getAllUsersTask = User_dao.getAllUsersTask();
+            getAllUsersTask.setOnSucceeded(e -> {
+                List<User> users = getAllUsersTask.getValue();
+                User userToDelete = users.stream()
+                        .filter(u -> u.getEmail().equals(email))
+                        .findFirst()
+                        .orElse(null);
+
+                if (userToDelete == null) {
+                    Platform.runLater(() -> {
+                        rr_userEmailIdField.clear();
+                        AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "No user found with email: " + email);
+                    });
+                    return;
+                }
+
+                Task<Void> deleteTask = User_dao.deleteUserTask(userToDelete.getUserId());
+                deleteTask.setOnSucceeded(e2 -> {
+                    Platform.runLater(() -> {
+                        rr_userEmailIdField.clear();
+                        AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "User removed successfully");
+                    });
+                });
+
+                deleteTask.setOnFailed(e2 -> {
+                    Platform.runLater(() -> {
+                        rr_userEmailIdField.clear();
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove user: " +
+                                deleteTask.getException().getMessage());
+                    });
+                });
+
+                Worker.submitTask(deleteTask);
+            });
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", ex.getMessage());
+        }
     }
 
-    @FXML
-    private void cancelRemoveRole(ActionEvent event) {
-        rr_employeeIdField.clear();
+    private void clearUpdateRoleFields() {
+        ur_usernameField.clear();
+        ur_passwordField.clear();
+        ur_emailField.clear();
+        ur_roleNameComboBox.setValue(null);
     }
 
-    @FXML
-    private void swapRemoveField(ActionEvent event) {
-        System.out.println("Swap field button clicked in Remove Role");
-    }
-
-    // Update Role Event Handlers
     @FXML
     private void submitUpdateRole(ActionEvent event) {
-        String username = ur_usernameField.getText();
-        String password = ur_passwordField.getText();
-        String email = ur_emailField.getText();
-        String roleName = ur_roleNameComboBox.getValue();
+        try {
+            if (currentUserId == null) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please search for a user first in View tab");
+                return;
+            }
 
-        // Add logic to update the role in the database
-        // Example: Use JPA to update the role
-        // EntityManager em = Persistence.createEntityManagerFactory("persistence-unit").createEntityManager();
-        // em.getTransaction().begin();
-        // Role role = em.find(Role.class, someEmployeeId);
-        // if (role != null) {
-        //     role.setUsername(username);
-        //     role.setPassword(password);
-        //     role.setEmail(email);
-        //     role.setRoleName(roleName);
-        // }
-        // em.getTransaction().commit();
+            String username = ur_usernameField.getText();
+            String password = ur_passwordField.getText();
+            String email = ur_emailField.getText();
+            String roleIdStr = ur_roleNameComboBox.getValue();
+            if (username.isEmpty() || password.isEmpty() || email.isEmpty() || roleIdStr == null) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "All fields are required");
+                return;
+            }
+            Long roleId = Policy.GetRoleId(roleIdStr);
 
-        ur_usernameField.clear();
-        ur_passwordField.clear();
-        ur_emailField.clear();
-        ur_roleNameComboBox.setValue(null);
+            user = new User(roleId, username, email, password);
+            user.setUserId(currentUserId);
+            Task<Void> updateUserTask = User_dao.updateUserTask(user);
+
+            updateUserTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    clearUpdateRoleFields();
+                    currentUserId = null;
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "User updated successfully");
+                });
+            });
+
+            updateUserTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    clearUpdateRoleFields();
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to update user: " +
+                            updateUserTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(updateUserTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
+        }
     }
 
-    @FXML
-    private void cancelUpdateRole(ActionEvent event) {
-        ur_usernameField.clear();
-        ur_passwordField.clear();
-        ur_emailField.clear();
-        ur_roleNameComboBox.setValue(null);
-    }
-
-    // View Role Event Handlers
     @FXML
     private void searchViewRole(ActionEvent event) {
-        String employeeId = vr_employeeIdSearchField.getText();
+        try {
+            String userIdStr = vr_employeeIdSearchField.getText();
+            if (userIdStr.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please enter a User ID to search");
+                return;
+            }
+            Long userId = Long.parseLong(userIdStr);
 
-        // EntityManager em = Persistence.createEntityManagerFactory("persistence-unit").createEntityManager();
-        // Role role = em.find(Role.class, Integer.parseInt(employeeId));
-        // if (role != null) {
-        //     ObservableList<Role> roleList = FXCollections.observableArrayList(role);
-        //     vr_RoleTable.setItems(roleList);
-        // }
+            Task<User> getUserTask = User_dao.getUserTask(userId);
+            getUserTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    vr_UserList.clear();
+                    User foundUser = getUserTask.getValue();
+                    vr_UserList.add(foundUser);
+                    // Populate update fields
+                    currentUserId = foundUser.getUserId();
+                    ur_usernameField.setText(foundUser.getUsername());
+                    ur_passwordField.setText(foundUser.getPassword());
+                    ur_emailField.setText(foundUser.getEmail());
+                    ur_roleNameComboBox.setValue(foundUser.getRoleId().toString());
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "User found");
+                });
+            });
+
+            getUserTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    vr_employeeIdSearchField.clear();
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to find user: " +
+                            getUserTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(getUserTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void showAllRoles(ActionEvent event) {
+        try {
+            Task<List<User>> getAllUsersTask = User_dao.getAllUsersTask();
+            getAllUsersTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    vr_UserList.clear();
+                    vr_UserList.addAll(getAllUsersTask.getValue());
+                });
+            });
+
+            getAllUsersTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to get all users: " +
+                            getAllUsersTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(getAllUsersTask);
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+        }
     }
 }

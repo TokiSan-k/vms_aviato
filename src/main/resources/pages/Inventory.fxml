@@ -61,10 +61,11 @@
                                                             <TextField fx:id="ai_PPUField" styleClass="addPPUInputField" onKeyTyped="#handlePPUInput" />
                                                             <Text fx:id="ai_PPUWarning" visible="false" managed="false" text="*Input should only be a numeric value" />
                                                         </HBox>
-                                                        <Button styleClass="submitButton" text="Submit">
+                                                        <Button styleClass="submitButton" onAction="#submitAddItem" text="Submit">
                                                             <VBox.margin>
                                                                 <Insets left="428.0" />
-                                                            </VBox.margin></Button>
+                                                            </VBox.margin>
+                                                        </Button>
                                                     </children>
                                                 </VBox>
                                             </children>
@@ -93,7 +94,7 @@
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button styleClass="removeFieldButton" text="Submit" />
+                                                                <Button styleClass="removeFieldButton" onAction="#submitRemoveItem" text="Submit" />
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -110,6 +111,11 @@
                                                                         <Text fx:id="ri_searchLabel" text="Search by Name:" />
                                                                         <TextField fx:id="ri_ItemSearchField" promptText="Enter Item Name" HBox.hgrow="ALWAYS" />
                                                                         <Button fx:id="ri_searchButton" mnemonicParsing="false" styleClass="searchItemButton" text="Search">
+                                                                            <HBox.margin>
+                                                                                <Insets left="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Button>
+                                                                        <Button fx:id="ri_searchAllButton" mnemonicParsing="false" styleClass="searchItemButton" onAction="#searchAllRemoveItem" text="All Items">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
@@ -142,7 +148,7 @@
                                                                 <TextField fx:id="mi_ItemIdField" promptText="Enter Item ID" />
                                                             </children>
                                                         </HBox>
-                                                        <Button fx:id="mi_verifyButton" mnemonicParsing="false" styleClass="modItemVerifyButton" text="Verify">
+                                                        <Button fx:id="mi_verifyButton" mnemonicParsing="false" styleClass="modItemVerifyButton" onAction="#verifyItemId" text="Verify">
                                                             <HBox.margin>
                                                                 <Insets left="5.0" />
                                                             </HBox.margin>
@@ -161,8 +167,8 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modItemName">
                                                                     <Text text="Item Name:" />
-                                                                    <TextField fx:id="mi_ItemNameField" />
-                                                                    <Button fx:id="mi_editItemNameButton" mnemonicParsing="false" styleClass="modItemButtons" text="C">
+                                                                    <TextField fx:id="mi_ItemNameField" editable="false" disable="true" />
+                                                                    <Button fx:id="mi_editItemNameButton" mnemonicParsing="false" styleClass="modItemButtons" onAction="#editItemName" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -170,8 +176,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modItemQuantity">
                                                                     <Text text="Quantity:" />
-                                                                    <TextField fx:id="mi_QuantityField" onKeyTyped="#handleModifyNumericInput"/>
-                                                                    <Button fx:id="mi_editQuantityButton" mnemonicParsing="false" styleClass="modItemButtons" text="C">
+                                                                    <TextField fx:id="mi_QuantityField" onKeyTyped="#handleModifyNumericInput" editable="false" disable="true"/>
+                                                                    <Button fx:id="mi_editQuantityButton" mnemonicParsing="false" styleClass="modItemButtons" onAction="#editQuantity" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -179,17 +185,18 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modItemPPU">
                                                                     <Text text="Price Per Unit:" />
-                                                                    <TextField fx:id="mi_PPUField" onKeyTyped="#handleModifyPPUInput" />
-                                                                    <Button fx:id="mi_editPPUButton" mnemonicParsing="false" styleClass="modItemButtons" text="C">
+                                                                    <TextField fx:id="mi_PPUField" onKeyTyped="#handleModifyPPUInput" editable="false" disable="true"/>
+                                                                    <Button fx:id="mi_editPPUButton" mnemonicParsing="false" styleClass="modItemButtons" onAction="#editPPU" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button styleClass="modItemSubmitButton" text="Submit">
+                                                                <Button styleClass="modItemSubmitButton" onAction="#submitModifyItem" text="Submit">
                                                                     <VBox.margin>
-                                                                        <Insets left="270.0" />
-                                                                    </VBox.margin></Button>
+                                                                        <Insets left="15.0" />
+                                                                    </VBox.margin>
+                                                                </Button>
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -218,7 +225,7 @@
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Button fx:id="vi_allCustomersButton" mnemonicParsing="false" styleClass="viewInvButtons" text="All Items">
+                                                                <Button fx:id="vi_allCustomersButton" mnemonicParsing="false" styleClass="viewInvButtons" onAction="#showAllItems" text="All Items">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" />
                                                                     </HBox.margin>

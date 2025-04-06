@@ -78,6 +78,9 @@ public class Pages {
             adminRoot = new FXMLLoader(Main.class.getResource("/pages/Admin.fxml")).load();
             adminScene = new Scene(adminRoot);
 
+            loginRoot = new FXMLLoader(Main.class.getResource("/pages/Login.fxml")).load();
+            loginScene = new Scene(loginRoot);
+
             rolesRoot = new FXMLLoader(Main.class.getResource("/pages/Roles.fxml")).load();
             rolesScene = new Scene(rolesRoot, width, height);
 
@@ -100,6 +103,7 @@ public class Pages {
     public static Scene GetLogOutScene() {return inventoryScene;}
     public static Scene GetEmployeeScene() {return employeeScene;}
     public static Scene GetAdminScene() {return adminScene;}
+    public static Scene GetLogInScene() {return loginScene;}
     public static Scene GetMainMenuScene()
     {
         //Change based on login

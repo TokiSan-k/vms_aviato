@@ -64,7 +64,7 @@
                                                             <Text text="Cost:" />
                                                             <TextField fx:id="as_costField" styleClass="addSvcInputField" />
                                                         </HBox>
-                                                        <Button fx:id="as_submitButton" styleClass="addFieldButton" text="Submit">
+                                                        <Button fx:id="as_submitButton" styleClass="addFieldButton" onAction="#submitAddService" text="Submit">
                                                             <VBox.margin>
                                                                 <Insets left="428.0" />
                                                             </VBox.margin>
@@ -98,7 +98,7 @@
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button fx:id="rs_submitButton" styleClass="removeFieldButton" text="Submit" />
+                                                                <Button fx:id="rs_submitButton" styleClass="removeFieldButton" onAction="#submitRemoveService" text="Submit" />
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -115,6 +115,11 @@
                                                                         <Text fx:id="rs_searchLabel" text="Search by Type:" />
                                                                         <TextField fx:id="rs_serviceSearchField" promptText="Enter service type" HBox.hgrow="ALWAYS" />
                                                                         <Button fx:id="rs_searchButton" mnemonicParsing="false" styleClass="searchSvcButton" text="Search">
+                                                                            <HBox.margin>
+                                                                                <Insets left="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Button>
+                                                                        <Button fx:id="rs_searchAllButton" mnemonicParsing="false" styleClass="searchSvcButton" onAction="#searchAllRemoveService" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
@@ -147,7 +152,7 @@
                                                                 <TextField fx:id="ms_serviceIdField" promptText="Enter service ID" />
                                                             </children>
                                                         </HBox>
-                                                        <Button fx:id="ms_verifyButton" mnemonicParsing="false" styleClass="modSvcVerifyButton" text="Verify">
+                                                        <Button fx:id="ms_verifyButton" mnemonicParsing="false" styleClass="modSvcVerifyButton" onAction="#verifyServiceId" text="Verify">
                                                             <HBox.margin>
                                                                 <Insets left="5.0" />
                                                             </HBox.margin>
@@ -166,8 +171,8 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modSvcType">
                                                                     <Text text="Service Type:" />
-                                                                    <TextField fx:id="ms_serviceTypeField" />
-                                                                    <Button fx:id="ms_editTypeButton" mnemonicParsing="false" styleClass="modSvcButtons" text="C">
+                                                                    <TextField fx:id="ms_serviceTypeField" editable="false" disable="true"/>
+                                                                    <Button fx:id="ms_editTypeButton" mnemonicParsing="false" styleClass="modSvcButtons" onAction="#editType" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -175,8 +180,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modSvcDate">
                                                                     <Text text="Service Date:" />
-                                                                    <TextField fx:id="ms_serviceDateField" />
-                                                                    <Button fx:id="ms_editDateButton" mnemonicParsing="false" styleClass="modSvcButtons" text="C">
+                                                                    <TextField fx:id="ms_serviceDateField" editable="false" disable="true" />
+                                                                    <Button fx:id="ms_editDateButton" mnemonicParsing="false" styleClass="modSvcButtons" onAction="#editDate" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -184,8 +189,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modSvcStatus">
                                                                     <Text text="Status:" />
-                                                                    <TextField fx:id="ms_statusField" />
-                                                                    <Button fx:id="ms_editStatusButton" mnemonicParsing="false" styleClass="modSvcButtons" text="C">
+                                                                    <TextField fx:id="ms_statusField" editable="false" disable="true"/>
+                                                                    <Button fx:id="ms_editStatusButton" mnemonicParsing="false" styleClass="modSvcButtons" onAction="#editStatus" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -193,14 +198,14 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modSvcCost">
                                                                     <Text text="Cost:" />
-                                                                    <TextField fx:id="ms_costField" />
-                                                                    <Button fx:id="ms_editCostButton" mnemonicParsing="false" styleClass="modSvcButtons" text="C">
+                                                                    <TextField fx:id="ms_costField" editable="false" disable="true" />
+                                                                    <Button fx:id="ms_editCostButton" mnemonicParsing="false" styleClass="modSvcButtons" onAction="#editCost" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button fx:id="ms_submitButton" styleClass="modSvcSubmitButton" text="Submit">
+                                                                <Button fx:id="ms_submitButton" styleClass="modSvcSubmitButton" onAction="#submitModifyService" text="Submit">
                                                                     <VBox.margin>
                                                                         <Insets left="270.0" />
                                                                     </VBox.margin>
@@ -233,7 +238,7 @@
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Button fx:id="vs_allServicesButton" mnemonicParsing="false" styleClass="viewSvcButtons" text="All Services">
+                                                                <Button fx:id="vs_allServicesButton" mnemonicParsing="false" styleClass="viewSvcButtons" onAction="#showAllServices" text="All Services">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" />
                                                                     </HBox.margin>
@@ -290,6 +295,11 @@
                                                         <VBox spacing="10.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                             <children>
                                                                 <Text text="Items Used in Services" />
+                                                                <Button fx:id="iu_showAllButton" styleClass="addFieldButton" text="All Items" onAction="#ShowAllItemsUsed">
+                                                                    <VBox.margin>
+                                                                        <Insets left="15.0" />
+                                                                    </VBox.margin>
+                                                                </Button>
                                                                 <TableView fx:id="iu_itemsTable" VBox.vgrow="ALWAYS">
                                                                     <columns>
                                                                         <TableColumn fx:id="iu_serviceIdColumn" text="Service ID" />

@@ -1,21 +1,22 @@
 package com.aviato.Controllers;
 
 import com.aviato.Types.Service;
+import com.aviato.Types.ServiceItem;
+import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.concurrency.Worker;
+import com.aviato.db.dao.Service_dao;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.persistence.StoredProcedureQuery;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Service_Cltr {
@@ -33,101 +34,74 @@ public class Service_Cltr {
         public static final byte AddItemUsedContainer = 4;
     }
 
+    private final ObservableList<Service> rs_SvcList = FXCollections.observableArrayList();
+    private final ObservableList<Service> vs_SvcList = FXCollections.observableArrayList();
+    private final ObservableList<ServiceItem> iu_ItemsList = FXCollections.observableArrayList();
+
     // Service Navbar
-    @FXML
-    private Button addSvcBtn;
-    @FXML
-    private Button removeSvcBtn;
-    @FXML
-    private Button modifySvcBtn;
-    @FXML
-    private Button viewSvcBtn;
+    @FXML private Button addSvcBtn;
+    @FXML private Button removeSvcBtn;
+    @FXML private Button modifySvcBtn;
+    @FXML private Button viewSvcBtn;
+    @FXML private Button addItemUsedBtn;
 
     // Add Service Fields
-    @FXML
-    private TextField as_serviceTypeField;
-    @FXML
-    private TextField as_serviceDateField;
-    @FXML
-    private TextField as_statusField;
-    @FXML
-    private TextField as_costField;
-    @FXML
-    private Button as_submitButton;
+    @FXML private TextField as_serviceTypeField;
+    @FXML private TextField as_serviceDateField;
+    @FXML private TextField as_statusField;
+    @FXML private TextField as_costField;
+    @FXML private Button as_submitButton;
 
     // Remove Service Fields
-    @FXML
-    private TextField rs_serviceIdField;
-    @FXML
-    private Button rs_swapFieldButton;
-    @FXML
-    private Button rs_submitButton;
-    @FXML
-    private TextField rs_serviceSearchField;
-    @FXML
-    private Button rs_searchButton;
-    @FXML
-    private TableView<Service> rs_serviceTable;
-    @FXML
-    private TableColumn<Service, Long> serviceIdColumn;
-    @FXML
-    private TableColumn<Service, String> serviceTypeColumn;
-    @FXML
-    private TableColumn<Service, String> serviceStatusColumn;
+    @FXML private TextField rs_serviceIdField;
+    @FXML private Button rs_swapFieldButton;
+    @FXML private Button rs_submitButton;
+    @FXML private TextField rs_serviceSearchField;
+    @FXML private Button rs_searchButton;
+    @FXML private TableView<Service> rs_serviceTable;
+    @FXML private TableColumn<Service, Long> serviceIdColumn;
+    @FXML private TableColumn<Service, String> serviceTypeColumn;
+    @FXML private TableColumn<Service, String> serviceStatusColumn;
 
     // Modify Service Fields
-    @FXML
-    private TextField ms_serviceIdField;
-    @FXML
-    private Button ms_verifyButton;
-    @FXML
-    private TextField ms_serviceTypeField;
-    @FXML
-    private TextField ms_serviceDateField;
-    @FXML
-    private TextField ms_statusField;
-    @FXML
-    private TextField ms_costField;
-    @FXML
-    private Button ms_editTypeButton;
-    @FXML
-    private Button ms_editDateButton;
-    @FXML
-    private Button ms_editStatusButton;
-    @FXML
-    private Button ms_editCostButton;
-    @FXML
-    private Button ms_submitButton;
+    @FXML private TextField ms_serviceIdField;
+    @FXML private Button ms_verifyButton;
+    @FXML private TextField ms_serviceTypeField;
+    @FXML private TextField ms_serviceDateField;
+    @FXML private TextField ms_statusField;
+    @FXML private TextField ms_costField;
+    @FXML private Button ms_editTypeButton;
+    @FXML private Button ms_editDateButton;
+    @FXML private Button ms_editStatusButton;
+    @FXML private Button ms_editCostButton;
+    @FXML private Button ms_submitButton;
 
     // View Service Fields
-    @FXML
-    private TextField vs_serviceSearchField;
-    @FXML
-    private Button vs_clearButton;
-    @FXML
-    private Button vs_searchButton;
-    @FXML
-    private Button vs_allServicesButton;
-    @FXML
-    private TableView<Service> vs_serviceTable;
-    @FXML
-    private TableColumn<Service, Long> vs_serviceIdColumn;
-    @FXML
-    private TableColumn<Service, String> vs_serviceTypeColumn;
-    @FXML
-    private TableColumn<Service, Date> vs_serviceDateColumn;
-    @FXML
-    private TableColumn<Service, String> vs_statusColumn;
-    @FXML
-    private TableColumn<Service, Double> vs_costColumn;
+    @FXML private TextField vs_serviceSearchField;
+    @FXML private Button vs_clearButton;
+    @FXML private Button vs_searchButton;
+    @FXML private Button vs_allServicesButton;
+    @FXML private TableView<Service> vs_serviceTable;
+    @FXML private TableColumn<Service, Long> vs_serviceIdColumn;
+    @FXML private TableColumn<Service, String> vs_serviceTypeColumn;
+    @FXML private TableColumn<Service, Date> vs_serviceDateColumn;
+    @FXML private TableColumn<Service, String> vs_statusColumn;
+    @FXML private TableColumn<Service, Double> vs_costColumn;
 
+    // Items Used Fields
     @FXML private TextField iu_serviceIdField;
     @FXML private TextField iu_itemIdField;
     @FXML private TextField iu_quantityField;
     @FXML private Button iu_submitButton;
-    @FXML private TableView<?> iu_itemsTable;
+    @FXML private TableView<ServiceItem> iu_itemsTable;
+    @FXML private TableColumn<ServiceItem, Long> iu_serviceIdColumn;
+    @FXML private TableColumn<ServiceItem, Long> iu_itemIdColumn;
+    @FXML private TableColumn<ServiceItem, Integer> iu_quantityUsedColumn;
+    @FXML private TableColumn<ServiceItem, String> iu_itemNameColumn;
+    @FXML private TableColumn<ServiceItem, Double> iu_pricePerUnitColumn;
 
-    // Initialize method to set up table columns
+    private Service service = new Service();
+
     @FXML
     public void initialize() {
         for (byte i = 0; i < serviceContainers.length; i++) {
@@ -141,6 +115,7 @@ public class Service_Cltr {
         serviceIdColumn.setCellValueFactory(new PropertyValueFactory<>("serviceId"));
         serviceTypeColumn.setCellValueFactory(new PropertyValueFactory<>("serviceType"));
         serviceStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        rs_serviceTable.setItems(rs_SvcList);
 
         // Set up View Service table columns
         vs_serviceIdColumn.setCellValueFactory(new PropertyValueFactory<>("serviceId"));
@@ -148,9 +123,24 @@ public class Service_Cltr {
         vs_serviceDateColumn.setCellValueFactory(new PropertyValueFactory<>("serviceDate"));
         vs_statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         vs_costColumn.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        vs_serviceTable.setItems(vs_SvcList);
+
+        // Set up Items Used table columns
+        iu_serviceIdColumn.setCellValueFactory(new PropertyValueFactory<>("serviceId"));
+        iu_itemIdColumn.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+        iu_quantityUsedColumn.setCellValueFactory(new PropertyValueFactory<>("quantityUsed"));
+        iu_itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        iu_pricePerUnitColumn.setCellValueFactory(new PropertyValueFactory<>("pricePerUnit"));
+        iu_itemsTable.setItems(iu_ItemsList);
     }
 
     // Service NavBar
+    private void ResetUiComps()
+    {
+        turnOffVisibleAndManageSvcContainer();
+        isMSVerified = false;
+    }
+
     private void turnOffVisibleAndManageSvcContainer() {
         for (byte i = 0; i < serviceContainers.length; i++) {
             serviceContainers[i].setVisible(false);
@@ -158,46 +148,37 @@ public class Service_Cltr {
         }
     }
 
-    @FXML
-    private void handleServiceNavAddSvc(ActionEvent event) {
-        turnOffVisibleAndManageSvcContainer();
+    @FXML private void handleServiceNavAddSvc(ActionEvent event) {
+        ResetUiComps();
         serviceContainers[SvcContainerEnum.AddServiceContainer].setManaged(true);
         serviceContainers[SvcContainerEnum.AddServiceContainer].setVisible(true);
     }
 
-    @FXML
-    private void handleServiceNavRemoveSvc(ActionEvent event) {
-        turnOffVisibleAndManageSvcContainer();
+    @FXML private void handleServiceNavRemoveSvc(ActionEvent event) {
+        ResetUiComps();
         serviceContainers[SvcContainerEnum.RemoveServiceContainer].setManaged(true);
         serviceContainers[SvcContainerEnum.RemoveServiceContainer].setVisible(true);
     }
 
-    @FXML
-    private void handleServiceNavModifySvc(ActionEvent event) {
-        turnOffVisibleAndManageSvcContainer();
+    @FXML private void handleServiceNavModifySvc(ActionEvent event) {
+        ResetUiComps();
         serviceContainers[SvcContainerEnum.ModifyServiceContainer].setManaged(true);
         serviceContainers[SvcContainerEnum.ModifyServiceContainer].setVisible(true);
     }
 
-    @FXML
-    private void handleServiceNavViewSvc(ActionEvent event) {
-        turnOffVisibleAndManageSvcContainer();
+    @FXML private void handleServiceNavViewSvc(ActionEvent event) {
+        ResetUiComps();
         serviceContainers[SvcContainerEnum.ViewServiceContainer].setManaged(true);
         serviceContainers[SvcContainerEnum.ViewServiceContainer].setVisible(true);
     }
 
-    @FXML
-    private void handleServiceNavItemsUsed(ActionEvent event) {
-        turnOffVisibleAndManageSvcContainer();
+    @FXML private void handleServiceNavItemsUsed(ActionEvent event) {
+        ResetUiComps();
         serviceContainers[SvcContainerEnum.AddItemUsedContainer].setManaged(true);
         serviceContainers[SvcContainerEnum.AddItemUsedContainer].setVisible(true);
     }
 
-    // Add Service Submit Handler
-    @FXML
-    private void submitAddService(ActionEvent event) {
-
-        // Clear fields
+    private void clearAddSvcFields() {
         as_serviceTypeField.clear();
         as_serviceDateField.clear();
         as_statusField.clear();
@@ -205,22 +186,93 @@ public class Service_Cltr {
     }
 
     @FXML
-    private void handleAddItemUsed(ActionEvent event) {
-        Long serviceId = Long.parseLong(iu_serviceIdField.getText());
-        Long itemId = Long.parseLong(iu_itemIdField.getText());
-        Integer quantity = Integer.parseInt(iu_quantityField.getText());
+    private void submitAddService(ActionEvent event) {
+        try {
+            String serviceType = as_serviceTypeField.getText();
+            Date serviceDate = Date.valueOf(as_serviceDateField.getText());
+            String status = as_statusField.getText();
+            Double cost = Double.parseDouble(as_costField.getText());
 
+            service = new Service(serviceType, serviceDate, status, cost);
+            Task<Void> insertSvcTask = Service_dao.insertServiceTask(service);
 
-        iu_serviceIdField.clear();
-        iu_itemIdField.clear();
-        iu_quantityField.clear();
+            insertSvcTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    clearAddSvcFields();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Service added successfully");
+                });
+            });
+
+            insertSvcTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    clearAddSvcFields();
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to add service: " +
+                            insertSvcTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(insertSvcTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
+        }
     }
 
-    // Remove Service Event Handlers
     @FXML
     private void submitRemoveService(ActionEvent event) {
+        try {
+            String svcId = rs_serviceIdField.getText();
+            if (svcId.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please enter a Service ID to remove");
+                return;
+            }
+            Long serviceId = Long.parseLong(svcId);
 
-        rs_serviceIdField.clear();
+            Task<Void> deleteTask = Service_dao.deleteServiceTask(serviceId);
+            deleteTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    rs_serviceIdField.clear();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Service removed successfully");
+                });
+            });
+
+            deleteTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    rs_serviceIdField.clear();
+                    Throwable exception = deleteTask.getException();
+                    String err = "";
+
+                    if (exception != null) {
+                        Throwable cause = exception;
+                        SQLException sqlEx = null;
+                        while (cause != null) {
+                            if (cause instanceof SQLException) {
+                                sqlEx = (SQLException) cause;
+                                break;
+                            }
+                            cause = cause.getCause();
+                        }
+
+                        if (sqlEx != null) {
+                            err = sqlEx.getMessage().split("\n")[0];
+                        } else {
+                            cause = exception;
+                            while (cause.getCause() != null) {
+                                cause = cause.getCause();
+                            }
+                            err = cause.getMessage();
+                        }
+
+                        AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Information", err);
+                    } else {
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Unknown error occurred.");
+                    }
+                });
+            });
+
+            Worker.submitTask(deleteTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     @FXML
@@ -231,43 +283,154 @@ public class Service_Cltr {
 
     @FXML
     private void searchRemoveService(ActionEvent event) {
-        // Placeholder for search logic (could use GetService with a filter)
         String searchTerm = rs_serviceSearchField.getText();
-        System.out.println("Searching for service type: " + searchTerm);
+        // Add search logic here if needed
     }
 
-    // Modify Service Event Handlers
+    @FXML
+    private void searchAllRemoveService(ActionEvent event) {
+        try {
+            Task<List<Service>> getAllSvcTask = Service_dao.getAllServicesTask();
+            getAllSvcTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    rs_SvcList.clear();
+                    rs_SvcList.addAll(getAllSvcTask.getValue());
+                });
+            });
+
+            getAllSvcTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Services: " +
+                            getAllSvcTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(getAllSvcTask);
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+        }
+    }
+
+    private void onMSServiceVerified(Service svc) {
+        service.setServiceId(svc.getServiceId());
+        ms_serviceTypeField.setText(svc.getServiceType());
+        ms_serviceDateField.setText(svc.getServiceDate().toString());
+        ms_statusField.setText(svc.getStatus());
+        ms_costField.setText(String.valueOf(svc.getCost()));
+    }
+
     @FXML
     private void verifyServiceId(ActionEvent event) {
+        try {
+            String svcId = ms_serviceIdField.getText();
+            if (svcId.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please enter a Service ID to verify");
+                return;
+            }
+            Long serviceId = Long.parseLong(svcId);
 
+            Task<Service> getSvcTask = Service_dao.getServiceTask(serviceId);
+            getSvcTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    onMSServiceVerified(getSvcTask.getValue());
+                    isMSVerified = true;
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Service ID Verified!");
+                });
+            });
+
+            getSvcTask.setOnFailed(e -> {
+                Platform.runLater(() ->
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", getSvcTask.getException().getMessage()));
+            });
+
+            Worker.submitTask(getSvcTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
-    @FXML
-    private void editType(ActionEvent event) {
-        ms_serviceTypeField.setEditable(true);
+    private boolean isMSVerified = false;
+
+    @FXML private void editType(ActionEvent event) {
+        if (isMSVerified) {
+            ms_serviceTypeField.setEditable(true);
+            ms_serviceTypeField.setDisable(false);
+        }
     }
 
-    @FXML
-    private void editDate(ActionEvent event) {
-        ms_serviceDateField.setEditable(true);
+    @FXML private void editDate(ActionEvent event) {
+        if (isMSVerified) {
+            ms_serviceDateField.setEditable(true);
+            ms_serviceDateField.setDisable(false);
+        }
     }
 
-    @FXML
-    private void editStatus(ActionEvent event) {
-        ms_statusField.setEditable(true);
+    @FXML private void editStatus(ActionEvent event) {
+        if (isMSVerified) {
+            ms_statusField.setEditable(true);
+            ms_statusField.setDisable(false);
+        }
     }
 
-    @FXML
-    private void editCost(ActionEvent event) {
-        ms_costField.setEditable(true);
+    @FXML private void editCost(ActionEvent event) {
+        if (isMSVerified) {
+            ms_costField.setEditable(true);
+            ms_costField.setDisable(false);
+        }
+    }
+
+    private void clearAllMSFields() {
+        ms_serviceTypeField.clear();
+        ms_serviceDateField.clear();
+        ms_statusField.clear();
+        ms_costField.clear();
+    }
+
+    private void setEditableMSFields(boolean status) {
+        ms_serviceTypeField.setEditable(status);
+        ms_serviceTypeField.setDisable(!status);
+        ms_serviceDateField.setEditable(status);
+        ms_serviceDateField.setDisable(!status);
+        ms_statusField.setEditable(status);
+        ms_statusField.setDisable(!status);
+        ms_costField.setEditable(status);
+        ms_costField.setDisable(!status);
     }
 
     @FXML
     private void submitModifyService(ActionEvent event) {
+        try {
+            service.setServiceId(Long.parseLong(ms_serviceIdField.getText()));
+            service.setServiceType(ms_serviceTypeField.getText());
+            service.setServiceDate(Date.valueOf(ms_serviceDateField.getText()));
+            service.setStatus(ms_statusField.getText());
+            service.setCost(Double.parseDouble(ms_costField.getText()));
 
+            Task<Void> updateSvcTask = Service_dao.updateServiceTask(service);
+            updateSvcTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    clearAllMSFields();
+                    setEditableMSFields(false);
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Service Modified successfully");
+                });
+            });
+
+            updateSvcTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    clearAllMSFields();
+                    setEditableMSFields(false);
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Modify Service: " +
+                            updateSvcTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(updateSvcTask);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
-    // View Service Event Handlers
     @FXML
     private void clearViewSearch(ActionEvent event) {
         vs_serviceSearchField.clear();
@@ -276,13 +439,103 @@ public class Service_Cltr {
 
     @FXML
     private void searchViewService(ActionEvent event) {
-        // Placeholder for search logic (could filter GetAllServices results)
         String searchTerm = vs_serviceSearchField.getText();
-        System.out.println("Searching for service type: " + searchTerm);
+        // Add search logic here if needed
     }
 
     @FXML
     private void showAllServices(ActionEvent event) {
+        try {
+            Task<List<Service>> getAllSvcTask = Service_dao.getAllServicesTask();
+            getAllSvcTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    vs_SvcList.clear();
+                    vs_SvcList.addAll(getAllSvcTask.getValue());
+                });
+            });
 
+            getAllSvcTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Services: " +
+                            getAllSvcTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(getAllSvcTask);
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleAddItemUsed(ActionEvent event) {
+        try {
+            Long serviceId = Long.parseLong(iu_serviceIdField.getText());
+            Long itemId = Long.parseLong(iu_itemIdField.getText());
+            Integer quantity = Integer.parseInt(iu_quantityField.getText());
+
+            Task<Void> useInventoryTask = Service_dao.useInventoryTask(serviceId, itemId, quantity);
+            useInventoryTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    iu_serviceIdField.clear();
+                    iu_itemIdField.clear();
+                    iu_quantityField.clear();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Item usage recorded successfully");
+                    //refreshItemsUsedTable(serviceId);
+                });
+            });
+
+            useInventoryTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    iu_serviceIdField.clear();
+                    iu_itemIdField.clear();
+                    iu_quantityField.clear();
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to record item usage: " +
+                            useInventoryTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(useInventoryTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void ShowAllItemsUsed(ActionEvent event)
+    {
+        try
+        {
+            //Procedure for All Service_Inventory
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+
+    private void refreshItemsUsedTable(Long serviceId) throws Exception{
+        try {
+            Task<List<ServiceItem>> getInventoryTask = Service_dao.getServiceInventoryTask(serviceId);
+            getInventoryTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    iu_ItemsList.addAll(getInventoryTask.getValue());
+                });
+            });
+
+            getInventoryTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to load items used: " +
+                            getInventoryTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(getInventoryTask);
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
     }
 }

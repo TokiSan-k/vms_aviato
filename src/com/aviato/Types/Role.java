@@ -4,12 +4,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
-public class RoleItem {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
-    private Integer employeeId;
+    private Long employeeId;
 
     @Column(name = "username")
     private String username;
@@ -21,10 +21,10 @@ public class RoleItem {
     private String roleName;
 
     // Default constructor
-    public RoleItem() {}
+    public Role() {}
 
     // Parameterized constructor
-    public RoleItem(Integer employeeId, String username, String email, String roleName) {
+    public Role(Long employeeId, String username, String email, String roleName) {
         this.employeeId = employeeId;
         this.username = username;
         this.email = email;
@@ -32,11 +32,11 @@ public class RoleItem {
     }
 
     // Getters and Setters
-    public Integer getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Integer employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 

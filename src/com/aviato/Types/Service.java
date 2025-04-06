@@ -8,7 +8,7 @@ import java.sql.Date;
 @NamedStoredProcedureQueries({
         @NamedStoredProcedureQuery(
                 name = "InsertService",
-                procedureName = "add_service",
+                procedureName = "service_pkg.add_service",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_type", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_date", type = Date.class),
@@ -19,7 +19,7 @@ import java.sql.Date;
         ),
         @NamedStoredProcedureQuery(
                 name = "GetService",
-                procedureName = "get_service",
+                procedureName = "service_pkg.get_service",
                 resultClasses = Service.class,
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_id", type = Long.class),
@@ -29,7 +29,7 @@ import java.sql.Date;
         ),
         @NamedStoredProcedureQuery(
                 name = "UpdateService",
-                procedureName = "update_service",
+                procedureName = "service_pkg.update_service",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_id", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_status", type = String.class),
@@ -39,7 +39,7 @@ import java.sql.Date;
         ),
         @NamedStoredProcedureQuery(
                 name = "DeleteService",
-                procedureName = "delete_service",
+                procedureName = "service_pkg.delete_service",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_id", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_service_id_out", type = Long.class)
@@ -47,38 +47,12 @@ import java.sql.Date;
         ),
         @NamedStoredProcedureQuery(
                 name = "GetAllServices",
-                procedureName = "get_service",
+                procedureName = "service_pkg.get_service",
                 resultClasses = Service.class,
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_id", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_service_id_out", type = Long.class)
-                }
-        ),
-        @NamedStoredProcedureQuery(
-                name = "UseInventory",
-                procedureName = "use_inventory",
-                parameters = {
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_id", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_item_id", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_quantity_used", type = Integer.class)
-                }
-        ),
-        @NamedStoredProcedureQuery(
-                name = "GetServiceInventory",
-                procedureName = "get_service_inventory",
-                resultClasses = ServiceItem.class,
-                parameters = {
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_id", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
-                }
-        ),
-        @NamedStoredProcedureQuery(
-                name = "DeleteServiceInventory",
-                procedureName = "delete_service_inventory",
-                parameters = {
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_id", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_item_id", type = Long.class)
                 }
         )
 })

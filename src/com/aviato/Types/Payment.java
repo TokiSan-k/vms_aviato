@@ -77,6 +77,13 @@ public class Payment {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
+    public void SetAllFields(Long invoiceId, Date paymentDate, BigDecimal amountPaid, String paymentMethod, String status){
+        this.invoiceId = invoiceId;
+        this.paymentDate = paymentDate;
+        this.amountPaid = amountPaid;
+        this.paymentMethod = paymentMethod;
+        this.status = status;
+    }
 
     public Payment() {}
 

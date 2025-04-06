@@ -7,7 +7,7 @@ import javax.persistence.*;
 @NamedStoredProcedureQueries({
         @NamedStoredProcedureQuery(
                 name = "InsertItem",
-                procedureName = "add_inventory_item",
+                procedureName = "inventory_pkg.add_inventory_item",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_item_name", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_quantity", type = Integer.class),
@@ -17,7 +17,7 @@ import javax.persistence.*;
         ),
         @NamedStoredProcedureQuery(
                 name = "GetItem",
-                procedureName = "get_inventory",
+                procedureName = "inventory_pkg.get_inventory",
                 resultClasses = Item.class,
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_item_id", type = Long.class),
@@ -26,7 +26,7 @@ import javax.persistence.*;
         ),
         @NamedStoredProcedureQuery(
                 name = "UpdateItem",
-                procedureName = "update_inventory",
+                procedureName = "inventory_pkg.update_inventory",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_item_id", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_quantity", type = Integer.class),
@@ -35,7 +35,7 @@ import javax.persistence.*;
         ),
         @NamedStoredProcedureQuery(
                 name = "DeleteItem",
-                procedureName = "delete_inventory",
+                procedureName = "inventory_pkg.delete_inventory",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_item_id", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_deleted_item_id", type = Long.class)
@@ -43,7 +43,7 @@ import javax.persistence.*;
         ),
         @NamedStoredProcedureQuery(
                 name = "GetAllItems",
-                procedureName = "get_inventory",
+                procedureName = "inventory_pkg.get_inventory",
                 resultClasses = Item.class,
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_item_id", type = Long.class),

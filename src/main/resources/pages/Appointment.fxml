@@ -75,9 +75,9 @@
                                                             <Text text="Employee ID:" />
                                                             <TextField fx:id="aa_empIdField" styleClass="addAppInputField" />
                                                         </HBox>
-                                                        <Button fx:id="aa_submitButton" styleClass="addFieldButton" text="Submit">
+                                                        <Button fx:id="aa_submitButton" styleClass="addFieldButton" onAction="#submitAddAppointment" text="Submit">
                                                             <VBox.margin>
-                                                                <Insets left="428.0" />
+                                                                <Insets left="15.0" />
                                                             </VBox.margin>
                                                         </Button>
                                                     </children>
@@ -109,7 +109,7 @@
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button fx:id="ra_submitButton" styleClass="removeFieldButton" text="Submit" />
+                                                                <Button fx:id="ra_submitButton" styleClass="removeFieldButton" onAction="#submitRemoveAppointment" text="Submit" />
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -128,6 +128,11 @@
                                                                         <Button fx:id="ra_searchButton" mnemonicParsing="false" styleClass="searchAppButton" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Button>
+                                                                        <Button fx:id="ra_searchAllButton" mnemonicParsing="false" styleClass="searchAppButton" onAction="#searchAllRemoveAppointment" text="All Appointment">
+                                                                            <HBox.margin>
+                                                                                <Insets left="10.0" />
                                                                             </HBox.margin>
                                                                         </Button>
                                                                     </children>
@@ -158,7 +163,7 @@
                                                                 <TextField fx:id="ma_appIdField" promptText="Enter appointment ID" />
                                                             </children>
                                                         </HBox>
-                                                        <Button fx:id="ma_verifyButton" mnemonicParsing="false" styleClass="modAppVerifyButton" text="Verify">
+                                                        <Button fx:id="ma_verifyButton" mnemonicParsing="false" styleClass="modAppVerifyButton" onAction="#verifyAppointmentId" text="Verify">
                                                             <HBox.margin>
                                                                 <Insets left="5.0" />
                                                             </HBox.margin>
@@ -177,8 +182,8 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modCustId">
                                                                     <Text text="Customer ID:" />
-                                                                    <TextField fx:id="ma_custIdField" />
-                                                                    <Button fx:id="ma_editCustIdButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                    <TextField fx:id="ma_custIdField" editable="false" disable="true" />
+                                                                    <Button fx:id="ma_editCustIdButton" mnemonicParsing="false" styleClass="modAppButtons" onAction="#editCustId" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -186,8 +191,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modVehicleId">
                                                                     <Text text="Vehicle ID:" />
-                                                                    <TextField fx:id="ma_vehicleIdField" />
-                                                                    <Button fx:id="ma_editVehicleIdButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                    <TextField fx:id="ma_vehicleIdField" editable="false" disable="true" />
+                                                                    <Button fx:id="ma_editVehicleIdButton" mnemonicParsing="false" styleClass="modAppButtons" onAction="#editVehicleId" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -195,8 +200,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modAppDate">
                                                                     <Text text="Date:" />
-                                                                    <TextField fx:id="ma_appDateField" />
-                                                                    <Button fx:id="ma_editAppDateButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                    <TextField fx:id="ma_appDateField" editable="false" disable="true" />
+                                                                    <Button fx:id="ma_editAppDateButton" mnemonicParsing="false" styleClass="modAppButtons" onAction="#editAppDate" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -204,8 +209,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modAppTime">
                                                                     <Text text="Time:" />
-                                                                    <TextField fx:id="ma_appTimeField" />
-                                                                    <Button fx:id="ma_editAppTimeButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                    <TextField fx:id="ma_appTimeField" editable="false" disable="true" />
+                                                                    <Button fx:id="ma_editAppTimeButton" mnemonicParsing="false" styleClass="modAppButtons" onAction="#editAppTime" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -213,8 +218,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modStatus">
                                                                     <Text text="Status:" />
-                                                                    <TextField fx:id="ma_statusField" />
-                                                                    <Button fx:id="ma_editStatusButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                    <TextField fx:id="ma_statusField" editable="false" disable="true" />
+                                                                    <Button fx:id="ma_editStatusButton" mnemonicParsing="false" styleClass="modAppButtons" onAction="#editStatus" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -222,8 +227,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modServiceId">
                                                                     <Text text="Service ID:" />
-                                                                    <TextField fx:id="ma_serviceIdField" />
-                                                                    <Button fx:id="ma_editServiceIdButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                    <TextField fx:id="ma_serviceIdField" editable="false" disable="true" />
+                                                                    <Button fx:id="ma_editServiceIdButton" mnemonicParsing="false" styleClass="modAppButtons" onAction="#editServiceId" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -231,14 +236,14 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpId">
                                                                     <Text text="Employee ID:" />
-                                                                    <TextField fx:id="ma_empIdField" />
-                                                                    <Button fx:id="ma_editEmpIdButton" mnemonicParsing="false" styleClass="modAppButtons" text="C">
+                                                                    <TextField fx:id="ma_empIdField" editable="false" disable="true" />
+                                                                    <Button fx:id="ma_editEmpIdButton" mnemonicParsing="false" styleClass="modAppButtons" onAction="#editEmpId" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button fx:id="ma_submitButton" styleClass="modAppSubmitButton" text="Submit">
+                                                                <Button fx:id="ma_submitButton" styleClass="modAppSubmitButton" onAction="#submitModifyAppointment" text="Submit">
                                                                     <VBox.margin>
                                                                         <Insets left="270.0" />
                                                                     </VBox.margin>
@@ -271,7 +276,7 @@
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Button fx:id="va_allAppointmentsButton" mnemonicParsing="false" styleClass="viewAppButtons" text="All Appointments">
+                                                                <Button fx:id="va_allAppointmentsButton" mnemonicParsing="false" styleClass="viewAppButtons" onAction="#showAllAppointments" text="All Appointments">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" />
                                                                     </HBox.margin>

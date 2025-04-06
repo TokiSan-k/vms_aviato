@@ -60,7 +60,7 @@
                                                             <Text text="Status:" />
                                                             <TextField fx:id="ap_statusField" styleClass="addPaymentInputField" />
                                                         </HBox>
-                                                        <Button styleClass="addPaymentButton" text="Submit">
+                                                        <Button styleClass="addPaymentButton" onAction="#submitAddPayment" text="Submit">
                                                             <VBox.margin>
                                                                 <Insets left="428.0" />
                                                             </VBox.margin>
@@ -73,8 +73,53 @@
                                             </VBox.margin>
                                         </VBox>
 
+                                        <!-- Container for Updating Payment Status -->
+                                        <VBox fx:id="paymentContainer_1" managed="false" visible="false" styleClass="updateStatusContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <VBox fx:id="us_checkPaymentIdContainer" styleClass="checkPaymentID" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Text fx:id="us_checkPaymentIdTitle" text="Check Payment ID" />
+                                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                            <children>
+                                                                <Text fx:id="us_paymentIdLabel" text="Enter ID:" />
+                                                                <TextField fx:id="us_paymentIdField" promptText="Enter payment ID" />
+                                                            </children>
+                                                        </HBox>
+                                                        <Button fx:id="us_verifyButton" mnemonicParsing="false" styleClass="updateStatusVerifyButton" onAction="#verifyPaymentId" text="Verify">
+                                                            <HBox.margin>
+                                                                <Insets left="5.0" />
+                                                            </HBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                    <VBox.margin>
+                                                        <Insets top="5.0" />
+                                                    </VBox.margin>
+                                                </VBox>
+
+                                                <!-- Container for Updating Status -->
+                                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text text="Update Payment Status" />
+                                                        <VBox spacing="10.0">
+                                                            <children>
+                                                                <HBox alignment="CENTER_LEFT" styleClass="updateStatusField">
+                                                                    <Text text="New Status:" />
+                                                                    <TextField fx:id="us_newStatusField" />
+                                                                </HBox>
+                                                                <Button styleClass="updateStatusSubmitButton" onAction="#submitUpdateStatus" text="Submit">
+                                                                    <VBox.margin>
+                                                                        <Insets left="270.0" />
+                                                                    </VBox.margin>
+                                                                </Button>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+
                                         <!-- Container for Viewing Payments -->
-                                        <VBox fx:id="paymentContainer_1" managed="false" visible="false" styleClass="viewPaymentsContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="paymentContainer_2" managed="false" visible="false" styleClass="viewPaymentsContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="viewPaymentsTitle" text="View All Payments" />
                                                 <VBox spacing="10.0" HBox.hgrow="ALWAYS">
@@ -120,50 +165,6 @@
                                             </VBox.margin>
                                         </VBox>
 
-                                        <!-- Container for Updating Payment Status -->
-                                        <VBox fx:id="paymentContainer_2" managed="false" visible="false" styleClass="updateStatusContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-                                            <children>
-                                                <VBox fx:id="us_checkPaymentIdContainer" styleClass="checkPaymentID" HBox.hgrow="ALWAYS">
-                                                    <children>
-                                                        <Text fx:id="us_checkPaymentIdTitle" text="Check Payment ID" />
-                                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                                            <children>
-                                                                <Text fx:id="us_paymentIdLabel" text="Enter ID:" />
-                                                                <TextField fx:id="us_paymentIdField" promptText="Enter payment ID" />
-                                                            </children>
-                                                        </HBox>
-                                                        <Button fx:id="us_verifyButton" mnemonicParsing="false" styleClass="updateStatusVerifyButton" text="Verify">
-                                                            <HBox.margin>
-                                                                <Insets left="5.0" />
-                                                            </HBox.margin>
-                                                        </Button>
-                                                    </children>
-                                                    <VBox.margin>
-                                                        <Insets top="5.0" />
-                                                    </VBox.margin>
-                                                </VBox>
-
-                                                <!-- Container for Updating Status -->
-                                                <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-                                                    <children>
-                                                        <Text text="Update Payment Status" />
-                                                        <VBox spacing="10.0">
-                                                            <children>
-                                                                <HBox alignment="CENTER_LEFT" styleClass="updateStatusField">
-                                                                    <Text text="New Status:" />
-                                                                    <TextField fx:id="us_newStatusField" />
-                                                                </HBox>
-                                                                <Button styleClass="updateStatusSubmitButton" text="Submit">
-                                                                    <VBox.margin>
-                                                                        <Insets left="270.0" />
-                                                                    </VBox.margin>
-                                                                </Button>
-                                                            </children>
-                                                        </VBox>
-                                                    </children>
-                                                </VBox>
-                                            </children>
-                                        </VBox>
                                     </children>
                                 </VBox>
                             </children>

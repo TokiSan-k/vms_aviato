@@ -153,6 +153,17 @@ public class Employee {
         this.hoursWorked = hoursWorked;
     }
 
+    public void SetAllFields(String empName, String position, String phone, String email, Double salary, Date hireDate, Double hoursWorked)
+    {
+        this.empName = empName;
+        this.position = position;
+        this.phone = phone;
+        this.email = email;
+        this.salary = salary;
+        this.hireDate = hireDate;
+        this.hoursWorked = hoursWorked;
+    }
+
     // Constructors
     public Employee() {}
 

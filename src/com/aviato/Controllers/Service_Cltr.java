@@ -3,6 +3,7 @@ package com.aviato.Controllers;
 import com.aviato.Types.Service;
 import com.aviato.Types.ServiceItem;
 import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.ErrorHandler;
 import com.aviato.Utils.concurrency.Worker;
 import com.aviato.db.dao.Service_dao;
 import javafx.application.Platform;
@@ -206,8 +207,7 @@ public class Service_Cltr {
             insertSvcTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
                     clearAddSvcFields();
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to add service: " +
-                            insertSvcTask.getException().getMessage());
+                    ErrorHandler.ManageException(insertSvcTask.getException());
                 });
             });
 
@@ -238,34 +238,7 @@ public class Service_Cltr {
             deleteTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
                     rs_serviceIdField.clear();
-                    Throwable exception = deleteTask.getException();
-                    String err = "";
-
-                    if (exception != null) {
-                        Throwable cause = exception;
-                        SQLException sqlEx = null;
-                        while (cause != null) {
-                            if (cause instanceof SQLException) {
-                                sqlEx = (SQLException) cause;
-                                break;
-                            }
-                            cause = cause.getCause();
-                        }
-
-                        if (sqlEx != null) {
-                            err = sqlEx.getMessage().split("\n")[0];
-                        } else {
-                            cause = exception;
-                            while (cause.getCause() != null) {
-                                cause = cause.getCause();
-                            }
-                            err = cause.getMessage();
-                        }
-
-                        AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Information", err);
-                    } else {
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Unknown error occurred.");
-                    }
+                    ErrorHandler.ManageException(deleteTask.getException());
                 });
             });
 
@@ -300,8 +273,7 @@ public class Service_Cltr {
 
             getAllSvcTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Services: " +
-                            getAllSvcTask.getException().getMessage());
+                    ErrorHandler.ManageException(getAllSvcTask.getException());
                 });
             });
 
@@ -339,8 +311,9 @@ public class Service_Cltr {
             });
 
             getSvcTask.setOnFailed(e -> {
-                Platform.runLater(() ->
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", getSvcTask.getException().getMessage()));
+                Platform.runLater(() ->{
+                    ErrorHandler.ManageException(getSvcTask.getException());
+                });
             });
 
             Worker.submitTask(getSvcTask);
@@ -419,8 +392,7 @@ public class Service_Cltr {
                 Platform.runLater(() -> {
                     clearAllMSFields();
                     setEditableMSFields(false);
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Modify Service: " +
-                            updateSvcTask.getException().getMessage());
+                    ErrorHandler.ManageException(updateSvcTask.getException());
                 });
             });
 
@@ -456,8 +428,7 @@ public class Service_Cltr {
 
             getAllSvcTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Services: " +
-                            getAllSvcTask.getException().getMessage());
+                    ErrorHandler.ManageException(getAllSvcTask.getException());
                 });
             });
 
@@ -490,8 +461,7 @@ public class Service_Cltr {
                     iu_serviceIdField.clear();
                     iu_itemIdField.clear();
                     iu_quantityField.clear();
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to record item usage: " +
-                            useInventoryTask.getException().getMessage());
+                    ErrorHandler.ManageException(useInventoryTask.getException());
                 });
             });
 
@@ -526,8 +496,7 @@ public class Service_Cltr {
 
             getInventoryTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to load items used: " +
-                            getInventoryTask.getException().getMessage());
+                    ErrorHandler.ManageException(getInventoryTask.getException());
                 });
             });
 

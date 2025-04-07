@@ -2,6 +2,7 @@ package com.aviato.Controllers;
 
 import com.aviato.Types.Payment;
 import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.ErrorHandler;
 import com.aviato.Utils.concurrency.Worker;
 import com.aviato.db.dao.Payment_dao;
 import javafx.application.Platform;
@@ -142,8 +143,7 @@ public class Payments_Cltr {
             recordTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
                     clearAddPaymentFields();
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to record payment: " +
-                            recordTask.getException().getMessage());
+                    ErrorHandler.ManageException(recordTask.getException());
                 });
             });
 
@@ -179,8 +179,7 @@ public class Payments_Cltr {
 
             getPaymentTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to retrieve payment: " +
-                            getPaymentTask.getException().getMessage());
+                    ErrorHandler.ManageException(getPaymentTask.getException());
                 });
             });
 
@@ -221,8 +220,9 @@ public class Payments_Cltr {
             });
 
             getPaymentTask.setOnFailed(e -> {
-                Platform.runLater(() ->
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", getPaymentTask.getException().getMessage()));
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getPaymentTask.getException());
+                });
             });
 
             Worker.submitTask(getPaymentTask);
@@ -260,8 +260,7 @@ public class Payments_Cltr {
                 Platform.runLater(() -> {
                     clearUpdateStatusFields();
                     setEditableUSFields(false);
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to update payment status: " +
-                            updateTask.getException().getMessage());
+                    ErrorHandler.ManageException(updateTask.getException());
                 });
             });
 

@@ -5,6 +5,7 @@ import com.aviato.Types.Customer;
 import com.aviato.Types.Pages;
 import com.aviato.Types.Vehicle;
 import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.ErrorHandler;
 import com.aviato.Utils.Field;
 import com.aviato.Utils.concurrency.Worker;
 import com.aviato.db.dao.Customer_dao;
@@ -248,8 +249,7 @@ public class Vehicle_Cltr {
             insertTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
                     clearAddVehicleFields();
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to add vehicle: " +
-                            insertTask.getException().getMessage());
+                    ErrorHandler.ManageException(insertTask.getException());
                 });
             });
 
@@ -296,9 +296,9 @@ public class Vehicle_Cltr {
             });
 
             getCustTask.setOnFailed(e -> {
-                Platform.runLater(() ->
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove customer: " +
-                                getCustTask.getException().getMessage()));
+                Platform.runLater(() ->{
+                    ErrorHandler.ManageException(getCustTask.getException());
+                });
             });
 
             //getCustTask.setOnFinished(e -> showLoading(false));
@@ -330,9 +330,9 @@ public class Vehicle_Cltr {
             });
 
             deleteTask.setOnFailed(e -> {
-                Platform.runLater(() ->
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove vehicle: " +
-                                deleteTask.getException().getMessage()));
+                Platform.runLater(() ->{
+                    ErrorHandler.ManageException(deleteTask.getException());
+                });
             });
 
             Worker.submitTask(deleteTask);
@@ -365,13 +365,11 @@ public class Vehicle_Cltr {
             getAllVehicleTask.setOnFailed(e ->
             {
                 Platform.runLater(() ->{
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Customer: " +
-                            getAllVehicleTask.getException().getMessage());
+                    ErrorHandler.ManageException(getAllVehicleTask.getException());
                 });
             });
 
             Worker.submitTask(getAllVehicleTask);
-
         } catch (Exception e) {
             AlertBox.ShowAlert(Alert.AlertType.ERROR,"Error", e.getMessage());
         }
@@ -415,8 +413,9 @@ public class Vehicle_Cltr {
             });
 
             getVehicleTask.setOnFailed(e -> {
-                Platform.runLater(() ->
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", getVehicleTask.getException().getMessage()));
+                Platform.runLater(() ->{
+                        ErrorHandler.ManageException(getVehicleTask.getException());
+                });
             });
 
             //getCustTask.setOnFinished(e -> showLoading(false));
@@ -495,8 +494,7 @@ public class Vehicle_Cltr {
                 Platform.runLater(() ->{
                     ClearAllMVFields();
                     SetEditableMVFields(false);
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Modify Vehicle: " +
-                            updateVehicleTask.getException().getMessage());
+                    ErrorHandler.ManageException(updateVehicleTask.getException());
                 });
             });
 
@@ -531,8 +529,7 @@ public class Vehicle_Cltr {
             getAllVehicleTask.setOnFailed(e ->
             {
                 Platform.runLater(() ->{
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Vehicles: " +
-                            getAllVehicleTask.getException().getMessage());
+                    ErrorHandler.ManageException(getAllVehicleTask.getException());
                 });
             });
 

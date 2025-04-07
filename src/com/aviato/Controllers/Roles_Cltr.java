@@ -3,6 +3,7 @@ package com.aviato.Controllers;
 import com.aviato.Types.User;
 import com.aviato.Types.Policy;
 import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.ErrorHandler;
 import com.aviato.Utils.concurrency.Worker;
 import com.aviato.db.dao.User_dao;
 import javafx.application.Platform;
@@ -15,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
+import java.sql.Date;
 import java.util.List;
 
 public class Roles_Cltr {
@@ -146,7 +148,10 @@ public class Roles_Cltr {
             }
             Long roleId = Policy.GetRoleId(roleIdStr);
 
-            user.SetAllFields(roleId, username, email, password);
+            // Create a new User object and set all fields, including today's date
+            java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis()); // Today's date
+            user.SetAllFields(email, password, username, roleId, currentDate);
+
             Task<Void> insertUserTask = User_dao.insertUserTask(user);
 
             insertUserTask.setOnSucceeded(e -> {
@@ -169,7 +174,6 @@ public class Roles_Cltr {
             AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
         }
     }
-
     @FXML
     private void submitRemoveRole(ActionEvent event) {
         try {
@@ -244,7 +248,8 @@ public class Roles_Cltr {
             }
             Long roleId = Policy.GetRoleId(roleIdStr);
 
-            user = new User(roleId, username, email, password);
+            java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis()); // Today's date
+            user.SetAllFields(email, password, username, roleId, currentDate);
             user.setUserId(currentUserId);
             Task<Void> updateUserTask = User_dao.updateUserTask(user);
 
@@ -259,8 +264,7 @@ public class Roles_Cltr {
             updateUserTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
                     clearUpdateRoleFields();
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to update user: " +
-                            updateUserTask.getException().getMessage());
+                    ErrorHandler.ManageException(updateUserTask.getException());
                 });
             });
 
@@ -299,8 +303,7 @@ public class Roles_Cltr {
             getUserTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
                     vr_employeeIdSearchField.clear();
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to find user: " +
-                            getUserTask.getException().getMessage());
+                    ErrorHandler.ManageException(getUserTask.getException());
                 });
             });
 
@@ -323,8 +326,7 @@ public class Roles_Cltr {
 
             getAllUsersTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to get all users: " +
-                            getAllUsersTask.getException().getMessage());
+                    ErrorHandler.ManageException(getAllUsersTask.getException());
                 });
             });
 

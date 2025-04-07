@@ -33,11 +33,16 @@ public class Pages {
     private static Scene adminScene;
     private static Parent adminRoot;
 
+    private static Scene salesScene;
+    private static Parent salesRoot;
+
     private static Scene rolesScene;
     private static Parent rolesRoot;
 
     private static Scene loginScene;
     private static Parent loginRoot;
+
+    private static Scene[] mainMenuScene = {adminScene, salesScene};
 
     private static double width;
     private static double height;
@@ -104,10 +109,17 @@ public class Pages {
     public static Scene GetEmployeeScene() {return employeeScene;}
     public static Scene GetAdminScene() {return adminScene;}
     public static Scene GetLogInScene() {return loginScene;}
-    public static Scene GetMainMenuScene()
+    public static Scene GetMainMenuScene(String roleName)
     {
         //Change based on login
-        return loginScene;
+        for(int i =0; i<Policy.roleNames.size(); i++)
+        {
+            if(Policy.roleNames.get(i) == roleName)
+                return mainMenuScene[i];
+        }
+
+        //Error
+        return salesScene;
     }
 
 }

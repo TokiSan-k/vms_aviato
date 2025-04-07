@@ -25,6 +25,12 @@ public class Main extends Application {
 
     public static Stage currentStage = null;
     List<ServiceItem> items = new ArrayList<ServiceItem>();
+    private static String roleName;
+
+    public static String GetRoleName(){ return roleName;}
+    public static void SetRoleName(String RoleName) {
+        roleName = RoleName;
+    }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -47,7 +53,7 @@ public class Main extends Application {
 
             currentStage = primaryStage;
             primaryStage.setTitle("Admin Panel Dashboard");
-            primaryStage.setScene(Pages.GetCustomerScene());
+            primaryStage.setScene(Pages.GetAdminScene());
             primaryStage.setWidth(width);
             primaryStage.setHeight(height);
             primaryStage.setResizable(true);

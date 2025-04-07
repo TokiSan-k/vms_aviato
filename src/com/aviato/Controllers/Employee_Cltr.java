@@ -3,6 +3,7 @@ package com.aviato.Controllers;
 import com.aviato.Types.Employee; // Assuming an Employee entity class exists
 import com.aviato.Types.Vehicle;
 import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.ErrorHandler;
 import com.aviato.Utils.concurrency.Worker;
 import com.aviato.db.dao.Employee_dao;
 import com.aviato.db.dao.Vehicle_dao;
@@ -255,8 +256,7 @@ public class Employee_Cltr {
             insertEmpTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
                     clearAddEmpFields();
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to add vehicle: " +
-                            insertEmpTask.getException().getMessage());
+                    ErrorHandler.ManageException(insertEmpTask.getException());
                 });
             });
 
@@ -288,34 +288,7 @@ public class Employee_Cltr {
             deleteTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
                     re_empIdField.clear();
-                    Throwable exception = deleteTask.getException();
-                    String err ="";
-
-                    if (exception != null) {
-                        Throwable cause = exception;
-                        SQLException sqlEx = null;
-                        while (cause != null) {
-                            if (cause instanceof SQLException) {
-                                sqlEx = (SQLException) cause;
-                                break;
-                            }
-                            cause = cause.getCause();
-                        }
-
-                        if (sqlEx != null) {
-                            err = sqlEx.getMessage().split("\n")[0];
-                        } else {
-                            cause = exception;
-                            while (cause.getCause() != null) {
-                                cause = cause.getCause();
-                            }
-                            err = cause.getMessage();
-                        }
-
-                        AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Information", err);
-                    } else {
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Unknown error occurred.");
-                    }
+                    ErrorHandler.ManageException(deleteTask.getException());
                 });
             });
 
@@ -352,8 +325,7 @@ public class Employee_Cltr {
             getAllEmpTask.setOnFailed(e ->
             {
                 Platform.runLater(() ->{
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Employee: " +
-                            getAllEmpTask.getException().getMessage());
+                    ErrorHandler.ManageException(getAllEmpTask.getException());
                 });
             });
 
@@ -399,8 +371,9 @@ public class Employee_Cltr {
             });
 
             getEmpTask.setOnFailed(e -> {
-                Platform.runLater(() ->
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", getEmpTask.getException().getMessage()));
+                Platform.runLater(() ->{
+                    ErrorHandler.ManageException(getEmpTask.getException());
+                });
             });
 
             //getEmpTask.setOnFinished(e -> showLoading(false));
@@ -526,8 +499,7 @@ public class Employee_Cltr {
                 Platform.runLater(() ->{
                     ClearAllMEFields();
                     SetEditableMEFields(false);
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Modify Employee: " +
-                            updateEmpTask.getException().getMessage());
+                    ErrorHandler.ManageException(updateEmpTask.getException());
                 });
             });
 
@@ -569,8 +541,7 @@ public class Employee_Cltr {
             getAllEmpTask.setOnFailed(e ->
             {
                 Platform.runLater(() ->{
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Employee: " +
-                            getAllEmpTask.getException().getMessage());
+                    ErrorHandler.ManageException(getAllEmpTask.getException());
                 });
             });
 

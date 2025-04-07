@@ -1,10 +1,18 @@
 package com.aviato.Controllers;
 
+import com.aviato.Main;
+import com.aviato.Types.Pages;
+import com.aviato.Types.User;
+import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.concurrency.Worker;
+import com.aviato.db.dao.User_dao;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 public class Login_Cltr {
 
@@ -18,32 +26,59 @@ public class Login_Cltr {
     @FXML
     private Button loginButton;
 
+    @FXML
+    public void initialize() {
+        // Any initialization logic can go here (e.g., setting default styles or listeners)
+    }
+
     // Method to handle the login button action
     @FXML
-    private void handleLogin() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+    private void handleLogin(ActionEvent event) {
+        try {
+            String email = usernameField.getText().trim();
+            String password = passwordField.getText().trim();
 
-        // Basic validation: check if fields are empty
-        if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Error", "Please fill in both username and password.");
-            return;
-        }
+            // Basic validation: check if fields are empty
+            if (email.isEmpty() || password.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please fill in both email and password.");
+                return;
+            }
 
-        // Example login logic (replace with your actual authentication logic)
-        if (username.equals("admin") && password.equals("password123")) {
-            showAlert("Success", "Login successful! Welcome, " + username + "!");
-        } else {
-            showAlert("Error", "Invalid username or password.");
+            // Create a task to authenticate the user via the stored procedure
+            Task<String> authenticateTask = User_dao.authenticateUserTask(email, password);
+
+            authenticateTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    String roleName = authenticateTask.getValue();
+                    if (roleName != null && !roleName.isEmpty()) {
+                        // Successful login
+                        clearFields();
+                        Main.SetRoleName(roleName);
+                        Main.currentStage.setScene(Pages.GetMainMenuScene(roleName));
+                    } else {
+                        // This shouldn't happen with the procedure, but as a fallback
+                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Authentication failed.");
+                    }
+                });
+            });
+
+            authenticateTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    clearFields();
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error",
+                            "Login failed: " + authenticateTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(authenticateTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
         }
     }
 
-    // Utility method to show alerts
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+    // Utility method to clear input fields
+    private void clearFields() {
+        usernameField.clear();
+        passwordField.clear();
     }
 }

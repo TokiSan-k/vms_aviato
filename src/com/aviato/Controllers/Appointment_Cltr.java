@@ -2,6 +2,7 @@ package com.aviato.Controllers;
 
 import com.aviato.Types.Appointment;
 import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.ErrorHandler;
 import com.aviato.Utils.concurrency.Worker;
 import com.aviato.db.dao.Appointment_dao;
 import javafx.application.Platform;
@@ -198,8 +199,7 @@ public class Appointment_Cltr {
             scheduleTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
                     clearAddAppFields();
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to schedule appointment: " +
-                            scheduleTask.getException().getMessage());
+                    ErrorHandler.ManageException(scheduleTask.getException());
                 });
             });
 
@@ -230,34 +230,7 @@ public class Appointment_Cltr {
             deleteTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
                     ra_appIdField.clear();
-                    Throwable exception = deleteTask.getException();
-                    String err = "";
-
-                    if (exception != null) {
-                        Throwable cause = exception;
-                        SQLException sqlEx = null;
-                        while (cause != null) {
-                            if (cause instanceof SQLException) {
-                                sqlEx = (SQLException) cause;
-                                break;
-                            }
-                            cause = cause.getCause();
-                        }
-
-                        if (sqlEx != null) {
-                            err = sqlEx.getMessage().split("\n")[0];
-                        } else {
-                            cause = exception;
-                            while (cause.getCause() != null) {
-                                cause = cause.getCause();
-                            }
-                            err = cause.getMessage();
-                        }
-
-                        AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Information", err);
-                    } else {
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Unknown error occurred.");
-                    }
+                    ErrorHandler.ManageException(deleteTask.getException());
                 });
             });
 
@@ -292,8 +265,7 @@ public class Appointment_Cltr {
 
             getAllTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to get all appointments: " +
-                            getAllTask.getException().getMessage());
+                    ErrorHandler.ManageException(getAllTask.getException());
                 });
             });
 
@@ -334,8 +306,9 @@ public class Appointment_Cltr {
             });
 
             getAppTask.setOnFailed(e -> {
-                Platform.runLater(() ->
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", getAppTask.getException().getMessage()));
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getAppTask.getException());
+                });
             });
 
             Worker.submitTask(getAppTask);
@@ -439,8 +412,7 @@ public class Appointment_Cltr {
                 Platform.runLater(() -> {
                     clearAllMAFields();
                     setEditableMAFields(false);
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to update appointment status: " +
-                            updateTask.getException().getMessage());
+                    ErrorHandler.ManageException(updateTask.getException());
                 });
             });
 
@@ -476,8 +448,7 @@ public class Appointment_Cltr {
 
             getAllTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to get all appointments: " +
-                            getAllTask.getException().getMessage());
+                    ErrorHandler.ManageException(getAllTask.getException());
                 });
             });
 

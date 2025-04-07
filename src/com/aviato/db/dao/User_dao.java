@@ -133,4 +133,34 @@ public class User_dao {
             }
         };
     }
+
+    public static Task<String> authenticateUserTask(String email, String password) {
+        return new Task<String>() {
+            @Override
+            protected String call() throws Exception {
+                Transaction transaction = null;
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    transaction = session.beginTransaction();
+                    ProcedureCall procedureCall = session.getNamedProcedureCall("AuthenticateUser");
+                    procedureCall.setParameter("p_email", email);
+                    procedureCall.setParameter("p_password", password);
+
+                    procedureCall.execute();
+                    String roleName = (String) procedureCall.getOutputParameterValue("p_role_name");
+                    transaction.commit();
+
+                    if (roleName == null) {
+                        
+                        throw new Exception("Authentication failed: Invalid email or password");
+                    }
+                    return roleName;
+                } catch (Exception ex) {
+                    if (transaction != null) {
+                        transaction.rollback();
+                    }
+                    throw ex;
+                }
+            }
+        };
+    }
 }

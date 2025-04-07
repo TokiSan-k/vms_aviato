@@ -5,6 +5,7 @@ import com.aviato.Utils.AlertBox;
 
 import com.aviato.Types.Customer;
 import com.aviato.Types.Pages;
+import com.aviato.Utils.ErrorHandler;
 import com.aviato.Utils.concurrency.Worker;
 import com.aviato.Utils.Field;
 import com.aviato.db.dao.Customer_dao;
@@ -25,6 +26,7 @@ import javafx.scene.text.Text;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.StoredProcedureQuery;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -223,7 +225,7 @@ public class Customer_Cltr
     @FXML
     private void handleMainMenuButton(ActionEvent event)
     {
-        Main.currentStage.setScene(Pages.GetMainMenuScene());
+        Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
     }
 
     private int currentRCFieldIdx = 0;
@@ -250,33 +252,35 @@ public class Customer_Cltr
     // Add Customer Submit Handler
     @FXML
     private void submitAddCustomer(ActionEvent event) {
-        String firstName = ac_firstNameField.getText();
-        String lastName = ac_LastNameField.getText();
-        String fullName = firstName + " " + lastName;
-        String email = ac_emailField.getText();
-        String phone = ac_phoneField.getText();
-        String address = ac_addressField.getText();
+        try {
+            String firstName = ac_firstNameField.getText();
+            String lastName = ac_LastNameField.getText();
+            String fullName = firstName + " " + lastName;
+            String email = ac_emailField.getText();
+            String phone = ac_phoneField.getText();
+            String address = ac_addressField.getText();
 
-        //ReUsing - No Garbage Collection
-        customer.SetAllFields(fullName, lastName, phone, email, address);
-        Task<Void> insertTask = Customer_dao.insertCustomerTask(customer);
+            customer.SetAllFields(fullName, lastName, phone, email, address);
+            Task<Void> insertTask = Customer_dao.insertCustomerTask(customer);
 
-        insertTask.setOnSucceeded(e -> {
-            Platform.runLater(() -> {
-                ClearAddCustFields();
-                AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer added successfully");
-            });
-        });
-
-        insertTask.setOnFailed(e -> {
-            Platform.runLater(() ->{
+            insertTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
                     ClearAddCustFields();
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to add customer: " +
-                            insertTask.getException().getMessage());
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer added successfully");
+                });
             });
-        });
 
-        Worker.submitTask(insertTask);
+            insertTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ClearAddCustFields();
+                    ErrorHandler.ManageException(insertTask.getException());
+                });
+            });
+
+            Worker.submitTask(insertTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     // Remove Customer Event Handlers
@@ -294,21 +298,19 @@ public class Customer_Cltr
             deleteTask.setOnSucceeded(e -> {
                 Platform.runLater(() -> {
                     rc_SwapField.clear();
-                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Information", "Customer removed successful");
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer removed successfully");
                 });
             });
 
             deleteTask.setOnFailed(e -> {
-                Platform.runLater(() ->
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove customer: " +
-                                deleteTask.getException().getMessage()));
+                Platform.runLater(() -> {
+                    rc_SwapField.clear();
+                    ErrorHandler.ManageException(deleteTask.getException());
+                });
             });
 
-            //deleteTask.setOnFinished(e -> showLoading(false));
             Worker.submitTask(deleteTask);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
         }
     }
@@ -340,9 +342,9 @@ public class Customer_Cltr
             });
 
             getCustTask.setOnFailed(e -> {
-                Platform.runLater(() ->
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove customer: " +
-                                getCustTask.getException().getMessage()));
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getCustTask.getException());
+                });
             });
 
             //getCustTask.setOnFinished(e -> showLoading(false));
@@ -442,23 +444,19 @@ public class Customer_Cltr
             updateCustTask.setOnSucceeded(e -> {
                 Platform.runLater(() -> {
                     ClearAllMCFields();
-                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer Modified successfully");
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer modified successfully");
                 });
             });
 
             updateCustTask.setOnFailed(e -> {
-                Platform.runLater(() ->{
+                Platform.runLater(() -> {
                     ClearAllMCFields();
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove customer: " +
-                            updateCustTask.getException().getMessage());
+                    ErrorHandler.ManageException(updateCustTask.getException());
                 });
             });
 
-            //getCustTask.setOnFinished(e -> showLoading(false));
             Worker.submitTask(updateCustTask);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
         }
     }
@@ -472,24 +470,23 @@ public class Customer_Cltr
             }
             Long custId = Long.parseLong(vcId);
 
-            Task<Customer> getCustTask = Customer_dao.getCustomerTask(custId);
-            getCustTask.setOnSucceeded(e ->
+            Task<Customer> getVCustTask = Customer_dao.getCustomerTask(custId);
+            getVCustTask.setOnSucceeded(e ->
             {
                 Platform.runLater(() -> {
                     vc_customerList.clear();
-                    vc_customerList.addAll(getCustTask.getValue());
+                    vc_customerList.addAll(getVCustTask.getValue());
                     AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer Modified successfully");
                 });
             });
 
-            getCustTask.setOnFailed(e ->
+            getVCustTask.setOnFailed(e ->
             {
                 Platform.runLater(() ->{
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Customer: " +
-                            getCustTask.getException().getMessage());
+                    ErrorHandler.ManageException(getVCustTask.getException());
                 });
             });
-            Worker.submitTask(getCustTask);
+            Worker.submitTask(getVCustTask);
         }
         catch (Exception ex)
         {
@@ -499,31 +496,25 @@ public class Customer_Cltr
 
     @FXML
     private void showAllCustomers(ActionEvent event) {
-        try{
-            System.out.println("VALL");
+        try {
             Task<List<Customer>> getAllCustTask = Customer_dao.getAllCustomersTask();
-            getAllCustTask.setOnSucceeded(e ->
-            {
+            getAllCustTask.setOnSucceeded(e -> {
                 Platform.runLater(() -> {
                     vc_customerList.clear();
                     vc_customerList.addAll(getAllCustTask.getValue());
-                    List<Customer> custs = getAllCustTask.getValue();
-                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer Modified successfully");
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "All customers retrieved successfully");
                 });
             });
 
-            getAllCustTask.setOnFailed(e ->
-            {
-                Platform.runLater(() ->{
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to Get All Customer: " +
-                            getAllCustTask.getException().getMessage());
+            getAllCustTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getAllCustTask.getException());
                 });
             });
 
             Worker.submitTask(getAllCustTask);
-
-        } catch (Exception e) {
-            AlertBox.ShowAlert(Alert.AlertType.ERROR,"Error", e.getMessage());
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
         }
     }
 

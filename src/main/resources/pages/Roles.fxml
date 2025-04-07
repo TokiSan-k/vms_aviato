@@ -105,15 +105,15 @@
                                                 <Text fx:id="ur_updateRoleTitle" text="Update A User" />
                                                 <VBox spacing="10.0">
                                                     <children>
-                                                        <HBox alignment="CENTER_LEFT" styleClass="updateRoleField">
+                                                        <HBox alignment="CENTER_LEFT" styleClass="updateUsername">
                                                             <Text text="Username:" />
                                                             <TextField fx:id="ur_usernameField" styleClass="updateRoleInputField" />
                                                         </HBox>
-                                                        <HBox alignment="CENTER_LEFT" styleClass="updateRoleField">
+                                                        <HBox alignment="CENTER_LEFT" styleClass="updatePassword">
                                                             <Text text="Password:" />
                                                             <TextField fx:id="ur_passwordField" styleClass="updateRoleInputField" />
                                                         </HBox>
-                                                        <HBox alignment="CENTER_LEFT" styleClass="updateRoleField">
+                                                        <HBox alignment="CENTER_LEFT" styleClass="updateEmailId">
                                                             <Text text="Email ID:" />
                                                             <TextField fx:id="ur_emailField" styleClass="updateRoleInputField" />
                                                         </HBox>

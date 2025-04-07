@@ -92,6 +92,7 @@
 
 .remove-service-section {
     -fx-padding: 0 0 10px 0; /* Bottom padding only */
+    -fx-font-size: 14;
 }
 
 .Search {
@@ -200,22 +201,22 @@
 
 .addSvcTypeField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 10;
+    -fx-padding: 0 0 0 0;
 }
 
 .addSvcDateField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 6;
+    -fx-padding: 0 0 0 2;
 }
 
 .addSvcStatusField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 32;
+    -fx-padding: 0 0 0 46;
 }
 
 .addSvcCostField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 44;
+    -fx-padding: 0 0 0 58;
 }
 
 .addFieldButton {
@@ -274,22 +275,22 @@
 
 .modSvcType {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 10;
+    -fx-padding: 0 0 0 0;
 }
 
 .modSvcDate {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 6;
+    -fx-padding: 0 0 0 2;
 }
 
 .modSvcStatus {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 32;
+    -fx-padding: 0 0 0 46;
 }
 
 .modSvcCost {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 44;
+    -fx-padding: 0 0 0 58;
 }
 
 .viewSvcContainer {
@@ -316,15 +317,15 @@
 
 .itemsUsedServiceIdField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 20;
+    -fx-padding: 0 0 0 30;
 }
 
 .itemsUsedItemIdField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 28;
+    -fx-padding: 0 0 0 48;
 }
 
 .itemsUsedQuantityField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 2;
+    -fx-padding: 0 0 0 0;
 }

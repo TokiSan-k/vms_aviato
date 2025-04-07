@@ -69,12 +69,12 @@
 
 .addInvoiceIdField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 20;
+    -fx-padding: 0 0 0 48;
 }
 
 .addAmountPaidField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 5;
+    -fx-padding: 0 0 0 28;
 }
 
 .addPaymentMethodField {
@@ -84,7 +84,7 @@
 
 .addStatusField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 40;
+    -fx-padding: 0 0 0 74;
 }
 
 .addPaymentButton {
@@ -211,7 +211,7 @@
 
 .updateStatusField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 20;
+    -fx-padding: 0 0 0 0;
 }
 
 .updateStatusSubmitButton {

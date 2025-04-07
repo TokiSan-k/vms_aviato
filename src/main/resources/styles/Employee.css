@@ -92,6 +92,7 @@
 
 .remove-employee-section {
     -fx-padding: 0 0 10px 0; /* Bottom padding only */
+    -fx-font-size: 14;
 }
 
 .Search {
@@ -200,32 +201,32 @@
 
 .addEmpNameField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 35;
+    -fx-padding: 0 0 0 58;
 }
 
 .addPositionField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 14;
+    -fx-padding: 0 0 0 45;
 }
 
 .addPhoneField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 28;
+    -fx-padding: 0 0 0 55;
 }
 
 .addEmailField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 32;
+    -fx-padding: 0 0 0 62;
 }
 
 .addSalaryField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 26;
+    -fx-padding: 0 0 0 57;
 }
 
 .addHireDateField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 6;
+    -fx-padding: 0 0 0 35;
 }
 
 .addHoursWorkedField {
@@ -289,32 +290,32 @@
 
 .modEmpName {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 35;
+    -fx-padding: 0 0 0 58;
 }
 
 .modEmpPosition {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 14;
+    -fx-padding: 0 0 0 43;
 }
 
 .modEmpPhone {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 28;
+    -fx-padding: 0 0 0 55;
 }
 
 .modEmpEmail {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 32;
+    -fx-padding: 0 0 0 60;
 }
 
 .modEmpSalary {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 26;
+    -fx-padding: 0 0 0 56;
 }
 
 .modEmpHireDate {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 6;
+    -fx-padding: 0 0 0 33;
 }
 
 .modEmpHoursWorked {

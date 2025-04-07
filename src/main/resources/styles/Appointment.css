@@ -92,6 +92,7 @@
 
 .remove-appointment-section {
     -fx-padding: 0 0 10px 0; /* Bottom padding only */
+    -fx-font-size: 14;
 }
 
 .Search {
@@ -200,37 +201,37 @@
 
 .addCustIdField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 14;
+    -fx-padding: 0 0 0 0;
 }
 
 .addVehicleIdField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 18;
+    -fx-padding: 0 0 0 16;
 }
 
 .addAppDateField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 42;
+    -fx-padding: 0 0 0 50;
 }
 
 .addAppTimeField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 38;
+    -fx-padding: 0 0 0 50;
 }
 
 .addStatusField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 32;
+    -fx-padding: 0 0 0 42;
 }
 
 .addServiceIdField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 12;
+    -fx-padding: 0 0 0 16;
 }
 
 .addEmpIdField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 10;
+    -fx-padding: 0 0 0 0;
 }
 
 .addFieldButton {
@@ -289,37 +290,37 @@
 
 .modCustId {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 14;
+    -fx-padding: 0 0 0 0;
 }
 
 .modVehicleId {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 18;
+    -fx-padding: 0 0 0 16;
 }
 
 .modAppDate {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 42;
+    -fx-padding: 0 0 0 50;
 }
 
 .modAppTime {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 38;
+    -fx-padding: 0 0 0 50;
 }
 
 .modStatus {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 32;
+    -fx-padding: 0 0 0 42;
 }
 
 .modServiceId {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 12;
+    -fx-padding: 0 0 0 16;
 }
 
 .modEmpId {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 10;
+    -fx-padding: 0 0 0 0;
 }
 
 .viewAppContainer {

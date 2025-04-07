@@ -9,9 +9,19 @@
     -fx-font-size: 20;
 }
 
-.addRoleNameField, .addRolePasswordField, .addRoleEmailField {
+.addRoleNameField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 6;
+    -fx-padding: 0 0 0 20;
+}
+
+.addRoleEmailField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 34;
+}
+
+.addRolePasswordField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 24;
 }
 
 .addRoleInputField {
@@ -79,6 +89,7 @@
 
 .remove-role-section {
     -fx-padding: 0 0 10px 0;
+    -fx-font-size: 14;
 }
 
 .Search {
@@ -103,9 +114,24 @@
     -fx-text-fill: #5E5E5E;
 }
 
+.updateUsername{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 0;
+}
+
+.updatePassword{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 4;
+}
+
+.updateEmailId{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 14;
+}
+
 .updateRoleField {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 6;
+    -fx-padding: 0 0 0 42;
 }
 
 .updateRoleInputField {

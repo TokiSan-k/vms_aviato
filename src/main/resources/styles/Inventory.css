@@ -11,7 +11,7 @@
 
 .addItemNameField{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 6;
+    -fx-padding: 0 0 0 12;
 }
 
 .addItemInputField{
@@ -21,12 +21,16 @@
 
 .addQuantityField{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 44;
+    -fx-padding: 0 0 0 26;
 }
 
 .addQuantityInputField{
     -fx-min-width: 400;
     -fx-min-height: 25;
+}
+
+.addPPUField{
+    -fx-padding: 0 0 0 0;
 }
 
 .addPPUInputField{
@@ -95,6 +99,7 @@
 
 .remove-item-section {
     -fx-padding: 0 0 10px 0; /* Bottom padding only */
+    -fx-font-size: 14   ;
 }
 
 .Search {
@@ -223,7 +228,7 @@
 
 .modItemName{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 5;
+    -fx-padding: 0 0 0 18;
 }
 
 .modItemButtons{
@@ -239,7 +244,7 @@
 
 .modItemQuantity{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 43;
+    -fx-padding: 0 0 0 34;
 }
 
 .modItemPPU{

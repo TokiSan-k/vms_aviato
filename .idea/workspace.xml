@@ -6,30 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="Minor Changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Appointment_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Appointment_Cltr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Employee_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Employee_Cltr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Inventory_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Inventory_Cltr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Payments_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Payments_Cltr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Roles_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Roles_Cltr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Service_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Service_Cltr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Vehicle_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Vehicle_Cltr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Pages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Pages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/RoleItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/dao/Appointment_dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/dao/Appointment_dao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/dao/Employee_dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/dao/Employee_dao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/dao/Inventory_dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/dao/Inventory_dao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/dao/Service_dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/dao/Service_dao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Appointment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Appointment.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Employee.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Employee.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Inventory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Inventory.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Payment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Payment.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Roles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Roles.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Service.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Service.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Appointment.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Appointment.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Employee.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Employee.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Inventory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Inventory.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Payments.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Payments.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Roles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Roles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Service.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Service.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Vehicle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Vehicle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

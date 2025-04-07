@@ -62,7 +62,7 @@
 
 .addLicencePlateField{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 8;
+    -fx-padding: 0 0 0 0;
 }
 
 .addLicencePlateInputField{
@@ -72,17 +72,17 @@
 
 .addMakeField{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 44;
+    -fx-padding: 0 0 0 56;
 }
 
 .addModelField{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 44;
+    -fx-padding: 0 0 0 52;
 }
 
-.addYearInputField {
-    -fx-min-width: 400;
-    -fx-min-height: 25;
+.addYearField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 60;
 }
 
 .addFieldButton{
@@ -233,7 +233,7 @@
 
 .modVehicleLicencePlate{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 5;
+    -fx-padding: 0 0 0 0;
 }
 
 .modVehicleButtons{
@@ -248,17 +248,17 @@
 
 .modVehicleMake{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 6;
+    -fx-padding: 0 0 0 54;
 }
 
 .modVehicleModel{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 43;
+    -fx-padding: 0 0 0 50;
 }
 
 .modVehicleYear {
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 43;
+    -fx-padding: 0 0 0 58;
 }
 
 .modVehicleSubmitButton{
@@ -290,4 +290,11 @@
 
 .footer{
     -fx-font-family: "Maven Pro Medium";
+}
+.vehicleSearchTextField{
+    -fx-font-size: 14;
+}
+
+.remove-vehicle-section{
+    -fx-font-size: 14;
 }

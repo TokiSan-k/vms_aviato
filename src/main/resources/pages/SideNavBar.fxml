@@ -2,145 +2,147 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
-
 <?import javafx.scene.layout.Region?>
-<VBox styleClass="sidebar" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.SideNavBar_Cltr">
+<?import javafx.scene.layout.VBox?>
+
+<VBox styleClass="sidebar" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.SideNavBar_Cltr">
     <padding>
         <Insets top="20.0" />
     </padding>
     <children>
-        <Button fx:id="sidebarCustomersButton" onAction="#handleCustomers" mnemonicParsing="false" styleClass="sidebar-button" text="Customers">
+        <Button fx:id="sidebarCustomersButton" mnemonicParsing="false" onAction="#handleCustomers" styleClass="sidebar-button" text="Customers">
             <VBox.margin>
                 <Insets top="35.0" />
             </VBox.margin>
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/Icons/team-line.png" />
+                        <Image url="@../images/Icons/team-line-grey.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarVehiclesButton" onAction="#handleVehicles" mnemonicParsing="false" styleClass="sidebar-button" text="Vehicles">
+        <Button fx:id="sidebarVehiclesButton" mnemonicParsing="false" onAction="#handleVehicles" styleClass="sidebar-button" text="Vehicles">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/Icons/car-line.png" />
+                        <Image url="@../images/Icons/car-line-grey.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarEmployeeButton" onAction="#handleEmployee" mnemonicParsing="false" styleClass="sidebar-button" text="Employee">
+        <Button fx:id="sidebarEmployeeButton" mnemonicParsing="false" onAction="#handleEmployee" styleClass="sidebar-button" text="Employee">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/Icons/team-line.png" />
+                        <Image url="@../images/Icons/user-2-fill-gery.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarServiceManagementButton" onAction="#handleServiceManagement" mnemonicParsing="false"  styleClass="sidebar-button" text="Service Management">
+        <Button fx:id="sidebarServiceManagementButton" mnemonicParsing="false" onAction="#handleServiceManagement" styleClass="sidebar-button" text="Service Management">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/Icons/tools-line.png" />
+                        <Image url="@../images/Icons/tools-line-gery.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarAppointmentsButton" onAction="#handleAppointments" mnemonicParsing="false" styleClass="sidebar-button" text="Appointments">
+        <Button fx:id="sidebarAppointmentsButton" mnemonicParsing="false" onAction="#handleAppointments" styleClass="sidebar-button" text="Appointments">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/Icons/calendar-line.png" />
+                        <Image url="@../images/Icons/calendar-line-gery.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarManageInventoryButton" onAction="#handleManageInventory" mnemonicParsing="false"  styleClass="sidebar-button" text="Manage Inventory">
+        <Button fx:id="sidebarManageInventoryButton" mnemonicParsing="false" onAction="#handleManageInventory" styleClass="sidebar-button" text="Manage Inventory">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/Icons/shopping-cart-2-line.png" />
+                        <Image url="@../images/Icons/shopping-cart-2-line-grey.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarPaymentsButton" onAction="#handlePayments" mnemonicParsing="false"  styleClass="sidebar-button" text="Payments">
+        <Button fx:id="sidebarPaymentsButton" mnemonicParsing="false" onAction="#handlePayments" styleClass="sidebar-button" text="Payments">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/Icons/money-dollar-circle-line.png" />
+                        <Image url="@../images/Icons/money-dollar-circle-line-gery.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarManageRolesButton" onAction="#handleManageRoles" mnemonicParsing="false"  styleClass="sidebar-button" text="Manage Roles">
+        <Button fx:id="sidebarManageRolesButton" mnemonicParsing="false" onAction="#handleManageRoles" styleClass="sidebar-button" text="Manage Roles">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/Icons/shield-user-line.png" />
+                        <Image url="@../images/Icons/shield-user-line-gery.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarMonthlyReportsButton" onAction="#handleMonthlyReports" mnemonicParsing="false"  styleClass="sidebar-button" text="Monthly Reports">
+        <Button fx:id="sidebarMonthlyReportsButton" mnemonicParsing="false" onAction="#handleMonthlyReports" styleClass="sidebar-button" text="Monthly Reports">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/Icons/reports.png" />
+                        <Image url="@../images/Icons/file-paper-2-line-gery.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
-        <Region VBox.vgrow="ALWAYS"/>
+        <Region VBox.vgrow="ALWAYS" />
         <HBox>
             <children>
                 <Button fx:id="logOutButton" mnemonicParsing="false" styleClass="logout-button" text="Log Out">
                     <HBox.margin>
                         <Insets left="10.0" />
                     </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Icons/logout-circle-r-line-gery.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                 </Button>
             </children>
             <VBox.margin>

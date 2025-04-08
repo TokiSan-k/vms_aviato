@@ -338,3 +338,20 @@
     -fx-text-fill: #1967D2;
     -fx-background-color: #C4DAFE;
 }
+
+.generate-invoice-section {
+    -fx-padding: 0 0 10px 0; /* Bottom padding only */
+    -fx-font-size: 14;
+}
+
+.genDescription{
+    -fx-padding: 0 0 0 28;
+}
+
+.genTotalAmount{
+    -fx-padding: 0 0 0 12;
+}
+
+.generate_text-field {
+    -fx-pref-width: 800;
+}

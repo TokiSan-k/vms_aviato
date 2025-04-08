@@ -38,6 +38,7 @@
                                                 <Button fx:id="removeAppBtn" onAction="#handleAppointmentNavRemoveApp" styleClass="appButtons" text="Remove Appointment" />
                                                 <Button fx:id="modifyAppBtn" onAction="#handleAppointmentNavModifyApp" styleClass="appButtons" text="Modify Appointment" />
                                                 <Button fx:id="viewAppBtn" onAction="#handleAppointmentNavViewApp" styleClass="appButtons" text="View Appointment" />
+                                                <Button fx:id="manageInvoiceBtn" onAction="#handleManageInvoicetNavViewApp" styleClass="appButtons" text="Manage Invoice" />
                                             </children>
                                         </HBox>
 
@@ -302,6 +303,74 @@
                                             <VBox.margin>
                                                 <Insets top="5.0" />
                                             </VBox.margin>
+                                        </VBox>
+
+                                        <!--container for generate invoice-->
+                                        <VBox fx:id="appointmentContainer_4" managed="false" visible="false" styleClass="generate-invoice-section" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <VBox spacing="20.0" styleClass="Search" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text styleClass="heading" text="Generate an Invoice" />
+                                                        <VBox spacing="10.0">
+                                                            <children>
+                                                                <HBox spacing="10.0" styleClass="genAppointmentID">
+                                                                    <Text text="Appointment ID:">
+                                                                        <HBox.margin>
+                                                                            <Insets top="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Text>
+                                                                    <TextField fx:id="gen_appIdField" promptText="Enter ID" styleClass="generate_text-field" />
+                                                                </HBox>
+                                                                <HBox spacing="10.0" styleClass="genDescription">
+                                                                    <Text text="Description:">
+                                                                        <HBox.margin>
+                                                                            <Insets top="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Text>
+                                                                    <TextField fx:id="gen_descIdField" promptText="Enter Description" styleClass="generate_text-field" />
+                                                                </HBox>
+                                                                <HBox spacing="10.0" styleClass="genTotalAmount">
+                                                                    <Text text="Total Amount:">
+                                                                        <HBox.margin>
+                                                                            <Insets top="5.0" />
+                                                                        </HBox.margin>
+                                                                    </Text>
+                                                                    <TextField fx:id="gen_totalAmount" promptText="Enter Total Amount" styleClass="generate_text-field" />
+                                                                </HBox>
+                                                                <Button fx:id="gen_submitBtn" styleClass="removeFieldButton" text="Generate" />
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+
+                                                <!-- Container for Searching an Appointment -->
+<!--                                                <VBox fx:id="gen_invoiceViewContainer" spacing="20.0" styleClass="appSearchTextField" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">-->
+<!--                                                    <children>-->
+<!--                                                        <Text styleClass="AppInfo" text="Check all Invoices" />-->
+<!--                                                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">-->
+<!--                                                            <children>-->
+<!--                                                                <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">-->
+<!--                                                                    <children>-->
+<!--                                                                        <Button fx:id="gen_searchAllButton" mnemonicParsing="false" styleClass="searchAppButton" onAction="#searchAllInvoices" text="All Appointment">-->
+<!--                                                                            <HBox.margin>-->
+<!--                                                                                <Insets left="10.0" />-->
+<!--                                                                            </HBox.margin>-->
+<!--                                                                        </Button>-->
+<!--                                                                    </children>-->
+<!--                                                                </HBox>-->
+<!--                                                                <TableView fx:id="gen_appointmentTable" styleClass="table-view" VBox.vgrow="ALWAYS">-->
+<!--                                                                    <columns>-->
+<!--                                                                        <TableColumn fx:id="gen_InvoiceIdColumn" text="InvoiceID" />-->
+<!--                                                                        <TableColumn fx:id="gen_CustNameColumn" text="Customer Name" />-->
+<!--                                                                        <TableColumn fx:id="gen_CustNumColumn" text="Customer Number" />-->
+<!--                                                                        <TableColumn fx:id="gen_CustAddressColumn" text="Customer Address" />-->
+<!--                                                                    </columns>-->
+<!--                                                                </TableView>-->
+<!--                                                            </children>-->
+<!--                                                        </VBox>-->
+<!--                                                    </children>-->
+<!--                                                </VBox>-->
+                                            </children>
                                         </VBox>
                                     </children>
                                 </VBox>

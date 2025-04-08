@@ -29,7 +29,7 @@ public class ErrorHandler
                 }
                 err = cause.getMessage();
             }
-
+            exception.printStackTrace();
             AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Information", err);
         } else {
             AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Unknown error occurred.");

@@ -134,4 +134,24 @@ public class Employee_dao {
             }
         };
     }
+
+    public static Task<List<Employee>> searchEmployeesByPartialNameTask(String partialName) {
+        return new Task<List<Employee>>() {
+            @Override
+            protected List<Employee> call() throws Exception {
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    ProcedureCall procedureCall = session.getNamedProcedureCall("SearchEmployeesByPartialName");
+                    procedureCall.setParameter("p_partial_name", partialName);
+
+                    List<Employee> resultList = procedureCall.getResultList();
+                    if (resultList == null || resultList.isEmpty()) {
+                        throw new Exception("No employees found matching name: " + partialName);
+                    }
+                    return resultList;
+                } catch (Exception ex) {
+                    throw ex;
+                }
+            }
+        };
+    }
 }

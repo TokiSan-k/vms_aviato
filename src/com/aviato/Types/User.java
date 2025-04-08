@@ -54,6 +54,15 @@ import java.sql.Date;
                         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_user_id_out", type = Long.class)
                 }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "AuthenticateUser",
+                procedureName = "authenticate_user",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_email", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_password", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_role_name", type = String.class)
+                }
         )
 })
 public class User {

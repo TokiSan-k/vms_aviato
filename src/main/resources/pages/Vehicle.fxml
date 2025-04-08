@@ -122,13 +122,13 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                                                                     <children>
-                                                                        <Button fx:id="rv_tableSwapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C">
-                                                                            <HBox.margin>
-                                                                                <Insets right="5.0" />
-                                                                            </HBox.margin>
-                                                                        </Button>
-                                                                        <Text fx:id="rv_searchLabel" text="Search by Vehicle ID:" />
-                                                                        <TextField fx:id="rv_searchField" promptText="Enter Vehicle Id" HBox.hgrow="ALWAYS" />
+<!--                                                                        <Button fx:id="rv_tableSwapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C">-->
+<!--                                                                            <HBox.margin>-->
+<!--                                                                                <Insets right="5.0" />-->
+<!--                                                                            </HBox.margin>-->
+<!--                                                                        </Button>-->
+                                                                        <Text fx:id="rv_searchLabel" text="Search by Customer ID:" />
+                                                                        <TextField fx:id="rv_searchField" promptText="Enter Customer Id" HBox.hgrow="ALWAYS" />
                                                                         <Button fx:id="rv_searchButton" mnemonicParsing="false" onAction="#TableSearchRV" styleClass="searchVehicleButton" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
@@ -248,9 +248,9 @@
                                                                         <Insets right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Text fx:id="vv_SwapLabel" text="ID:" />
-                                                                <TextField fx:id="vv_SwapField" promptText="Enter Vehicle ID:" />
-                                                                <Button fx:id="vv_searchButton" mnemonicParsing="false" styleClass="viewVehicleButtons" text="S">
+                                                                <Text fx:id="vv_SwapLabel" text="Customer ID:" />
+                                                                <TextField fx:id="vv_SwapField" promptText="Enter Customer ID:" />
+                                                                <Button fx:id="vv_searchButton" mnemonicParsing="false" onAction="#searchViewVehicle" styleClass="viewVehicleButtons" text="S">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>

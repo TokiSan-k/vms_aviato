@@ -135,4 +135,25 @@ public class Customer_dao {
             }
         };
     }
+    
+    public static Task<List<Customer>> searchCustomersByPartialNameTask(String searchTerm) {
+        return new Task<List<Customer>>() {
+            @Override
+            protected List<Customer> call() throws Exception {
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    ProcedureCall procedureCall = session.createStoredProcedureCall("CustomerSearchByPartialName", Customer.class);
+                    procedureCall.registerParameter("p_SearchTerm", String.class, ParameterMode.IN).bindValue(searchTerm);
+                    procedureCall.registerParameter("p_Result", void.class, ParameterMode.REF_CURSOR);
+
+                    List<Customer> resultList = procedureCall.getResultList();
+                    if (resultList == null || resultList.isEmpty()) {
+                        throw new Exception("No customers found matching: " + searchTerm);
+                    }
+                    return resultList;
+                } catch (Exception ex) {
+                    throw ex;
+                }
+            }
+        };
+    }
 }

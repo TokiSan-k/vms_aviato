@@ -58,6 +58,15 @@ import java.sql.Date;
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_emp_id", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
                 }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "SearchEmployeesByPartialName",
+                procedureName = "employee_search_by_partial_name",
+                resultClasses = Employee.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_partial_name", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
+                }
         )
 })
 public class Employee {

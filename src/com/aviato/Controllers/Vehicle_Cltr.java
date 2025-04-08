@@ -343,11 +343,37 @@ public class Vehicle_Cltr {
 
     @FXML
     private void TableSearchRV(ActionEvent event) {
-        String searchTerm = rv_searchField.getText();
-        //Cust Id
-        //Vehicle Id
+        try {
+            String searchTerm = vv_SwapField.getText();
+            if (searchTerm.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "CustomerID cannot be empty!");
+                return;
+            }
+            try {
+                Long customerId = Long.parseLong(searchTerm);
+                Task<List<Vehicle>> searchTask = Vehicle_dao.searchVehiclesByCustomerIdTask(customerId);
 
-        //Show OutPut in Table
+                searchTask.setOnSucceeded(e -> {
+                    Platform.runLater(() -> {
+                        rv_vehicleList.clear();
+                        rv_vehicleList.addAll(searchTask.getValue());
+                        rv_searchField.clear();
+                    });
+                });
+
+                searchTask.setOnFailed(e -> {
+                    Platform.runLater(() -> {
+                        ErrorHandler.ManageException(searchTask.getException());
+                    });
+                });
+
+                Worker.submitTask(searchTask);
+            } catch (NumberFormatException ex) {
+                AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Please enter a valid Customer ID");
+            }
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", ex.getMessage());
+        }
     }
 
     @FXML
@@ -510,8 +536,37 @@ public class Vehicle_Cltr {
 
     @FXML
     private void searchViewVehicle(ActionEvent event) {
-        String field = vv_SwapField.getText();
-        // Search logic would go here
+        try {
+            String searchTerm = vv_SwapField.getText();
+            if (searchTerm.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "CustomerID cannot be empty!");
+                return;
+            }
+            try {
+                Long customerId = Long.parseLong(searchTerm);
+                Task<List<Vehicle>> searchTask = Vehicle_dao.searchVehiclesByCustomerIdTask(customerId);
+
+                searchTask.setOnSucceeded(e -> {
+                    Platform.runLater(() -> {
+                        vv_vehicleList.clear();
+                        vv_vehicleList.addAll(searchTask.getValue());
+                        vv_SwapField.clear();
+                    });
+                });
+
+                searchTask.setOnFailed(e -> {
+                    Platform.runLater(() -> {
+                        ErrorHandler.ManageException(searchTask.getException());
+                    });
+                });
+
+                Worker.submitTask(searchTask);
+            } catch (NumberFormatException ex) {
+                AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Please enter a valid Customer ID");
+            }
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", ex.getMessage());
+        }
     }
 
     @FXML

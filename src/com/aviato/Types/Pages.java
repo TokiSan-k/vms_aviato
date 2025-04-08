@@ -114,10 +114,11 @@ public class Pages {
         //Change based on login
         for(int i =0; i<Policy.roleNames.size(); i++)
         {
-            if(Policy.roleNames.get(i) == roleName)
+            String t = Policy.roleNames.get(i);
+            if(t.equals(roleName)) {
                 return mainMenuScene[i];
+            }
         }
-
         //Error
         return salesScene;
     }

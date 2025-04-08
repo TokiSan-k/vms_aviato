@@ -4,6 +4,7 @@ import com.aviato.Main;
 import com.aviato.Types.Pages;
 import com.aviato.Types.User;
 import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.ErrorHandler;
 import com.aviato.Utils.concurrency.Worker;
 import com.aviato.db.dao.User_dao;
 import javafx.application.Platform;
@@ -65,8 +66,7 @@ public class Login_Cltr {
             authenticateTask.setOnFailed(e -> {
                 Platform.runLater(() -> {
                     clearFields();
-                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error",
-                            "Login failed: " + authenticateTask.getException().getMessage());
+                    ErrorHandler.ManageException(authenticateTask.getException());
                 });
             });
 

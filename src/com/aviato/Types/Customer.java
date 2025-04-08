@@ -51,6 +51,15 @@ import javax.persistence.*;
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_cust_id", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
                 }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "SearchCustomersByPartialName",
+                procedureName = "customer_procedures.CustomerSearchByPartialName",
+                resultClasses = Customer.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_SearchTerm", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_Result", type = void.class)
+                }
         )
 })
 public class Customer
@@ -89,9 +98,9 @@ public class Customer
     public String getAddress() { return Address;}
     public void setAddress(String address) { Address = address;}
 
-    public void SetAllFields(String fName, String lName, String phone, String emailId, String address)
+    public void SetAllFields(String fName, String phone, String emailId, String address)
     {
-        Name = fName+" "+lName;
+        Name = fName;
         Phone = phone;
         EmailId = emailId;
         Address = address;

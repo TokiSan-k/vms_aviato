@@ -52,6 +52,15 @@ import javax.persistence.*;
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_vehicle_id", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
                 }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "SearchVehiclesByCustomerId",
+                procedureName = "vehicle_search_by_cust_id",
+                resultClasses = Vehicle.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_cust_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
+                }
         )
 })
 public class Vehicle {

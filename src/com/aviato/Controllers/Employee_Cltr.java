@@ -83,11 +83,22 @@ public class Employee_Cltr {
     @FXML
     private TableView<Employee> re_employeeTable;
     @FXML
-    private TableColumn<Employee, String> employeeNameColumn;
+    private TableColumn<Employee, Long> re_empIdColumn;
     @FXML
-    private TableColumn<Employee, String> employeePositionColumn;
+    private TableColumn<Employee, String> re_empNameColumn;
     @FXML
-    private TableColumn<Employee, String> employeePhoneColumn;
+    private TableColumn<Employee, String> re_positionColumn;
+    @FXML
+    private TableColumn<Employee, String> re_phoneColumn;
+    @FXML
+    private TableColumn<Employee, String> re_emailColumn;
+    @FXML
+    private TableColumn<Employee, Double> re_salaryColumn;
+    @FXML
+    private TableColumn<Employee, String> re_hireDateColumn; // Could use java.sql.Date if preferred
+    @FXML
+    private TableColumn<Employee, Double> re_hoursWorkedColumn;
+
 
     // Modify Employee Fields
     @FXML
@@ -167,9 +178,15 @@ public class Employee_Cltr {
         employeeContainers[EmpContainerEnum.AddEmployeeContainer].setManaged(true);
 
         // Set up Remove Employee table columns
-        employeeNameColumn.setCellValueFactory(new PropertyValueFactory<>("empName"));
-        employeePositionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
-        employeePhoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        re_empIdColumn.setCellValueFactory(new PropertyValueFactory<>("empId"));
+        re_empNameColumn.setCellValueFactory(new PropertyValueFactory<>("empName"));
+        re_positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
+        re_phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        re_emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        re_salaryColumn.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        re_hireDateColumn.setCellValueFactory(new PropertyValueFactory<>("hireDate"));
+        re_hoursWorkedColumn.setCellValueFactory(new PropertyValueFactory<>("hoursWorked"));
+        re_employeeTable.setItems(re_EmpList);
 
         // Set up View Employee table columns
         ve_empIdColumn.setCellValueFactory(new PropertyValueFactory<>("empId"));
@@ -299,15 +316,34 @@ public class Employee_Cltr {
     }
 
     @FXML
-    private void swapRemoveField(ActionEvent event) {
-        // Placeholder for swapping field (e.g., toggle between ID and another field)
-        System.out.println("Swap field button clicked in Remove Employee");
-    }
-
-    @FXML
     private void searchRemoveEmployee(ActionEvent event) {
-        String searchTerm = re_employeeSearchField.getText();
-        // Add search logic here
+        try {
+            String searchTerm = re_employeeSearchField.getText();
+            if (searchTerm.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Search term cannot be empty!");
+                return;
+            }
+
+            Task<List<Employee>> searchTask = Employee_dao.searchEmployeesByPartialNameTask(searchTerm);
+
+            searchTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    re_EmpList.clear();
+                    re_EmpList.addAll(searchTask.getValue());
+                    re_employeeSearchField.clear();
+                });
+            });
+
+            searchTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(searchTask.getException());
+                });
+            });
+
+            Worker.submitTask(searchTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", ex.getMessage());
+        }
     }
 
     @FXML
@@ -522,8 +558,33 @@ public class Employee_Cltr {
 
     @FXML
     private void searchViewEmployee(ActionEvent event) {
-        String searchTerm = ve_nameSearchField.getText();
-        // Add search logic here
+        try {
+            String searchTerm = ve_nameSearchField.getText();
+            if (searchTerm.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Search term cannot be empty!");
+                return;
+            }
+
+            Task<List<Employee>> searchTask = Employee_dao.searchEmployeesByPartialNameTask(searchTerm);
+
+            searchTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    ve_EmpList.clear();
+                    ve_EmpList.addAll(searchTask.getValue());
+                    ve_nameSearchField.clear();
+                });
+            });
+
+            searchTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(searchTask.getException());
+                });
+            });
+
+            Worker.submitTask(searchTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", ex.getMessage());
+        }
     }
 
     @FXML

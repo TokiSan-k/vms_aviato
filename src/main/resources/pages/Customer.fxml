@@ -48,12 +48,8 @@
                                                 <VBox spacing="10.0">
                                                     <children>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addFirstNameField">
-                                                            <Text text="First Name:" />
-                                                            <TextField fx:id="ac_firstNameField" styleClass="addCustInputField" />
-                                                        </HBox>
-                                                        <HBox alignment="CENTER_LEFT" styleClass="addLastNameField">
-                                                            <Text text="Last Name:" />
-                                                            <TextField fx:id="ac_LastNameField" styleClass="addCustInputField" />
+                                                            <Text text="Name:" />
+                                                            <TextField fx:id="ac_NameField" styleClass="addCustInputField" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addEmailField">
                                                             <Text text="Email:" />
@@ -125,9 +121,11 @@
                                                                 </HBox>
                                                                 <TableView fx:id="rc_customerTable" styleClass="table-view" VBox.vgrow="ALWAYS">
                                                                     <columns>
+                                                                        <TableColumn fx:id="customerIdColumn" text="CustId" />
                                                                         <TableColumn fx:id="customerNameColumn" text="Name" />
                                                                         <TableColumn fx:id="customerEmailColumn" text="Email" />
                                                                         <TableColumn fx:id="customerPhoneColumn" text="Phone" />
+                                                                        <TableColumn fx:id="customerAddressColumn" text="Address" />
                                                                     </columns>
                                                                 </TableView>
                                                             </children>
@@ -167,18 +165,9 @@
                                                         <VBox spacing="10.0">
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modCustFirstName">
-                                                                    <Text text="First Name:" />
-                                                                    <TextField fx:id="mc_firstNameField" disable="true" editable="false"/>
-                                                                    <Button fx:id="mc_editFirstNameButton" mnemonicParsing="false" styleClass="modCustButtons" onAction="#editFirstName" text="C">
-                                                                        <HBox.margin>
-                                                                            <Insets left="5.0" />
-                                                                        </HBox.margin>
-                                                                    </Button>
-                                                                </HBox>
-                                                                <HBox alignment="CENTER_LEFT" styleClass="modCustLastName">
-                                                                    <Text text="Last Name:" />
-                                                                    <TextField fx:id="mc_lastNameField" disable="true" editable="false"/>
-                                                                    <Button fx:id="mc_editLastNameButton" mnemonicParsing="false" styleClass="modCustButtons" onAction="#editLastName" text="C">
+                                                                    <Text text="Name:" />
+                                                                    <TextField fx:id="mc_NameField" disable="true" editable="false"/>
+                                                                    <Button fx:id="mc_editNameButton" mnemonicParsing="false" styleClass="modCustButtons" onAction="#editName" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -231,11 +220,6 @@
                                                         <!-- Search and Control Section -->
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Button fx:id="vc_SwapButton" mnemonicParsing="false" styleClass="viewCustButtons" onAction="#handleVCSwapField" text="C">
-                                                                    <HBox.margin>
-                                                                        <Insets right="5.0" />
-                                                                    </HBox.margin>
-                                                                </Button>
                                                                 <Text fx:id="vc_swapLabel" text="Enter Name:" />
                                                                 <TextField fx:id="vc_swapField" promptText="Enter customer name" />
                                                                 <Button fx:id="vc_searchButton" mnemonicParsing="false" styleClass="viewCustButtons" onAction="#searchViewCustomer" text="S">

@@ -37,6 +37,7 @@ public class Customer_Cltr
     private VBox mainContainer;
 
     private final ObservableList<Customer> vc_customerList = FXCollections.observableArrayList();
+    private final ObservableList<Customer> rc_customerList = FXCollections.observableArrayList();
 
     private VBox[] customerContainers = new VBox[4];
     private class CustContainerEnum
@@ -68,9 +69,7 @@ public class Customer_Cltr
 
     // Add Customer Fields
     @FXML
-    private TextField ac_firstNameField;
-    @FXML
-    private TextField ac_LastNameField;
+    private TextField ac_NameField;
     @FXML
     private TextField ac_emailField;
     @FXML
@@ -104,9 +103,7 @@ public class Customer_Cltr
     @FXML
     private Button mc_verifyButton;
     @FXML
-    private TextField mc_firstNameField;
-    @FXML
-    private TextField mc_lastNameField;
+    private TextField mc_NameField;
     @FXML
     private TextField mc_emailField;
     @FXML
@@ -177,7 +174,7 @@ public class Customer_Cltr
         vc_phoneColumn.setCellValueFactory(new PropertyValueFactory<>("Phone"));
         vc_addressColumn.setCellValueFactory(new PropertyValueFactory<>("Address"));
 
-
+        rc_customerTable.setItems(rc_customerList);
         vc_customerTable.setItems(vc_customerList);
     }
 
@@ -192,6 +189,7 @@ public class Customer_Cltr
 
         SetEditableMCFields(false);
         vc_customerList.clear();
+        rc_customerList.clear();
     }
 
     @FXML
@@ -242,8 +240,7 @@ public class Customer_Cltr
 
     private void ClearAddCustFields()
     {
-        ac_firstNameField.clear();
-        ac_LastNameField.clear();
+        ac_NameField.clear();
         ac_emailField.clear();
         ac_phoneField.clear();
         ac_addressField.clear();
@@ -253,14 +250,12 @@ public class Customer_Cltr
     @FXML
     private void submitAddCustomer(ActionEvent event) {
         try {
-            String firstName = ac_firstNameField.getText();
-            String lastName = ac_LastNameField.getText();
-            String fullName = firstName + " " + lastName;
+            String fullName = ac_NameField.getText();
             String email = ac_emailField.getText();
             String phone = ac_phoneField.getText();
             String address = ac_addressField.getText();
 
-            customer.SetAllFields(fullName, lastName, phone, email, address);
+            customer.SetAllFields(fullName, phone, email, address);
             Task<Void> insertTask = Customer_dao.insertCustomerTask(customer);
 
             insertTask.setOnSucceeded(e -> {
@@ -317,8 +312,33 @@ public class Customer_Cltr
 
     @FXML
     private void searchNameRCTable(ActionEvent event) {
-        String searchTerm = rc_customerSearchField.getText();
+        try {
+            String cust_name = rc_customerSearchField.getText();
+            if(cust_name.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.ERROR,"Error", "Search Name cannot be empty!");
+            }
 
+            Task<List<Customer>> getVCustTask = Customer_dao.searchCustomersByPartialNameTask(cust_name);
+            getVCustTask.setOnSucceeded(e ->
+            {
+                Platform.runLater(() -> {
+                    rc_customerList.clear();
+                    rc_customerList.addAll(getVCustTask.getValue());
+                });
+            });
+
+            getVCustTask.setOnFailed(e ->
+            {
+                Platform.runLater(() ->{
+                    ErrorHandler.ManageException(getVCustTask.getException());
+                });
+            });
+            Worker.submitTask(getVCustTask);
+        }
+        catch (Exception ex)
+        {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", ex.getMessage());
+        }
     }
 
     // Modify Customer Event Handlers
@@ -358,25 +378,17 @@ public class Customer_Cltr
 
     private void OnCustomerVerified(Customer customer)
     {
-        String[] nameParts = customer.getName().split(" ");
-        String FName = nameParts[0];
-        String LName = String.join(" ", Arrays.copyOfRange(nameParts, 1, nameParts.length));
-        mc_firstNameField.setText(FName);
-        mc_lastNameField.setText(LName);
+        mc_NameField.setText(customer.getName());
         mc_emailField.setText(customer.getEmailId());
         mc_phoneField.setText(customer.getPhone());
         mc_addressField.setText(customer.getAddress());
-
         //UI
     }
 
     private void SetEditableMCFields(boolean status)
     {
-        mc_firstNameField.setEditable(status);
-        mc_firstNameField.setDisable(!status);
-
-        mc_lastNameField.setEditable(status);
-        mc_lastNameField.setDisable(!status);
+        mc_NameField.setEditable(status);
+        mc_NameField.setDisable(!status);
 
         mc_emailField.setEditable(status);
         mc_emailField.setDisable(!status);
@@ -390,15 +402,9 @@ public class Customer_Cltr
 
 
     @FXML
-    private void editFirstName(ActionEvent event) {
-        mc_firstNameField.setEditable(true);
-        mc_firstNameField.setDisable(false);
-    }
-
-    @FXML
-    private void editLastName(ActionEvent event) {
-        mc_lastNameField.setEditable(true);
-        mc_lastNameField.setDisable(false);
+    private void editName(ActionEvent event) {
+        mc_NameField.setEditable(true);
+        mc_NameField.setDisable(false);
     }
 
     @FXML
@@ -422,8 +428,7 @@ public class Customer_Cltr
     private void ClearAllMCFields()
     {
         mc_customerIdField.clear();
-        mc_firstNameField.clear();
-        mc_lastNameField.clear();
+        mc_NameField.clear();
         mc_emailField.clear();
         mc_phoneField.clear();
         mc_addressField.clear();
@@ -434,8 +439,7 @@ public class Customer_Cltr
     private void submitModifyCustomer(ActionEvent event) {
         try {
             customer.setCustId(Long.parseLong(mc_customerIdField.getText()));
-            customer.SetAllFields(mc_firstNameField.getText(),
-                    mc_lastNameField.getText(),
+            customer.SetAllFields(mc_NameField.getText(),
                     mc_phoneField.getText(),
                     mc_emailField.getText(),
                     mc_addressField.getText());
@@ -464,13 +468,12 @@ public class Customer_Cltr
     @FXML
     private void searchViewCustomer(ActionEvent event) {
         try {
-            String vcId = vc_swapField.getText();
-            if(vcId.isEmpty()) {
-                AlertBox.ShowAlert(Alert.AlertType.ERROR,"Error", "Search ID cannot be empty!");
+            String cust_name = vc_swapField.getText();
+            if(cust_name.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.INFORMATION,"Information", "Search Name cannot be empty!");
             }
-            Long custId = Long.parseLong(vcId);
 
-            Task<Customer> getVCustTask = Customer_dao.getCustomerTask(custId);
+            Task<List<Customer>> getVCustTask = Customer_dao.searchCustomersByPartialNameTask(cust_name);
             getVCustTask.setOnSucceeded(e ->
             {
                 Platform.runLater(() -> {

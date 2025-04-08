@@ -53,7 +53,7 @@ public class Main extends Application {
 
             currentStage = primaryStage;
             primaryStage.setTitle("Admin Panel Dashboard");
-            primaryStage.setScene(Pages.GetAdminScene());
+            primaryStage.setScene(Pages.GetLogInScene());
             primaryStage.setWidth(width);
             primaryStage.setHeight(height);
             primaryStage.setResizable(true);

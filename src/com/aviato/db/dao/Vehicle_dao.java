@@ -132,4 +132,24 @@ public class Vehicle_dao {
             }
         };
     }
+
+    public static Task<List<Vehicle>> searchVehiclesByCustomerIdTask(Long customerId) {
+        return new Task<List<Vehicle>>() {
+            @Override
+            protected List<Vehicle> call() throws Exception {
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    ProcedureCall procedureCall = session.getNamedProcedureCall("SearchVehiclesByCustomerId");
+                    procedureCall.setParameter("p_cust_id", customerId);
+
+                    List<Vehicle> resultList = procedureCall.getResultList();
+                    if (resultList == null || resultList.isEmpty()) {
+                        throw new Exception("No vehicles found for customer ID: " + customerId);
+                    }
+                    return resultList;
+                } catch (Exception ex) {
+                    throw ex;
+                }
+            }
+        };
+    }
 }

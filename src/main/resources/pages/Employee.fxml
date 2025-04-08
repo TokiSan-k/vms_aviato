@@ -125,7 +125,7 @@
                                                                     <children>
                                                                         <Text fx:id="re_searchLabel" text="Search by Name:" />
                                                                         <TextField fx:id="re_employeeSearchField" promptText="Enter employee name" HBox.hgrow="ALWAYS" />
-                                                                        <Button fx:id="re_searchButton" mnemonicParsing="false" styleClass="searchEmpButton" text="Search">
+                                                                        <Button fx:id="re_searchButton" mnemonicParsing="false" onAction="#searchRemoveEmployee" styleClass="searchEmpButton" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
@@ -139,9 +139,14 @@
                                                                 </HBox>
                                                                 <TableView fx:id="re_employeeTable" styleClass="table-view" VBox.vgrow="ALWAYS">
                                                                     <columns>
-                                                                        <TableColumn fx:id="employeeNameColumn" text="Name" />
-                                                                        <TableColumn fx:id="employeePositionColumn" text="Position" />
-                                                                        <TableColumn fx:id="employeePhoneColumn" text="Phone" />
+                                                                        <TableColumn fx:id="re_empIdColumn" text="ID" />
+                                                                        <TableColumn fx:id="re_empNameColumn" text="Name" />
+                                                                        <TableColumn fx:id="re_positionColumn" text="Position" />
+                                                                        <TableColumn fx:id="re_phoneColumn" text="Phone" />
+                                                                        <TableColumn fx:id="re_emailColumn" text="Email" />
+                                                                        <TableColumn fx:id="re_salaryColumn" text="Salary" />
+                                                                        <TableColumn fx:id="re_hireDateColumn" text="Hire Date" />
+                                                                        <TableColumn fx:id="re_hoursWorkedColumn" text="Hours Worked" />
                                                                     </columns>
                                                                 </TableView>
                                                             </children>
@@ -264,14 +269,9 @@
                                                         <!-- Search and Control Section -->
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Button fx:id="ve_clearButton" mnemonicParsing="false" styleClass="viewEmpButtons" text="C">
-                                                                    <HBox.margin>
-                                                                        <Insets right="5.0" />
-                                                                    </HBox.margin>
-                                                                </Button>
                                                                 <Text fx:id="ve_nameLabel" text="Enter Name:" />
-                                                                <TextField fx:id="ve_nameSearchField" promptText="Enter employee name" />
-                                                                <Button fx:id="ve_searchButton" mnemonicParsing="false" styleClass="viewEmpButtons" text="S">
+                                                                <TextField fx:id="ve_nameSearchField" promptText="Enter Employee Name" />
+                                                                <Button fx:id="ve_searchButton" mnemonicParsing="false" onAction="#searchViewEmployee" styleClass="viewEmpButtons" text="Search">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>

@@ -42,7 +42,7 @@ public class Pages {
     private static Scene loginScene;
     private static Parent loginRoot;
 
-    private static Scene[] mainMenuScene = {adminScene, salesScene};
+    private static Scene[] mainMenuScene = new Scene[2];
 
     private static double width;
     private static double height;
@@ -89,6 +89,8 @@ public class Pages {
             rolesRoot = new FXMLLoader(Main.class.getResource("/pages/Roles.fxml")).load();
             rolesScene = new Scene(rolesRoot, width, height);
 
+            mainMenuScene[0] = adminScene;
+            mainMenuScene[1] = salesScene;
             // Debug output to verify sizes
             System.out.println("Visual Bounds - Width: " + width + ", Height: " + height);
         } catch (Exception ex) {
@@ -115,6 +117,7 @@ public class Pages {
         for(int i =0; i<Policy.roleNames.size(); i++)
         {
             String t = Policy.roleNames.get(i);
+            System.out.println(t);
             if(t.equals(roleName)) {
                 return mainMenuScene[i];
             }

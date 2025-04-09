@@ -8,6 +8,7 @@ module com.aviato {
     requires java.sql;
     requires java.naming;
     requires kernel;
+    requires layout;
 
     opens com.aviato to javafx.fxml, org.hibernate.orm.core;
     opens com.aviato.Controllers to javafx.fxml, javafx.base, org.hibernate.orm.core;

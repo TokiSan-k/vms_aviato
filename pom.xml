@@ -72,10 +72,6 @@
                 <configuration>
                     <source>22</source>
                     <target>22</target>
-                    <compilerArgs>
-                        <arg>--add-modules</arg>
-                        <arg>com.itextpdf.kernel,com.itextpdf.layout</arg>
-                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>

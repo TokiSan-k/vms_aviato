@@ -7,9 +7,7 @@
     <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="Minor Changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Pages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Pages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/dao/Customer_dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/dao/Customer_dao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

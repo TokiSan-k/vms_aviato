@@ -12,12 +12,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Customer.css" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Customer_Cltr">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Customer.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Customer_Cltr">
     <children>
         <HBox VBox.vgrow="ALWAYS">
             <children>
                 <!-- Sidebar Menu -->
-                <fx:include source="../pages/SideNavBar.fxml"/>
+                <fx:include source="../pages/SideNavBar.fxml" />
 
                 <!-- Main Container -->
                 <VBox styleClass="custMainCard" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
@@ -28,7 +28,7 @@
                                     <children>
                                         <HBox>
                                             <children>
-                                                <Button styleClass="custBackButton" onAction="#handleMainMenuButton" text="Main Menu" />
+                                                <Button onAction="#handleMainMenuButton" styleClass="custBackButton" text="Main Menu" />
                                             </children>
                                         </HBox>
                                         <!-- Navigation Bar -->
@@ -42,7 +42,7 @@
                                         </HBox>
 
                                         <!-- Container for Adding a Customer -->
-                                        <VBox fx:id="customerContainer_0" managed="false" visible="false" styleClass="addCustContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="customerContainer_0" managed="false" styleClass="addCustContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="ac_HeadingLabel" text="Add New Customer" />
                                                 <VBox spacing="10.0">
@@ -63,7 +63,7 @@
                                                             <Text text="Address:" />
                                                             <TextField fx:id="ac_addressField" styleClass="addCustInputField" />
                                                         </HBox>
-                                                        <Button styleClass="addFieldButton" onAction="#submitAddCustomer" text="Submit">
+                                                        <Button onAction="#submitAddCustomer" styleClass="addFieldButton" text="Submit">
                                                             <VBox.margin>
                                                                 <Insets top="15.0" />
                                                             </VBox.margin>
@@ -77,7 +77,7 @@
                                         </VBox>
 
                                         <!-- Container for Removing a Customer -->
-                                        <VBox fx:id="customerContainer_1" managed="false" visible="false" styleClass="remove-customer-section" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="customerContainer_1" managed="false" styleClass="remove-customer-section" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <VBox spacing="20.0" styleClass="Search" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                     <children>
@@ -112,7 +112,7 @@
                                                                     <children>
                                                                         <Text fx:id="rc_searchLabel" text="Search by Name:" />
                                                                         <TextField fx:id="rc_customerSearchField" promptText="Enter customer name" HBox.hgrow="ALWAYS" />
-                                                                        <Button fx:id="rc_searchButton" mnemonicParsing="false" styleClass="searchCustButton" onAction="#searchNameRCTable" text="Search">
+                                                                        <Button fx:id="rc_searchButton" mnemonicParsing="false" onAction="#searchNameRCTable" styleClass="searchCustButton" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
@@ -136,7 +136,7 @@
                                         </VBox>
 
                                         <!-- Container for Modifying a Customer -->
-                                        <VBox fx:id="customerContainer_2" managed="false" visible="false" styleClass="modCustContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="customerContainer_2" managed="false" styleClass="modCustContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <VBox fx:id="mc_checkCustomerIdContainer" styleClass="checkCustID" HBox.hgrow="ALWAYS">
                                                     <children>
@@ -147,7 +147,7 @@
                                                                 <TextField fx:id="mc_customerIdField" promptText="Enter customer ID" />
                                                             </children>
                                                         </HBox>
-                                                        <Button fx:id="mc_verifyButton" mnemonicParsing="false" styleClass="modCustVerifyButton" onAction="#MCverifyCustomerId" text="Verify">
+                                                        <Button fx:id="mc_verifyButton" mnemonicParsing="false" onAction="#MCverifyCustomerId" styleClass="modCustVerifyButton" text="Verify">
                                                             <HBox.margin>
                                                                 <Insets left="5.0" />
                                                             </HBox.margin>
@@ -166,8 +166,8 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modCustFirstName">
                                                                     <Text text="Name:" />
-                                                                    <TextField fx:id="mc_NameField" disable="true" editable="false"/>
-                                                                    <Button fx:id="mc_editNameButton" mnemonicParsing="false" styleClass="modCustButtons" onAction="#editName" text="C">
+                                                                    <TextField fx:id="mc_NameField" disable="true" editable="false" />
+                                                                    <Button fx:id="mc_editNameButton" mnemonicParsing="false" onAction="#editName" styleClass="modCustButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -175,8 +175,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modCustEmail">
                                                                     <Text text="Email:" />
-                                                                    <TextField fx:id="mc_emailField" disable="true" editable="false"/>
-                                                                    <Button fx:id="mc_editEmailButton" mnemonicParsing="false" styleClass="modCustButtons" onAction="#editEmail" text="C">
+                                                                    <TextField fx:id="mc_emailField" disable="true" editable="false" />
+                                                                    <Button fx:id="mc_editEmailButton" mnemonicParsing="false" onAction="#editEmail" styleClass="modCustButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -184,8 +184,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modCustPhoneNum">
                                                                     <Text text="Phone Num:" />
-                                                                    <TextField fx:id="mc_phoneField" disable="true" editable="false"/>
-                                                                    <Button fx:id="mc_editPhoneNoButton" mnemonicParsing="false" styleClass="modCustButtons" onAction="#editPhone" text="C">
+                                                                    <TextField fx:id="mc_phoneField" disable="true" editable="false" />
+                                                                    <Button fx:id="mc_editPhoneNoButton" mnemonicParsing="false" onAction="#editPhone" styleClass="modCustButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -193,14 +193,14 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modCustAddress">
                                                                     <Text text="Address:" />
-                                                                    <TextField fx:id="mc_addressField" disable="true" editable="false"/>
-                                                                    <Button fx:id="mc_editAddressButton" mnemonicParsing="false" styleClass="modCustButtons" onAction="#editAddress" text="C">
+                                                                    <TextField fx:id="mc_addressField" disable="true" editable="false" />
+                                                                    <Button fx:id="mc_editAddressButton" mnemonicParsing="false" onAction="#editAddress" styleClass="modCustButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button styleClass="modCustSubmitButton" onAction="#submitModifyCustomer" text="Submit">
+                                                                <Button onAction="#submitModifyCustomer" styleClass="modCustSubmitButton" text="Submit">
                                                    <VBox.margin>
                                                       <Insets top="15.0" />
                                                    </VBox.margin></Button>
@@ -212,7 +212,7 @@
                                         </VBox>
 
                                         <!-- Container for View Customers -->
-                                        <VBox fx:id="customerContainer_3" managed="false" visible="false"  styleClass="viewCustContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="customerContainer_3" managed="false" styleClass="viewCustContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="viewCustomerTitle" text="View All Customers" />
                                                 <VBox spacing="10.0" HBox.hgrow="ALWAYS">
@@ -222,12 +222,19 @@
                                                             <children>
                                                                 <Text fx:id="vc_swapLabel" text="Enter Name:" />
                                                                 <TextField fx:id="vc_swapField" promptText="Enter customer name" />
-                                                                <Button fx:id="vc_searchButton" mnemonicParsing="false" styleClass="viewCustButtons" onAction="#searchViewCustomer" text="S">
+                                                                <Button fx:id="vc_searchButton" mnemonicParsing="false" onAction="#searchViewCustomer" styleClass="viewCustButtons">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
+                                                   <graphic>
+                                                      <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/Icons/search-2-line-gery.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
                                                                 </Button>
-                                                                <Button fx:id="vc_allCustomersButton" mnemonicParsing="false" styleClass="viewCustButtons" onAction="#showAllCustomers" text="All Customers">
+                                                                <Button fx:id="vc_allCustomersButton" mnemonicParsing="false" onAction="#showAllCustomers" styleClass="viewCustButtons" text="All Customers">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" />
                                                                     </HBox.margin>
@@ -263,7 +270,7 @@
                 </VBox>
             </children>
         </HBox>
-        <HBox alignment="CENTER" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="NEVER" minHeight="40" prefHeight="40">
+        <HBox alignment="CENTER" minHeight="40" prefHeight="40" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="NEVER">
             <children>
                 <Label>
                     2025 © VMS|Aviato™

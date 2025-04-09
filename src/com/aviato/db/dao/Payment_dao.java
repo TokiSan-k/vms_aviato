@@ -5,8 +5,10 @@ import com.aviato.db.HibernateUtil;
 import javafx.concurrent.Task;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.procedure.ParameterRegistration;
 import org.hibernate.procedure.ProcedureCall;
 
+import java.util.Date;
 import java.util.List;
 
 public class Payment_dao {
@@ -81,6 +83,27 @@ public class Payment_dao {
                     if (transaction != null) {
                         transaction.rollback();
                     }
+                    throw ex;
+                }
+            }
+        };
+    }
+
+    public static Task<List<Payment>> getAllPaymentsTask() {
+        return new Task<List<Payment>>() {
+            @Override
+            protected List<Payment> call() throws Exception {
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    ProcedureCall procedureCall = session.getNamedProcedureCall("getAllPayment");
+
+                    // No IN parameters to set, just execute the procedure
+                    List<Payment> resultList = procedureCall.getResultList();
+                    if (resultList == null || resultList.isEmpty()) {
+                        throw new Exception("No payments in the database");
+                    }
+                    return resultList;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                     throw ex;
                 }
             }

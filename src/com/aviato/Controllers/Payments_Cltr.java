@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Payments_Cltr {
     // Containers
@@ -191,8 +192,26 @@ public class Payments_Cltr {
 
     @FXML
     private void showAllPayments(ActionEvent event) {
-        // Note: No getAllPaymentsTask exists in Payment_dao; placeholder for future implementation
-        AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Show all payments not implemented yet.");
+        try {
+            Task<List<Payment>> getAllPaymentsTask = Payment_dao.getAllPaymentsTask();
+
+            getAllPaymentsTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    vp_PaymentList.clear();
+                    vp_PaymentList.addAll(getAllPaymentsTask.getValue());
+                });
+            });
+
+            getAllPaymentsTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getAllPaymentsTask.getException());
+                });
+            });
+
+            Worker.submitTask(getAllPaymentsTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to retrieve payments: " + ex.getMessage());
+        }
     }
 
     private void onUSPaymentVerified(Payment payment) {

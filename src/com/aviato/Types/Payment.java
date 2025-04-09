@@ -33,6 +33,14 @@ import java.util.Date;
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_payment_id", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_new_status", type = String.class)
                 }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "getAllPayment",
+                procedureName = "get_all_payments",
+                resultClasses = Payment.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
+                }
         )
 })
 public class Payment {

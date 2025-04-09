@@ -12,12 +12,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Inventory.css" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Inventory_Cltr">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Inventory.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Inventory_Cltr">
     <children>
         <HBox VBox.vgrow="ALWAYS">
             <children>
                 <!-- Sidebar Menu -->
-                <fx:include source="../pages/SideNavBar.fxml"/>
+                <fx:include source="../pages/SideNavBar.fxml" />
 
                 <!-- Main Container -->
                 <VBox styleClass="invMainCard" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
@@ -42,7 +42,7 @@
                                         </HBox>
 
                                         <!-- Container for Adding an Item -->
-                                        <VBox fx:id="invContainer_0" managed="false" visible="false" styleClass="addItemContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="invContainer_0" managed="false" styleClass="addItemContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="selectedInvNavLabel" styleClass="heading" text="Add New Item" />
                                                 <VBox spacing="10.0">
@@ -53,15 +53,15 @@
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addQuantityField">
                                                             <Text text="Quantity:" />
-                                                            <TextField fx:id="ai_quantifyField" styleClass="addQuantityInputField" onKeyTyped="#handleNumericInput"/>
-                                                            <Text fx:id="ai_quantityWarning" visible="false" managed="false" text="*Input should only be a numeric value" />
+                                                            <TextField fx:id="ai_quantifyField" onKeyTyped="#handleNumericInput" styleClass="addQuantityInputField" />
+                                                            <Text fx:id="ai_quantityWarning" managed="false" text="*Input should only be a numeric value" visible="false" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addPPUField">
                                                             <Text text="Price Per Unit:" />
-                                                            <TextField fx:id="ai_PPUField" styleClass="addPPUInputField" onKeyTyped="#handlePPUInput" />
-                                                            <Text fx:id="ai_PPUWarning" visible="false" managed="false" text="*Input should only be a numeric value" />
+                                                            <TextField fx:id="ai_PPUField" onKeyTyped="#handlePPUInput" styleClass="addPPUInputField" />
+                                                            <Text fx:id="ai_PPUWarning" managed="false" text="*Input should only be a numeric value" visible="false" />
                                                         </HBox>
-                                                        <Button styleClass="submitButton" onAction="#submitAddItem" text="Submit">
+                                                        <Button onAction="#submitAddItem" styleClass="submitButton" text="Submit">
                                                             <VBox.margin>
                                                                 <Insets left="428.0" />
                                                             </VBox.margin>
@@ -75,7 +75,7 @@
                                         </VBox>
 
                                         <!-- Container for Removing an Item -->
-                                        <VBox fx:id="invContainer_1" managed="false" visible="false" styleClass="remove-item-section" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="invContainer_1" managed="false" styleClass="remove-item-section" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <VBox spacing="20.0" styleClass="Search" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                     <children>
@@ -94,7 +94,7 @@
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button styleClass="removeFieldButton" onAction="#submitRemoveItem" text="Submit" />
+                                                                <Button onAction="#submitRemoveItem" styleClass="removeFieldButton" text="Submit" />
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -115,7 +115,7 @@
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
                                                                         </Button>
-                                                                        <Button fx:id="ri_searchAllButton" mnemonicParsing="false" styleClass="searchItemButton" onAction="#searchAllRemoveItem" text="All Items">
+                                                                        <Button fx:id="ri_searchAllButton" mnemonicParsing="false" onAction="#searchAllRemoveItem" styleClass="searchItemButton" text="All Items">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
@@ -137,7 +137,7 @@
                                         </VBox>
 
                                         <!-- Container for Modifying an Inventory Item -->
-                                        <VBox fx:id="invContainer_2" managed="false" visible="false" styleClass="modInvContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="invContainer_2" managed="false" styleClass="modInvContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <VBox fx:id="mi_checkItemIdContainer" styleClass="checkItemID" HBox.hgrow="ALWAYS">
                                                     <children>
@@ -148,7 +148,7 @@
                                                                 <TextField fx:id="mi_ItemIdField" promptText="Enter Item ID" />
                                                             </children>
                                                         </HBox>
-                                                        <Button fx:id="mi_verifyButton" mnemonicParsing="false" styleClass="modItemVerifyButton" onAction="#verifyItemId" text="Verify">
+                                                        <Button fx:id="mi_verifyButton" mnemonicParsing="false" onAction="#verifyItemId" styleClass="modItemVerifyButton" text="Verify">
                                                             <HBox.margin>
                                                                 <Insets left="5.0" />
                                                             </HBox.margin>
@@ -167,8 +167,8 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modItemName">
                                                                     <Text text="Item Name:" />
-                                                                    <TextField fx:id="mi_ItemNameField" editable="false" disable="true" />
-                                                                    <Button fx:id="mi_editItemNameButton" mnemonicParsing="false" styleClass="modItemButtons" onAction="#editItemName" text="C">
+                                                                    <TextField fx:id="mi_ItemNameField" disable="true" editable="false" />
+                                                                    <Button fx:id="mi_editItemNameButton" mnemonicParsing="false" onAction="#editItemName" styleClass="modItemButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -176,8 +176,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modItemQuantity">
                                                                     <Text text="Quantity:" />
-                                                                    <TextField fx:id="mi_QuantityField" onKeyTyped="#handleModifyNumericInput" editable="false" disable="true"/>
-                                                                    <Button fx:id="mi_editQuantityButton" mnemonicParsing="false" styleClass="modItemButtons" onAction="#editQuantity" text="C">
+                                                                    <TextField fx:id="mi_QuantityField" disable="true" editable="false" onKeyTyped="#handleModifyNumericInput" />
+                                                                    <Button fx:id="mi_editQuantityButton" mnemonicParsing="false" onAction="#editQuantity" styleClass="modItemButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -185,14 +185,14 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modItemPPU">
                                                                     <Text text="Price Per Unit:" />
-                                                                    <TextField fx:id="mi_PPUField" onKeyTyped="#handleModifyPPUInput" editable="false" disable="true"/>
-                                                                    <Button fx:id="mi_editPPUButton" mnemonicParsing="false" styleClass="modItemButtons" onAction="#editPPU" text="C">
+                                                                    <TextField fx:id="mi_PPUField" disable="true" editable="false" onKeyTyped="#handleModifyPPUInput" />
+                                                                    <Button fx:id="mi_editPPUButton" mnemonicParsing="false" onAction="#editPPU" styleClass="modItemButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button styleClass="modItemSubmitButton" onAction="#submitModifyItem" text="Submit">
+                                                                <Button onAction="#submitModifyItem" styleClass="modItemSubmitButton" text="Submit">
                                                                     <VBox.margin>
                                                                         <Insets left="15.0" />
                                                                     </VBox.margin>
@@ -205,7 +205,7 @@
                                         </VBox>
 
                                         <!-- Container for View Customers -->
-                                        <VBox fx:id="invContainer_3" managed="false" visible="false" styleClass="viewInvContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="invContainer_3" managed="false" styleClass="viewInvContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="viewInvTitle" text="View All Items" />
                                                 <VBox spacing="10.0" HBox.hgrow="ALWAYS">
@@ -220,12 +220,19 @@
                                                                 </Button>
                                                                 <Text fx:id="vi_nameLabel" text="Enter Name:" />
                                                                 <TextField fx:id="vi_nameSearchField" promptText="Enter Item name" />
-                                                                <Button fx:id="vi_searchButton" mnemonicParsing="false" styleClass="viewInvButtons" text="S">
+                                                                <Button fx:id="vi_searchButton" mnemonicParsing="false" styleClass="viewInvButtons">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
+                                                   <graphic>
+                                                      <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/Icons/search-2-line-gery.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
                                                                 </Button>
-                                                                <Button fx:id="vi_allCustomersButton" mnemonicParsing="false" styleClass="viewInvButtons" onAction="#showAllItems" text="All Items">
+                                                                <Button fx:id="vi_allCustomersButton" mnemonicParsing="false" onAction="#showAllItems" styleClass="viewInvButtons" text="All Items">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" />
                                                                     </HBox.margin>
@@ -259,7 +266,7 @@
                 </VBox>
             </children>
         </HBox>
-        <HBox alignment="CENTER" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="NEVER" minHeight="40" prefHeight="40">
+        <HBox alignment="CENTER" minHeight="40" prefHeight="40" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="NEVER">
             <children>
                 <Label>
                     2025 © VMS|Aviato™

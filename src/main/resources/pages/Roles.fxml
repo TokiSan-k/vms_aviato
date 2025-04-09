@@ -7,16 +7,18 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Roles.css" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Roles_Cltr">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Roles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Roles_Cltr">
     <children>
         <HBox VBox.vgrow="ALWAYS">
             <children>
                 <!-- Sidebar Menu -->
-                <fx:include source="../pages/SideNavBar.fxml"/>
+                <fx:include source="../pages/SideNavBar.fxml" />
 
                 <!-- Main Container -->
                 <VBox styleClass="roleMainCard" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
@@ -41,7 +43,7 @@
                                         </HBox>
 
                                         <!-- Container for Adding a Role -->
-                                        <VBox fx:id="roleContainer_0" managed="false" visible="false" styleClass="addRoleContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="roleContainer_0" managed="false" styleClass="addRoleContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="selectedRoleNavLabel" styleClass="heading" text="Add New User" />
                                                 <VBox spacing="10.0">
@@ -62,7 +64,7 @@
                                                             <Text text="Role Name:" />
                                                             <ComboBox fx:id="ar_roleNameComboBox" styleClass="addRoleInputField" />
                                                         </HBox>
-                                                        <Button fx:id="ar_submitButton" styleClass="submitButton" text="Add" onAction="#submitAddRole">
+                                                        <Button fx:id="ar_submitButton" onAction="#submitAddRole" styleClass="submitButton" text="Add">
                                                             <VBox.margin>
                                                                 <Insets left="15.0" />
                                                             </VBox.margin>
@@ -76,7 +78,7 @@
                                         </VBox>
 
                                         <!-- Container for Removing a Role -->
-                                        <VBox fx:id="roleContainer_1" managed="false" visible="false" styleClass="remove-role-section" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="roleContainer_1" managed="false" styleClass="remove-role-section" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <VBox spacing="20.0" styleClass="Search" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                     <children>
@@ -91,7 +93,7 @@
                                                                     </Text>
                                                                     <TextField fx:id="rr_userEmailIdField" promptText="Enter Email" />
                                                                 </HBox>
-                                                                <Button fx:id="rr_submitButton" styleClass="removeFieldButton" text="Delete" onAction="#submitRemoveRole" />
+                                                                <Button fx:id="rr_submitButton" onAction="#submitRemoveRole" styleClass="removeFieldButton" text="Delete" />
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -100,7 +102,7 @@
                                         </VBox>
 
                                         <!-- Container for Updating a Role -->
-                                        <VBox fx:id="roleContainer_2" managed="false" visible="false" styleClass="updateRoleContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="roleContainer_2" managed="false" styleClass="updateRoleContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="ur_updateRoleTitle" text="Update A User" />
                                                 <VBox spacing="10.0">
@@ -121,7 +123,7 @@
                                                             <Text text="Role:" />
                                                             <ComboBox fx:id="ur_roleNameComboBox" styleClass="updateRoleInputField" />
                                                         </HBox>
-                                                        <Button fx:id="ur_submitButton" styleClass="submitButton" text="Update" onAction="#submitUpdateRole">
+                                                        <Button fx:id="ur_submitButton" onAction="#submitUpdateRole" styleClass="submitButton" text="Update">
                                                             <VBox.margin>
                                                                 <Insets left="428.0" />
                                                             </VBox.margin>
@@ -135,7 +137,7 @@
                                         </VBox>
 
                                         <!-- Container for Viewing Roles -->
-                                        <VBox fx:id="roleContainer_3" managed="false" visible="false" styleClass="viewRoleContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="roleContainer_3" managed="false" styleClass="viewRoleContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="viewRoleTitle" text="View All Users" />
                                                 <VBox spacing="10.0" HBox.hgrow="ALWAYS">
@@ -145,12 +147,19 @@
                                                             <children>
                                                                 <Text fx:id="vr_employeeIdLabel" text="Employee ID:" />
                                                                 <TextField fx:id="vr_employeeIdSearchField" promptText="Enter Employee ID" />
-                                                                <Button fx:id="vr_searchButton" mnemonicParsing="false" styleClass="viewRoleButtons" text="Search" onAction="#searchViewRole">
+                                                                <Button fx:id="vr_searchButton" mnemonicParsing="false" onAction="#searchViewRole" styleClass="viewRoleButtons">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
+                                                   <graphic>
+                                                      <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/Icons/search-2-line-gery.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
                                                                 </Button>
-                                                                <Button fx:id="vr_searchAllButton" mnemonicParsing="false" styleClass="viewRoleButtons" text="All Users" onAction="#showAllRoles">
+                                                                <Button fx:id="vr_searchAllButton" mnemonicParsing="false" onAction="#showAllRoles" styleClass="viewRoleButtons" text="All Users">
                                                                     <HBox.margin>
                                                                         <Insets left="15.0" right="5.0" />
                                                                     </HBox.margin>

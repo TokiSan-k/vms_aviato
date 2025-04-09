@@ -34,12 +34,17 @@
     -fx-min-width: 100;
     -fx-min-height: 20;
     -fx-padding: 10;
-    -fx-border-radius: 5;
-    -fx-border-color: black;
+    -fx-border-color: #d5d9d9;
+    -fx-border-radius: 8;
     -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER;
+    -fx-content-display: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0, 0, 4);
 }
 
 .login-button:hover {
     -fx-text-fill: #1967D2;
+    -fx-border-radius: 8;
     -fx-background-color: #C4DAFE;
 }

@@ -6,16 +6,18 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Payments.css" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Payments_Cltr">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Payments.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Payments_Cltr">
     <children>
         <HBox VBox.vgrow="ALWAYS">
             <children>
                 <!-- Sidebar Menu -->
-                <fx:include source="../pages/SideNavBar.fxml"/>
+                <fx:include source="../pages/SideNavBar.fxml" />
 
                 <!-- Main Container -->
                 <VBox styleClass="payMainCard" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
@@ -39,7 +41,7 @@
                                         </HBox>
 
                                         <!-- Container for Adding a Payment -->
-                                        <VBox fx:id="paymentContainer_0" managed="false" visible="false" styleClass="addPaymentContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="paymentContainer_0" managed="false" styleClass="addPaymentContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text text="Add New Payment" />
                                                 <VBox spacing="10.0">
@@ -60,7 +62,7 @@
                                                             <Text text="Status:" />
                                                             <TextField fx:id="ap_statusField" styleClass="addPaymentInputField" />
                                                         </HBox>
-                                                        <Button styleClass="addPaymentButton" onAction="#submitAddPayment" text="Submit">
+                                                        <Button onAction="#submitAddPayment" styleClass="addPaymentButton" text="Submit">
                                                             <VBox.margin>
                                                                 <Insets left="428.0" />
                                                             </VBox.margin>
@@ -74,7 +76,7 @@
                                         </VBox>
 
                                         <!-- Container for Updating Payment Status -->
-                                        <VBox fx:id="paymentContainer_1" managed="false" visible="false" styleClass="updateStatusContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="paymentContainer_1" managed="false" styleClass="updateStatusContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <VBox fx:id="us_checkPaymentIdContainer" styleClass="checkPaymentID" HBox.hgrow="ALWAYS">
                                                     <children>
@@ -85,7 +87,7 @@
                                                                 <TextField fx:id="us_paymentIdField" promptText="Enter payment ID" />
                                                             </children>
                                                         </HBox>
-                                                        <Button fx:id="us_verifyButton" mnemonicParsing="false" styleClass="updateStatusVerifyButton" onAction="#verifyPaymentId" text="Verify">
+                                                        <Button fx:id="us_verifyButton" mnemonicParsing="false" onAction="#verifyPaymentId" styleClass="updateStatusVerifyButton" text="Verify">
                                                             <HBox.margin>
                                                                 <Insets left="5.0" />
                                                             </HBox.margin>
@@ -106,7 +108,7 @@
                                                                     <Text text="New Status:" />
                                                                     <TextField fx:id="us_newStatusField" />
                                                                 </HBox>
-                                                                <Button styleClass="updateStatusSubmitButton" onAction="#submitUpdateStatus" text="Submit">
+                                                                <Button onAction="#submitUpdateStatus" styleClass="updateStatusSubmitButton" text="Submit">
                                                                     <VBox.margin>
                                                                         <Insets left="270.0" />
                                                                     </VBox.margin>
@@ -119,7 +121,7 @@
                                         </VBox>
 
                                         <!-- Container for Viewing Payments -->
-                                        <VBox fx:id="paymentContainer_2" managed="false" visible="false" styleClass="viewPaymentsContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="paymentContainer_2" managed="false" styleClass="viewPaymentsContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="viewPaymentsTitle" text="View All Payments" />
                                                 <VBox spacing="10.0" HBox.hgrow="ALWAYS">
@@ -134,12 +136,19 @@
                                                                 </Button>
                                                                 <Text fx:id="vp_paymentIdLabel" text="Enter Payment ID:" />
                                                                 <TextField fx:id="vp_paymentIdSearchField" promptText="Enter payment ID" />
-                                                                <Button fx:id="vp_searchButton" mnemonicParsing="false" styleClass="viewPaymentsButtons" text="S">
+                                                                <Button fx:id="vp_searchButton" mnemonicParsing="false" styleClass="viewPaymentsButtons">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
+                                                   <graphic>
+                                                      <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/Icons/search-2-line-gery.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
                                                                 </Button>
-                                                                <Button fx:id="vp_allPaymentsButton" mnemonicParsing="false" styleClass="viewPaymentsButtons" text="All Payments">
+                                                                <Button fx:id="vp_allPaymentsButton" mnemonicParsing="false" onAction="#showAllPayments" styleClass="viewPaymentsButtons" text="All Payments">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" />
                                                                     </HBox.margin>
@@ -176,7 +185,7 @@
                 </VBox>
             </children>
         </HBox>
-        <HBox alignment="CENTER" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="NEVER" minHeight="40" prefHeight="40">
+        <HBox alignment="CENTER" minHeight="40" prefHeight="40" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="NEVER">
             <children>
                 <Label>
                     2025 © VMS|Aviato™

@@ -12,12 +12,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Service.css" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Service_Cltr">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Service.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Service_Cltr">
     <children>
         <HBox VBox.vgrow="ALWAYS">
             <children>
                 <!-- Sidebar Menu -->
-                <fx:include source="../pages/SideNavBar.fxml"/>
+                <fx:include source="../pages/SideNavBar.fxml" />
 
                 <!-- Main Container -->
                 <VBox styleClass="svcMainCard" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
@@ -43,7 +43,7 @@
                                         </HBox>
 
                                         <!-- Container for Adding a Service -->
-                                        <VBox fx:id="serviceContainer_0" managed="false" visible="false" styleClass="addSvcContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="serviceContainer_0" managed="false" styleClass="addSvcContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text text="Add New Service" />
                                                 <VBox spacing="10.0">
@@ -54,7 +54,7 @@
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addSvcDateField">
                                                             <Text text="Service Date:" />
-                                                            <TextField fx:id="as_serviceDateField" styleClass="addSvcInputField" promptText="YYYY-MM-DD" />
+                                                            <TextField fx:id="as_serviceDateField" promptText="YYYY-MM-DD" styleClass="addSvcInputField" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addSvcStatusField">
                                                             <Text text="Status:" />
@@ -64,7 +64,7 @@
                                                             <Text text="Cost:" />
                                                             <TextField fx:id="as_costField" styleClass="addSvcInputField" />
                                                         </HBox>
-                                                        <Button fx:id="as_submitButton" styleClass="addFieldButton" onAction="#submitAddService" text="Submit">
+                                                        <Button fx:id="as_submitButton" onAction="#submitAddService" styleClass="addFieldButton" text="Submit">
                                                             <VBox.margin>
                                                                 <Insets left="428.0" />
                                                             </VBox.margin>
@@ -78,7 +78,7 @@
                                         </VBox>
 
                                         <!-- Container for Removing a Service -->
-                                        <VBox fx:id="serviceContainer_1" managed="false" visible="false" styleClass="remove-service-section" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="serviceContainer_1" managed="false" styleClass="remove-service-section" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <VBox spacing="20.0" styleClass="Search" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                     <children>
@@ -98,7 +98,7 @@
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button fx:id="rs_submitButton" styleClass="removeFieldButton" onAction="#submitRemoveService" text="Submit" />
+                                                                <Button fx:id="rs_submitButton" onAction="#submitRemoveService" styleClass="removeFieldButton" text="Submit" />
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -119,7 +119,7 @@
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
                                                                         </Button>
-                                                                        <Button fx:id="rs_searchAllButton" mnemonicParsing="false" styleClass="searchSvcButton" onAction="#searchAllRemoveService" text="Search">
+                                                                        <Button fx:id="rs_searchAllButton" mnemonicParsing="false" onAction="#searchAllRemoveService" styleClass="searchSvcButton" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
@@ -141,7 +141,7 @@
                                         </VBox>
 
                                         <!-- Container for Modifying a Service -->
-                                        <VBox fx:id="serviceContainer_2" managed="false" visible="false" styleClass="modSvcContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="serviceContainer_2" managed="false" styleClass="modSvcContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <VBox fx:id="ms_checkServiceIdContainer" styleClass="checkSvcID" HBox.hgrow="ALWAYS">
                                                     <children>
@@ -152,7 +152,7 @@
                                                                 <TextField fx:id="ms_serviceIdField" promptText="Enter service ID" />
                                                             </children>
                                                         </HBox>
-                                                        <Button fx:id="ms_verifyButton" mnemonicParsing="false" styleClass="modSvcVerifyButton" onAction="#verifyServiceId" text="Verify">
+                                                        <Button fx:id="ms_verifyButton" mnemonicParsing="false" onAction="#verifyServiceId" styleClass="modSvcVerifyButton" text="Verify">
                                                             <HBox.margin>
                                                                 <Insets left="5.0" />
                                                             </HBox.margin>
@@ -171,8 +171,8 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modSvcType">
                                                                     <Text text="Service Type:" />
-                                                                    <TextField fx:id="ms_serviceTypeField" editable="false" disable="true"/>
-                                                                    <Button fx:id="ms_editTypeButton" mnemonicParsing="false" styleClass="modSvcButtons" onAction="#editType" text="C">
+                                                                    <TextField fx:id="ms_serviceTypeField" disable="true" editable="false" />
+                                                                    <Button fx:id="ms_editTypeButton" mnemonicParsing="false" onAction="#editType" styleClass="modSvcButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -180,8 +180,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modSvcDate">
                                                                     <Text text="Service Date:" />
-                                                                    <TextField fx:id="ms_serviceDateField" editable="false" disable="true" />
-                                                                    <Button fx:id="ms_editDateButton" mnemonicParsing="false" styleClass="modSvcButtons" onAction="#editDate" text="C">
+                                                                    <TextField fx:id="ms_serviceDateField" disable="true" editable="false" />
+                                                                    <Button fx:id="ms_editDateButton" mnemonicParsing="false" onAction="#editDate" styleClass="modSvcButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -189,8 +189,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modSvcStatus">
                                                                     <Text text="Status:" />
-                                                                    <TextField fx:id="ms_statusField" editable="false" disable="true"/>
-                                                                    <Button fx:id="ms_editStatusButton" mnemonicParsing="false" styleClass="modSvcButtons" onAction="#editStatus" text="C">
+                                                                    <TextField fx:id="ms_statusField" disable="true" editable="false" />
+                                                                    <Button fx:id="ms_editStatusButton" mnemonicParsing="false" onAction="#editStatus" styleClass="modSvcButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -198,14 +198,14 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modSvcCost">
                                                                     <Text text="Cost:" />
-                                                                    <TextField fx:id="ms_costField" editable="false" disable="true" />
-                                                                    <Button fx:id="ms_editCostButton" mnemonicParsing="false" styleClass="modSvcButtons" onAction="#editCost" text="C">
+                                                                    <TextField fx:id="ms_costField" disable="true" editable="false" />
+                                                                    <Button fx:id="ms_editCostButton" mnemonicParsing="false" onAction="#editCost" styleClass="modSvcButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button fx:id="ms_submitButton" styleClass="modSvcSubmitButton" onAction="#submitModifyService" text="Submit">
+                                                                <Button fx:id="ms_submitButton" onAction="#submitModifyService" styleClass="modSvcSubmitButton" text="Submit">
                                                                     <VBox.margin>
                                                                         <Insets left="270.0" />
                                                                     </VBox.margin>
@@ -218,7 +218,7 @@
                                         </VBox>
 
                                         <!-- Container for Viewing Services -->
-                                        <VBox fx:id="serviceContainer_3" managed="false" visible="false" styleClass="viewSvcContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="serviceContainer_3" managed="false" styleClass="viewSvcContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="viewServiceTitle" text="View All Services" />
                                                 <VBox spacing="10.0" HBox.hgrow="ALWAYS">
@@ -233,12 +233,19 @@
                                                                 </Button>
                                                                 <Text fx:id="vs_typeLabel" text="Enter Type:" />
                                                                 <TextField fx:id="vs_serviceSearchField" promptText="Enter service type" />
-                                                                <Button fx:id="vs_searchButton" mnemonicParsing="false" styleClass="viewSvcButtons" text="S">
+                                                                <Button fx:id="vs_searchButton" mnemonicParsing="false" styleClass="viewSvcButtons">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
+                                                   <graphic>
+                                                      <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/Icons/search-2-line-gery.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
                                                                 </Button>
-                                                                <Button fx:id="vs_allServicesButton" mnemonicParsing="false" styleClass="viewSvcButtons" onAction="#showAllServices" text="All Services">
+                                                                <Button fx:id="vs_allServicesButton" mnemonicParsing="false" onAction="#showAllServices" styleClass="viewSvcButtons" text="All Services">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" />
                                                                     </HBox.margin>
@@ -263,7 +270,7 @@
                                             </VBox.margin>
                                         </VBox>
 
-                                        <VBox fx:id="serviceContainer_4" managed="false" visible="false" styleClass="itemsUsedContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="serviceContainer_4" managed="false" styleClass="itemsUsedContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="itemsUsedTitle" text="Manage Items Used in Services" />
                                                 <VBox spacing="20.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
@@ -274,17 +281,17 @@
                                                                 <Text text="Add Item Used" />
                                                                 <HBox alignment="CENTER_LEFT" styleClass="itemsUsedServiceIdField">
                                                                     <Text text="Service ID:" />
-                                                                    <TextField fx:id="iu_serviceIdField" styleClass="addSvcInputField" promptText="Enter Service ID" />
+                                                                    <TextField fx:id="iu_serviceIdField" promptText="Enter Service ID" styleClass="addSvcInputField" />
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="itemsUsedItemIdField">
                                                                     <Text text="Item ID:" />
-                                                                    <TextField fx:id="iu_itemIdField" styleClass="addSvcInputField" promptText="Enter Item ID" />
+                                                                    <TextField fx:id="iu_itemIdField" promptText="Enter Item ID" styleClass="addSvcInputField" />
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="itemsUsedQuantityField">
                                                                     <Text text="Quantity Used:" />
-                                                                    <TextField fx:id="iu_quantityField" styleClass="addSvcInputField" promptText="Enter Quantity" />
+                                                                    <TextField fx:id="iu_quantityField" promptText="Enter Quantity" styleClass="addSvcInputField" />
                                                                 </HBox>
-                                                                <Button fx:id="iu_submitButton" styleClass="addFieldButton" text="Submit" onAction="#handleAddItemUsed">
+                                                                <Button fx:id="iu_submitButton" onAction="#handleAddItemUsed" styleClass="addFieldButton" text="Submit">
                                                                     <VBox.margin>
                                                                         <Insets left="428.0" />
                                                                     </VBox.margin>
@@ -295,7 +302,7 @@
                                                         <VBox spacing="10.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                             <children>
                                                                 <Text text="Items Used in Services" />
-                                                                <Button fx:id="iu_showAllButton" styleClass="addFieldButton" text="All Items" onAction="#ShowAllItemsUsed">
+                                                                <Button fx:id="iu_showAllButton" onAction="#ShowAllItemsUsed" styleClass="addFieldButton" text="All Items">
                                                                     <VBox.margin>
                                                                         <Insets left="15.0" />
                                                                     </VBox.margin>
@@ -329,7 +336,7 @@
                 </VBox>
             </children>
         </HBox>
-        <HBox alignment="CENTER" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="NEVER" minHeight="40" prefHeight="40">
+        <HBox alignment="CENTER" minHeight="40" prefHeight="40" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="NEVER">
             <children>
                 <Label>
                     2025 © VMS|Aviato™

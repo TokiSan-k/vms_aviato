@@ -12,12 +12,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Employee.css" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Employee_Cltr">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/SideNavbar.css, @../styles/Employee.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Employee_Cltr">
     <children>
         <HBox VBox.vgrow="ALWAYS">
             <children>
                 <!-- Sidebar Menu -->
-                <fx:include source="../pages/SideNavBar.fxml"/>
+                <fx:include source="../pages/SideNavBar.fxml" />
 
                 <!-- Main Container -->
                 <VBox styleClass="empMainCard" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
@@ -42,7 +42,7 @@
                                         </HBox>
 
                                         <!-- Container for Adding an Employee -->
-                                        <VBox fx:id="employeeContainer_0" managed="false" visible="false" styleClass="addEmpContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="employeeContainer_0" managed="false" styleClass="addEmpContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text text="Add New Employee" />
                                                 <VBox spacing="10.0">
@@ -69,13 +69,13 @@
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addHireDateField">
                                                             <Text text="Hire Date:" />
-                                                            <TextField fx:id="ae_hireDateField" styleClass="addEmpInputField" promptText="YYYY-MM-DD" />
+                                                            <TextField fx:id="ae_hireDateField" promptText="YYYY-MM-DD" styleClass="addEmpInputField" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addHoursWorkedField">
                                                             <Text text="Hours Worked:" />
                                                             <TextField fx:id="ae_hoursWorkedField" styleClass="addEmpInputField" />
                                                         </HBox>
-                                                        <Button fx:id="ae_submitButton" styleClass="addFieldButton" onAction="#submitAddEmployee" text="Submit">
+                                                        <Button fx:id="ae_submitButton" onAction="#submitAddEmployee" styleClass="addFieldButton" text="Submit">
                                                             <VBox.margin>
                                                                 <Insets left="15.0" />
                                                             </VBox.margin>
@@ -89,7 +89,7 @@
                                         </VBox>
 
                                         <!-- Container for Removing an Employee -->
-                                        <VBox fx:id="employeeContainer_1" managed="false" visible="false" styleClass="remove-employee-section" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="employeeContainer_1" managed="false" styleClass="remove-employee-section" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <VBox spacing="20.0" styleClass="Search" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                     <children>
@@ -109,7 +109,7 @@
 <!--                                                                        </HBox.margin>-->
 <!--                                                                    </Button>-->
                                                                 </HBox>
-                                                                <Button fx:id="re_submitButton" styleClass="removeFieldButton" onAction="#submitRemoveEmployee" text="Submit" />
+                                                                <Button fx:id="re_submitButton" onAction="#submitRemoveEmployee" styleClass="removeFieldButton" text="Submit" />
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -130,7 +130,7 @@
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
                                                                         </Button>
-                                                                        <Button fx:id="re_searchAllButton" mnemonicParsing="false" styleClass="searchEmpButton" onAction="#searchAllRemoveEmployee" text="All Employees">
+                                                                        <Button fx:id="re_searchAllButton" mnemonicParsing="false" onAction="#searchAllRemoveEmployee" styleClass="searchEmpButton" text="All Employees">
                                                                             <HBox.margin>
                                                                                 <Insets left="10.0" />
                                                                             </HBox.margin>
@@ -157,7 +157,7 @@
                                         </VBox>
 
                                         <!-- Container for Modifying an Employee -->
-                                        <VBox fx:id="employeeContainer_2" managed="false" visible="false" styleClass="modEmpContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="employeeContainer_2" managed="false" styleClass="modEmpContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <VBox fx:id="me_checkEmployeeIdContainer" styleClass="checkEmpID" HBox.hgrow="ALWAYS">
                                                     <children>
@@ -168,7 +168,7 @@
                                                                 <TextField fx:id="me_employeeIdField" promptText="Enter employee ID" />
                                                             </children>
                                                         </HBox>
-                                                        <Button fx:id="me_verifyButton" mnemonicParsing="false" styleClass="modEmpVerifyButton" onAction="#verifyEmployeeId" text="Verify">
+                                                        <Button fx:id="me_verifyButton" mnemonicParsing="false" onAction="#verifyEmployeeId" styleClass="modEmpVerifyButton" text="Verify">
                                                             <HBox.margin>
                                                                 <Insets left="5.0" />
                                                             </HBox.margin>
@@ -187,8 +187,8 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpName">
                                                                     <Text text="Name:" />
-                                                                    <TextField fx:id="me_empNameField" editable="false" disable="true" />
-                                                                    <Button fx:id="me_editNameButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editName" text="C">
+                                                                    <TextField fx:id="me_empNameField" disable="true" editable="false" />
+                                                                    <Button fx:id="me_editNameButton" mnemonicParsing="false" onAction="#editName" styleClass="modEmpButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -196,8 +196,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpPosition">
                                                                     <Text text="Position:" />
-                                                                    <TextField fx:id="me_positionField" editable="false" disable="true" />
-                                                                    <Button fx:id="me_editPositionButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editPosition" text="C">
+                                                                    <TextField fx:id="me_positionField" disable="true" editable="false" />
+                                                                    <Button fx:id="me_editPositionButton" mnemonicParsing="false" onAction="#editPosition" styleClass="modEmpButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -205,8 +205,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpPhone">
                                                                     <Text text="Phone:" />
-                                                                    <TextField fx:id="me_phoneField" editable="false" disable="true" />
-                                                                    <Button fx:id="me_editPhoneButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editPhone" text="C">
+                                                                    <TextField fx:id="me_phoneField" disable="true" editable="false" />
+                                                                    <Button fx:id="me_editPhoneButton" mnemonicParsing="false" onAction="#editPhone" styleClass="modEmpButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -214,8 +214,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpEmail">
                                                                     <Text text="Email:" />
-                                                                    <TextField fx:id="me_emailField" editable="false" disable="true" />
-                                                                    <Button fx:id="me_editEmailButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editEmail" text="C">
+                                                                    <TextField fx:id="me_emailField" disable="true" editable="false" />
+                                                                    <Button fx:id="me_editEmailButton" mnemonicParsing="false" onAction="#editEmail" styleClass="modEmpButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -223,8 +223,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpSalary">
                                                                     <Text text="Salary:" />
-                                                                    <TextField fx:id="me_salaryField" editable="false" disable="true" />
-                                                                    <Button fx:id="me_editSalaryButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editSalary" text="C">
+                                                                    <TextField fx:id="me_salaryField" disable="true" editable="false" />
+                                                                    <Button fx:id="me_editSalaryButton" mnemonicParsing="false" onAction="#editSalary" styleClass="modEmpButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -232,8 +232,8 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpHireDate">
                                                                     <Text text="Hire Date:" />
-                                                                    <TextField fx:id="me_hireDateField" editable="false" disable="true" />
-                                                                    <Button fx:id="me_editHireDateButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editHireDate" text="C">
+                                                                    <TextField fx:id="me_hireDateField" disable="true" editable="false" />
+                                                                    <Button fx:id="me_editHireDateButton" mnemonicParsing="false" onAction="#editHireDate" styleClass="modEmpButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
@@ -241,14 +241,14 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpHoursWorked">
                                                                     <Text text="Hours Worked:" />
-                                                                    <TextField fx:id="me_hoursWorkedField" editable="false" disable="true" />
-                                                                    <Button fx:id="me_editHoursWorkedButton" mnemonicParsing="false" styleClass="modEmpButtons" onAction="#editHoursWorked" text="C">
+                                                                    <TextField fx:id="me_hoursWorkedField" disable="true" editable="false" />
+                                                                    <Button fx:id="me_editHoursWorkedButton" mnemonicParsing="false" onAction="#editHoursWorked" styleClass="modEmpButtons" text="C">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
                                                                     </Button>
                                                                 </HBox>
-                                                                <Button fx:id="me_submitButton" styleClass="modEmpSubmitButton" onAction="#submitModifyEmployee" text="Submit">
+                                                                <Button fx:id="me_submitButton" onAction="#submitModifyEmployee" styleClass="modEmpSubmitButton" text="Submit">
                                                                     <VBox.margin>
                                                                         <Insets left="270.0" />
                                                                     </VBox.margin>
@@ -261,7 +261,7 @@
                                         </VBox>
 
                                         <!-- Container for Viewing Employees -->
-                                        <VBox fx:id="employeeContainer_3" managed="false" visible="false" styleClass="viewEmpContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="employeeContainer_3" managed="false" styleClass="viewEmpContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Text fx:id="viewEmployeeTitle" text="View All Employees" />
                                                 <VBox spacing="10.0" HBox.hgrow="ALWAYS">
@@ -271,12 +271,19 @@
                                                             <children>
                                                                 <Text fx:id="ve_nameLabel" text="Enter Name:" />
                                                                 <TextField fx:id="ve_nameSearchField" promptText="Enter Employee Name" />
-                                                                <Button fx:id="ve_searchButton" mnemonicParsing="false" onAction="#searchViewEmployee" styleClass="viewEmpButtons" text="Search">
+                                                                <Button fx:id="ve_searchButton" mnemonicParsing="false" onAction="#searchViewEmployee" styleClass="viewEmpButtons">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
+                                                   <graphic>
+                                                      <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/Icons/search-2-line-gery.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
                                                                 </Button>
-                                                                <Button fx:id="ve_allEmployeesButton" mnemonicParsing="false" styleClass="viewEmpButtons" onAction="#showAllEmployees" text="All Employees">
+                                                                <Button fx:id="ve_allEmployeesButton" mnemonicParsing="false" onAction="#showAllEmployees" styleClass="viewEmpButtons" text="All Employees">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" />
                                                                     </HBox.margin>
@@ -314,7 +321,7 @@
                 </VBox>
             </children>
         </HBox>
-        <HBox alignment="CENTER" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="NEVER" minHeight="40" prefHeight="40">
+        <HBox alignment="CENTER" minHeight="40" prefHeight="40" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="NEVER">
             <children>
                 <Label>
                     2025 © VMS|Aviato™

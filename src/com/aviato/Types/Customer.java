@@ -54,7 +54,7 @@ import javax.persistence.*;
         ),
         @NamedStoredProcedureQuery(
                 name = "SearchCustomersByPartialName",
-                procedureName = "customer_procedures.CustomerSearchByPartialName",
+                procedureName = "customer_search_by_partial_name",
                 resultClasses = Customer.class,
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_SearchTerm", type = String.class),

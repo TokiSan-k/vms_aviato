@@ -141,9 +141,8 @@ public class Customer_dao {
             @Override
             protected List<Customer> call() throws Exception {
                 try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                    ProcedureCall procedureCall = session.createStoredProcedureCall("CustomerSearchByPartialName", Customer.class);
-                    procedureCall.registerParameter("p_SearchTerm", String.class, ParameterMode.IN).bindValue(searchTerm);
-                    procedureCall.registerParameter("p_Result", void.class, ParameterMode.REF_CURSOR);
+                    ProcedureCall procedureCall = session.getNamedProcedureCall("SearchCustomersByPartialName");
+                    procedureCall.setParameter("p_SearchTerm", searchTerm);
 
                     List<Customer> resultList = procedureCall.getResultList();
                     if (resultList == null || resultList.isEmpty()) {

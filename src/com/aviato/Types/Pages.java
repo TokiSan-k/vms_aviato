@@ -117,7 +117,6 @@ public class Pages {
         for(int i =0; i<Policy.roleNames.size(); i++)
         {
             String t = Policy.roleNames.get(i);
-            System.out.println(t);
             if(t.equals(roleName)) {
                 return mainMenuScene[i];
             }

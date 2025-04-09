@@ -199,7 +199,7 @@
 
 .addFirstNameField{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 6;
+    -fx-padding: 0 0 0 42;
 }
 .addLastNameField{
     -fx-spacing: 10;

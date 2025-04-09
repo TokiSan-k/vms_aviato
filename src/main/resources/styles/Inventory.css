@@ -11,7 +11,7 @@
 
 .addItemNameField{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 12;
+    -fx-padding: 0 0 0 20;
 }
 
 .addItemInputField{
@@ -21,7 +21,7 @@
 
 .addQuantityField{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 26;
+    -fx-padding: 0 0 0 36;
 }
 
 .addQuantityInputField{
@@ -30,6 +30,7 @@
 }
 
 .addPPUField{
+    -fx-spacing: 10;
     -fx-padding: 0 0 0 0;
 }
 

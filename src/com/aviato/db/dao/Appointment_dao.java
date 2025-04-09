@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.procedure.ParameterRegistration;
 import org.hibernate.procedure.ProcedureCall;
+import com.aviato.Types.InvoiceInfo;
+
 
 import java.util.List;
 
@@ -137,4 +139,38 @@ public class Appointment_dao {
             }
         };
     }
+
+
+    public static Task<InvoiceInfo> generateInvoiceTask(Long appId, String description, Double totalAmount) {
+        return new Task<InvoiceInfo>() {
+            @Override
+            protected InvoiceInfo call() throws Exception {
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    ProcedureCall call = session.getNamedProcedureCall("GenerateInvoice");
+
+                    call.setParameter("p_app_id", appId);
+                    call.setParameter("p_description", description);
+                    call.setParameter("p_total_amount", totalAmount);
+
+                    call.execute();
+
+                    return new InvoiceInfo(
+                            (Long) call.getOutputParameterValue("p_invoice_id"),
+                            (java.sql.Date) call.getOutputParameterValue("p_invoice_date"),
+                            (Double) call.getOutputParameterValue("p_total_amount_out"),
+                            (String) call.getOutputParameterValue("p_cust_name"),
+                            (String) call.getOutputParameterValue("p_address"),
+                            (String) call.getOutputParameterValue("p_email"),
+                            (String) call.getOutputParameterValue("p_contact"),
+                            (String) call.getOutputParameterValue("p_licence_plate"),
+                            (String) call.getOutputParameterValue("p_description_out")
+                    );
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw e;
+                }
+            }
+        };
+    }
+
 }

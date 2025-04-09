@@ -5,6 +5,8 @@ import com.aviato.Utils.AlertBox;
 import com.aviato.Utils.ErrorHandler;
 import com.aviato.Utils.concurrency.Worker;
 import com.aviato.db.dao.Appointment_dao;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,10 +17,24 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
+
+import com.aviato.Types.InvoiceInfo;
+//import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.*;
+import com.itextpdf.layout.properties.*;
+// Or specific imports like:
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.UnitValue;
+
 
 public class Appointment_Cltr {
     // Containers
@@ -98,6 +114,13 @@ public class Appointment_Cltr {
     @FXML private TableColumn<Appointment, String> va_statusColumn;
     @FXML private TableColumn<Appointment, Long> va_serviceIdColumn;
     @FXML private TableColumn<Appointment, Long> va_empIdColumn;
+
+    //Generate Invoice
+    @FXML private TextField gen_appIdField;
+    @FXML private TextField gen_descIdField;
+    @FXML private TextField gen_totalAmount;
+    @FXML private Button gen_submitBtn;
+
 
     private Appointment appointment = new Appointment();
     private boolean isMAVerified = false;
@@ -464,4 +487,116 @@ public class Appointment_Cltr {
             AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
         }
     }
+
+    @FXML
+    private void handleGenerateInvoice(ActionEvent event) {
+        try {
+            Long appId = Long.parseLong(gen_appIdField.getText());
+            String description = gen_descIdField.getText();
+            Double totalAmount = Double.parseDouble(gen_totalAmount.getText().trim());
+
+            Task<InvoiceInfo> generateTask = Appointment_dao.generateInvoiceTask(appId, description, totalAmount);
+
+            generateTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    InvoiceInfo info = generateTask.getValue();
+
+                    // Confirm success
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Invoice Generated",
+                            "Invoice ID: " + info.getInvoiceId() + "\nCustomer: " + info.getCustName());
+
+                    // Generate PDF
+                    generateStyledInvoice(info);
+                });
+            });
+
+            generateTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(generateTask.getException());
+                });
+            });
+
+            Worker.submitTask(generateTask);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
+        }
+    }
+
+    private void generateStyledInvoice(InvoiceInfo info) {
+        try {
+            String directory = "invoices/"; // folder relative to project root
+            File invoiceDir = new File(directory);
+            if (!invoiceDir.exists()) {
+                invoiceDir.mkdirs();
+            }
+            String[] name = info.getCustName().split(" ");
+            String fName = "";
+            for(int i =0; i<name.length;i++)
+            {
+                fName += name[i];
+            }
+            String fileName = directory + fName + info.getInvoiceId() + ".pdf";
+            PdfWriter writer = new PdfWriter(fileName);
+            System.out.println("Invoice saved at: " + new File(fileName).getAbsolutePath());
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+
+
+            // Title (now using boldFont)
+            Paragraph title = new Paragraph("INVOICE")
+                    .setFontSize(22)
+                    .setTextAlignment(TextAlignment.CENTER);
+            document.add(title);
+
+            // Invoice details
+            document.add(new Paragraph("Invoice #: " + info.getInvoiceId()));
+            document.add(new Paragraph("Date: " + info.getInvoiceDate()));
+            document.add(new Paragraph("Vehicle: " + info.getLicencePlate()));
+
+            // Billed To (bold header)
+            Paragraph billedToHeader = new Paragraph("Billed To:")
+                    .setFontSize(12);
+            document.add(billedToHeader);
+
+            document.add(new Paragraph(info.getCustName()));
+            document.add(new Paragraph(info.getAddress()));
+            document.add(new Paragraph("Email: " + info.getEmail()));
+            document.add(new Paragraph("Contact: " + info.getContact()));
+
+            // Use fully qualified names for clarity
+            float[] cols = {350F, 150F};
+            Table table = new Table(UnitValue.createPercentArray(cols))
+                    .setMarginTop(20);
+
+// iText PDF Cells (explicit package)
+            table.addHeaderCell(
+                    new com.itextpdf.layout.element.Cell()
+                            .add(new Paragraph("Description"))
+            );
+            table.addHeaderCell(
+                    new com.itextpdf.layout.element.Cell()
+                            .add(new Paragraph("Amount"))
+            );
+
+// Add data cells
+            table.addCell(new com.itextpdf.layout.element.Cell().add(new Paragraph(info.getDescription())));
+            table.addCell(new com.itextpdf.layout.element.Cell().add(new Paragraph("₹" + String.format("%.2f", info.getTotalAmount()))));
+            document.add(table);
+
+            // Footer
+            document.add(new Paragraph("2025 © VMS|Aviato™")
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setFontSize(10)
+                    .setFontColor(ColorConstants.GRAY)
+                    .setMarginTop(60));
+
+            document.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "PDF Error", "Error creating PDF: " + e.getMessage());
+        }
+    }
+
 }

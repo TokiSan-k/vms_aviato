@@ -53,7 +53,27 @@ import java.sql.Timestamp;
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_app_id", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
                 }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "GenerateInvoice",
+                procedureName = "generate_invoice",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_app_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_description", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_total_amount", type = Double.class),
+
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_invoice_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_invoice_date", type = java.sql.Date.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_total_amount_out", type = Double.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_cust_name", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_address", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_email", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_contact", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_licence_plate", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_description_out", type = String.class)
+                }
         )
+
 })
 public class Appointment {
     @Id

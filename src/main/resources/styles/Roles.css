@@ -9,6 +9,12 @@
     -fx-font-size: 20;
 }
 
+
+.addUserNameField{
+    -fx-spacing: 10;
+    -fx-padding: 0 0 0 24 ;
+}
+
 .addRoleNameField {
     -fx-spacing: 10;
     -fx-padding: 0 0 0 20;
@@ -16,12 +22,12 @@
 
 .addRoleEmailField{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 34;
+    -fx-padding: 0 0 0 38;
 }
 
 .addRolePasswordField{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 24;
+    -fx-padding: 0 0 0 28;
 }
 
 .addRoleInputField {

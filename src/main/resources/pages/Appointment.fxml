@@ -337,7 +337,7 @@
                                                                     </Text>
                                                                     <TextField fx:id="gen_totalAmount" promptText="Enter Total Amount" styleClass="generate_text-field" />
                                                                 </HBox>
-                                                                <Button fx:id="gen_submitBtn" styleClass="removeFieldButton" text="Generate" />
+                                                                <Button fx:id="gen_submitBtn" styleClass="removeFieldButton" text="Generate" onAction="#handleGenerateInvoice" />
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -383,7 +383,7 @@
                 </VBox>
             </children>
         </HBox>
-        <HBox alignment="CENTER" style="-fx-background-color: #F8F8FF;" styleClass="footer">
+        <HBox alignment="CENTER" style="-fx-background-color: #F8F8FF;" styleClass="footer" VBox.vgrow="NEVER" minHeight="40" prefHeight="40">
             <children>
                 <Label>
                     2025 © VMS|Aviato™

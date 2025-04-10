@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,55 +11,40 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="496.0" prefWidth="696.0" stylesheets="@../styles/Login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.Login_Cltr">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="900.0"
+      stylesheets="@../styles/Login.css"
+      xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.aviato.Controllers.Login_Cltr">
+
     <children>
-        <HBox VBox.vgrow="ALWAYS">
-            <children>
-                <ImageView fitHeight="499.0" fitWidth="406.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="img">
+        <HBox prefWidth="1200.0" prefHeight="1200.0">
+
+            <!-- Left Image Container -->
+            <VBox alignment="CENTER" prefWidth="750.0" style="-fx-background-color: white;">
+                <ImageView fitWidth="450.0" preserveRatio="true">
                     <image>
-                        <Image url="@../images/Login.jpg" />
+                        <Image url="@../images/vector.png" />
                     </image>
                 </ImageView>
+            </VBox>
 
-                <!-- Login Section -->
-                <VBox prefHeight="499.0" prefWidth="331.0" styleClass="login-section" HBox.hgrow="ALWAYS">
-                    <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
-                            <image>
-                                <Image url="@../images/Logo.png" />
-                            </image>
-                            <VBox.margin>
-                                <Insets left="68.0" top="60.0" />
-                            </VBox.margin>
-                        </ImageView>
-                        <Text styleClass="welcome-text" text="Welcome!" VBox.vgrow="ALWAYS">
-                            <VBox.margin>
-                                <Insets left="100.0" top="20.0" />
-                            </VBox.margin></Text>
-                        <TextField fx:id="usernameField" maxHeight="30.0" maxWidth="250.0" promptText="Username" styleClass="input-field" VBox.vgrow="ALWAYS">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin></TextField>
-                        <TextField fx:id="passwordField" maxHeight="30.0" maxWidth="250.0" promptText="Password" styleClass="input-field" VBox.vgrow="ALWAYS">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin></TextField>
-                        <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" onAction="#handleLogin" prefHeight="42.0" prefWidth="114.0" styleClass="login-button" text="Login" textAlignment="CENTER" VBox.vgrow="ALWAYS">
-                            <VBox.margin>
-                                <Insets left="120.0" />
-                            </VBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font></Button>
-                    </children>
-                </VBox>
-            </children>
+            <!-- Right Login Panel (Full height) -->
+            <VBox alignment="CENTER" spacing="20" prefWidth="800.0" style="-fx-background-color: #F5FEFD;">
+                <padding>
+                    <Insets top="60" bottom="60" left="240" right="240"/>
+                </padding>
+                <children>
+                    <Text text="VMS" styleClass="logo"/>
+
+                    <Text text="Welcome!" styleClass="welcome-text"/>
+
+                    <TextField fx:id="usernameField" promptText="Username" styleClass="input-field" />
+                    <PasswordField fx:id="passwordField" promptText="Password" styleClass="input-field" />
+                    <Button fx:id="loginButton" text="Login" onAction="#handleLogin" styleClass="login-button"/>
+                </children>
+            </VBox>
         </HBox>
+
     </children>
 </VBox>

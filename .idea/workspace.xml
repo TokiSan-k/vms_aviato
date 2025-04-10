@@ -6,20 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="Minor Changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Appointment_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Appointment_Cltr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Customer_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Customer_Cltr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Inventory_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Inventory_Cltr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Vehicle_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Vehicle_Cltr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/dao/Appointment_dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/dao/Appointment_dao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/dao/Customer_dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/dao/Customer_dao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Appointment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Appointment.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Customer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Customer.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Inventory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Inventory.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Payments_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Payments_Cltr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Roles_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Roles_Cltr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/dao/User_dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/dao/User_dao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Payment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Payment.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Roles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Roles.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/SideNavBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/SideNavBar.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Vehicle.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Vehicle.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +72,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
-    "Application.vms_aviato.executor": "Debug",
+    "Application.vms_aviato.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "Development",

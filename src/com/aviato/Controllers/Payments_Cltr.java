@@ -155,12 +155,6 @@ public class Payments_Cltr {
     }
 
     @FXML
-    private void clearViewSearch(ActionEvent event) {
-        vp_paymentIdSearchField.clear();
-        vp_paymentsTable.getItems().clear();
-    }
-
-    @FXML
     private void searchViewPayment(ActionEvent event) {
         try {
             String paymentIdText = vp_paymentIdSearchField.getText();

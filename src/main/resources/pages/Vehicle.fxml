@@ -47,34 +47,21 @@
                                                 <Text text="Add New Vehicle" />
                                                 <VBox spacing="10.0">
                                                     <children>
-                                                        <HBox>
-                                                            <Text text="verify customer id" />
-                                                        </HBox>
-                                                        <HBox alignment="CENTER_LEFT" styleClass="addCustIDField">
-                                                            <Text text="Customer ID:" />
-                                                            <TextField fx:id="av_CustIdField" styleClass="addCustIdInputField" />
-                                                            <Button fx:id="av_verifyCustIdButton" mnemonicParsing="false" onAction="#verifyCustomerId" styleClass="addFieldButton" text="Verify">
-                                                                <HBox.margin>
-                                                                    <Insets left="5.0" />
-                                                                </HBox.margin>
-                                                            </Button>
-                                                            <Text fx:id="verifyStatus" managed="false" text="Customer ID does not exists!" visible="false" />
-                                                        </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addLicencePlateField">
                                                             <Text text="Licence Plate:" />
-                                                            <TextField fx:id="av_LicencePlateField" disable="true" editable="false" styleClass="addLicencePlateInputField" />
+                                                            <TextField fx:id="av_LicencePlateField" styleClass="addLicencePlateInputField" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addMakeField">
                                                             <Text text="Make:" />
-                                                            <TextField fx:id="av_MakeField" disable="true" editable="false" styleClass="addMakeInputField" />
+                                                            <TextField fx:id="av_MakeField" styleClass="addMakeInputField" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addModelField">
                                                             <Text text="Model:" />
-                                                            <TextField fx:id="av_ModelField" disable="true" editable="false" styleClass="addModelInputField" />
+                                                            <TextField fx:id="av_ModelField" styleClass="addModelInputField" />
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" styleClass="addYearField">
                                                             <Text text="Year:" />
-                                                            <TextField fx:id="av_YearField" disable="true" editable="false" styleClass="addYearInputField" />
+                                                            <TextField fx:id="av_YearField" styleClass="addYearInputField" />
                                                         </HBox>
                                                         <Button onAction="#submitAddVehicle" styleClass="addFieldButton" text="Submit">
                                                             <VBox.margin>

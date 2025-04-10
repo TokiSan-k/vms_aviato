@@ -150,7 +150,6 @@ public class User_dao {
                     transaction.commit();
 
                     if (roleName == null) {
-                        
                         throw new Exception("Authentication failed: Invalid email or password");
                     }
                     return roleName;

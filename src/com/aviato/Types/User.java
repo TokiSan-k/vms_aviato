@@ -8,7 +8,7 @@ import java.sql.Date;
 @NamedStoredProcedureQueries({
         @NamedStoredProcedureQuery(
                 name = "InsertUser",
-                procedureName = "user_pkg.add_user",
+                procedureName = "user_procedures.add_user",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_email", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_password", type = String.class),
@@ -19,40 +19,38 @@ import java.sql.Date;
         ),
         @NamedStoredProcedureQuery(
                 name = "GetUser",
-                procedureName = "user_pkg.get_user",
+                procedureName = "user_procedures.get_user",
                 resultClasses = User.class,
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_user_id", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_user_id_out", type = Long.class)
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
                 }
         ),
         @NamedStoredProcedureQuery(
                 name = "UpdateUser",
-                procedureName = "user_pkg.update_user",
+                procedureName = "user_procedures.update_user",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_user_id", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_email", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_password", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_user_id_out", type = Long.class)
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_username", type = String.class), // Added missing p_username
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_role_id", type = Long.class)    // Added missing p_role_id
                 }
         ),
         @NamedStoredProcedureQuery(
                 name = "DeleteUser",
-                procedureName = "user_pkg.delete_user",
+                procedureName = "user_procedures.delete_user",
                 parameters = {
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_user_id", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_user_id_out", type = Long.class)
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_user_id", type = Long.class)
                 }
         ),
         @NamedStoredProcedureQuery(
                 name = "GetAllUsers",
-                procedureName = "user_pkg.get_user",
+                procedureName = "user_procedures.get_user",
                 resultClasses = User.class,
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_user_id", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_user_id_out", type = Long.class)
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
                 }
         ),
         @NamedStoredProcedureQuery(
@@ -83,9 +81,6 @@ public class User {
 
     @Column(name = "ROLE_ID")
     private Long roleId;
-
-    @Column(name = "CREATED_DATE")
-    private Date createdDate;
 
     // Getters and Setters
     public Long getUserId() {
@@ -128,30 +123,20 @@ public class User {
         this.roleId = roleId;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public void SetAllFields(String email, String password, String username, Long roleId, Date createdDate){
+    public void SetAllFields(String email, String password, String username, Long roleId){
         this.email = email;
         this.password = password;
         this.username = username;
         this.roleId = roleId;
-        this.createdDate = createdDate;
     }
 
     // Constructors
     public User() {}
 
-    public User(String email, String password, String username, Long roleId, Date createdDate) {
+    public User(String email, String password, String username, Long roleId) {
         this.email = email;
         this.password = password;
         this.username = username;
         this.roleId = roleId;
-        this.createdDate = createdDate;
     }
 }

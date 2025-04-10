@@ -129,14 +129,9 @@
                                                         <!-- Search and Control Section -->
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Button fx:id="vp_clearButton" mnemonicParsing="false" styleClass="viewPaymentsButtons" text="C">
-                                                                    <HBox.margin>
-                                                                        <Insets right="5.0" />
-                                                                    </HBox.margin>
-                                                                </Button>
                                                                 <Text fx:id="vp_paymentIdLabel" text="Enter Payment ID:" />
                                                                 <TextField fx:id="vp_paymentIdSearchField" promptText="Enter payment ID" />
-                                                                <Button fx:id="vp_searchButton" mnemonicParsing="false" styleClass="viewPaymentsButtons">
+                                                                <Button fx:id="vp_searchButton" mnemonicParsing="false" onAction="#searchViewPayment" styleClass="viewPaymentsButtons">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>

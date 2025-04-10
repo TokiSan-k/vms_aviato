@@ -86,12 +86,12 @@
                                                         <VBox spacing="10.0">
                                                             <children>
                                                                 <HBox spacing="10.0">
-                                                                    <Text fx:id="rr_swapLabel" text="User EmailID:">
+                                                                    <Text fx:id="rr_swapLabel" text="User ID:">
                                                                         <HBox.margin>
                                                                             <Insets top="5.0" />
                                                                         </HBox.margin>
                                                                     </Text>
-                                                                    <TextField fx:id="rr_userEmailIdField" promptText="Enter Email" />
+                                                                    <TextField fx:id="rr_userEmailIdField" promptText="Enter ID" />
                                                                 </HBox>
                                                                 <Button fx:id="rr_submitButton" onAction="#submitRemoveRole" styleClass="removeFieldButton" text="Delete" />
                                                             </children>
@@ -102,8 +102,26 @@
                                         </VBox>
 
                                         <!-- Container for Updating a Role -->
-                                        <VBox fx:id="roleContainer_2" managed="false" styleClass="updateRoleContainer" visible="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                        <VBox fx:id="roleContainer_2" managed="false" styleClass="updateRoleContainer" visible="false" HBox.hgrow="ALWAYS">
                                             <children>
+                                                <VBox spacing="20.0" styleClass="Search" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text styleClass="heading" text="Remove A User" />
+                                                        <VBox spacing="10.0">
+                                                            <children>
+                                                                <HBox spacing="10.0">
+                                                                    <Text fx:id="ru_swapLabel" text="User ID:">
+                                                                        <HBox.margin>
+                                                                            <Insets top="5.0" />
+                                                                        </HBox.margin></Text>
+                                                                    <TextField fx:id="ru_swapField" promptText="Enter User ID" />
+                                                                </HBox>
+                                                                <Button onAction="#verifyUpdateUser" styleClass="removeFieldButton" text="Submit" />
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+
                                                 <Text fx:id="ur_updateRoleTitle" text="Update A User" />
                                                 <VBox spacing="10.0">
                                                     <children>
@@ -145,8 +163,8 @@
                                                         <!-- Search and Control Section -->
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Text fx:id="vr_employeeIdLabel" text="Employee ID:" />
-                                                                <TextField fx:id="vr_employeeIdSearchField" promptText="Enter Employee ID" />
+                                                                <Text fx:id="vr_employeeIdLabel" text="User ID:" />
+                                                                <TextField fx:id="vr_employeeIdSearchField" promptText="Enter User ID" />
                                                                 <Button fx:id="vr_searchButton" mnemonicParsing="false" onAction="#searchViewRole" styleClass="viewRoleButtons">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
@@ -169,10 +187,10 @@
                                                         <!-- Role Table -->
                                                         <TableView fx:id="vr_RoleTable" VBox.vgrow="ALWAYS">
                                                             <columns>
-                                                                <TableColumn fx:id="vr_UserID" text="Employee ID" />
+                                                                <TableColumn fx:id="vr_UserID" text="User ID" />
                                                                 <TableColumn fx:id="vr_Username" text="Username" />
                                                                 <TableColumn fx:id="vr_Email" text="Email" />
-                                                                <TableColumn fx:id="vr_RoleName" text="Role Name" />
+                                                                <TableColumn fx:id="vr_RoleName" text="Role ID" />
                                                             </columns>
                                                         </TableView>
                                                     </children>

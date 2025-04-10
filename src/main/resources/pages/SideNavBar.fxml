@@ -78,19 +78,6 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarManageInventoryButton" mnemonicParsing="false" onAction="#handleManageInventory" styleClass="sidebar-button" text="Manage Inventory">
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
-            <graphic>
-                <ImageView pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../images/Icons/shopping-cart-2-line-grey.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
-
         <Button fx:id="sidebarPaymentsButton" mnemonicParsing="false" onAction="#handlePayments" styleClass="sidebar-button" text="Payments">
             <VBox.margin>
                 <Insets />
@@ -99,6 +86,19 @@
                 <ImageView pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/Icons/money-dollar-circle-line-gery.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="sidebarManageInventoryButton" mnemonicParsing="false" onAction="#handleManageInventory" styleClass="sidebar-button" text="Manage Inventory">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Icons/shopping-cart-2-line-grey.png" />
                     </image>
                 </ImageView>
             </graphic>
@@ -117,18 +117,6 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarMonthlyReportsButton" mnemonicParsing="false" onAction="#handleMonthlyReports" styleClass="sidebar-button" text="Monthly Reports">
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
-            <graphic>
-                <ImageView pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../images/Icons/file-paper-2-line-gery.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
         <Region VBox.vgrow="ALWAYS" />
         <HBox>
             <children>

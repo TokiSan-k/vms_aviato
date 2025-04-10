@@ -53,6 +53,7 @@ public class Roles_Cltr {
     @FXML private Button rr_submitButton;
 
     // Update Role Fields
+    @FXML private TextField ru_swapField;
     @FXML private TextField ur_usernameField;
     @FXML private TextField ur_passwordField;
     @FXML private TextField ur_emailField;
@@ -60,13 +61,13 @@ public class Roles_Cltr {
     @FXML private Button ur_submitButton;
 
     // View Role Fields
-    @FXML private TextField vr_employeeIdSearchField;  // Using as userId search
+    @FXML private TextField vr_employeeIdSearchField;
     @FXML private Button vr_searchButton;
     @FXML private TableView<User> vr_RoleTable;
-    @FXML private TableColumn<User, Long> vr_UserID;  // Changed from EmployeeId
+    @FXML private TableColumn<User, Long> vr_UserID;
     @FXML private TableColumn<User, String> vr_Username;
     @FXML private TableColumn<User, String> vr_Email;
-    @FXML private TableColumn<User, Long> vr_RoleName;  // Changed to roleId
+    @FXML private TableColumn<User, Long> vr_RoleName;
 
     private User user = new User();
     private Long currentUserId = null;  // For update functionality
@@ -149,8 +150,7 @@ public class Roles_Cltr {
             Long roleId = Policy.GetRoleId(roleIdStr);
 
             // Create a new User object and set all fields, including today's date
-            java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis()); // Today's date
-            user.SetAllFields(email, password, username, roleId, currentDate);
+            user.SetAllFields(email, password, username, roleId);
 
             Task<Void> insertUserTask = User_dao.insertUserTask(user);
 
@@ -174,50 +174,34 @@ public class Roles_Cltr {
             AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
         }
     }
+
     @FXML
     private void submitRemoveRole(ActionEvent event) {
         try {
-            String email = rr_userEmailIdField.getText();
-            if (email.isEmpty()) {
+            String id = rr_userEmailIdField.getText();
+            if (id.isEmpty()) {
                 AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please enter an email to remove");
                 return;
             }
+            Long userId = Long.parseLong(id);
 
-            // We need user ID for deletion, so we'll fetch the user first
-            Task<List<User>> getAllUsersTask = User_dao.getAllUsersTask();
-            getAllUsersTask.setOnSucceeded(e -> {
-                List<User> users = getAllUsersTask.getValue();
-                User userToDelete = users.stream()
-                        .filter(u -> u.getEmail().equals(email))
-                        .findFirst()
-                        .orElse(null);
-
-                if (userToDelete == null) {
-                    Platform.runLater(() -> {
-                        rr_userEmailIdField.clear();
-                        AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "No user found with email: " + email);
-                    });
-                    return;
-                }
-
-                Task<Void> deleteTask = User_dao.deleteUserTask(userToDelete.getUserId());
-                deleteTask.setOnSucceeded(e2 -> {
-                    Platform.runLater(() -> {
-                        rr_userEmailIdField.clear();
-                        AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "User removed successfully");
-                    });
+            Task<Void> deleteTask = User_dao.deleteUserTask(userId);
+            deleteTask.setOnSucceeded(e2 -> {
+                Platform.runLater(() -> {
+                    rr_userEmailIdField.clear();
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "User removed successfully");
                 });
-
-                deleteTask.setOnFailed(e2 -> {
-                    Platform.runLater(() -> {
-                        rr_userEmailIdField.clear();
-                        AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove user: " +
-                                deleteTask.getException().getMessage());
-                    });
-                });
-
-                Worker.submitTask(deleteTask);
             });
+
+            deleteTask.setOnFailed(e2 -> {
+                Platform.runLater(() -> {
+                    rr_userEmailIdField.clear();
+                    AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to remove user: " +
+                            deleteTask.getException().getMessage());
+                });
+            });
+
+            Worker.submitTask(deleteTask);
         } catch (Exception ex) {
             AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", ex.getMessage());
         }
@@ -228,6 +212,58 @@ public class Roles_Cltr {
         ur_passwordField.clear();
         ur_emailField.clear();
         ur_roleNameComboBox.setValue(null);
+    }
+
+    private void SetMUFields(User user){
+        ur_usernameField.setText(user.getUsername());
+        ur_passwordField.setText(user.getPassword());
+        ur_emailField.setText(user.getEmail());
+    }
+
+    private void SetEditableMUFields(boolean status)
+    {
+        ur_usernameField.setEditable(status);
+        ur_usernameField.setDisable(!status);
+
+        ur_passwordField.setEditable(status);
+        ur_passwordField.setDisable(!status);
+
+        ur_emailField.setEditable(status);
+        ur_emailField.setDisable(!status);
+
+        ur_roleNameComboBox.setEditable(status);
+        ur_roleNameComboBox.setDisable(!status);
+    }
+
+    @FXML
+    private void verifyUpdateUser(ActionEvent event){
+        try {
+            String userIdStr = ru_swapField.getText();
+            if (userIdStr.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please enter a User ID to search");
+                return;
+            }
+            Long userId = Long.parseLong(userIdStr);
+
+            Task<User> getUserTask = User_dao.getUserTask(userId);
+            getUserTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    SetMUFields(getUserTask.getValue());
+                    SetEditableMUFields(true);
+                });
+            });
+
+            getUserTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    vr_employeeIdSearchField.clear();
+                    ErrorHandler.ManageException(getUserTask.getException());
+                });
+            });
+
+            Worker.submitTask(getUserTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Invalid input: " + ex.getMessage());
+        }
     }
 
     @FXML
@@ -249,7 +285,7 @@ public class Roles_Cltr {
             Long roleId = Policy.GetRoleId(roleIdStr);
 
             java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis()); // Today's date
-            user.SetAllFields(email, password, username, roleId, currentDate);
+            user.SetAllFields(email, password, username, roleId);
             user.setUserId(currentUserId);
             Task<Void> updateUserTask = User_dao.updateUserTask(user);
 
@@ -296,7 +332,6 @@ public class Roles_Cltr {
                     ur_passwordField.setText(foundUser.getPassword());
                     ur_emailField.setText(foundUser.getEmail());
                     ur_roleNameComboBox.setValue(foundUser.getRoleId().toString());
-                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "User found");
                 });
             });
 

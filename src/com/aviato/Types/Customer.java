@@ -57,8 +57,8 @@ import javax.persistence.*;
                 procedureName = "customer_search_by_partial_name",
                 resultClasses = Customer.class,
                 parameters = {
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_SearchTerm", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_Result", type = void.class)
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_partial_name", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
                 }
         )
 })

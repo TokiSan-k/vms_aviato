@@ -11,6 +11,7 @@ module com.aviato {
     requires java.naming;
     requires kernel;
     requires layout;
+    requires com.oracle.database.jdbc;
 
 
     // Open packages for reflection (JavaFX FXML + Hibernate)

@@ -121,7 +121,7 @@
                                                                 </HBox>
                                                                 <TableView fx:id="rc_customerTable" styleClass="table-view" VBox.vgrow="ALWAYS">
                                                                     <columns>
-                                                                        <TableColumn fx:id="customerIdColumn" text="CustId" />
+                                                                        <TableColumn fx:id="customerIdColumn" text="ID" />
                                                                         <TableColumn fx:id="customerNameColumn" text="Name" />
                                                                         <TableColumn fx:id="customerEmailColumn" text="Email" />
                                                                         <TableColumn fx:id="customerPhoneColumn" text="Phone" />

@@ -142,7 +142,7 @@ public class Customer_dao {
             protected List<Customer> call() throws Exception {
                 try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                     ProcedureCall procedureCall = session.getNamedProcedureCall("SearchCustomersByPartialName");
-                    procedureCall.setParameter("p_SearchTerm", searchTerm);
+                    procedureCall.setParameter("p_partial_name", searchTerm);
 
                     List<Customer> resultList = procedureCall.getResultList();
                     if (resultList == null || resultList.isEmpty()) {

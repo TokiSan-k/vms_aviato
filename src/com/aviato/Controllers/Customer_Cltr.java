@@ -91,11 +91,15 @@ public class Customer_Cltr
     @FXML
     private TableView<Customer> rc_customerTable;
     @FXML
+    private TableColumn<Customer, String> customerIdColumn;
+    @FXML
     private TableColumn<Customer, String> customerNameColumn;
     @FXML
     private TableColumn<Customer, String> customerEmailColumn;
     @FXML
     private TableColumn<Customer, String> customerPhoneColumn;
+    @FXML
+    private TableColumn<Customer, String> customerAddressColumn;
 
     // Modify Customer Fields
     @FXML
@@ -163,9 +167,11 @@ public class Customer_Cltr
         customerContainers[CustContainerEnum.AddCustomerContainer].setManaged(true);
 
         // Set up Remove Customer table columns
+        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("custId"));
         customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
         customerEmailColumn.setCellValueFactory(new PropertyValueFactory<>("EmailId"));
         customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("Phone"));
+        customerAddressColumn.setCellValueFactory(new PropertyValueFactory<>("Address"));
 
         // Set up View Customer table columns
         vc_IdColumn.setCellValueFactory(new PropertyValueFactory<>("custId"));
@@ -479,7 +485,6 @@ public class Customer_Cltr
                 Platform.runLater(() -> {
                     vc_customerList.clear();
                     vc_customerList.addAll(getVCustTask.getValue());
-                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer Modified successfully");
                 });
             });
 
@@ -505,7 +510,6 @@ public class Customer_Cltr
                 Platform.runLater(() -> {
                     vc_customerList.clear();
                     vc_customerList.addAll(getAllCustTask.getValue());
-                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "All customers retrieved successfully");
                 });
             });
 

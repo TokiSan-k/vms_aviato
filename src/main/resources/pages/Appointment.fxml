@@ -124,9 +124,14 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                                                                     <children>
-                                                                        <Text fx:id="ra_searchLabel" text="Search by Date:" />
-                                                                        <TextField fx:id="ra_appointmentSearchField" promptText="YYYY-MM-DD" HBox.hgrow="ALWAYS" />
-                                                                        <Button fx:id="ra_searchButton" mnemonicParsing="false" styleClass="searchAppButton" text="Search">
+                                                                        <Button fx:id="ra_SwapButton" mnemonicParsing="false" styleClass="viewAppButtons" onAction="#swapRemoveField" text="C">
+                                                                            <HBox.margin>
+                                                                                <Insets right="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Button>
+                                                                        <Text fx:id="ra_searchLabel" text="Cust ID:" />
+                                                                        <TextField fx:id="ra_appointmentSearchField" promptText="Enter Cust ID" HBox.hgrow="ALWAYS" />
+                                                                        <Button fx:id="ra_searchButton" mnemonicParsing="false" styleClass="searchAppButton" onAction="#searchRemoveAppointment" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
@@ -265,14 +270,14 @@
                                                         <!-- Search and Control Section -->
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Button fx:id="va_clearButton" mnemonicParsing="false" styleClass="viewAppButtons" text="C">
+                                                                <Button fx:id="va_SwapButton" mnemonicParsing="false" styleClass="viewAppButtons" onAction="#SwapViewSearch" text="C">
                                                                     <HBox.margin>
                                                                         <Insets right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Text fx:id="va_dateLabel" text="Enter Date:" />
-                                                                <TextField fx:id="va_appointmentSearchField" promptText="YYYY-MM-DD" />
-                                                                <Button fx:id="va_searchButton" mnemonicParsing="false" styleClass="viewAppButtons">
+                                                                <Text fx:id="va_swapSearchLabel" text="Enter Cust ID:" />
+                                                                <TextField fx:id="va_SwapSearchField" promptText="Enter Cust ID" />
+                                                                <Button fx:id="va_searchButton" mnemonicParsing="false" onAction="#searchViewAppointment" styleClass="viewAppButtons">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
@@ -350,33 +355,34 @@
                                                     </children>
                                                 </VBox>
 
-                                                <!-- Container for Searching an Appointment -->
-<!--                                                <VBox fx:id="gen_invoiceViewContainer" spacing="20.0" styleClass="appSearchTextField" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">-->
-<!--                                                    <children>-->
-<!--                                                        <Text styleClass="AppInfo" text="Check all Invoices" />-->
-<!--                                                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">-->
-<!--                                                            <children>-->
-<!--                                                                <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">-->
-<!--                                                                    <children>-->
-<!--                                                                        <Button fx:id="gen_searchAllButton" mnemonicParsing="false" styleClass="searchAppButton" onAction="#searchAllInvoices" text="All Appointment">-->
-<!--                                                                            <HBox.margin>-->
-<!--                                                                                <Insets left="10.0" />-->
-<!--                                                                            </HBox.margin>-->
-<!--                                                                        </Button>-->
-<!--                                                                    </children>-->
-<!--                                                                </HBox>-->
-<!--                                                                <TableView fx:id="gen_appointmentTable" styleClass="table-view" VBox.vgrow="ALWAYS">-->
-<!--                                                                    <columns>-->
-<!--                                                                        <TableColumn fx:id="gen_InvoiceIdColumn" text="InvoiceID" />-->
-<!--                                                                        <TableColumn fx:id="gen_CustNameColumn" text="Customer Name" />-->
-<!--                                                                        <TableColumn fx:id="gen_CustNumColumn" text="Customer Number" />-->
-<!--                                                                        <TableColumn fx:id="gen_CustAddressColumn" text="Customer Address" />-->
-<!--                                                                    </columns>-->
-<!--                                                                </TableView>-->
-<!--                                                            </children>-->
-<!--                                                        </VBox>-->
-<!--                                                    </children>-->
-<!--                                                </VBox>-->
+<!--                                                 Container for Searching an Invoice -->
+                                                <VBox fx:id="gen_invoiceViewContainer" spacing="20.0" styleClass="appSearchTextField" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <Text styleClass="AppInfo" text="Check all Invoices" />
+                                                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                                            <children>
+                                                                <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Button fx:id="gen_searchAllButton" mnemonicParsing="false" styleClass="searchAppButton" onAction="#searchAllInvoices" text="All Invoices">
+                                                                            <HBox.margin>
+                                                                                <Insets left="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Button>
+                                                                    </children>
+                                                                </HBox>
+                                                                <TableView fx:id="gen_appointmentTable" styleClass="table-view" VBox.vgrow="ALWAYS">
+                                                                    <columns>
+                                                                        <TableColumn fx:id="gen_InvoiceIdColumn" text="Invoice ID" />
+                                                                        <TableColumn fx:id="gen_ServiceIdColumn" text="Service ID" />
+                                                                        <TableColumn fx:id="gen_AppIdColumn" text="Appointment ID" />
+                                                                        <TableColumn fx:id="gen_InvoiceDateColumn" text="Invoice Date" />
+                                                                        <TableColumn fx:id="gen_TotalAmountColumn" text="Total Amount" />
+                                                                    </columns>
+                                                                </TableView>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
                                             </children>
                                         </VBox>
                                     </children>

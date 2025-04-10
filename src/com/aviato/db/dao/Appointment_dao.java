@@ -1,13 +1,14 @@
 package com.aviato.db.dao;
 
 import com.aviato.Types.Appointment;
+import com.aviato.Types.Invoice;
+import com.aviato.Types.InvoiceInfo;
 import com.aviato.db.HibernateUtil;
 import javafx.concurrent.Task;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.procedure.ParameterRegistration;
 import org.hibernate.procedure.ProcedureCall;
-import com.aviato.Types.InvoiceInfo;
 
 
 import java.util.List;
@@ -173,4 +174,65 @@ public class Appointment_dao {
         };
     }
 
+    public static Task<List<Appointment>> searchAllCustIdAppointmentsTask(Long custID) {
+        return new Task<List<Appointment>>() {
+            @Override
+            protected List<Appointment> call() throws Exception {
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    ProcedureCall procedureCall = session.getNamedProcedureCall("searchAppointmentsByCustomerId");
+                    procedureCall.setParameter("p_cust_id", custID);
+
+                    List<Appointment> resultList = procedureCall.getResultList();
+                    if (resultList == null || resultList.isEmpty()) {
+                        throw new Exception("No appointments for ID: "+custID);
+                    }
+                    return resultList;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    throw ex;
+                }
+            }
+        };
+    }
+
+    public static Task<List<Appointment>> searchAllVehcleIdAppointmentsTask(Long vehicleID) {
+        return new Task<List<Appointment>>() {
+            @Override
+            protected List<Appointment> call() throws Exception {
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    ProcedureCall procedureCall = session.getNamedProcedureCall("searchAppointmentsByVehicleId");
+                    procedureCall.setParameter("p_vehicle_id", vehicleID);
+
+                    List<Appointment> resultList = procedureCall.getResultList();
+                    if (resultList == null || resultList.isEmpty()) {
+                        throw new Exception("No appointments for ID: "+vehicleID);
+                    }
+                    return resultList;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    throw ex;
+                }
+            }
+        };
+    }
+
+    public static Task<List<Invoice>> getAllInvoicesTask() {
+        return new Task<List<Invoice>>() {
+            @Override
+            protected List<Invoice> call() throws Exception {
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    ProcedureCall procedureCall = session.getNamedProcedureCall("GetAllInvoices");
+
+                    List<Invoice> resultList = procedureCall.getResultList();
+                    if (resultList == null || resultList.isEmpty()) {
+                        throw new Exception("No invoices found in the database");
+                    }
+                    return resultList;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    throw ex;
+                }
+            }
+        };
+    }
 }

@@ -243,11 +243,11 @@
                                                         <!-- Search and Control Section -->
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Button fx:id="vv_swapButton" mnemonicParsing="false" onAction="#handleVCSwapField" styleClass="viewVehicleButtons" text="C">
-                                                                    <HBox.margin>
-                                                                        <Insets right="5.0" />
-                                                                    </HBox.margin>
-                                                                </Button>
+<!--                                                                <Button fx:id="vv_swapButton" mnemonicParsing="false" onAction="#handleVCSwapField" styleClass="viewVehicleButtons" text="C">-->
+<!--                                                                    <HBox.margin>-->
+<!--                                                                        <Insets right="5.0" />-->
+<!--                                                                    </HBox.margin>-->
+<!--                                                                </Button>-->
                                                                 <Text fx:id="vv_SwapLabel" text="Customer ID:" />
                                                                 <TextField fx:id="vv_SwapField" promptText="Enter Customer ID:" />
                                                                 <Button fx:id="vv_searchButton" mnemonicParsing="false" onAction="#searchViewVehicle" styleClass="viewVehicleButtons">

@@ -72,8 +72,33 @@ import java.sql.Timestamp;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_licence_plate", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_description_out", type = String.class)
                 }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "searchAppointmentsByCustomerId",
+                procedureName = "appointment_search_by_cust_id",
+                resultClasses = Appointment.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_cust_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
+                }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "searchAppointmentsByVehicleId",
+                procedureName = "appointment_search_by_vehicle_id",
+                resultClasses = Appointment.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_vehicle_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
+                }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "GetAllInvoices",
+                procedureName = "get_all_invoices",
+                resultClasses = Invoice.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
+                }
         )
-
 })
 public class Appointment {
     @Id

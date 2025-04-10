@@ -1,12 +1,13 @@
 package com.aviato.Controllers;
 
 import com.aviato.Types.Appointment;
+import com.aviato.Types.Invoice;
+import com.aviato.Types.InvoiceInfo;
 import com.aviato.Utils.AlertBox;
 import com.aviato.Utils.ErrorHandler;
+import com.aviato.Utils.Field;
 import com.aviato.Utils.concurrency.Worker;
 import com.aviato.db.dao.Appointment_dao;
-import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,18 +20,16 @@ import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
+import javafx.scene.text.Text;
 
-import com.aviato.Types.InvoiceInfo;
 //import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.*;
-import com.itextpdf.layout.properties.*;
 // Or specific imports like:
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
@@ -51,8 +50,21 @@ public class Appointment_Cltr {
         public static final byte ManageInvoiceContainer = 4;
     }
 
+    private final Field[] va_AppointmentSwapFields = { new Field(0,"Cust ID:","Enter Customer ID"),
+            new Field(1,"Vehicle ID:","Enter Vehicle ID")};
+
     private final ObservableList<Appointment> ra_AppList = FXCollections.observableArrayList();
     private final ObservableList<Appointment> va_AppList = FXCollections.observableArrayList();
+
+    private final ObservableList<Invoice> gen_InvoiceList = FXCollections.observableArrayList();
+
+    // Invoice Table Fields (add these)
+    @FXML private TableView<Invoice> gen_appointmentTable;
+    @FXML private TableColumn<Invoice, Long> gen_InvoiceIdColumn;
+    @FXML private TableColumn<Invoice, Long> gen_ServiceIdColumn;
+    @FXML private TableColumn<Invoice, Long> gen_AppIdColumn;
+    @FXML private TableColumn<Invoice, Date> gen_InvoiceDateColumn;
+    @FXML private TableColumn<Invoice, Double> gen_TotalAmountColumn;
 
     // Appointment Navbar
     @FXML private Button addAppBtn;
@@ -74,6 +86,7 @@ public class Appointment_Cltr {
     @FXML private TextField ra_appIdField;
     @FXML private Button ra_swapFieldButton;
     @FXML private Button ra_submitButton;
+    @FXML private Text ra_searchLabel;
     @FXML private TextField ra_appointmentSearchField;
     @FXML private Button ra_searchButton;
     @FXML private TableView<Appointment> ra_appointmentTable;
@@ -101,7 +114,8 @@ public class Appointment_Cltr {
     @FXML private Button ma_submitButton;
 
     // View Appointment Fields
-    @FXML private TextField va_appointmentSearchField;
+    @FXML private TextField va_SwapSearchField;
+    @FXML private Text va_swapSearchLabel;
     @FXML private Button va_clearButton;
     @FXML private Button va_searchButton;
     @FXML private Button va_allAppointmentsButton;
@@ -150,6 +164,13 @@ public class Appointment_Cltr {
         va_serviceIdColumn.setCellValueFactory(new PropertyValueFactory<>("serviceId"));
         va_empIdColumn.setCellValueFactory(new PropertyValueFactory<>("empId"));
         va_appointmentTable.setItems(va_AppList);
+
+        gen_InvoiceIdColumn.setCellValueFactory(new PropertyValueFactory<>("invoiceId"));
+        gen_ServiceIdColumn.setCellValueFactory(new PropertyValueFactory<>("serviceId"));
+        gen_AppIdColumn.setCellValueFactory(new PropertyValueFactory<>("appId"));
+        gen_InvoiceDateColumn.setCellValueFactory(new PropertyValueFactory<>("invoiceDate"));
+        gen_TotalAmountColumn.setCellValueFactory(new PropertyValueFactory<>("totalAmount"));
+        gen_appointmentTable.setItems(gen_InvoiceList);
     }
 
     // Appointment NavBar
@@ -270,16 +291,75 @@ public class Appointment_Cltr {
         }
     }
 
+    private int va_swapIdx = 0;
+    private int ra_swapIdx = 0;
     @FXML
     private void swapRemoveField(ActionEvent event) {
-        // Placeholder for swapping field (e.g., toggle between ID and another field)
-        System.out.println("Swap field button clicked in Remove Appointment");
+        ra_swapIdx+=1;
+        if(ra_swapIdx > 1)
+            ra_swapIdx = 0;
+
+        ra_searchLabel.setText(va_AppointmentSwapFields[ra_swapIdx].Text);
+        ra_appointmentSearchField.setPromptText(va_AppointmentSwapFields[ra_swapIdx].Prompt);
     }
 
     @FXML
     private void searchRemoveAppointment(ActionEvent event) {
         String searchTerm = ra_appointmentSearchField.getText();
-        // Add search logic here if needed
+        try{
+            Long Id = Long.parseLong(searchTerm);
+            if(ra_swapIdx == 0){
+                searchRAByCustID(Id);
+            }else if(ra_swapIdx ==1){
+                searchRAByVehicleID(Id);
+            }
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Information", ex.getMessage());
+        }
+    }
+
+    private void searchRAByCustID(Long searchTerm) throws Exception {
+        try {
+            Task<List<Appointment>> getAllTask = Appointment_dao.searchAllCustIdAppointmentsTask(searchTerm);
+            getAllTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    ra_AppList.clear();
+                    ra_AppList.addAll(getAllTask.getValue());
+                });
+            });
+
+            getAllTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getAllTask.getException());
+                });
+            });
+
+            Worker.submitTask(getAllTask);
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+        }
+    }
+
+    private void searchRAByVehicleID(Long searchTerm) throws Exception {
+        try {
+            Task<List<Appointment>> getAllTask = Appointment_dao.searchAllVehcleIdAppointmentsTask(searchTerm);
+            getAllTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    ra_AppList.clear();
+                    ra_AppList.addAll(getAllTask.getValue());
+                });
+            });
+
+            getAllTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getAllTask.getException());
+                });
+            });
+
+            Worker.submitTask(getAllTask);
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+        }
     }
 
     @FXML
@@ -454,16 +534,75 @@ public class Appointment_Cltr {
     }
 
     @FXML
-    private void clearViewSearch(ActionEvent event) {
-        va_appointmentSearchField.clear();
-        va_appointmentTable.getItems().clear();
+    private void SwapViewSearch(ActionEvent event) {
+        va_swapIdx+=1;
+        if(va_swapIdx > 1)
+            va_swapIdx = 0;
+
+        va_swapSearchLabel.setText(va_AppointmentSwapFields[va_swapIdx].Text);
+        va_SwapSearchField.setPromptText(va_AppointmentSwapFields[va_swapIdx].Prompt);
     }
 
     @FXML
     private void searchViewAppointment(ActionEvent event) {
-        String searchTerm = va_appointmentSearchField.getText();
-        // Add search logic here if needed
+        String searchTerm = va_SwapSearchField.getText();
+        try{
+            Long Id = Long.parseLong(searchTerm);
+            if(va_swapIdx == 0){
+                searchVAByCustID(Id);
+            }else if(va_swapIdx ==1){
+                searchVAByVehicleID(Id);
+            }
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Information", ex.getMessage());
+        }
     }
+
+
+    private void searchVAByCustID(Long searchTerm) throws Exception {
+        try {
+            Task<List<Appointment>> getAllTask = Appointment_dao.searchAllCustIdAppointmentsTask(searchTerm);
+            getAllTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    va_AppList.clear();
+                    va_AppList.addAll(getAllTask.getValue());
+                });
+            });
+
+            getAllTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getAllTask.getException());
+                });
+            });
+
+            Worker.submitTask(getAllTask);
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+        }
+    }
+
+    private void searchVAByVehicleID(Long searchTerm) throws Exception {
+        try {
+            Task<List<Appointment>> getAllTask = Appointment_dao.searchAllVehcleIdAppointmentsTask(searchTerm);
+            getAllTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    va_AppList.clear();
+                    va_AppList.addAll(getAllTask.getValue());
+                });
+            });
+
+            getAllTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getAllTask.getException());
+                });
+            });
+
+            Worker.submitTask(getAllTask);
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+        }
+    }
+
 
     @FXML
     private void showAllAppointments(ActionEvent event) {
@@ -596,6 +735,29 @@ public class Appointment_Cltr {
         } catch (Exception e) {
             e.printStackTrace();
             AlertBox.ShowAlert(Alert.AlertType.ERROR, "PDF Error", "Error creating PDF: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void searchAllInvoices(ActionEvent event){
+        try {
+            Task<List<Invoice>> getAllInvoicesTask = Appointment_dao.getAllInvoicesTask();
+            getAllInvoicesTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    gen_InvoiceList.clear();
+                    gen_InvoiceList.addAll(getAllInvoicesTask.getValue());
+                });
+            });
+
+            getAllInvoicesTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getAllInvoicesTask.getException());
+                });
+            });
+
+            Worker.submitTask(getAllInvoicesTask);
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to fetch invoices: " + e.getMessage());
         }
     }
 

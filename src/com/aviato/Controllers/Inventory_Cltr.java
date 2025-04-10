@@ -51,11 +51,11 @@ public class Inventory_Cltr {
     @FXML private Text ai_quantityWarning;
 
     // Remove Item Fields
-    @FXML private TextField ri_emailField; // Repurposed as Item ID field
+    @FXML private TextField ri_emailField;
     @FXML private Button ri_swapFieldButton;
     @FXML private TextField ri_ItemSearchField;
     @FXML private Button ri_searchButton;
-    @FXML private TableView<Item> rc_InventoryTable; // Note: Typo in variable name (rc_ vs ri_)
+    @FXML private TableView<Item> rc_InventoryTable;
     @FXML private TableColumn<Item, String> ItemNameColumn;
     @FXML private TableColumn<Item, Integer> ItemQuantityColumn;
     @FXML private TableColumn<Item, Double> ItemPPUColumn;
@@ -219,8 +219,32 @@ public class Inventory_Cltr {
 
     @FXML
     private void searchRemoveItem(ActionEvent event) {
-        String searchTerm = ri_ItemSearchField.getText();
-        // Add search logic here if needed
+        try {
+            String searchId = ri_ItemSearchField.getText();
+            if (searchId.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please enter an Item ID to verify");
+                return;
+            }
+            Long itemId = Long.parseLong(searchId);
+
+            Task<Item> getItemTask = Inventory_dao.getItemTask(itemId);
+            getItemTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    ri_ItemList.clear();
+                    ri_ItemList.addAll(getItemTask.getValue());
+                });
+            });
+
+            getItemTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getItemTask.getException());
+                });
+            });
+
+            Worker.submitTask(getItemTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     @FXML
@@ -353,15 +377,33 @@ public class Inventory_Cltr {
     }
 
     @FXML
-    private void clearViewSearch(ActionEvent event) {
-        vi_nameSearchField.clear();
-        vi_InventoryTable.getItems().clear();
-    }
-
-    @FXML
     private void searchViewItem(ActionEvent event) {
-        String searchTerm = vi_nameSearchField.getText();
-        // Add search logic here if needed
+        try {
+            String searchId = vi_nameSearchField.getText();
+            if (searchId.isEmpty()) {
+                AlertBox.ShowAlert(Alert.AlertType.WARNING, "Warning", "Please enter an Item ID to search");
+                return;
+            }
+            Long itemId = Long.parseLong(searchId);
+
+            Task<Item> getItemTask = Inventory_dao.getItemTask(itemId);
+            getItemTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    vi_ItemList.clear();
+                    vi_ItemList.addAll(getItemTask.getValue());
+                });
+            });
+
+            getItemTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getItemTask.getException());
+                });
+            });
+
+            Worker.submitTask(getItemTask);
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Exception", ex.getMessage());
+        }
     }
 
     @FXML

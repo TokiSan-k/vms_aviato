@@ -108,9 +108,9 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                                                                     <children>
-                                                                        <Text fx:id="ri_searchLabel" text="Search by Name:" />
-                                                                        <TextField fx:id="ri_ItemSearchField" promptText="Enter Item Name" HBox.hgrow="ALWAYS" />
-                                                                        <Button fx:id="ri_searchButton" mnemonicParsing="false" styleClass="searchItemButton" text="Search">
+                                                                        <Text fx:id="ri_searchLabel" text="Search by Item ID:" />
+                                                                        <TextField fx:id="ri_ItemSearchField" promptText="Enter Item ID" HBox.hgrow="ALWAYS" />
+                                                                        <Button fx:id="ri_searchButton" mnemonicParsing="false" styleClass="searchItemButton" onAction="#searchRemoveItem" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
@@ -213,14 +213,9 @@
                                                         <!-- Search and Control Section -->
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Button fx:id="vi_clearButton" mnemonicParsing="false" styleClass="viewInvButtons" text="C">
-                                                                    <HBox.margin>
-                                                                        <Insets right="5.0" />
-                                                                    </HBox.margin>
-                                                                </Button>
-                                                                <Text fx:id="vi_nameLabel" text="Enter Name:" />
-                                                                <TextField fx:id="vi_nameSearchField" promptText="Enter Item name" />
-                                                                <Button fx:id="vi_searchButton" mnemonicParsing="false" styleClass="viewInvButtons">
+                                                                <Text fx:id="vi_nameLabel" text="Enter Item ID:" />
+                                                                <TextField fx:id="vi_nameSearchField" promptText="Enter Item ID" />
+                                                                <Button fx:id="vi_searchButton" mnemonicParsing="false" onAction="#searchViewItem" styleClass="viewInvButtons">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>

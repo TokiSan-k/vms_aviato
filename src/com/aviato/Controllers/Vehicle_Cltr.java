@@ -167,6 +167,7 @@ public class Vehicle_Cltr {
         vehicleMakeColumn.setCellValueFactory(new PropertyValueFactory<>("make"));
         vehicleModelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         vehicleYearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
+        rv_vehicleTable.setItems(rv_vehicleList);
 
         // Set up View Vehicle table columns
         vv_VehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleId"));
@@ -291,7 +292,7 @@ public class Vehicle_Cltr {
                     SetEditableAVFields(true);
                     //======
                     //For Now
-                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer Verified!");
+
                 });
             });
 
@@ -344,7 +345,7 @@ public class Vehicle_Cltr {
     @FXML
     private void TableSearchRV(ActionEvent event) {
         try {
-            String searchTerm = vv_SwapField.getText();
+            String searchTerm = rv_searchField.getText();
             if (searchTerm.isEmpty()) {
                 AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "CustomerID cannot be empty!");
                 return;

@@ -27,7 +27,7 @@ public class Main extends Application {
     public static Stage currentStage = null;
     List<ServiceItem> items = new ArrayList<ServiceItem>();
     private static String roleName;
-    public static SideNavBar_Cltr sideNavIns;
+    public static List<SideNavBar_Cltr> AllsideNavIns = new ArrayList<SideNavBar_Cltr>();
 
     public static String GetRoleName(){ return roleName;}
     public static void SetRoleName(String RoleName) {

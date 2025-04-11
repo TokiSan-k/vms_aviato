@@ -58,6 +58,9 @@ public class Login_Cltr {
                         // Successful login
                         clearFields();
                         Main.SetRoleName(roleName);
+                        for(int i =0; i<Main.AllsideNavIns.size(); i++){
+                            Main.AllsideNavIns.get(i).AdaptToPolicy();
+                        }
                         Main.currentStage.setScene(Pages.GetMainMenuScene(roleName));
                     } else {
                         // This shouldn't happen with the procedure, but as a fallback

@@ -71,6 +71,7 @@ public class Service_dao {
                     transaction = session.beginTransaction();
                     ProcedureCall procedureCall = session.getNamedProcedureCall("UpdateService");
                     procedureCall.setParameter("p_service_id", service.getServiceId());
+                    procedureCall.setParameter("p_service_id", service.getServiceType());
                     procedureCall.setParameter("p_status", service.getStatus());
                     procedureCall.setParameter("p_cost", service.getCost());
 

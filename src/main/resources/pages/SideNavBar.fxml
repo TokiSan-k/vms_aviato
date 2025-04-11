@@ -133,18 +133,18 @@
         <Region VBox.vgrow="ALWAYS" />
         <HBox>
             <children>
-                <Button fx:id="logOutButton" mnemonicParsing="false" styleClass="logout-button" text="Log Out">
-                    <HBox.margin>
-                        <Insets left="10.0" />
-                    </HBox.margin>
-               <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Icons/logout-circle-r-line-gery.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-                </Button>
+<!--                <Button fx:id="logOutButton" mnemonicParsing="false" styleClass="logout-button" text="Log Out">-->
+<!--                    <HBox.margin>-->
+<!--                        <Insets left="10.0" />-->
+<!--                    </HBox.margin>-->
+<!--               <graphic>-->
+<!--                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">-->
+<!--                     <image>-->
+<!--                        <Image url="@../images/Icons/logout-circle-r-line-gery.png" />-->
+<!--                     </image>-->
+<!--                  </ImageView>-->
+<!--               </graphic>-->
+<!--                </Button>-->
             </children>
             <VBox.margin>
                 <Insets bottom="15.0" />

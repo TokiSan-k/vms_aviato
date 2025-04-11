@@ -27,6 +27,8 @@ public class Login_Cltr {
     @FXML
     private Button loginButton;
 
+    public static SideNavBar_Cltr sideBarIns;
+
     @FXML
     public void initialize() {
         // Any initialization logic can go here (e.g., setting default styles or listeners)
@@ -51,6 +53,7 @@ public class Login_Cltr {
             authenticateTask.setOnSucceeded(e -> {
                 Platform.runLater(() -> {
                     String roleName = authenticateTask.getValue();
+                    System.out.println(roleName);
                     if (roleName != null && !roleName.isEmpty()) {
                         // Successful login
                         clearFields();

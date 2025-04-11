@@ -98,6 +98,14 @@ import java.sql.Timestamp;
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
                 }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "GetTodaysAppointments",
+                procedureName = "get_todays_appointments",
+                resultClasses = Appointment.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
+                }
         )
 })
 public class Appointment {

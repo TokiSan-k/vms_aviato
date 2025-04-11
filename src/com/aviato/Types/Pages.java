@@ -83,6 +83,9 @@ public class Pages {
             adminRoot = new FXMLLoader(Main.class.getResource("/pages/Admin.fxml")).load();
             adminScene = new Scene(adminRoot);
 
+            salesRoot = new FXMLLoader(Main.class.getResource("/pages/Sales.fxml")).load();
+            salesScene = new Scene(salesRoot);
+
             loginRoot = new FXMLLoader(Main.class.getResource("/pages/Login.fxml")).load();
             loginScene = new Scene(loginRoot);
 
@@ -122,7 +125,8 @@ public class Pages {
             }
         }
         //Error
-        return salesScene;
+
+        return adminScene;
     }
 
 }

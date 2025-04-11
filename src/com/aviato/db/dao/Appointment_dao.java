@@ -235,4 +235,24 @@ public class Appointment_dao {
             }
         };
     }
+
+    public static Task<List<Appointment>> getTodaysAppointmentsTask() {
+        return new Task<List<Appointment>>() {
+            @Override
+            protected List<Appointment> call() throws Exception {
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    ProcedureCall procedureCall = session.getNamedProcedureCall("GetTodaysAppointments");
+
+                    List<Appointment> resultList = procedureCall.getResultList();
+                    if (resultList == null || resultList.isEmpty()) {
+                        throw new Exception("No appointments found for today");
+                    }
+                    return resultList;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    throw ex;
+                }
+            }
+        };
+    }
 }

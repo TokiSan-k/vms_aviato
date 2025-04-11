@@ -54,6 +54,51 @@ import java.sql.Date;
                         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_service_id_out", type = Long.class)
                 }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "SearchServiceByType",
+                procedureName = "search_service_by_type",
+                resultClasses = Service.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_type", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
+                }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "UseInventory",
+                procedureName = "service_pkg.use_inventory",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_item_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_quantity_used", type = Integer.class)
+                }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "GetServiceInventoryByServiceId",
+                procedureName = "get_service_inventory_by_service_id",
+                resultClasses = ServiceItem.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_service_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
+                }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "GetServiceInventory",
+                procedureName = "get_all_service_inventory",
+                resultClasses = ServiceItem.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_item_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
+                }
+        ),
+        @NamedStoredProcedureQuery(
+                name = "GetAllServiceInventory",
+                procedureName = "get_all_service_inventory",
+                resultClasses = ServiceItem.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_item_id", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
+                }
         )
 })
 public class Service {

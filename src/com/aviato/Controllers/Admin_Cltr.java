@@ -1,10 +1,27 @@
 package com.aviato.Controllers;
+import com.aviato.Main;
 import com.aviato.Types.*;
+import com.aviato.Utils.AlertBox;
+import com.aviato.Utils.ErrorHandler;
+import com.aviato.Utils.concurrency.Worker;
+import com.aviato.db.dao.Appointment_dao;
+import com.aviato.db.dao.Inventory_dao;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.List;
 
 public class Admin_Cltr {
 
@@ -31,13 +48,27 @@ public class Admin_Cltr {
     private PieChart pendingServicesChart;
 
     // Table for today's appointments
-    @FXML
-    private TableView<Appointment> appointmentsTable;
-    @FXML
-    private TableColumn<Appointment, String> detailsColumn;
-    @FXML
-    private TableColumn<Appointment, String> timeColumn;
+    @FXML private TableView<Appointment> va_appointmentTable;
+    @FXML private TableColumn<Appointment, Long> va_appIdColumn;
+    @FXML private TableColumn<Appointment, Long> va_custIdColumn;
+    @FXML private TableColumn<Appointment, Long> va_vehicleIdColumn;
+    @FXML private TableColumn<Appointment, Date> va_appDateColumn;
+    @FXML private TableColumn<Appointment, Timestamp> va_appTimeColumn;
+    @FXML private TableColumn<Appointment, String> va_statusColumn;
+    @FXML private TableColumn<Appointment, Long> va_serviceIdColumn;
+    @FXML private TableColumn<Appointment, Long> va_empIdColumn;
+    private final ObservableList<Appointment> va_AppList = FXCollections.observableArrayList();
 
+    private final ObservableList<InventoryAlert> vi_AlertList = FXCollections.observableArrayList();
+
+    @FXML private Button vi_alertsButton;
+    @FXML private TableView<InventoryAlert> vi_AlertsTable;
+    @FXML private TableColumn<InventoryAlert, Long> vi_AlertItemId;
+    @FXML private TableColumn<InventoryAlert, String> vi_AlertItemName;
+    @FXML private TableColumn<InventoryAlert, Integer> vi_AlertQuantity;
+    @FXML private TableColumn<InventoryAlert, Double> vi_AlertPPU;
+    @FXML private TableColumn<InventoryAlert, Long> vi_AlertServiceId;
+    @FXML private TableColumn<InventoryAlert, Integer> vi_AlertQuantityUsed;
     // Quick action buttons
     @FXML
     private Button newAppointmentButton;
@@ -56,114 +87,185 @@ public class Admin_Cltr {
     @FXML
     private TableColumn<InventoryAlert, String> c2Column;
 
+    private final String customerPageHeading = "Manage Customers";
+    private final String appointmentPageHeading = "Manage Appointments";
+    private final String vehiclePageHeading = "Manage Vehicles";
+    private final String manageRolesPageHeading = "Manage Roles";
+    private final String inventoryPageHeading = "Manage Inventory";
+    private final String servicePageHeading = "Manage Services";
+    private final String employeePageHeading = "Manage Employee";
+
+
     // Initialize the controller
     @FXML
     public void initialize() {
-//        // Initialize the pie chart with sample data
-//        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-//                new PieChart.Data("Detailing (35%)", 35),
-//                new PieChart.Data("PPF Install (25%)", 25),
-//                new PieChart.Data("Ceramic Coating (20%)", 20),
-//                new PieChart.Data("Oil Change (15%)", 15),
-//                new PieChart.Data("Other (5%)", 5)
-//        );
-//        pendingServicesChart.setData(pieChartData);
-//
-//        // Initialize the appointments table
-//        detailsColumn.setCellValueFactory(new PropertyValueFactory<>("details"));
-//        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-//
-//        ObservableList<Appointment> appointments = FXCollections.observableArrayList(
-//                new Appointment("John Smith", "9:00 Am"),
-//                new Appointment("Jay Jones", "10:00 Am"),
-//                new Appointment("Alex", "10:00 Am"),
-//                new Appointment("Tom", "10:00 Am")
-//        );
-//        appointmentsTable.setItems(appointments);
-//
-//        // Initialize the inventory alerts table (placeholder data)
-//        c1Column.setCellValueFactory(new PropertyValueFactory<>("item"));
-//        c2Column.setCellValueFactory(new PropertyValueFactory<>("status"));
-//
-//        ObservableList<InventoryAlert> inventoryAlerts = FXCollections.observableArrayList(
-//                // Add placeholder data if needed, e.g., new InventoryAlert("Oil Filter", "Low Stock")
-//        );
-//        inventoryTable.setItems(inventoryAlerts);
+        // Set up View Appointment table columns
+        va_appIdColumn.setCellValueFactory(new PropertyValueFactory<>("appId"));
+        va_custIdColumn.setCellValueFactory(new PropertyValueFactory<>("custId"));
+        va_vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleId"));
+        va_appDateColumn.setCellValueFactory(new PropertyValueFactory<>("appDate"));
+        va_appTimeColumn.setCellValueFactory(new PropertyValueFactory<>("appTime"));
+        va_statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        va_serviceIdColumn.setCellValueFactory(new PropertyValueFactory<>("serviceId"));
+        va_empIdColumn.setCellValueFactory(new PropertyValueFactory<>("empId"));
+        va_appointmentTable.setItems(va_AppList);
 
-
-    }
-
-    // Event handlers for sidebar buttons
-    @FXML
-    private void handleCustomers() {
-        System.out.println("Navigating to Customers section...");
-        // Add navigation logic here
+        vi_AlertsTable.setItems(vi_AlertList);
+        vi_AlertItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+        vi_AlertItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        vi_AlertQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        vi_AlertPPU.setCellValueFactory(new PropertyValueFactory<>("pricePerUnit"));
+        vi_AlertServiceId.setCellValueFactory(new PropertyValueFactory<>("serviceId"));
+        vi_AlertQuantityUsed.setCellValueFactory(new PropertyValueFactory<>("quantityUsed"));
     }
 
     @FXML
-    private void handleAppointments() {
-        System.out.println("Navigating to Appointments section...");
-        // Add navigation logic here
+    private void handleHomePage(ActionEvent event) {
+        if (!Main.currentStage.getScene().equals(Pages.GetMainMenuScene(Main.GetRoleName()))) {
+            Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
+            Main.currentStage.setTitle("Home");
+        }
     }
 
     @FXML
-    private void handleVehicles() {
-        System.out.println("Navigating to Vehicles section...");
-        // Add navigation logic here
+    private void handleCustomers(ActionEvent event) {
+        if (!Main.currentStage.getScene().equals(Pages.GetCustomerScene())) {
+            Main.currentStage.setScene(Pages.GetCustomerScene());
+            Main.currentStage.setTitle(customerPageHeading);
+        }
     }
 
     @FXML
-    private void handlePayments() {
-        System.out.println("Navigating to Payments section...");
-        // Add navigation logic here
+    private void handleAppointments(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetAppointmentScene()) {
+            Main.currentStage.setScene(Pages.GetAppointmentScene());
+            Main.currentStage.setTitle(appointmentPageHeading);
+        }
     }
 
     @FXML
-    private void handleManageRoles() {
-        System.out.println("Navigating to Manage Roles section...");
-        // Add navigation logic here
+    private void handleVehicles(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetVehicleScene()) {
+            Main.currentStage.setScene(Pages.GetVehicleScene());
+            Main.currentStage.setTitle(vehiclePageHeading);
+        }
     }
 
     @FXML
-    private void handleManageInventory() {
-        System.out.println("Navigating to Manage Inventory section...");
-        // Add navigation logic here
+    private void handlePayments(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetPaymentsScene()) {
+            Main.currentStage.setScene(Pages.GetPaymentsScene());
+            Main.currentStage.setTitle(customerPageHeading);
+        }
     }
 
     @FXML
-    private void handleServiceManagement() {
-        System.out.println("Navigating to Service Management section...");
-        // Add navigation logic here
+    private void handleManageRoles(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetManageRoleScene()) {
+            Main.currentStage.setScene(Pages.GetManageRoleScene());
+            Main.currentStage.setTitle(manageRolesPageHeading);
+        }
     }
 
     @FXML
-    private void handleMonthlyReports() {
-        System.out.println("Navigating to Monthly Reports section...");
-        // Add navigation logic here
-    }
-
-    // Event handlers for quick action buttons
-    @FXML
-    private void handleNewAppointment() {
-        System.out.println("Opening New Appointment form...");
-        // Add logic to open a new appointment form
+    private void handleManageInventory(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetInventoryScene()) {
+            Main.currentStage.setScene(Pages.GetInventoryScene());
+            Main.currentStage.setTitle(inventoryPageHeading);
+        }
     }
 
     @FXML
-    private void handleCustomerSearch() {
-        System.out.println("Opening Customer Search...");
-        // Add logic to open customer search
+    private void handleServiceManagement(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetServiceManagementScene()) {
+            Main.currentStage.setScene(Pages.GetServiceManagementScene());
+            Main.currentStage.setTitle(servicePageHeading);
+        }
     }
 
     @FXML
-    private void handleRegisterVehicle() {
-        System.out.println("Opening Register Vehicle form...");
-        // Add logic to open vehicle registration form
+    private void handleEmployee(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetEmployeeScene()) {
+            Main.currentStage.setScene(Pages.GetEmployeeScene());
+            Main.currentStage.setTitle(employeePageHeading);
+        }
     }
 
     @FXML
-    private void handleProcessPayment() {
-        System.out.println("Opening Process Payment form...");
-        // Add logic to open payment processing form
+    private void handleNewAppointment(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetEmployeeScene()) {
+            Main.currentStage.setScene(Pages.GetEmployeeScene());
+            Main.currentStage.setTitle(employeePageHeading);
+        }
+    }
+
+    @FXML
+    private void handleCustomerSearch(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetEmployeeScene()) {
+            Main.currentStage.setScene(Pages.GetEmployeeScene());
+            Main.currentStage.setTitle(employeePageHeading);
+        }
+    }
+
+    @FXML
+    private void handleRegisterVehicle(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetEmployeeScene()) {
+            Main.currentStage.setScene(Pages.GetEmployeeScene());
+            Main.currentStage.setTitle(employeePageHeading);
+        }
+    }
+
+    @FXML
+    private void handleProcessPayment(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetEmployeeScene()) {
+            Main.currentStage.setScene(Pages.GetEmployeeScene());
+            Main.currentStage.setTitle(employeePageHeading);
+        }
+    }
+
+    private void showTodaysAppointments() {
+        try {
+            Task<List<Appointment>> getTodaysTask = Appointment_dao.getTodaysAppointmentsTask();
+            getTodaysTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    va_AppList.clear();
+                    va_AppList.addAll(getTodaysTask.getValue());
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Today's appointments loaded");
+                });
+            });
+
+            getTodaysTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getTodaysTask.getException());
+                });
+            });
+
+            Worker.submitTask(getTodaysTask);
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to fetch today's appointments: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void showInventoryAlerts() {
+        try {
+            Task<List<InventoryAlert>> getAlertsTask = Inventory_dao.getInventoryAlertsTask();
+            getAlertsTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    vi_AlertList.clear();
+                    vi_AlertList.addAll(getAlertsTask.getValue());
+                });
+            });
+
+            getAlertsTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getAlertsTask.getException());
+                });
+            });
+
+            Worker.submitTask(getAlertsTask);
+        } catch (Exception e) {
+            AlertBox.ShowAlert(Alert.AlertType.ERROR, "Error", "Failed to fetch inventory alerts: " + e.getMessage());
+        }
     }
 }

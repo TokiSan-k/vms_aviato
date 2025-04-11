@@ -6,10 +6,10 @@ import javafx.collections.ObservableList;
 public class Policy
 {
     ///Map the Index with DB roleID
-    public static final ObservableList<String> roleNames = FXCollections.observableArrayList("Admin", "Sales");
+    public static final ObservableList<String> roleNames = FXCollections.observableArrayList("Admin", "Sales Representative");
 
-    public static void Autherize()
-    {}
+    public static final String[] AdminPolicy = {"Customer_page", "Vehicle_page", "Employee_page", "Service_page", "Appointment_page", "Payment_page", "Inventory_page", "User_page"};
+    public static final String[] SalesPolicy = {"Customer_page", "Vehicle_page", "Employee_page", "Service_page", "Appointment_page", "Payment_page"};
 
     public static long GetRoleId(String roleName)
     {

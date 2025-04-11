@@ -1,5 +1,6 @@
 package com.aviato;
 
+import com.aviato.Controllers.SideNavBar_Cltr;
 import com.aviato.Types.*;
 import com.aviato.Types.Pages;
 import com.aviato.Utils.concurrency.Worker;
@@ -26,6 +27,7 @@ public class Main extends Application {
     public static Stage currentStage = null;
     List<ServiceItem> items = new ArrayList<ServiceItem>();
     private static String roleName;
+    public static SideNavBar_Cltr sideNavIns;
 
     public static String GetRoleName(){ return roleName;}
     public static void SetRoleName(String RoleName) {
@@ -53,7 +55,7 @@ public class Main extends Application {
 
             currentStage = primaryStage;
             primaryStage.setTitle("Admin Panel Dashboard");
-            primaryStage.setScene(Pages.GetCustomerScene());
+            primaryStage.setScene(Pages.GetLogInScene());
             primaryStage.setWidth(width);
             primaryStage.setHeight(height);
             primaryStage.setResizable(true);

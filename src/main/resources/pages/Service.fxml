@@ -112,14 +112,19 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                                                                     <children>
-                                                                        <Text fx:id="rs_searchLabel" text="Search by Type:" />
-                                                                        <TextField fx:id="rs_serviceSearchField" promptText="Enter service type" HBox.hgrow="ALWAYS" />
-                                                                        <Button fx:id="rs_searchButton" mnemonicParsing="false" styleClass="searchSvcButton" text="Search">
+                                                                        <Button fx:id="rs_swapButton" mnemonicParsing="false" onAction="#swapRemoveField" styleClass="searchSvcButton" text="C">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
                                                                         </Button>
-                                                                        <Button fx:id="rs_searchAllButton" mnemonicParsing="false" onAction="#searchAllRemoveService" styleClass="searchSvcButton" text="Search">
+                                                                        <Text fx:id="rs_searchLabel" text="Type:" />
+                                                                        <TextField fx:id="rs_serviceSearchField" promptText="Enter Service Type" HBox.hgrow="ALWAYS" />
+                                                                        <Button fx:id="rs_searchButton" mnemonicParsing="false" styleClass="searchSvcButton" onAction="#searchRemoveService" text="Search">
+                                                                            <HBox.margin>
+                                                                                <Insets left="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Button>
+                                                                        <Button fx:id="rs_searchAllButton" mnemonicParsing="false" onAction="#searchAllRemoveService" styleClass="searchSvcButton" text="All Service">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
@@ -226,14 +231,14 @@
                                                         <!-- Search and Control Section -->
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Button fx:id="vs_clearButton" mnemonicParsing="false" styleClass="viewSvcButtons" text="C">
+                                                                <Button fx:id="vs_swapButton" mnemonicParsing="false" onAction="#swapViewField" styleClass="viewSvcButtons" text="C">
                                                                     <HBox.margin>
                                                                         <Insets right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Text fx:id="vs_typeLabel" text="Enter Type:" />
-                                                                <TextField fx:id="vs_serviceSearchField" promptText="Enter service type" />
-                                                                <Button fx:id="vs_searchButton" mnemonicParsing="false" styleClass="viewSvcButtons">
+                                                                <Text fx:id="vs_typeLabel" text="Type:" />
+                                                                <TextField fx:id="vs_serviceSearchField" promptText="Enter Service Type" />
+                                                                <Button fx:id="vs_searchButton" mnemonicParsing="false" onAction="#searchViewService" styleClass="viewSvcButtons">
                                                                     <HBox.margin>
                                                                         <Insets left="5.0" right="5.0" />
                                                                     </HBox.margin>
@@ -302,7 +307,7 @@
                                                         <VBox spacing="10.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                             <children>
                                                                 <Text text="Items Used in Services" />
-                                                                <Button fx:id="iu_showAllButton" onAction="#ShowAllItemsUsed" styleClass="addFieldButton" text="All Items">
+                                                                <Button fx:id="iu_showAllButton" onAction="#ShowAllItemsUsed"  styleClass="addFieldButton" text="All Items">
                                                                     <VBox.margin>
                                                                         <Insets left="15.0" />
                                                                     </VBox.margin>
@@ -312,8 +317,6 @@
                                                                         <TableColumn fx:id="iu_serviceIdColumn" text="Service ID" />
                                                                         <TableColumn fx:id="iu_itemIdColumn" text="Item ID" />
                                                                         <TableColumn fx:id="iu_quantityUsedColumn" text="Quantity Used" />
-                                                                        <TableColumn fx:id="iu_itemNameColumn" text="Item Name" />
-                                                                        <TableColumn fx:id="iu_pricePerUnitColumn" text="Price Per Unit" />
                                                                     </columns>
                                                                 </TableView>
                                                             </children>

@@ -1,5 +1,6 @@
 package com.aviato.db.dao;
 
+import com.aviato.Types.InventoryAlert;
 import com.aviato.Types.Item;
 import com.aviato.db.HibernateUtil;
 import javafx.concurrent.Task;
@@ -130,6 +131,26 @@ public class Inventory_dao {
                     List<Item> resultList = procedureCall.getResultList();
                     if (resultList == null || resultList.isEmpty()) {
                         throw new Exception("No items in the database");
+                    }
+                    return resultList;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    throw ex;
+                }
+            }
+        };
+    }
+
+    public static Task<List<InventoryAlert>> getInventoryAlertsTask() {
+        return new Task<List<InventoryAlert>>() {
+            @Override
+            protected List<InventoryAlert> call() throws Exception {
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    ProcedureCall procedureCall = session.getNamedProcedureCall("GetInventoryAlerts");
+
+                    List<InventoryAlert> resultList = procedureCall.getResultList();
+                    if (resultList == null || resultList.isEmpty()) {
+                        throw new Exception("No inventory alerts found (all items above threshold)");
                     }
                     return resultList;
                 } catch (Exception ex) {

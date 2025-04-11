@@ -4,6 +4,7 @@ import com.aviato.Types.Service;
 import com.aviato.Types.ServiceItem;
 import com.aviato.Utils.AlertBox;
 import com.aviato.Utils.ErrorHandler;
+import com.aviato.Utils.Field;
 import com.aviato.Utils.concurrency.Worker;
 import com.aviato.db.dao.Service_dao;
 import javafx.application.Platform;
@@ -15,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -38,6 +40,9 @@ public class Service_Cltr {
     private final ObservableList<Service> rs_SvcList = FXCollections.observableArrayList();
     private final ObservableList<Service> vs_SvcList = FXCollections.observableArrayList();
     private final ObservableList<ServiceItem> iu_ItemsList = FXCollections.observableArrayList();
+
+    private final Field[] vs_ServiceSwapFields = { new Field(0,"Type:","Enter Service Type"),
+            new Field(1,"ID:","Enter Service ID")};
 
     // Service Navbar
     @FXML private Button addSvcBtn;
@@ -78,6 +83,7 @@ public class Service_Cltr {
     @FXML private Button ms_submitButton;
 
     // View Service Fields
+    @FXML private Text vs_typeLabel;
     @FXML private TextField vs_serviceSearchField;
     @FXML private Button vs_clearButton;
     @FXML private Button vs_searchButton;
@@ -98,8 +104,6 @@ public class Service_Cltr {
     @FXML private TableColumn<ServiceItem, Long> iu_serviceIdColumn;
     @FXML private TableColumn<ServiceItem, Long> iu_itemIdColumn;
     @FXML private TableColumn<ServiceItem, Integer> iu_quantityUsedColumn;
-    @FXML private TableColumn<ServiceItem, String> iu_itemNameColumn;
-    @FXML private TableColumn<ServiceItem, Double> iu_pricePerUnitColumn;
 
     private Service service = new Service();
 
@@ -130,8 +134,6 @@ public class Service_Cltr {
         iu_serviceIdColumn.setCellValueFactory(new PropertyValueFactory<>("serviceId"));
         iu_itemIdColumn.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         iu_quantityUsedColumn.setCellValueFactory(new PropertyValueFactory<>("quantityUsed"));
-        iu_itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
-        iu_pricePerUnitColumn.setCellValueFactory(new PropertyValueFactory<>("pricePerUnit"));
         iu_itemsTable.setItems(iu_ItemsList);
     }
 
@@ -248,16 +250,76 @@ public class Service_Cltr {
         }
     }
 
+    private int rs_swapIdx = 0;
     @FXML
     private void swapRemoveField(ActionEvent event) {
-        // Placeholder for swapping field (e.g., toggle between ID and another field)
-        System.out.println("Swap field button clicked in Remove Service");
+        rs_swapIdx+=1;
+        if(rs_swapIdx > 1)
+            rs_swapIdx = 0;
+
+        vs_typeLabel.setText(vs_ServiceSwapFields[rs_swapIdx].Text);
+        vs_serviceSearchField.setPromptText(vs_ServiceSwapFields[rs_swapIdx].Prompt);
+    }
+
+    private void searchRSByServiceId(Long serviceId) throws Exception {
+        try {
+            Task<Service> searchSvcTask = Service_dao.getServiceTask(serviceId);
+            searchSvcTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    rs_SvcList.clear();
+                    rs_SvcList.addAll(searchSvcTask.getValue());
+                });
+            });
+
+            searchSvcTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(searchSvcTask.getException());
+                });
+            });
+
+            Worker.submitTask(searchSvcTask);
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    private void searchRSServiceByType(String searchTerm) throws Exception
+    {
+        try {
+            Task<List<Service>> searchSvcTask = Service_dao.searchServiceByTypeTask(searchTerm);
+            searchSvcTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    rs_SvcList.clear();
+                    rs_SvcList.addAll(searchSvcTask.getValue());
+                });
+            });
+
+            searchSvcTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(searchSvcTask.getException());
+                });
+            });
+
+            Worker.submitTask(searchSvcTask);
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 
     @FXML
     private void searchRemoveService(ActionEvent event) {
         String searchTerm = rs_serviceSearchField.getText();
-        // Add search logic here if needed
+        try {
+            if(vs_swapIdx == 0){
+                searchRSServiceByType(searchTerm);
+            }
+            else if(vs_swapIdx == 1) {
+                Long serviceID = Long.parseLong(searchTerm);
+                searchRSByServiceId(serviceID);
+            }
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.INFORMATION,"Information", ex.getMessage());
+        }
     }
 
     @FXML
@@ -409,11 +471,78 @@ public class Service_Cltr {
         vs_serviceTable.getItems().clear();
     }
 
+    private int vs_swapIdx = 0;
+    @FXML
+    private void swapViewField(ActionEvent event) {
+        vs_swapIdx+=1;
+        if(vs_swapIdx > 1)
+            vs_swapIdx = 0;
+
+        vs_typeLabel.setText(vs_ServiceSwapFields[vs_swapIdx].Text);
+        vs_serviceSearchField.setPromptText(vs_ServiceSwapFields[vs_swapIdx].Prompt);
+    }
+
     @FXML
     private void searchViewService(ActionEvent event) {
         String searchTerm = vs_serviceSearchField.getText();
-        // Add search logic here if needed
+        try {
+            if(vs_swapIdx == 0){
+                searchServiceByType(searchTerm);
+            }
+            else if(vs_swapIdx == 1) {
+                Long serviceID = Long.parseLong(searchTerm);
+                searchByServiceId(serviceID);
+            }
+        } catch (Exception ex) {
+            AlertBox.ShowAlert(Alert.AlertType.INFORMATION,"Information", ex.getMessage());
+        }
     }
+
+    private void searchByServiceId(Long serviceId) throws Exception {
+        try {
+            Task<Service> searchSvcTask = Service_dao.getServiceTask(serviceId);
+            searchSvcTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    vs_SvcList.clear();
+                    vs_SvcList.addAll(searchSvcTask.getValue());
+                });
+            });
+
+            searchSvcTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(searchSvcTask.getException());
+                });
+            });
+
+            Worker.submitTask(searchSvcTask);
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    private void searchServiceByType(String searchTerm) throws Exception
+    {
+        try {
+            Task<List<Service>> searchSvcTask = Service_dao.searchServiceByTypeTask(searchTerm);
+            searchSvcTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    vs_SvcList.clear();
+                    vs_SvcList.addAll(searchSvcTask.getValue());
+                });
+            });
+
+            searchSvcTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(searchSvcTask.getException());
+                });
+            });
+
+            Worker.submitTask(searchSvcTask);
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
 
     @FXML
     private void showAllServices(ActionEvent event) {
@@ -474,18 +603,31 @@ public class Service_Cltr {
     @FXML
     private void ShowAllItemsUsed(ActionEvent event)
     {
-        try
-        {
-            //Procedure for All Service_Inventory
-        }
-        catch (Exception ex)
-        {
+        try {
 
+            Task<List<ServiceItem>> getInventoryTask = Service_dao.getAllServiceInventoryTask();
+            getInventoryTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    iu_ItemsList.addAll(getInventoryTask.getValue());
+                });
+            });
+
+            getInventoryTask.setOnFailed(e -> {
+                Platform.runLater(() -> {
+                    ErrorHandler.ManageException(getInventoryTask.getException());
+                });
+            });
+
+            Worker.submitTask(getInventoryTask);
+        }
+        catch(Exception ex)
+        {
+            throw ex;
         }
     }
 
-
-    private void refreshItemsUsedTable(Long serviceId) throws Exception{
+    @FXML
+    private void getAllItemsUsedTable(Long serviceId) throws Exception{
         try {
             Task<List<ServiceItem>> getInventoryTask = Service_dao.getServiceInventoryTask(serviceId);
             getInventoryTask.setOnSucceeded(e -> {

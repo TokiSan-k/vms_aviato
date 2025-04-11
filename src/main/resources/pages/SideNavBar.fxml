@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox styleClass="sidebar" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.SideNavBar_Cltr">
+<VBox fx:id="mainContainer" styleClass="sidebar" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aviato.Controllers.SideNavBar_Cltr">
     <padding>
         <Insets top="20.0" />
     </padding>
     <children>
-        <Button fx:id="sidebarCustomersButton" mnemonicParsing="false" onAction="#handleCustomers" styleClass="sidebar-button" text="Customers">
+        <Button fx:id="sidebarHomeButton" mnemonicParsing="false" onAction="#handleHomePage" text="Home">
             <VBox.margin>
-                <Insets top="35.0" />
+                <Insets bottom="15.0" />
             </VBox.margin>
             <graphic>
                 <ImageView pickOnBounds="true" preserveRatio="true">
@@ -26,7 +26,20 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarVehiclesButton" mnemonicParsing="false" onAction="#handleVehicles" styleClass="sidebar-button" text="Vehicles">
+        <Button fx:id="Customer_page" visible="false" managed="false" mnemonicParsing="false" onAction="#handleCustomers" styleClass="sidebar-button" text="Customers">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <graphic>
+                <ImageView pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Icons/team-line-grey.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <Button fx:id="Vehicle_page" visible="false" managed="false" mnemonicParsing="false" onAction="#handleVehicles" styleClass="sidebar-button" text="Vehicles">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -39,7 +52,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarEmployeeButton" mnemonicParsing="false" onAction="#handleEmployee" styleClass="sidebar-button" text="Employee">
+        <Button fx:id="Employee_page" visible="false" managed="false" mnemonicParsing="false" onAction="#handleEmployee" styleClass="sidebar-button" text="Employee">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -52,7 +65,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarServiceManagementButton" mnemonicParsing="false" onAction="#handleServiceManagement" styleClass="sidebar-button" text="Service Management">
+        <Button fx:id="Service_page" visible="false" managed="false" mnemonicParsing="false" onAction="#handleServiceManagement" styleClass="sidebar-button" text="Service Management">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -65,7 +78,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarAppointmentsButton" mnemonicParsing="false" onAction="#handleAppointments" styleClass="sidebar-button" text="Appointments">
+        <Button fx:id="Appointment_page" visible="false" managed="false" mnemonicParsing="false" onAction="#handleAppointments" styleClass="sidebar-button" text="Appointments">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -78,7 +91,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarPaymentsButton" mnemonicParsing="false" onAction="#handlePayments" styleClass="sidebar-button" text="Payments">
+        <Button fx:id="Payment_page"  visible="false" managed="false" mnemonicParsing="false" onAction="#handlePayments" styleClass="sidebar-button" text="Payments">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -91,7 +104,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarManageInventoryButton" mnemonicParsing="false" onAction="#handleManageInventory" styleClass="sidebar-button" text="Manage Inventory">
+        <Button fx:id="Inventory_page" visible="false" managed="false" mnemonicParsing="false" onAction="#handleManageInventory" styleClass="sidebar-button" text="Manage Inventory">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -104,7 +117,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarManageRolesButton" mnemonicParsing="false" onAction="#handleManageRoles" styleClass="sidebar-button" text="Manage Roles">
+        <Button fx:id="User_page" visible="false" managed="false" mnemonicParsing="false" onAction="#handleManageRoles" styleClass="sidebar-button" text="Manage User">
             <VBox.margin>
                 <Insets />
             </VBox.margin>

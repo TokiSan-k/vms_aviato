@@ -1,5 +1,7 @@
 package com.aviato.Controllers;
+import com.aviato.Main;
 import com.aviato.Types.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
@@ -56,6 +58,13 @@ public class Sales_Cltr {
     @FXML
     private TableColumn<InventoryAlert, String> c2Column;
 
+    private final String customerPageHeading = "Manage Customers";
+    private final String appointmentPageHeading = "Manage Appointments";
+    private final String vehiclePageHeading = "Manage Vehicles";
+    private final String servicePageHeading = "Manage Services";
+    private final String employeePageHeading = "Manage Employee";
+
+
     // Initialize the controller
     @FXML
     public void initialize() {
@@ -93,77 +102,93 @@ public class Sales_Cltr {
 
     }
 
-    // Event handlers for sidebar buttons
     @FXML
-    private void handleCustomers() {
-        System.out.println("Navigating to Customers section...");
-        // Add navigation logic here
+    private void handleHomePage(ActionEvent event) {
+        if (!Main.currentStage.getScene().equals(Pages.GetMainMenuScene(Main.GetRoleName()))) {
+            Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
+            Main.currentStage.setTitle("Home");
+        }
     }
 
     @FXML
-    private void handleAppointments() {
-        System.out.println("Navigating to Appointments section...");
-        // Add navigation logic here
+    private void handleCustomers(ActionEvent event) {
+        if (!Main.currentStage.getScene().equals(Pages.GetCustomerScene())) {
+            Main.currentStage.setScene(Pages.GetCustomerScene());
+            Main.currentStage.setTitle(customerPageHeading);
+        }
     }
 
     @FXML
-    private void handleVehicles() {
-        System.out.println("Navigating to Vehicles section...");
-        // Add navigation logic here
+    private void handleAppointments(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetAppointmentScene()) {
+            Main.currentStage.setScene(Pages.GetAppointmentScene());
+            Main.currentStage.setTitle(appointmentPageHeading);
+        }
     }
 
     @FXML
-    private void handlePayments() {
-        System.out.println("Navigating to Payments section...");
-        // Add navigation logic here
+    private void handleVehicles(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetVehicleScene()) {
+            Main.currentStage.setScene(Pages.GetVehicleScene());
+            Main.currentStage.setTitle(vehiclePageHeading);
+            System.out.println("Width on Vehicle page: " + Main.currentStage.getWidth());
+            System.out.println("Height on Vehicle page: " + Main.currentStage.getHeight());
+        }
     }
 
     @FXML
-    private void handleManageRoles() {
-        System.out.println("Navigating to Manage Roles section...");
-        // Add navigation logic here
+    private void handlePayments(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetPaymentsScene()) {
+            Main.currentStage.setScene(Pages.GetPaymentsScene());
+            Main.currentStage.setTitle(customerPageHeading);
+        }
     }
 
     @FXML
-    private void handleManageInventory() {
-        System.out.println("Navigating to Manage Inventory section...");
-        // Add navigation logic here
+    private void handleServiceManagement(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetServiceManagementScene()) {
+            Main.currentStage.setScene(Pages.GetServiceManagementScene());
+            Main.currentStage.setTitle(servicePageHeading);
+        }
     }
 
     @FXML
-    private void handleServiceManagement() {
-        System.out.println("Navigating to Service Management section...");
-        // Add navigation logic here
+    private void handleEmployee(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetEmployeeScene()) {
+            Main.currentStage.setScene(Pages.GetEmployeeScene());
+            Main.currentStage.setTitle(employeePageHeading);
+        }
     }
 
     @FXML
-    private void handleMonthlyReports() {
-        System.out.println("Navigating to Monthly Reports section...");
-        // Add navigation logic here
-    }
-
-    // Event handlers for quick action buttons
-    @FXML
-    private void handleNewAppointment() {
-        System.out.println("Opening New Appointment form...");
-        // Add logic to open a new appointment form
+    private void handleNewAppointment(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetEmployeeScene()) {
+            Main.currentStage.setScene(Pages.GetEmployeeScene());
+            Main.currentStage.setTitle(employeePageHeading);
+        }
     }
 
     @FXML
-    private void handleCustomerSearch() {
-        System.out.println("Opening Customer Search...");
-        // Add logic to open customer search
+    private void handleCustomerSearch(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetEmployeeScene()) {
+            Main.currentStage.setScene(Pages.GetEmployeeScene());
+            Main.currentStage.setTitle(employeePageHeading);
+        }
     }
 
     @FXML
-    private void handleRegisterVehicle() {
-        System.out.println("Opening Register Vehicle form...");
-        // Add logic to open vehicle registration form
+    private void handleRegisterVehicle(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetEmployeeScene()) {
+            Main.currentStage.setScene(Pages.GetEmployeeScene());
+            Main.currentStage.setTitle(employeePageHeading);
+        }
     }
 
     @FXML
-    private void handleProcessPayment() {
-        System.out.println("Opening Process Payment form...");
-        // Add logic to open payment processing form
+    private void handleProcessPayment(ActionEvent event) {
+        if (Main.currentStage.getScene() != Pages.GetEmployeeScene()) {
+            Main.currentStage.setScene(Pages.GetEmployeeScene());
+            Main.currentStage.setTitle(employeePageHeading);
+        }
     }
 }

@@ -195,6 +195,7 @@ public class SideNavBar_Cltr {
 
     @FXML
     public void initialize() {
+//        Main.sideNavIns = this;
         Main.AllsideNavIns.add(this);
         //AdaptToPolicy();
     }

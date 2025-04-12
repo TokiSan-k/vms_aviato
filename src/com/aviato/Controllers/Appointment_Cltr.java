@@ -17,23 +17,28 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.File;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
-import javafx.scene.text.Text;
 
-//import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.colors.DeviceRgb;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
+import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.borders.Border;
+import com.itextpdf.layout.borders.SolidBorder;
 import com.itextpdf.layout.element.*;
-// Or specific imports like:
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
-
+import com.itextpdf.layout.properties.VerticalAlignment;
 
 public class Appointment_Cltr {
     // Containers
@@ -665,73 +670,148 @@ public class Appointment_Cltr {
 
     private void generateStyledInvoice(InvoiceInfo info) {
         try {
-            String directory = "invoices/"; // folder relative to project root
+            String directory = "invoices/";
             File invoiceDir = new File(directory);
             if (!invoiceDir.exists()) {
                 invoiceDir.mkdirs();
             }
             String[] name = info.getCustName().split(" ");
-            String fName = "";
-            for(int i =0; i<name.length;i++)
-            {
-                fName += name[i];
-            }
+            String fName = String.join("", name);
             String fileName = directory + fName + info.getInvoiceId() + ".pdf";
             PdfWriter writer = new PdfWriter(fileName);
             System.out.println("Invoice saved at: " + new File(fileName).getAbsolutePath());
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
 
+            // Define custom colors
+            DeviceRgb primaryColor = new DeviceRgb(33, 150, 243); // Modern blue
+            DeviceRgb secondaryColor = new DeviceRgb(66, 66, 66); // Dark gray
+            DeviceRgb accentColor = new DeviceRgb(240, 240, 240); // Light gray for backgrounds
 
-            // Title (now using boldFont)
+            // Use a professional font (fallback to Helvetica if custom font unavailable)
+            PdfFont boldFont = PdfFontFactory.createFont("Helvetica-Bold");
+            PdfFont regularFont = PdfFontFactory.createFont("Helvetica");
+
+            // Header Section
+            Table headerTable = new Table(UnitValue.createPercentArray(new float[]{20, 80})).useAllAvailableWidth();
+
+            // Company Details
+            Div companyDetails = new Div()
+                    .add(new Paragraph("VMS | Aviato™")
+                            .setFont(boldFont)
+                            .setFontSize(18)
+                            .setFontColor(primaryColor))
+                    .add(new Paragraph("1234 Auto Lane, Tech City, TX 75001")
+                            .setFont(regularFont)
+                            .setFontSize(10))
+                    .add(new Paragraph("Email: support@aviato.com | Phone: (123) 456-7890")
+                            .setFont(regularFont)
+                            .setFontSize(10));
+            headerTable.addCell(new com.itextpdf.layout.element.Cell().add(companyDetails)
+                    .setBorder(Border.NO_BORDER)
+                    .setTextAlignment(TextAlignment.RIGHT));
+            document.add(headerTable);
+
+            // Divider Line
+            SolidLine line = new SolidLine(1f);
+            line.setColor(primaryColor);
+            LineSeparator separator = new LineSeparator(line);
+            separator.setMarginTop(10);
+            separator.setMarginBottom(20);
+            document.add(separator);
+
+            // Title
             Paragraph title = new Paragraph("INVOICE")
-                    .setFontSize(22)
-                    .setTextAlignment(TextAlignment.CENTER);
+                    .setFont(boldFont)
+                    .setFontSize(24)
+                    .setFontColor(secondaryColor)
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setMarginBottom(20);
             document.add(title);
 
-            // Invoice details
-            document.add(new Paragraph("Invoice #: " + info.getInvoiceId()));
-            document.add(new Paragraph("Date: " + info.getInvoiceDate()));
-            document.add(new Paragraph("Vehicle: " + info.getLicencePlate()));
+            // Invoice Details (in a two-column layout)
+            Table infoTable = new Table(UnitValue.createPercentArray(new float[]{50, 50})).useAllAvailableWidth();
+            Div invoiceInfo = new Div()
+                    .add(new Paragraph("Invoice #: " + info.getInvoiceId()).setFont(regularFont).setFontSize(11))
+                    .add(new Paragraph("Date: " + info.getInvoiceDate()).setFont(regularFont).setFontSize(11))
+                    .add(new Paragraph("Vehicle: " + info.getLicencePlate()).setFont(regularFont).setFontSize(11));
+            Div billedTo = new Div()
+                    .add(new Paragraph("Billed To:").setFont(boldFont).setFontSize(12))
+                    .add(new Paragraph(info.getCustName()).setFont(regularFont).setFontSize(11))
+                    .add(new Paragraph(info.getAddress()).setFont(regularFont).setFontSize(11))
+                    .add(new Paragraph("Email: " + info.getEmail()).setFont(regularFont).setFontSize(11))
+                    .add(new Paragraph("Contact: " + info.getContact()).setFont(regularFont).setFontSize(11));
+            infoTable.addCell(new com.itextpdf.layout.element.Cell().add(invoiceInfo)
+                    .setBorder(Border.NO_BORDER)
+                    .setPadding(10));
+            infoTable.addCell(new com.itextpdf.layout.element.Cell().add(billedTo)
+                    .setBorder(Border.NO_BORDER)
+                    .setPadding(10));
+            document.add(infoTable);
 
-            // Billed To (bold header)
-            Paragraph billedToHeader = new Paragraph("Billed To:")
-                    .setFontSize(12);
-            document.add(billedToHeader);
+            // Service Table
+            float[] cols = {70, 30};
+            Table serviceTable = new Table(UnitValue.createPercentArray(cols))
+                    .useAllAvailableWidth()
+                    .setMarginTop(20)
+                    .setBackgroundColor(accentColor)
+                    .setBorder(new SolidBorder(ColorConstants.LIGHT_GRAY, 1));
+            serviceTable.addHeaderCell(new com.itextpdf.layout.element.Cell()
+                    .add(new Paragraph("Description").setFont(boldFont).setFontSize(11))
+                    .setBackgroundColor(primaryColor)
+                    .setFontColor(ColorConstants.WHITE)
+                    .setPadding(8));
+            serviceTable.addHeaderCell(new com.itextpdf.layout.element.Cell()
+                    .add(new Paragraph("Amount").setFont(boldFont).setFontSize(11))
+                    .setBackgroundColor(primaryColor)
+                    .setFontColor(ColorConstants.WHITE)
+                    .setPadding(8)
+                    .setTextAlignment(TextAlignment.RIGHT));
+            serviceTable.addCell(new com.itextpdf.layout.element.Cell()
+                    .add(new Paragraph(info.getDescription()).setFont(regularFont).setFontSize(11))
+                    .setPadding(8));
+            serviceTable.addCell(new com.itextpdf.layout.element.Cell()
+                    .add(new Paragraph("₹" + String.format("%.2f", info.getTotalAmount())).setFont(regularFont).setFontSize(11))
+                    .setPadding(8)
+                    .setTextAlignment(TextAlignment.RIGHT));
+            document.add(serviceTable);
 
-            document.add(new Paragraph(info.getCustName()));
-            document.add(new Paragraph(info.getAddress()));
-            document.add(new Paragraph("Email: " + info.getEmail()));
-            document.add(new Paragraph("Contact: " + info.getContact()));
-
-            // Use fully qualified names for clarity
-            float[] cols = {350F, 150F};
-            Table table = new Table(UnitValue.createPercentArray(cols))
-                    .setMarginTop(20);
-
-// iText PDF Cells (explicit package)
-            table.addHeaderCell(
-                    new com.itextpdf.layout.element.Cell()
-                            .add(new Paragraph("Description"))
-            );
-            table.addHeaderCell(
-                    new com.itextpdf.layout.element.Cell()
-                            .add(new Paragraph("Amount"))
-            );
-
-// Add data cells
-            table.addCell(new com.itextpdf.layout.element.Cell().add(new Paragraph(info.getDescription())));
-            table.addCell(new com.itextpdf.layout.element.Cell().add(new Paragraph("₹" + String.format("%.2f", info.getTotalAmount()))));
-            document.add(table);
+            // Total Amount
+            Table totalTable = new Table(UnitValue.createPercentArray(new float[]{70, 30})).useAllAvailableWidth();
+            totalTable.addCell(new com.itextpdf.layout.element.Cell()
+                    .add(new Paragraph("Total").setFont(boldFont).setFontSize(12))
+                    .setBorder(Border.NO_BORDER)
+                    .setPaddingTop(10)
+                    .setTextAlignment(TextAlignment.RIGHT));
+            totalTable.addCell(new com.itextpdf.layout.element.Cell()
+                    .add(new Paragraph("₹" + String.format("%.2f", info.getTotalAmount())).setFont(boldFont).setFontSize(12))
+                    .setBorder(Border.NO_BORDER)
+                    .setPaddingTop(10)
+                    .setTextAlignment(TextAlignment.RIGHT));
+            document.add(totalTable);
 
             // Footer
-            document.add(new Paragraph("2025 © VMS|Aviato™")
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(10)
-                    .setFontColor(ColorConstants.GRAY)
-                    .setMarginTop(60));
+            Div footer = new Div()
+                    .add(new Paragraph("Thank you for choosing VMS | Aviato™")
+                            .setFont(regularFont)
+                            .setFontSize(10)
+                            .setFontColor(secondaryColor)
+                            .setTextAlignment(TextAlignment.CENTER))
+                    .add(new Paragraph("Contact us at support@aviato.com or (123) 456-7890")
+                            .setFont(regularFont)
+                            .setFontSize(10)
+                            .setFontColor(secondaryColor)
+                            .setTextAlignment(TextAlignment.CENTER))
+                    .add(new Paragraph("2025 © VMS | Aviato™. All Rights Reserved.")
+                            .setFont(regularFont)
+                            .setFontSize(10)
+                            .setFontColor(secondaryColor)
+                            .setTextAlignment(TextAlignment.CENTER));
+            document.add(footer.setMarginTop(40));
+
 
             document.close();
+            AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Invoice generated and saved as " + fileName);
         } catch (Exception e) {
             e.printStackTrace();
             AlertBox.ShowAlert(Alert.AlertType.ERROR, "PDF Error", "Error creating PDF: " + e.getMessage());
@@ -762,3 +842,7 @@ public class Appointment_Cltr {
     }
 
 }
+
+
+
+

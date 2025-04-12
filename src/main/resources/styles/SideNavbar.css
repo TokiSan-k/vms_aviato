@@ -15,7 +15,12 @@
     -fx-background-color: #D3D3D3;
 }
 
-.sidebar-button:focused{
+/*.sidebar-button:focused{*/
+/*    -fx-background-color: #C4DAFE;*/
+/*    -fx-text-fill: #0B57D0;*/
+/*}*/
+
+.sidebar-button.selected {
     -fx-background-color: #C4DAFE;
     -fx-text-fill: #0B57D0;
 }

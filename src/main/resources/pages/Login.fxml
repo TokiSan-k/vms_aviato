@@ -13,7 +13,7 @@
 
 <VBox alignment="CENTER" prefHeight="600.0" prefWidth="900.0"
       stylesheets="@../styles/Login.css"
-      xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns="http://javafx.com/javafx/22.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.aviato.Controllers.Login_Cltr">
 
@@ -30,12 +30,16 @@
             </VBox>
 
             <!-- Right Login Panel (Full height) -->
-            <VBox alignment="CENTER" spacing="20" prefWidth="800.0" style="-fx-background-color: #F5FEFD;">
+            <VBox alignment="CENTER" spacing="20" prefWidth="800.0" style="-fx-background-color: #F9F8F5;">
                 <padding>
                     <Insets top="60" bottom="60" left="240" right="240"/>
                 </padding>
                 <children>
-                    <Text text="VMS" styleClass="logo"/>
+                    <ImageView fitHeight="200.0" fitWidth="200.0" preserveRatio="true">
+                        <image>
+                            <Image url="@../images/logo.png" />
+                        </image>
+                    </ImageView>
 
                     <Text text="Welcome!" styleClass="welcome-text"/>
 

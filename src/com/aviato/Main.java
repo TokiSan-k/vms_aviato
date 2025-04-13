@@ -3,6 +3,7 @@ package com.aviato;
 import com.aviato.Controllers.SideNavBar_Cltr;
 import com.aviato.Types.*;
 import com.aviato.Types.Pages;
+import com.aviato.Utils.AlertBox;
 import com.aviato.Utils.concurrency.Worker;
 import com.aviato.db.HibernateUtil;
 import com.aviato.db.dao.Customer_dao;
@@ -15,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
@@ -77,7 +79,7 @@ public class Main extends Application {
 
         }
         catch (Exception ex){
-            System.out.println("MainErr: "+ex.getMessage());
+            AlertBox.ShowAlert(Alert.AlertType.WARNING, "Information", "Cannot connect to database check connection! Close Application.");
         }
     }
 

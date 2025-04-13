@@ -6,12 +6,16 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
 
-    public static void Init()
+    public static void Init() throws ExceptionInInitializerError
     {
-        sessionFactory = buildSessionFactory();
+        try {
+            sessionFactory = buildSessionFactory();
+        } catch (ExceptionInInitializerError ex) {
+            throw ex;
+        }
     }
 
-    private static SessionFactory buildSessionFactory() {
+    private static SessionFactory buildSessionFactory() throws ExceptionInInitializerError {
         try {
             return new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         } catch (Throwable ex) {

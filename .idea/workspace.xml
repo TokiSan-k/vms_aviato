@@ -5,18 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7a298b9-4e51-40be-a829-a5c7b39f1372" name="Changes" comment="Minor Changes">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2025-04-03_5_20_p_m__[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2025-04-03_5_20_p_m___Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/Appointment_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/Appointment_Cltr.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/aviato/Controllers/SideNavBar_Cltr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Controllers/SideNavBar_Cltr.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/aviato/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/Logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pages/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/Types/Pages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/Types/Pages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/aviato/db/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/aviato/db/HibernateUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/pages/SideNavBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pages/SideNavBar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Appointment.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Appointment.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/Customer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/Customer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/SideNavbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/SideNavbar.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,14 +110,6 @@
       </method>
     </configuration>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -144,11 +130,6 @@
       <workItem from="1743191379788" duration="97000" />
       <workItem from="1743207848337" duration="7322000" />
       <workItem from="1744227588241" duration="3287000" />
-      <workItem from="1744376710972" duration="368000" />
-      <workItem from="1744383799631" duration="319000" />
-      <workItem from="1744384160204" duration="60000" />
-      <workItem from="1744409774227" duration="930000" />
-      <workItem from="1744410936855" duration="278000" />
     </task>
     <task id="LOCAL-00001" summary="Created Dev Branch">
       <option name="closed" value="true" />

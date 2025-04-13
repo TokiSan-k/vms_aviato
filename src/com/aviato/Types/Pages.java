@@ -110,7 +110,6 @@ public class Pages {
     public static Scene GetManageRoleScene() { return rolesScene; }
     public static Scene GetServiceManagementScene() {return serviceScene;}
     public static Scene GetMonthlyReportsScene() {return inventoryScene;}
-    public static Scene GetLogOutScene() {return inventoryScene;}
     public static Scene GetEmployeeScene() {return employeeScene;}
     public static Scene GetAdminScene() {return adminScene;}
     public static Scene GetLogInScene() {return loginScene;}
@@ -126,7 +125,7 @@ public class Pages {
         }
         //Error
 
-        return adminScene;
+        return salesScene;
     }
 
 }

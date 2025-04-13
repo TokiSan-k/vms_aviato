@@ -13,7 +13,7 @@
         <Insets top="20.0" />
     </padding>
     <children>
-        <Button fx:id="sidebarCustomersButton" mnemonicParsing="false" onAction="#handleCustomers" styleClass="sidebar-button" text="Customers">
+        <Button fx:id="Customer_page" mnemonicParsing="false" onAction="#handleCustomers" styleClass="sidebar-button" text="Customers">
             <VBox.margin>
                 <Insets top="35.0" />
             </VBox.margin>
@@ -26,7 +26,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarVehiclesButton" mnemonicParsing="false" onAction="#handleVehicles" styleClass="sidebar-button" text="Vehicles">
+        <Button fx:id="Vehicle_page" mnemonicParsing="false" onAction="#handleVehicles" styleClass="sidebar-button" text="Vehicles">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -39,7 +39,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarEmployeeButton" mnemonicParsing="false" onAction="#handleEmployee" styleClass="sidebar-button" text="Employee">
+        <Button fx:id="Employee_page" mnemonicParsing="false" onAction="#handleEmployee" styleClass="sidebar-button" text="Employee">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -52,7 +52,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarServiceManagementButton" mnemonicParsing="false" onAction="#handleServiceManagement" styleClass="sidebar-button" text="Service Management">
+        <Button fx:id="Service_page" mnemonicParsing="false" onAction="#handleServiceManagement" styleClass="sidebar-button" text="Service Management">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -65,7 +65,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarAppointmentsButton" mnemonicParsing="false" onAction="#handleAppointments" styleClass="sidebar-button" text="Appointments">
+        <Button fx:id="Appointment_page" mnemonicParsing="false" onAction="#handleAppointments" styleClass="sidebar-button" text="Appointments">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -78,7 +78,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarPaymentsButton" mnemonicParsing="false" onAction="#handlePayments" styleClass="sidebar-button" text="Payments">
+        <Button fx:id="Payment_page" mnemonicParsing="false" onAction="#handlePayments" styleClass="sidebar-button" text="Payments">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -91,7 +91,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarManageInventoryButton" mnemonicParsing="false" onAction="#handleManageInventory" styleClass="sidebar-button" text="Manage Inventory">
+        <Button fx:id="Inventory_page" mnemonicParsing="false" onAction="#handleManageInventory" styleClass="sidebar-button" text="Manage Inventory">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -104,7 +104,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="sidebarManageRolesButton" mnemonicParsing="false" onAction="#handleManageRoles" styleClass="sidebar-button" text="Manage Roles">
+        <Button fx:id="User_page" mnemonicParsing="false" onAction="#handleManageRoles" styleClass="sidebar-button" text="Manage Roles">
             <VBox.margin>
                 <Insets />
             </VBox.margin>
@@ -120,18 +120,18 @@
         <Region VBox.vgrow="ALWAYS" />
         <HBox>
             <children>
-<!--                <Button fx:id="logOutButton" mnemonicParsing="false" styleClass="logout-button" text="Log Out">-->
-<!--                    <HBox.margin>-->
-<!--                        <Insets left="10.0" />-->
-<!--                    </HBox.margin>-->
-<!--               <graphic>-->
-<!--                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                     <image>-->
-<!--                        <Image url="@../images/Icons/logout-circle-r-line-gery.png" />-->
-<!--                     </image>-->
-<!--                  </ImageView>-->
-<!--               </graphic>-->
-<!--                </Button>-->
+                <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#handleLogOut" styleClass="logout-button" text="Log Out">
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Icons/logout-circle-r-line-gery.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+                </Button>
             </children>
             <VBox.margin>
                 <Insets bottom="15.0" />

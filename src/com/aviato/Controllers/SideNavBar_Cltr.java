@@ -190,7 +190,8 @@ public class SideNavBar_Cltr {
 
     @FXML
     private void handleLogOut(ActionEvent event) {
-        // Implement logout logic
+        Main.currentStage.setScene(Pages.GetLogInScene());
+        Main.currentStage.setTitle("LogIn");
     }
 
     @FXML

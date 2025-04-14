@@ -20,7 +20,7 @@
       <HBox VBox.vgrow="ALWAYS">
          <children>
             <!-- Sidebar Menu -->
-            <fx:include source="../pages/SideNavBar.fxml" />
+            <fx:include fx:id="Admin_pageCltr" source="../pages/SideNavBar.fxml" />
 
             <VBox styleClass="adminMainCard" HBox.hgrow="ALWAYS">
                <children>

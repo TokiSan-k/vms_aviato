@@ -1,6 +1,8 @@
 package com.aviato.Controllers;
 
+import com.aviato.Main;
 import com.aviato.Types.Employee; // Assuming an Employee entity class exists
+import com.aviato.Types.Pages;
 import com.aviato.Types.Vehicle;
 import com.aviato.Utils.AlertBox;
 import com.aviato.Utils.ErrorHandler;
@@ -166,9 +168,22 @@ public class Employee_Cltr {
 
     private Employee employee = new Employee();
 
+
+    @FXML
+    private SideNavBar_Cltr Employee_pageCltrController;
+
+    @FXML
+    private void handleMainMenu()
+    {
+        Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
+        Main.currentStage.setTitle("Main Menu");
+    }
+
     // Initialize method to set up table columns
     @FXML
     public void initialize() {
+        Employee_pageCltrController.ApplyHighlight("Employee_page");
+
         for (byte i = 0; i < employeeContainers.length; i++)
         {
             String container = EmpContainerEnum.EmployeeContainerTag + i;

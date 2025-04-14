@@ -151,9 +151,21 @@ public class Vehicle_Cltr {
 
     private Vehicle vehicle = new Vehicle();
 
+    @FXML
+    private SideNavBar_Cltr Vehicle_pageCltrController;
+
+    @FXML
+    private void handleMainMenu()
+    {
+        Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
+        Main.currentStage.setTitle("Main Menu");
+    }
+
     // Initialize method to set up table columns
     @FXML
     public void initialize() {
+        Vehicle_pageCltrController.ApplyHighlight("Vehicle_page");
+
         for (byte i = 0; i < vehicleContainers.length; i++) {
             String container = VehicleContainerEnum.VehicleContainerTag + i;
             vehicleContainers[i] = (VBox) mainContainer.lookup(container);

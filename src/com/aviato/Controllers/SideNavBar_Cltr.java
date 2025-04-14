@@ -194,6 +194,18 @@ public class SideNavBar_Cltr {
         Main.currentStage.setTitle("LogIn");
     }
 
+    public void ApplyHighlight(String id){
+        Button button = getButtonById(id);
+        button.getStyleClass().add("button-selected");
+    }
+
+    @FXML
+    private void handleMainMenu()
+    {
+        Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
+        Main.currentStage.setTitle("Main Menu");
+    }
+
     @FXML
     public void initialize() {
 //        Main.sideNavIns = this;

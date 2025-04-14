@@ -1,6 +1,8 @@
 package com.aviato.Controllers;
 
+import com.aviato.Main;
 import com.aviato.Types.Item;
+import com.aviato.Types.Pages;
 import com.aviato.Utils.AlertBox;
 import com.aviato.Utils.ErrorHandler;
 import com.aviato.Utils.concurrency.Worker;
@@ -85,7 +87,19 @@ public class Inventory_Cltr {
     private boolean isMIVerified = false;
 
     @FXML
+    private SideNavBar_Cltr Inventory_pageCltrController;
+
+    @FXML
+    private void handleMainMenu()
+    {
+        Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
+        Main.currentStage.setTitle("Main Menu");
+    }
+
+    @FXML
     public void initialize() {
+        Inventory_pageCltrController.ApplyHighlight("Inventory_page");
+
         for (byte i = 0; i < invContainers.length; i++) {
             String container = InvContainerEnum.InvContainerTag + i;
             invContainers[i] = (VBox) mainContainer.lookup(container);

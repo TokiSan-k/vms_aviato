@@ -1,5 +1,7 @@
 package com.aviato.Controllers;
 
+import com.aviato.Main;
+import com.aviato.Types.Pages;
 import com.aviato.Types.Payment;
 import com.aviato.Utils.AlertBox;
 import com.aviato.Utils.ErrorHandler;
@@ -67,7 +69,19 @@ public class Payments_Cltr {
     private boolean isUSVerified = false;
 
     @FXML
+    private SideNavBar_Cltr Payments_pageCltrController;
+
+    @FXML
+    private void handleMainMenu()
+    {
+        Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
+        Main.currentStage.setTitle("Main Menu");
+    }
+
+    @FXML
     public void initialize() {
+        Payments_pageCltrController.ApplyHighlight("Payment_page");
+
         for (byte i = 0; i < paymentContainers.length; i++) {
             String container = PaymentContainerEnum.PaymentContainerTag + i;
             paymentContainers[i] = (VBox) mainContainer.lookup(container);

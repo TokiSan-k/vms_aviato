@@ -152,11 +152,23 @@ public class Customer_Cltr
     private Customer customer = new Customer();
 
 
+    @FXML
+    private SideNavBar_Cltr Customer_pageCltrController;
+
     //ToDo: For internal Nav check if clicked on same button results in no Change.
+
+    @FXML
+    private void handleMainMenu()
+    {
+        Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
+        Main.currentStage.setTitle("Main Menu");
+    }
 
     // Initialize method to set up table columns
     @FXML
     public void initialize() {
+
+        Customer_pageCltrController.ApplyHighlight("Customer_page");
 
         for(byte i =0; i<customerContainers.length; i++)
         {
@@ -224,12 +236,6 @@ public class Customer_Cltr
         TurnOffVisibleAndManageCustContainer();
         customerContainers[CustContainerEnum.ViewCustomerContainer].setManaged(true);
         customerContainers[CustContainerEnum.ViewCustomerContainer].setVisible(true);
-    }
-
-    @FXML
-    private void handleMainMenuButton(ActionEvent event)
-    {
-        Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
     }
 
     private int currentRCFieldIdx = 0;

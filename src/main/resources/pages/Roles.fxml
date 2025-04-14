@@ -18,7 +18,7 @@
         <HBox VBox.vgrow="ALWAYS">
             <children>
                 <!-- Sidebar Menu -->
-                <fx:include source="../pages/SideNavBar.fxml" />
+                <fx:include fx:id="User_pageCltr" source="../pages/SideNavBar.fxml" />
 
                 <!-- Main Container -->
                 <VBox styleClass="roleMainCard" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
@@ -29,7 +29,7 @@
                                     <children>
                                         <HBox>
                                             <children>
-                                                <Button styleClass="roleBackButton" text="Main Menu" />
+                                                <Button styleClass="roleBackButton" onAction="#handleMainMenu" text="Main Menu" />
                                             </children>
                                         </HBox>
                                         <!-- Navigation Bar -->

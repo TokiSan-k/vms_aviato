@@ -1,5 +1,7 @@
 package com.aviato.Controllers;
 
+import com.aviato.Main;
+import com.aviato.Types.Pages;
 import com.aviato.Types.User;
 import com.aviato.Types.Policy;
 import com.aviato.Utils.AlertBox;
@@ -73,7 +75,19 @@ public class Roles_Cltr {
     private Long currentUserId = null;  // For update functionality
 
     @FXML
+    private SideNavBar_Cltr User_pageCltrController;
+
+    @FXML
+    private void handleMainMenu()
+    {
+        Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
+        Main.currentStage.setTitle("Main Menu");
+    }
+
+    @FXML
     public void initialize() {
+        User_pageCltrController.ApplyHighlight("User_page");
+
         for (byte i = 0; i < roleContainers.length; i++) {
             String container = RoleContainerEnum.RoleContainerTag + i;
             roleContainers[i] = (VBox) mainContainer.lookup(container);

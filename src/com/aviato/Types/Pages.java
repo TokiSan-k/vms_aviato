@@ -1,5 +1,7 @@
 package com.aviato.Types;
 
+import com.aviato.Controllers.Admin_Cltr;
+import com.aviato.Controllers.Sales_Cltr;
 import com.aviato.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -32,9 +34,11 @@ public class Pages {
 
     private static Scene adminScene;
     private static Parent adminRoot;
+    private static Admin_Cltr adminCltr;
 
     private static Scene salesScene;
     private static Parent salesRoot;
+    private static Sales_Cltr salesCltr;
 
     private static Scene rolesScene;
     private static Parent rolesRoot;
@@ -55,10 +59,6 @@ public class Pages {
 
     public static void LoadAllPages() throws Exception {
         try {
-
-            loginRoot = new FXMLLoader(Main.class.getResource("/pages/Customer.fxml")).load();
-            loginScene = new Scene(loginRoot);
-
             customerRoot = new FXMLLoader(Main.class.getResource("/pages/Customer.fxml")).load();
             customerScene = new Scene(customerRoot);
 
@@ -80,10 +80,14 @@ public class Pages {
             paymentRoot = new FXMLLoader(Main.class.getResource("/pages/Payment.fxml")).load();
             paymentScene = new Scene(paymentRoot);
 
-            adminRoot = new FXMLLoader(Main.class.getResource("/pages/Admin.fxml")).load();
+            FXMLLoader adminLoader = new FXMLLoader(Main.class.getResource("/pages/Admin.fxml"));
+            adminCltr = adminLoader.getController();
+            adminRoot = adminLoader.load();
             adminScene = new Scene(adminRoot);
 
-            salesRoot = new FXMLLoader(Main.class.getResource("/pages/Sales.fxml")).load();
+            FXMLLoader salesLoader = new FXMLLoader(Main.class.getResource("/pages/Sales.fxml"));
+            salesCltr = salesLoader.getController();
+            salesRoot = salesLoader.load();
             salesScene = new Scene(salesRoot);
 
             loginRoot = new FXMLLoader(Main.class.getResource("/pages/Login.fxml")).load();
@@ -115,17 +119,25 @@ public class Pages {
     public static Scene GetLogInScene() {return loginScene;}
     public static Scene GetMainMenuScene(String roleName)
     {
-        //Change based on login
-        for(int i =0; i<Policy.roleNames.size(); i++)
-        {
-            String t = Policy.roleNames.get(i);
-            if(t.equals(roleName)) {
-                return mainMenuScene[i];
-            }
-        }
+        return adminScene;
+
+//        if(roleName.equals("Admin")){
+//            adminCltr.OnLoad();
+//        }
+//        else if(roleName.equals("Sales Representative")){
+//            salesCltr.OnLoad();
+//        }
+//        //Change based on login
+//        for(int i =0; i<Policy.roleNames.size(); i++)
+//        {
+//            String t = Policy.roleNames.get(i);
+//            if(t.equals(roleName)) {
+//                return mainMenuScene[i];
+//            }
+//        }
         //Error
 
-        return salesScene;
+        //return salesScene;
     }
 
 }

@@ -1,5 +1,7 @@
 package com.aviato.Controllers;
 
+import com.aviato.Main;
+import com.aviato.Types.Pages;
 import com.aviato.Types.Service;
 import com.aviato.Types.ServiceItem;
 import com.aviato.Utils.AlertBox;
@@ -108,7 +110,19 @@ public class Service_Cltr {
     private Service service = new Service();
 
     @FXML
+    private SideNavBar_Cltr Service_pageCltrController;
+
+    @FXML
+    private void handleMainMenu()
+    {
+        Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
+        Main.currentStage.setTitle("Main Menu");
+    }
+
+    @FXML
     public void initialize() {
+        Service_pageCltrController.ApplyHighlight("Service_page");
+
         for (byte i = 0; i < serviceContainers.length; i++) {
             String container = SvcContainerEnum.ServiceContainerTag + i;
             serviceContainers[i] = (VBox) mainContainer.lookup(container);

@@ -1,8 +1,10 @@
 package com.aviato.Controllers;
 
+import com.aviato.Main;
 import com.aviato.Types.Appointment;
 import com.aviato.Types.Invoice;
 import com.aviato.Types.InvoiceInfo;
+import com.aviato.Types.Pages;
 import com.aviato.Utils.AlertBox;
 import com.aviato.Utils.ErrorHandler;
 import com.aviato.Utils.Field;
@@ -145,7 +147,12 @@ public class Appointment_Cltr {
     private boolean isMAVerified = false;
 
     @FXML
+    private SideNavBar_Cltr Appointment_pageCltrController;
+
+    @FXML
     public void initialize() {
+        Appointment_pageCltrController.ApplyHighlight("Appointment_page");
+
         for (byte i = 0; i < appointmentContainers.length; i++) {
             String container = AppContainerEnum.AppointmentContainerTag + i;
             appointmentContainers[i] = (VBox) mainContainer.lookup(container);
@@ -176,6 +183,13 @@ public class Appointment_Cltr {
         gen_InvoiceDateColumn.setCellValueFactory(new PropertyValueFactory<>("invoiceDate"));
         gen_TotalAmountColumn.setCellValueFactory(new PropertyValueFactory<>("totalAmount"));
         gen_appointmentTable.setItems(gen_InvoiceList);
+    }
+
+    @FXML
+    private void handleMainMenu()
+    {
+        Main.currentStage.setScene(Pages.GetMainMenuScene(Main.GetRoleName()));
+        Main.currentStage.setTitle("Main Menu");
     }
 
     // Appointment NavBar

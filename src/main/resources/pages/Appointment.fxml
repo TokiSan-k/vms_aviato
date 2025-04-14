@@ -17,7 +17,7 @@
         <HBox VBox.vgrow="ALWAYS">
             <children>
                 <!-- Sidebar Menu -->
-                <fx:include source="../pages/SideNavBar.fxml" />
+                <fx:include fx:id="Appointment_pageCltr" source="../pages/SideNavBar.fxml" />
 
                 <!-- Main Container -->
                 <VBox styleClass="appMainCard" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
@@ -28,7 +28,7 @@
                                     <children>
                                         <HBox>
                                             <children>
-                                                <Button styleClass="appBackButton" text="Main Menu" />
+                                                <Button styleClass="appBackButton" onAction="#handleMainMenu" text="Main Menu" />
                                             </children>
                                         </HBox>
                                         <!-- Navigation Bar -->

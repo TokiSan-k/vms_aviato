@@ -65,6 +65,10 @@ public class Sales_Cltr {
     private final String employeePageHeading = "Manage Employee";
 
 
+    public void OnLoad(){
+
+    }
+
     // Initialize the controller
     @FXML
     public void initialize() {

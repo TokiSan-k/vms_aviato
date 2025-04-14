@@ -96,6 +96,12 @@ public class Admin_Cltr {
     private final String employeePageHeading = "Manage Employee";
 
 
+    public void OnLoad(){
+        showTodaysAppointments();
+        showInventoryAlerts();
+        System.out.println("ADMINLOAD");
+    }
+
     // Initialize the controller
     @FXML
     public void initialize() {

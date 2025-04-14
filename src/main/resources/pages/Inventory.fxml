@@ -88,10 +88,17 @@
                                                                             <Insets top="5.0" />
                                                                         </HBox.margin></Text>
                                                                     <TextField fx:id="ri_emailField" promptText="Enter ID" />
-                                                                    <Button fx:id="ri_swapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C">
+                                                                    <Button fx:id="ri_swapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <Button onAction="#submitRemoveItem" styleClass="removeFieldButton" text="Submit" />
@@ -110,7 +117,7 @@
                                                                     <children>
                                                                         <Text fx:id="ri_searchLabel" text="Search by Item ID:" />
                                                                         <TextField fx:id="ri_ItemSearchField" promptText="Enter Item ID" HBox.hgrow="ALWAYS" />
-                                                                        <Button fx:id="ri_searchButton" mnemonicParsing="false" styleClass="searchItemButton" onAction="#searchRemoveItem" text="Search">
+                                                                        <Button fx:id="ri_searchButton" mnemonicParsing="false" onAction="#searchRemoveItem" styleClass="searchItemButton" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
@@ -168,28 +175,49 @@
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modItemName">
                                                                     <Text text="Item Name:" />
                                                                     <TextField fx:id="mi_ItemNameField" disable="true" editable="false" />
-                                                                    <Button fx:id="mi_editItemNameButton" mnemonicParsing="false" onAction="#editItemName" styleClass="modItemButtons" text="C">
+                                                                    <Button fx:id="mi_editItemNameButton" mnemonicParsing="false" onAction="#editItemName" styleClass="modItemButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modItemQuantity">
                                                                     <Text text="Quantity:" />
                                                                     <TextField fx:id="mi_QuantityField" disable="true" editable="false" onKeyTyped="#handleModifyNumericInput" />
-                                                                    <Button fx:id="mi_editQuantityButton" mnemonicParsing="false" onAction="#editQuantity" styleClass="modItemButtons" text="C">
+                                                                    <Button fx:id="mi_editQuantityButton" mnemonicParsing="false" onAction="#editQuantity" styleClass="modItemButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modItemPPU">
                                                                     <Text text="Price Per Unit:" />
                                                                     <TextField fx:id="mi_PPUField" disable="true" editable="false" onKeyTyped="#handleModifyPPUInput" />
-                                                                    <Button fx:id="mi_editPPUButton" mnemonicParsing="false" onAction="#editPPU" styleClass="modItemButtons" text="C">
+                                                                    <Button fx:id="mi_editPPUButton" mnemonicParsing="false" onAction="#editPPU" styleClass="modItemButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <Button onAction="#submitModifyItem" styleClass="modItemSubmitButton" text="Submit">

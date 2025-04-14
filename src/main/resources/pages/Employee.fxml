@@ -188,64 +188,113 @@
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpName">
                                                                     <Text text="Name:" />
                                                                     <TextField fx:id="me_empNameField" disable="true" editable="false" />
-                                                                    <Button fx:id="me_editNameButton" mnemonicParsing="false" onAction="#editName" styleClass="modEmpButtons" text="C">
+                                                                    <Button fx:id="me_editNameButton" mnemonicParsing="false" onAction="#editName" styleClass="modEmpButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpPosition">
                                                                     <Text text="Position:" />
                                                                     <TextField fx:id="me_positionField" disable="true" editable="false" />
-                                                                    <Button fx:id="me_editPositionButton" mnemonicParsing="false" onAction="#editPosition" styleClass="modEmpButtons" text="C">
+                                                                    <Button fx:id="me_editPositionButton" mnemonicParsing="false" onAction="#editPosition" styleClass="modEmpButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpPhone">
                                                                     <Text text="Phone:" />
                                                                     <TextField fx:id="me_phoneField" disable="true" editable="false" />
-                                                                    <Button fx:id="me_editPhoneButton" mnemonicParsing="false" onAction="#editPhone" styleClass="modEmpButtons" text="C">
+                                                                    <Button fx:id="me_editPhoneButton" mnemonicParsing="false" onAction="#editPhone" styleClass="modEmpButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpEmail">
                                                                     <Text text="Email:" />
                                                                     <TextField fx:id="me_emailField" disable="true" editable="false" />
-                                                                    <Button fx:id="me_editEmailButton" mnemonicParsing="false" onAction="#editEmail" styleClass="modEmpButtons" text="C">
+                                                                    <Button fx:id="me_editEmailButton" mnemonicParsing="false" onAction="#editEmail" styleClass="modEmpButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpSalary">
                                                                     <Text text="Salary:" />
                                                                     <TextField fx:id="me_salaryField" disable="true" editable="false" />
-                                                                    <Button fx:id="me_editSalaryButton" mnemonicParsing="false" onAction="#editSalary" styleClass="modEmpButtons" text="C">
+                                                                    <Button fx:id="me_editSalaryButton" mnemonicParsing="false" onAction="#editSalary" styleClass="modEmpButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpHireDate">
                                                                     <Text text="Hire Date:" />
                                                                     <TextField fx:id="me_hireDateField" disable="true" editable="false" />
-                                                                    <Button fx:id="me_editHireDateButton" mnemonicParsing="false" onAction="#editHireDate" styleClass="modEmpButtons" text="C">
+                                                                    <Button fx:id="me_editHireDateButton" mnemonicParsing="false" onAction="#editHireDate" styleClass="modEmpButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modEmpHoursWorked">
                                                                     <Text text="Hours Worked:" />
                                                                     <TextField fx:id="me_hoursWorkedField" disable="true" editable="false" />
-                                                                    <Button fx:id="me_editHoursWorkedButton" mnemonicParsing="false" onAction="#editHoursWorked" styleClass="modEmpButtons" text="C">
+                                                                    <Button fx:id="me_editHoursWorkedButton" mnemonicParsing="false" onAction="#editHoursWorked" styleClass="modEmpButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <Button fx:id="me_submitButton" onAction="#submitModifyEmployee" styleClass="modEmpSubmitButton" text="Submit">

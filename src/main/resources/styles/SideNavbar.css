@@ -39,8 +39,8 @@
     -fx-font-size: 17;
     -fx-alignment: center-left;
     -fx-content-display: left;
+    -fx-cursor: hand;
     -fx-padding: 10px 30px;
-    -fx-font-family: "Maven Pro Medium";
     -fx-border-width: 2 2 2 2;
     -fx-border-color: #CCCCCC;
     -fx-border-radius: 15px;

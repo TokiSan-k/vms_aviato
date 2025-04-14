@@ -23,25 +23,28 @@
 
 
 .login-button {
-    -fx-font-family: "Maven Pro Medium";
     -fx-background-color: #F9F9F9;
     -fx-text-fill: #5E5E5E;
-    -fx-min-width: 100;
-    -fx-min-height: 20;
-    -fx-padding: 10;
+    -fx-min-width: 120;
+    -fx-min-height: 40;
+    -fx-padding: 12 18;
     -fx-border-color: #d5d9d9;
-    -fx-border-radius: 8;
+    -fx-border-radius: 10;
     -fx-font-size: 14px;
     -fx-cursor: hand;
-    -fx-alignment: CENTER;
-    -fx-content-display: CENTER;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0, 0, 4);
+    -fx-alignment: center;
+    -fx-content-display: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 6);
+    -fx-transition: all 0.3s ease-in-out;
 }
 
 .login-button:hover {
     -fx-text-fill: #1967D2;
-    -fx-border-radius: 8;
     -fx-background-color: #C4DAFE;
+    -fx-border-color: #1967D2;
+    -fx-border-radius: 10;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 .logo {

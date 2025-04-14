@@ -92,10 +92,17 @@
                                                                         </HBox.margin>
                                                                     </Text>
                                                                     <TextField fx:id="rs_serviceIdField" promptText="Enter ID" />
-                                                                    <Button fx:id="rs_swapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton" text="C">
+                                                                    <Button fx:id="rs_swapFieldButton" mnemonicParsing="false" styleClass="removeFieldButton">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <Button fx:id="rs_submitButton" onAction="#submitRemoveService" styleClass="removeFieldButton" text="Submit" />
@@ -112,14 +119,21 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                                                                     <children>
-                                                                        <Button fx:id="rs_swapButton" mnemonicParsing="false" onAction="#swapRemoveField" styleClass="searchSvcButton" text="C">
+                                                                        <Button fx:id="rs_swapButton" mnemonicParsing="false" onAction="#swapRemoveField" styleClass="searchSvcButton">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
+                                                         <graphic>
+                                                            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
                                                                         </Button>
                                                                         <Text fx:id="rs_searchLabel" text="Type:" />
                                                                         <TextField fx:id="rs_serviceSearchField" promptText="Enter Service Type" HBox.hgrow="ALWAYS" />
-                                                                        <Button fx:id="rs_searchButton" mnemonicParsing="false" styleClass="searchSvcButton" onAction="#searchRemoveService" text="Search">
+                                                                        <Button fx:id="rs_searchButton" mnemonicParsing="false" onAction="#searchRemoveService" styleClass="searchSvcButton" text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets left="5.0" />
                                                                             </HBox.margin>
@@ -177,37 +191,65 @@
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modSvcType">
                                                                     <Text text="Service Type:" />
                                                                     <TextField fx:id="ms_serviceTypeField" disable="true" editable="false" />
-                                                                    <Button fx:id="ms_editTypeButton" mnemonicParsing="false" onAction="#editType" styleClass="modSvcButtons" text="C">
+                                                                    <Button fx:id="ms_editTypeButton" mnemonicParsing="false" onAction="#editType" styleClass="modSvcButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modSvcDate">
                                                                     <Text text="Service Date:" />
                                                                     <TextField fx:id="ms_serviceDateField" disable="true" editable="false" />
-                                                                    <Button fx:id="ms_editDateButton" mnemonicParsing="false" onAction="#editDate" styleClass="modSvcButtons" text="C">
+                                                                    <Button fx:id="ms_editDateButton" mnemonicParsing="false" onAction="#editDate" styleClass="modSvcButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modSvcStatus">
                                                                     <Text text="Status:" />
                                                                     <TextField fx:id="ms_statusField" disable="true" editable="false" />
-                                                                    <Button fx:id="ms_editStatusButton" mnemonicParsing="false" onAction="#editStatus" styleClass="modSvcButtons" text="C">
+                                                                    <Button fx:id="ms_editStatusButton" mnemonicParsing="false" onAction="#editStatus" styleClass="modSvcButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modSvcCost">
                                                                     <Text text="Cost:" />
                                                                     <TextField fx:id="ms_costField" disable="true" editable="false" />
-                                                                    <Button fx:id="ms_editCostButton" mnemonicParsing="false" onAction="#editCost" styleClass="modSvcButtons" text="C">
+                                                                    <Button fx:id="ms_editCostButton" mnemonicParsing="false" onAction="#editCost" styleClass="modSvcButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <Button fx:id="ms_submitButton" onAction="#submitModifyService" styleClass="modSvcSubmitButton" text="Submit">
@@ -231,10 +273,17 @@
                                                         <!-- Search and Control Section -->
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Button fx:id="vs_swapButton" mnemonicParsing="false" onAction="#swapViewField" styleClass="viewSvcButtons" text="C">
+                                                                <Button fx:id="vs_swapButton" mnemonicParsing="false" onAction="#swapViewField" styleClass="viewSvcButtons">
                                                                     <HBox.margin>
                                                                         <Insets right="5.0" />
                                                                     </HBox.margin>
+                                                   <graphic>
+                                                      <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
                                                                 </Button>
                                                                 <Text fx:id="vs_typeLabel" text="Type:" />
                                                                 <TextField fx:id="vs_serviceSearchField" promptText="Enter Service Type" />
@@ -307,7 +356,7 @@
                                                         <VBox spacing="10.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                                                             <children>
                                                                 <Text text="Items Used in Services" />
-                                                                <Button fx:id="iu_showAllButton" onAction="#ShowAllItemsUsed"  styleClass="addFieldButton" text="All Items">
+                                                                <Button fx:id="iu_showAllButton" onAction="#ShowAllItemsUsed" styleClass="addFieldButton" text="All Items">
                                                                     <VBox.margin>
                                                                         <Insets left="15.0" />
                                                                     </VBox.margin>

@@ -176,37 +176,65 @@
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modVehicleLicencePlate">
                                                                     <Text text="Licence Plate:" />
                                                                     <TextField fx:id="mv_LicencePlateField" disable="true" editable="false" />
-                                                                    <Button fx:id="mv_editLicencePlateButton" mnemonicParsing="false" onAction="#editLicencePlate" styleClass="modVehicleButtons" text="C">
+                                                                    <Button fx:id="mv_editLicencePlateButton" mnemonicParsing="false" onAction="#editLicencePlate" styleClass="modVehicleButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modVehicleMake">
                                                                     <Text text="Make:" />
                                                                     <TextField fx:id="mv_MakeField" disable="true" editable="false" />
-                                                                    <Button fx:id="mc_editMakeButton" mnemonicParsing="false" onAction="#editMake" styleClass="modVehicleButtons" text="C">
+                                                                    <Button fx:id="mc_editMakeButton" mnemonicParsing="false" onAction="#editMake" styleClass="modVehicleButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modVehicleModel">
                                                                     <Text text="Model:" />
                                                                     <TextField fx:id="mv_ModelField" disable="true" editable="false" />
-                                                                    <Button fx:id="mv_ModelButton" mnemonicParsing="false" onAction="#editModel" styleClass="modVehicleButtons" text="C">
+                                                                    <Button fx:id="mv_ModelButton" mnemonicParsing="false" onAction="#editModel" styleClass="modVehicleButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" styleClass="modVehicleYear">
                                                                     <Text text="Year:" />
                                                                     <TextField fx:id="mv_YearField" disable="true" editable="false" />
-                                                                    <Button fx:id="mv_VehicleYearEditButton" mnemonicParsing="false" onAction="#editYear" styleClass="modVehicleButtons" text="C">
+                                                                    <Button fx:id="mv_VehicleYearEditButton" mnemonicParsing="false" onAction="#editYear" styleClass="modVehicleButtons">
                                                                         <HBox.margin>
                                                                             <Insets left="5.0" />
                                                                         </HBox.margin>
+                                                      <graphic>
+                                                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                               <Image url="@../images/Icons/loop-left-line-update-gery.png" />
+                                                            </image>
+                                                         </ImageView>
+                                                      </graphic>
                                                                     </Button>
                                                                 </HBox>
                                                                 <Button onAction="#submitModifyVehicle" styleClass="modVehicleSubmitButton" text="Submit">

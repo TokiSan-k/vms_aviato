@@ -715,7 +715,7 @@ public class Appointment_Cltr {
                             .setFont(boldFont)
                             .setFontSize(18)
                             .setFontColor(primaryColor))
-                    .add(new Paragraph("1234 Auto Lane, Tech City, TX 75001")
+                    .add(new Paragraph("1234 Auto Lane, Tech City, ON")
                             .setFont(regularFont)
                             .setFontSize(10))
                     .add(new Paragraph("Email: support@aviato.com | Phone: (123) 456-7890")

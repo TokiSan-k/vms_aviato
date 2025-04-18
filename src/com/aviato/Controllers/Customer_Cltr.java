@@ -369,7 +369,7 @@ public class Customer_Cltr
                 Platform.runLater(() -> {
                     //Verify UI update
                     OnCustomerVerified(getCustTask.getValue());
-                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer removed successfully");
+                    AlertBox.ShowAlert(Alert.AlertType.INFORMATION, "Success", "Customer verified successfully");
                 });
             });
 

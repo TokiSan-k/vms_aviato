@@ -273,7 +273,7 @@
 
 .modCustFirstName{
     -fx-spacing: 10;
-    -fx-padding: 0 0 0 5;
+    -fx-padding: 0 0 0 40;
 }
 
 .modCustLastName{
